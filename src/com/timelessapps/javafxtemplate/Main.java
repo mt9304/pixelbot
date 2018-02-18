@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -21,7 +22,8 @@ public class Main extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/Main.fxml"));
+        stage.initStyle(StageStyle.UNDECORATED);
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/alwaysdisplayed/Main.fxml"));
         
         Scene scene = new Scene(root);
         
@@ -35,6 +37,17 @@ public class Main extends Application
     public static void main(String[] args)
     {
         launch(args);
+    }
+    
+    private static Stage primaryStage; // **Declare static Stage**
+
+    private void setPrimaryStage(Stage stage) {
+        Main.primaryStage = stage;
+    }
+    
+    static public Stage getPrimaryStage() 
+    {
+        return Main.primaryStage;
     }
     
 }
