@@ -7,8 +7,8 @@
 	- [Adding Menu Items](#adding-menu-items)
   - [Adding Settings](#adding-settings)
 - [Useful Information](#useful-information)
-	- [Information 1](#information-1)
-  - [Information 1](#information-2)
+  - [Information 1](#information-1)
+  - [Information 2](#information-2)
 
 ## Introduction
 
