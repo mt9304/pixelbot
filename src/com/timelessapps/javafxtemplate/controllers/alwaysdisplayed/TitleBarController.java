@@ -38,7 +38,7 @@ public class TitleBarController implements Initializable
     @FXML
     private void titleBarClicked(MouseEvent event)
     {
-        System.out.println("Clicked");
+        
     }
     
     @FXML
