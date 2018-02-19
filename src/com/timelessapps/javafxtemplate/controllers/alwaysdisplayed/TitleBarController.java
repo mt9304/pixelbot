@@ -9,8 +9,6 @@ import com.timelessapps.javafxtemplate.Main;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,7 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+
 
 /**
  * FXML Controller class
@@ -34,32 +32,30 @@ public class TitleBarController implements Initializable
     private double yOffset = 0;
     
     @FXML
-    private void titleBarClicked(ActionEvent event)
+    private void titleBarClicked(MouseEvent event)
     {
         System.out.println("Clicked");
     }
     
     @FXML
-    private void titleBarDragged(MouseEvent event) throws IOException
+    private void titleBarPressed(MouseEvent event)
     {
-        /*
-        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
-        //stage.initStyle(StageStyle.TRANSPARENT);
-        
-        Stage stage = Main.getPrimaryStage();
-
         xOffset = event.getSceneX();
         yOffset = event.getSceneY();
-
+    }
+    
+    @FXML
+    private void titleBarDragged(MouseEvent event) throws IOException
+    {
+        Stage stage = Main.getMainStage();
         stage.setX(event.getScreenX() - xOffset);
         stage.setY(event.getScreenY() - yOffset);
-*/
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        xOffset = 0;
-        yOffset = 0;
+        //xOffset = 0;
+        //yOffset = 0;
     }   
 }

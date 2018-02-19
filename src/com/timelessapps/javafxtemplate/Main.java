@@ -18,11 +18,13 @@ import javafx.stage.StageStyle;
  */
 public class Main extends Application
 {
+    private static Stage stage;
     
     @Override
     public void start(Stage stage) throws Exception
     {
         stage.initStyle(StageStyle.UNDECORATED);
+        setPrimaryStage(stage);
         Parent root = FXMLLoader.load(getClass().getResource("fxml/alwaysdisplayed/Main.fxml"));
         
         Scene scene = new Scene(root);
@@ -38,16 +40,15 @@ public class Main extends Application
     {
         launch(args);
     }
-    
-    private static Stage primaryStage; // **Declare static Stage**
 
-    private void setPrimaryStage(Stage stage) {
-        Main.primaryStage = stage;
+    private void setPrimaryStage(Stage stage) 
+    {
+        Main.stage = stage;
     }
     
-    static public Stage getPrimaryStage() 
+    static public Stage getMainStage() 
     {
-        return Main.primaryStage;
+        return Main.stage;
     }
     
 }
