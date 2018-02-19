@@ -30,5 +30,10 @@
             <Image url="@../../images/MinimizeButton.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="ApplicationIcon" fitHeight="25.0" fitWidth="25.0" layoutX="5.0" onMouseClicked="#minimizeButtonClicked" onMouseEntered="#minimizeButtonEntered" onMouseExited="#minimizeButtonExited" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/ApplicationIcon.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
