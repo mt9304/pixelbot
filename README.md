@@ -12,6 +12,8 @@
 
 ## Introduction
 
+This is a template. 
+
 ## Prerequisites
 
 ### Suggested Environment
@@ -37,4 +39,8 @@
 
 ### Information 1
 
+This is some useful information. 
+
 ### Information 2
+
+This is more useful information. 
