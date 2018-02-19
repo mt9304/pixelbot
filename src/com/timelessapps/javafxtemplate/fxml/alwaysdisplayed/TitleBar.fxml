@@ -10,22 +10,22 @@
         <URL value="@/com/timelessapps/javafxtemplate/css/alwaysdisplayed/TitleBar.css" />
     </stylesheets>
    <children>
-      <ImageView fx:id="closeButtonFilled" fitHeight="25.0" fitWidth="25.0" layoutX="565.0" onMouseClicked="#closeButtonClicked" onMouseEntered="#closeButtonEntered" onMouseExited="#closeButtonExited" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="closeButtonFilled" fitHeight="25.0" fitWidth="25.0" layoutX="570.0" onMouseClicked="#closeButtonClicked" onMouseEntered="#closeButtonEntered" onMouseExited="#closeButtonExited" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../images/CloseButtonFilled.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="minimizeButtonFilled" fitHeight="25.0" fitWidth="25.0" layoutX="540.0" onMouseClicked="#minimizeButtonClicked" onMouseEntered="#minimizeButtonEntered" onMouseExited="#minimizeButtonExited" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="minimizeButtonFilled" fitHeight="25.0" fitWidth="25.0" layoutX="545.0" onMouseClicked="#minimizeButtonClicked" onMouseEntered="#minimizeButtonEntered" onMouseExited="#minimizeButtonExited" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../images/MinimizeButtonFilled.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="closeButton" fitHeight="25.0" fitWidth="25.0" layoutX="565.0" onMouseClicked="#closeButtonClicked" onMouseEntered="#closeButtonEntered" onMouseExited="#closeButtonExited" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="closeButton" fitHeight="25.0" fitWidth="25.0" layoutX="570.0" onMouseClicked="#closeButtonClicked" onMouseEntered="#closeButtonEntered" onMouseExited="#closeButtonExited" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/CloseButton.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="minimizeButton" fitHeight="25.0" fitWidth="25.0" layoutX="540.0" onMouseClicked="#minimizeButtonClicked" onMouseEntered="#minimizeButtonEntered" onMouseExited="#minimizeButtonExited" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="minimizeButton" fitHeight="25.0" fitWidth="25.0" layoutX="545.0" onMouseClicked="#minimizeButtonClicked" onMouseEntered="#minimizeButtonEntered" onMouseExited="#minimizeButtonExited" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/MinimizeButton.png" />
          </image>
