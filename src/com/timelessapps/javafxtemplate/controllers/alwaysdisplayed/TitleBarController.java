@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -27,6 +28,9 @@ public class TitleBarController implements Initializable
 {
     @FXML
     private AnchorPane titleBar;
+    
+    @FXML
+    private ImageView closeButton, minimizeButton, closeButtonFilled, minimizeButtonFilled;
     
     private double xOffset = 0;
     private double yOffset = 0;
@@ -52,10 +56,46 @@ public class TitleBarController implements Initializable
         stage.setY(event.getScreenY() - yOffset);
     }
     
+    @FXML
+    private void closeButtonClicked(MouseEvent event)
+    {
+        System.exit(0);
+    }
+    
+    @FXML
+    private void closeButtonEntered(MouseEvent event)
+    {
+        closeButtonFilled.setVisible(true);
+    }
+    
+    @FXML
+    public void closeButtonExited(MouseEvent event)
+    {
+        closeButtonFilled.setVisible(false);
+    }
+    
+    @FXML
+    private void minimizeButtonClicked(MouseEvent event)
+    {
+        Stage stage = Main.getMainStage();
+        stage.setIconified(true);
+    }
+    
+    @FXML
+    private void minimizeButtonEntered(MouseEvent event)
+    {
+        minimizeButtonFilled.setVisible(true);
+    }
+    
+    @FXML 
+    public void minimizeButtonExited(MouseEvent event)
+    {
+        minimizeButtonFilled.setVisible(false);
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        //xOffset = 0;
-        //yOffset = 0;
+        
     }   
 }
