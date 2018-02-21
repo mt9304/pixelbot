@@ -51,6 +51,7 @@ public class TitleBarController implements Initializable
     @FXML
     private void titleBarDragged(MouseEvent event) throws IOException
     {
+        //Makes the title bar movable when dragging it. 
         Stage stage = Main.getMainStage();
         stage.setX(event.getScreenX() - xOffset);
         stage.setY(event.getScreenY() - yOffset);

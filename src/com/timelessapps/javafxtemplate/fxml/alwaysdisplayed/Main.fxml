@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="main" prefHeight="375.0" prefWidth="600.0" styleClass="main" stylesheets="@/com/timelessapps/javafxtemplate/css/alwaysdisplayed/Main.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelessapps.javafxtemplate.controllers.alwaysdisplayed.MainController">
+<AnchorPane id="main" fx:id="mainWindow" prefHeight="375.0" prefWidth="600.0" styleClass="main" stylesheets="@/com/timelessapps/javafxtemplate/css/alwaysdisplayed/Main.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelessapps.javafxtemplate.controllers.alwaysdisplayed.MainController">
     <children>
       <fx:include source="TitleBar.fxml" />
         <Button fx:id="button" layoutX="268.0" layoutY="175.0" onAction="#handleButtonAction" text="Click Me!" />

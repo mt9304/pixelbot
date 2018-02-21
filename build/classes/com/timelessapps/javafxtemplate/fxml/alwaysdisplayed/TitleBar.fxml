@@ -5,7 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="titleBar" fx:id="titleBar" onMouseClicked="#titleBarClicked" onMouseDragged="#titleBarDragged" onMousePressed="#titleBarPressed" prefHeight="25.0" prefWidth="600.0" styleClass="titleBar" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelessapps.javafxtemplate.controllers.alwaysdisplayed.TitleBarController">
+<AnchorPane id="titleBar" fx:id="titleBar" layoutX="1.0" layoutY="1.0" onMouseClicked="#titleBarClicked" onMouseDragged="#titleBarDragged" onMousePressed="#titleBarPressed" prefHeight="25.0" prefWidth="600.0" styleClass="titleBar" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelessapps.javafxtemplate.controllers.alwaysdisplayed.TitleBarController">
     <stylesheets>
         <URL value="@/com/timelessapps/javafxtemplate/css/alwaysdisplayed/TitleBar.css" />
     </stylesheets>
