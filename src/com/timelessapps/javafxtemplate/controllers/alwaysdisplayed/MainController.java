@@ -43,6 +43,7 @@ public class MainController implements Initializable
         if (focused)
         {
             mainWindow.getStyleClass().add("greyBorder");
+            mainWindow.getStyleClass().remove("defaultBorder");
         }
         else if (!focused)
         {
