@@ -10,6 +10,7 @@
       <fx:include source="TitleBar.fxml" />
         <Button fx:id="button1" layoutX="268.0" layoutY="175.0" onAction="#handleButtonAction" text="Click Me!" />
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+      <fx:include source="LeftMenuPane.fxml" />
       <fx:include source="TopMenuPane.fxml" />
     </children>
    <styleClass>
