@@ -3,6 +3,7 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -20,4 +21,7 @@
          </padding>
       </Label>
    </children>
+   <effect>
+      <DropShadow />
+   </effect>
 </AnchorPane>
