@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="topMenuPane" prefHeight="400.0" prefWidth="600.0" styleClass="topMenuPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="com.timelessapps.javafxtemplate.controllers.alwaysdisplayed.TopMenuPaneController">
+<AnchorPane id="topMenuPane" layoutX="1.0" layoutY="27.0" prefHeight="32.0" prefWidth="599.0" style="-fx-background-color: #343640;" styleClass="topMenuPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelessapps.javafxtemplate.controllers.alwaysdisplayed.TopMenuPaneController">
     <stylesheets>
         <URL value="@/com/timelessapps/javafxtemplate/css/alwaysdisplayed/TopMenuPane.css" />
     </stylesheets>
+   <children>
+      <Label prefWidth="93.0" style="-fx-background-color: #414551;" text="Title" textFill="#d4d5d7">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <padding>
+            <Insets bottom="4.0" left="20.0" right="20.0" top="4.0" />
+         </padding>
+      </Label>
+   </children>
 </AnchorPane>
