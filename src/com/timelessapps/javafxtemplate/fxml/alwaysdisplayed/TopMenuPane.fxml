@@ -11,7 +11,7 @@
         <URL value="@/com/timelessapps/javafxtemplate/css/alwaysdisplayed/TopMenuPane.css" />
     </stylesheets>
    <children>
-      <Label prefWidth="93.0" style="-fx-background-color: #414551;" text="Title" textFill="#d4d5d7">
+      <Label prefWidth="93.0" style="-fx-background-color: #414551;" text="Home" textFill="#d4d5d7">
          <font>
             <Font size="16.0" />
          </font>
