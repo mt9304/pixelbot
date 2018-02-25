@@ -7,6 +7,7 @@ package com.timelessapps.javafxtemplate.controllers.alwaysdisplayed;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -17,6 +18,8 @@ import javafx.fxml.Initializable;
 public class LeftMenuPaneController implements Initializable
 {
 
+    //@FXML
+    //private JFXButton button1, button2, button3, button4, button5;
     /**
      * Initializes the controller class.
      */
