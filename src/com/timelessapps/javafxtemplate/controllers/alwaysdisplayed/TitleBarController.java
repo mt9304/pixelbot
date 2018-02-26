@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.timelessapps.javafxtemplate.controllers.alwaysdisplayed;
 
 import com.timelessapps.javafxtemplate.Main;
@@ -10,20 +5,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-
-/**
- * FXML Controller class
- *
- * @author Max
- */
 public class TitleBarController implements Initializable
 {
     @FXML
@@ -63,6 +50,7 @@ public class TitleBarController implements Initializable
         System.exit(0);
     }
     
+    //Adds highlighting effect for close button at top right. 
     @FXML
     private void closeButtonEntered(MouseEvent event)
     {
@@ -82,6 +70,7 @@ public class TitleBarController implements Initializable
         stage.setIconified(true);
     }
     
+    //Adds highlighting effect for minimize button at top right. 
     @FXML
     private void minimizeButtonEntered(MouseEvent event)
     {

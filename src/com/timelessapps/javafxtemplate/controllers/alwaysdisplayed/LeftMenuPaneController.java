@@ -12,17 +12,10 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javax.swing.JScrollPane;
 
-/**
- * FXML Controller class
- *
- * @author Max
- */
 public class LeftMenuPaneController implements Initializable
 {
     Stage stage = Main.getMainStage();

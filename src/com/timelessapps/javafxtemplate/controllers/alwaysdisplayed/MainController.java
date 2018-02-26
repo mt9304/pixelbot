@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.timelessapps.javafxtemplate.controllers.alwaysdisplayed;
 
 import com.timelessapps.javafxtemplate.Main;
@@ -10,28 +5,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- *
- * @author Max
- */
 public class MainController implements Initializable
 {
     @FXML
     private AnchorPane mainWindow;
     
-    @FXML
-    private void handleButtonAction(ActionEvent event)
-    {
-        
-    }
-    
+    //Changes color of window borders when focused. 
     @FXML
     private void toggleBorderColor(Boolean focused)
     {
