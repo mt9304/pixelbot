@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -38,15 +37,13 @@ public class LeftMenuPaneController implements Initializable
     {
         String nodeId = sceneHelper.getSourceID(event.getSource());
         Node eventNode = sceneHelper.getNodeById(nodeId);
-        eventNode.setStyle("-fx-background-color:  #3A3C43;");
+        eventNode.setStyle("-fx-background-color: #3A3C43;");
     }
     
     @FXML
     private void menuButtonClicked(MouseEvent event)
     {
         String buttonName = sceneHelper.getSourceName(event.getSource());
-        //String nodeId = sceneHelper.getSourceID(event.getSource());
-        //Label pageNameLabel = sceneHelper.getLabelById(nodeId);
         sceneHelper.changeLabelName("pageNameLabel", buttonName);
     }
     
