@@ -4,30 +4,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane layoutX="1.0" layoutY="60.0" prefHeight="340.0" prefWidth="150.0" style="-fx-background-color: #2A2B31;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane layoutX="1.0" layoutY="60.0" prefHeight="340.0" prefWidth="150.0" style="-fx-background-color: #2A2B31;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelessapps.javafxtemplate.controllers.alwaysdisplayed.LeftMenuPaneController">
    <children>
-      <Button id="button_1" fx:id="button_11" layoutX="5.0" layoutY="5.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="140.0" style="-fx-background-color: #4E5361; -fx-background-radius: 1;" styleClass="leftPaneButton" text="Button 1" textFill="#ddd6d6">
+      <Button id="homeButton" fx:id="homeButton" layoutX="5.0" layoutY="5.0" mnemonicParsing="false" onMouseClicked="#menuButtonClicked" onMouseEntered="#highlightButton" onMouseExited="#unHighlightButton" prefHeight="61.0" prefWidth="140.0" style="-fx-background-color: #4E5361; -fx-background-radius: 1;" styleClass="leftPaneButton" text="Home" textFill="#ddd6d6">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button id="button_1" fx:id="button_12" layoutX="5.0" layoutY="71.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="140.0" style="-fx-background-color: #4E5361; -fx-background-radius: 1;" styleClass="leftPaneButton" text="Button 1" textFill="#ddd6d6">
+      <Button id="applicationButton" fx:id="applicationButton" layoutX="5.0" layoutY="71.0" mnemonicParsing="false" onMouseClicked="#menuButtonClicked" onMouseEntered="#highlightButton" onMouseExited="#unHighlightButton" prefHeight="61.0" prefWidth="140.0" style="-fx-background-color: #4E5361; -fx-background-radius: 1;" styleClass="leftPaneButton" text="Application" textFill="#ddd6d6">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button id="button_1" fx:id="button_121" layoutX="5.0" layoutY="137.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="140.0" style="-fx-background-color: #4E5361; -fx-background-radius: 1;" styleClass="leftPaneButton" text="Button 1" textFill="#ddd6d6">
+      <Button id="apiDatabaseButton" fx:id="apiDatabaseButton" layoutX="5.0" layoutY="137.0" mnemonicParsing="false" onMouseClicked="#menuButtonClicked" onMouseEntered="#highlightButton" onMouseExited="#unHighlightButton" prefHeight="61.0" prefWidth="140.0" style="-fx-background-color: #4E5361; -fx-background-radius: 1;" styleClass="leftPaneButton" text="API/Database" textFill="#ddd6d6">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button id="button_1" fx:id="button_122" layoutX="5.0" layoutY="203.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="140.0" style="-fx-background-color: #4E5361; -fx-background-radius: 1;" styleClass="leftPaneButton" text="Button 1" textFill="#ddd6d6">
+      <Button id="generalButton" fx:id="generalButton" layoutX="5.0" layoutY="203.0" mnemonicParsing="false" onMouseClicked="#menuButtonClicked" onMouseEntered="#highlightButton" onMouseExited="#unHighlightButton" prefHeight="61.0" prefWidth="140.0" style="-fx-background-color: #4E5361; -fx-background-radius: 1;" styleClass="leftPaneButton" text="General Settings" textFill="#ddd6d6">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button id="button_1" fx:id="button_1221" layoutX="5.0" layoutY="269.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="140.0" style="-fx-background-color: #4E5361; -fx-background-radius: 1;" styleClass="leftPaneButton" text="Button 1" textFill="#ddd6d6">
+      <Button id="logsButton" fx:id="logsButton" layoutX="5.0" layoutY="269.0" mnemonicParsing="false" onMouseClicked="#menuButtonClicked" onMouseEntered="#highlightButton" onMouseExited="#unHighlightButton" prefHeight="61.0" prefWidth="140.0" style="-fx-background-color: #4E5361; -fx-background-radius: 1;" styleClass="leftPaneButton" text="Logs" textFill="#ddd6d6">
          <font>
             <Font size="18.0" />
          </font>
