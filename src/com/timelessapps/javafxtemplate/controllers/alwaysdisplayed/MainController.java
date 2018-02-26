@@ -47,7 +47,7 @@ public class MainController implements Initializable
     }
     
     @Override
-    public void initialize(URL url, ResourceBundle rb)
+    public void initialize(URL url, ResourceBundle rb) 
     {
         //For changing border color when focussing and unfocussing. Note that it starts with focused by default, even if program was not focussed when first opening. Functions starts working when first clicking into the program and then out. 
         //https://stackoverflow.com/questions/24038988/event-when-window-stage-lost-focus , https://docs.oracle.com/javafx/2/api/javafx/beans/value/ObservableBooleanValue.html#get()
