@@ -58,6 +58,7 @@ public class SceneHelper
     {
         //Page Ids should always be the button's name lowered plus "Page". So the "Home" button would return "home" and the page Id would be homePage. 
         pageName = pageName.toLowerCase() + "Page";
+        //Remember to take care of replacing "/" and camelcasing multiple words. Specifically for API/Database page. 
         setMainScene();
         getNodeById(pageName).toFront();
     }
