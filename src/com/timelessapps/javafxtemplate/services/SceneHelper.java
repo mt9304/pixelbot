@@ -54,6 +54,14 @@ public class SceneHelper
         label.setText(newText);
     }
     
+    public void bringNodeToFront(String pageName)
+    {
+        //Page Ids should always be the button's name lowered plus "Page". So the "Home" button would return "home" and the page Id would be homePage. 
+        pageName = pageName.toLowerCase() + "Page";
+        setMainScene();
+        getNodeById(pageName).toFront();
+    }
+    
     public void setMainScene()
     {
         scene = Main.getMainScene();

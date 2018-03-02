@@ -43,8 +43,12 @@ public class LeftMenuPaneController implements Initializable
     @FXML
     private void menuButtonClicked(MouseEvent event)
     {
+        //Changes name of the label in top left of top menu bar (id of pageNameLabel) to the name of the button clicked. 
         String buttonName = sceneHelper.getSourceName(event.getSource());
         sceneHelper.changeLabelName("pageNameLabel", buttonName);
+        
+        //Brings the page clicked to the front. 
+        sceneHelper.bringNodeToFront(buttonName);
     }
     
     @Override
