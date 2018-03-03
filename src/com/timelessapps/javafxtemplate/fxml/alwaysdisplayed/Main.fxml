@@ -8,8 +8,7 @@
       <fx:include source="TitleBar.fxml" />
       <fx:include source="LeftMenuPane.fxml" />
       <fx:include source="TopMenuPane.fxml" />
-      <fx:include source="../contentarea/ApplicationPage.fxml" />
-      <fx:include source="../contentarea/HomePage.fxml" />
+      <fx:include source="ContentAreaPane.fxml" />
     </children>
    <styleClass>
       <String fx:value="main" />
