@@ -56,9 +56,11 @@ public class SceneHelper
     
     public void bringNodeToFront(String pageName)
     {
-        //Page Ids should always be the button's name lowered plus "Page". So the "Home" button would return "home" and the page Id would be homePage. 
-        pageName = pageName.toLowerCase() + "Page";
-        //Remember to take care of replacing "/" and camelcasing multiple words. Specifically for API/Database page. 
+        //Lowers first letter of word and removes special characters. Page Ids should always be the button's name lowered plus "Page" in camel case. So the "Home" button would return "home" and the page Id would be homePage. 
+        char c[] = pageName.toCharArray();
+        c[0] = Character.toLowerCase(c[0]);
+        pageName = (new String(c) + "Page").replaceAll("[^a-zA-Z0-9]", "");
+
         setMainScene();
         getNodeById(pageName).toFront();
     }
