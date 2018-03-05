@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
  * Used to prevent controllers from calling each other directly. 
  * For example, changing label text on the top menu pane when performing actions on a scene. 
  */
-public class SceneHelper
+public  class SceneHelper
 {
     private static Scene scene;
     

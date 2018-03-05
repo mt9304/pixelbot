@@ -18,3 +18,21 @@
 {
     -fx-background-color: #fff;
 }
+/* */
+
+.button
+{
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-border-radius: 0px;
+}
+
+.button:focused
+{
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-border-radius: 0px;
+}
+
+#eventLogsButton
+{
+     -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+}

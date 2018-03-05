@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 public class LeftMenuPaneController implements Initializable
 {
-    Stage stage = Main.getMainStage();
+    //Stage stage = Main.getMainStage();
     SceneHelper sceneHelper = new SceneHelper();
     
     @FXML
