@@ -1,8 +1,20 @@
-/*
- * Empty Stylesheet file.
- */
-
 #logsPage
 {
 
+}
+
+/* Removes default blue borders.  */
+.text-area
+{
+    -fx-background-color: #fff, #fff;
+}
+
+.text-area .content
+{
+    -fx-background-color: #fff;
+}
+
+.text-area:focused .content
+{
+    -fx-background-color: #fff;
 }

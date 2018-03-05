@@ -22,6 +22,11 @@ public class SceneHelper
         
     }
     
+    public void setMainScene()
+    {
+        scene = Main.getMainScene();
+    }
+    
     //The source argument uses event.getSource(), which returns in the following format: Button[id=homeButton, styleClass=button leftPaneButton]'Home'
     //This method splits the string twice to get the id value. Can look into using regex instead, but might not be as readable. 
     public String getSourceID(Object source)
@@ -64,13 +69,5 @@ public class SceneHelper
         setMainScene();
         getNodeById(pageName).toFront();
     }
-    
-    public void setMainScene()
-    {
-        scene = Main.getMainScene();
-    }
-    
-    
-
     
 }
