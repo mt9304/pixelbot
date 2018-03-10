@@ -12,12 +12,12 @@
     </stylesheets>
    <children>
       <TextArea id="applicationLogTextArea" fx:id="applicationLogTextArea" editable="false" layoutY="37.0" prefHeight="290.0" prefWidth="440.0" text="Log" />
-      <Button id="eventLogsButton" fx:id="eventLogsButton" mnemonicParsing="false" prefHeight="28.0" prefWidth="145.0" style="-fx-background-color: white; -fx-background-radius: 0;" text="Event Logs">
+      <Button id="eventLogsButton" fx:id="eventLogsButton" mnemonicParsing="false" onMouseClicked="#activateTab" prefHeight="28.0" prefWidth="145.0" style="-fx-background-color: white; -fx-background-radius: 0;" text="Event Logs">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button id="applicationLogsButton" fx:id="applicationLogsButton" layoutX="150.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="145.0" style="-fx-background-color: white; -fx-background-radius: 0;" text="Application Logs">
+      <Button id="applicationLogsButton" fx:id="applicationLogsButton" layoutX="150.0" mnemonicParsing="false" onMouseClicked="#activateTab" prefHeight="28.0" prefWidth="145.0" style="-fx-background-color: white; -fx-background-radius: 0;" text="Application Logs">
          <font>
             <Font size="16.0" />
          </font>
