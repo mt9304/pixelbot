@@ -61,12 +61,7 @@ public  class SceneHelper
     
     public void bringNodeToFront(String nodeName, String appendingText)
     {
-        //Lowers first letter of word and removes special characters. Page Ids should always be the button's name lowered plus "Page" in camel case. So the "Home" button would return "home" and the page Id would be homePage. 
-       //Appending text in the above example would be "Page", while a tab's content area would be "TextArea". 
-        char c[] = nodeName.toCharArray();
-        c[0] = Character.toLowerCase(c[0]);
-        nodeName = (new String(c) + appendingText).replaceAll("[^a-zA-Z0-9]", "");
-
+        nodeName = convertStringToID(nodeName, appendingText);
         setMainScene();
         getNodeById(nodeName).toFront();
     }
@@ -86,7 +81,6 @@ public  class SceneHelper
         //For tab content part. tabNodeID would be eventLogsButton or applicationLogsTabButton, the tab content area's ID would be eventLogsTabContentArea. 
         String textAreaID = tabNodeID.split("TabButton")[0];
         bringNodeToFront(textAreaID, "TabContentArea");
-        System.out.println("Activating " + tabNodeID);
     }
     
     public void deactivateTabs(ArrayList<String> tabNodeIDs)
@@ -100,9 +94,17 @@ public  class SceneHelper
             + "-fx-background-insets: 0 0 -1 0, 0, 1, 2;"
             + " -fx-border-radius: 0px;"
             + "-fx-background-radius: 0 0 0 0;");
-            
-            System.out.println("Deactivating tabs: " + tabNodeID);
         }
+    }
+    
+    public String convertStringToID(String text, String appendingText)
+    {
+        //Lowers first letter of word and removes special characters. Page Ids should always be the button's name lowered plus "Page" in camel case. So the "Home" button would return "home" and the page Id would be homePage. 
+        //Appending text in the above example would be "Page", while a tab's content area would be "TextArea". 
+        char c[] = text.toCharArray();
+        c[0] = Character.toLowerCase(c[0]);
+        text = (new String(c) + appendingText).replaceAll("[^a-zA-Z0-9]", "");
+        return text;
     }
     
 }

@@ -5,7 +5,6 @@
  */
 package com.timelessapps.javafxtemplate.controllers.alwaysdisplayed;
 
-import com.timelessapps.javafxtemplate.Main;
 import com.timelessapps.javafxtemplate.services.SceneHelper;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 public class LeftMenuPaneController implements Initializable
 {
@@ -41,8 +39,33 @@ public class LeftMenuPaneController implements Initializable
     }
     
     @FXML
+    private void unHighlightButtonIfNotActive(MouseEvent event)
+    {
+        Node activePage = sceneHelper.getNodeById("pageNameLabel");
+        String activePageName = sceneHelper.getSourceName(activePage);
+        String hoveredButton = sceneHelper.getSourceName(event.getSource());
+        if (!activePageName.equals(hoveredButton))
+        {
+            unHighlightButton(event);
+        }
+     }
+    
+    @FXML
+    private void unHighlightByID(String nodeId)
+    {
+        Node previousPageButton = sceneHelper.getNodeById(nodeId);
+        previousPageButton.setStyle("-fx-background-color: #3A3C43;");
+    }
+    
+    @FXML
     private void menuButtonClicked(MouseEvent event)
     {
+        //Unhighlights the previous button that was clicked. 
+        Node pageNameLabel = sceneHelper.getNodeById("pageNameLabel");
+        String previousPageName = sceneHelper.getSourceName(pageNameLabel);
+        String previousPageNameID = sceneHelper.convertStringToID(previousPageName, "Button");
+        unHighlightByID(previousPageNameID);
+        
         //Changes name of the label in top left of top menu bar (id of pageNameLabel) to the name of the button clicked. 
         String buttonName = sceneHelper.getSourceName(event.getSource());
         sceneHelper.changeLabelName("pageNameLabel", buttonName);

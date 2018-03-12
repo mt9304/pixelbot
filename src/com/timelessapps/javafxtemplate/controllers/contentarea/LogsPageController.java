@@ -11,11 +11,14 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 
 public class LogsPageController implements Initializable
 {
     SceneHelper sceneHelper = new SceneHelper();
+    @FXML
+    private TextArea eventLogsTabContentArea, applicationLogsTabContentArea;
         
     @FXML
     private void setActivateTab(MouseEvent event)
@@ -32,8 +35,6 @@ public class LogsPageController implements Initializable
         String[] tabNodeIDsToFilter = {"applicationLogsTabButton","eventLogsTabButton"};
         String activeTab = sceneHelper.getSourceID(event.getSource());
         
-        System.out.println("Active tab is: " + activeTab);
-        
         for (String tabNodeID : tabNodeIDsToFilter)
         {
             if (!activeTab.equals(tabNodeID))
@@ -41,8 +42,19 @@ public class LogsPageController implements Initializable
                 tabNodeIDs.add(tabNodeID);
             }
         }
-
         return tabNodeIDs;
+    }
+    
+    @FXML
+    public void appendToEventLogTabContentArea(String text)
+    {
+        eventLogsTabContentArea.appendText(text + "\n");
+    }
+            
+    @FXML
+    public void appendToApplicationLogTabContentArea(String text)
+    {
+        applicationLogsTabContentArea.appendText(text + "\n");
     }
     
     @Override
