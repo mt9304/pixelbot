@@ -5,7 +5,9 @@
  */
 package com.timelessapps.javafxtemplate.controllers.alwaysdisplayed;
 
+import com.timelessapps.javafxtemplate.services.LoggingService;
 import com.timelessapps.javafxtemplate.services.SceneHelper;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -18,6 +20,7 @@ public class LeftMenuPaneController implements Initializable
 {
     //Stage stage = Main.getMainStage();
     SceneHelper sceneHelper = new SceneHelper();
+    LoggingService log = new LoggingService();
     
     @FXML
     private Button homeButton, applicationButton, apiDatabaseButton, _generalButton, logsButton;
@@ -58,7 +61,7 @@ public class LeftMenuPaneController implements Initializable
     }
     
     @FXML
-    private void menuButtonClicked(MouseEvent event)
+    private void menuButtonClicked(MouseEvent event) throws FileNotFoundException
     {
         //Unhighlights the previous button that was clicked. 
         Node pageNameLabel = sceneHelper.getNodeById("pageNameLabel");
@@ -72,6 +75,10 @@ public class LeftMenuPaneController implements Initializable
 
         //Brings the page clicked to the front. 
         sceneHelper.bringNodeToFront(buttonName, "Page");
+        
+        //For Logging. 
+        log.appendToApplicationLogsFile(buttonName);
+        log.appendToApplicationLogsInApplication(buttonName);
     }
     
     @Override

@@ -14,13 +14,11 @@ import javafx.fxml.FXML;
 
 public class LoggingService 
 {
-    LogsPageController logsPage = new LogsPageController(); 
-    
     public LoggingService()
     {
         
     }
-    
+
     public void writeToFile(String fileName, String text) throws FileNotFoundException
     {
         File file = new File(fileName);
@@ -33,7 +31,7 @@ public class LoggingService
         {
             printWriter = new PrintWriter(fileName);
         }
-        printWriter.append(text);
+        printWriter.println(text);
         printWriter.close();
     }
     
@@ -49,16 +47,14 @@ public class LoggingService
         writeToFile(fileName, logText);
     }
     
-    @FXML
     public void appendToEventLogsInApplication(String text)
     {
-        logsPage.appendToEventLogTabContentArea(text);
+        //logsPageController.appendToEventLogTabContentArea(text);
     }
-            
-    @FXML
+    
     public void appendToApplicationLogsInApplication(String text)
     {
-        logsPage.appendToApplicationLogTabContentArea(text);
+        //logsPageController.appendToApplicationLogTabContentArea(text);
     }
     
 }
