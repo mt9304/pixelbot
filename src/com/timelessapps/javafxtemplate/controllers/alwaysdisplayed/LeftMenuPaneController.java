@@ -48,7 +48,7 @@ public class LeftMenuPaneController implements Initializable
         sceneHelper.changeLabelName("pageNameLabel", buttonName);
 
         //Brings the page clicked to the front. 
-        sceneHelper.bringNodeToFront(buttonName);
+        sceneHelper.bringNodeToFront(buttonName, "Page");
     }
     
     @Override

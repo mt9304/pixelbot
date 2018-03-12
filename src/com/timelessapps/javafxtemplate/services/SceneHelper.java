@@ -1,12 +1,11 @@
 package com.timelessapps.javafxtemplate.services;
 
 import com.timelessapps.javafxtemplate.Main;
-import com.timelessapps.javafxtemplate.controllers.alwaysdisplayed.TopMenuPaneController;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import java.util.ArrayList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 
 /**
  * This class helps get FXML components from the main scene and can call functions from different controllers to change then. 
@@ -48,6 +47,7 @@ public  class SceneHelper
     
     public String getSourceName(Object source)
     {
+        //Output of source is Button[id=logsButton, styleClass=button leftPaneButton]'Logs' so splitting by single quote gets the name of the object. 
         return source.toString().split("'")[1];
     }
     
@@ -59,15 +59,50 @@ public  class SceneHelper
         label.setText(newText);
     }
     
-    public void bringNodeToFront(String pageName)
+    public void bringNodeToFront(String nodeName, String appendingText)
     {
         //Lowers first letter of word and removes special characters. Page Ids should always be the button's name lowered plus "Page" in camel case. So the "Home" button would return "home" and the page Id would be homePage. 
-        char c[] = pageName.toCharArray();
+       //Appending text in the above example would be "Page", while a tab's content area would be "TextArea". 
+        char c[] = nodeName.toCharArray();
         c[0] = Character.toLowerCase(c[0]);
-        pageName = (new String(c) + "Page").replaceAll("[^a-zA-Z0-9]", "");
+        nodeName = (new String(c) + appendingText).replaceAll("[^a-zA-Z0-9]", "");
 
         setMainScene();
-        getNodeById(pageName).toFront();
+        getNodeById(nodeName).toFront();
+    }
+    
+    public void activateTab(MouseEvent event)
+    {
+        //For tab part at the top. 
+        String tabNodeID = getSourceID(event.getSource());
+        Node tabEventNode = getNodeById(tabNodeID);
+        tabEventNode.setStyle("-fx-border-width: 0 0 -1 0; "
+                + "-fx-border-color: white white white white;"
+                + "-fx-background-color: white; "
+                + "-fx-background-insets: 0 0 -1 0, 0, 1, 2;"
+                + "-fx-border-radius: 0px;"
+                + "-fx-background-radius: 0 0 0 0;");
+        
+        //For tab content part. tabNodeID would be eventLogsButton or applicationLogsTabButton, the tab content area's ID would be eventLogsTabContentArea. 
+        String textAreaID = tabNodeID.split("TabButton")[0];
+        bringNodeToFront(textAreaID, "TabContentArea");
+        System.out.println("Activating " + tabNodeID);
+    }
+    
+    public void deactivateTabs(ArrayList<String> tabNodeIDs)
+    {
+        for (String tabNodeID : tabNodeIDs)
+        {
+            Node tabEventNode = getNodeById(tabNodeID);
+            tabEventNode.setStyle("-fx-border-width: 0 0 1 0; "
+            + "-fx-border-color: white white black white;"
+            + " -fx-background-color: white; "
+            + "-fx-background-insets: 0 0 -1 0, 0, 1, 2;"
+            + " -fx-border-radius: 0px;"
+            + "-fx-background-radius: 0 0 0 0;");
+            
+            System.out.println("Deactivating tabs: " + tabNodeID);
+        }
     }
     
 }
