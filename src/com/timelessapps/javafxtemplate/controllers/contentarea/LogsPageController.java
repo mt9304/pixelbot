@@ -52,7 +52,7 @@ public class LogsPageController implements Initializable
     }
             
     @FXML
-    public void appendToApplicationLogTabContentArea(String text)
+    public  void appendToApplicationLogTabContentArea(String text)
     {
         applicationLogsTabContentArea.appendText(text + "\n");
     }

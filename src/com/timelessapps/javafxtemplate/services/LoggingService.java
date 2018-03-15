@@ -5,12 +5,10 @@
  */
 package com.timelessapps.javafxtemplate.services;
 
-import com.timelessapps.javafxtemplate.controllers.contentarea.LogsPageController;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
-import javafx.fxml.FXML;
 
 public class LoggingService 
 {

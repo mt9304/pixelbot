@@ -5,6 +5,7 @@
  */
 package com.timelessapps.javafxtemplate.controllers.alwaysdisplayed;
 
+import com.timelessapps.javafxtemplate.Main;
 import com.timelessapps.javafxtemplate.services.LoggingService;
 import com.timelessapps.javafxtemplate.services.SceneHelper;
 import java.io.FileNotFoundException;

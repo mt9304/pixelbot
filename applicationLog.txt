@@ -1,32 +1,11 @@
-Api/Database 
-Application 
-Home 
-General Settings 
-Logs 
-Api/Database
 General Settings
-Logs
-Api/Database
+General Settings
+General Settings
+Application
+Application
+Application
 Application
 Home
-Api/Database
-General Settings
-General Settings
-General Settings
-Api/Database
 Application
-Logs
-Application
-General Settings
-Api/Database
-Application
-Api/Database
-Logs
-Application
-General Settings
-Api/Database
-Application
-General Settings
-General Settings
-Logs
 Home
+Application

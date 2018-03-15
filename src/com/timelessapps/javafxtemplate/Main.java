@@ -5,6 +5,7 @@
  */
 package com.timelessapps.javafxtemplate;
 
+import com.timelessapps.javafxtemplate.controllers.contentarea.LogsPageController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,10 +13,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-/**
- *
- * @author Max
- */
 public class Main extends Application
 {
     private static Stage stage;
@@ -28,17 +25,13 @@ public class Main extends Application
         setPrimaryStage(stage);
         setPrimaryScene(scene);
         Parent root = FXMLLoader.load(getClass().getResource("fxml/alwaysdisplayed/Main.fxml"));
-        
+
         scene = new Scene(root);
         
         stage.setScene(scene);
         stage.show();  
     }
     
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args)
     {
         launch(args);
