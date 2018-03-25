@@ -26,7 +26,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button id="logsButton" fx:id="logsButton" layoutX="5.0" layoutY="269.0" mnemonicParsing="false" onMouseClicked="#menuButtonClicked" onMouseEntered="#highlightButton" onMouseExited="#unHighlightButton" prefHeight="61.0" prefWidth="140.0" style="-fx-background-color: #3A3C43; -fx-background-radius: 1;" styleClass="leftPaneButton" text="Logs" textFill="#ddd6d6">
+      <Button id="logsButton" fx:id="logsButton" layoutX="5.0" layoutY="269.0" mnemonicParsing="false" onMouseClicked="#menuButtonClicked" onMouseEntered="#highlightButton" onMouseExited="#unHighlightButtonIfNotActive" prefHeight="61.0" prefWidth="140.0" style="-fx-background-color: #3A3C43; -fx-background-radius: 1;" styleClass="leftPaneButton" text="Logs" textFill="#ddd6d6">
          <font>
             <Font size="18.0" />
          </font>
