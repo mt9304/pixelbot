@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.timelessapps.javafxtemplate.services;
 
 import java.io.File;
@@ -12,6 +7,8 @@ import java.io.PrintWriter;
 
 public class LoggingService 
 {
+    private SceneHelper sceneHelper;
+    
     public LoggingService()
     {
         
@@ -47,12 +44,12 @@ public class LoggingService
     
     public void appendToEventLogsInApplication(String text)
     {
-        //logsPageController.appendToEventLogTabContentArea(text);
+        sceneHelper.appendToTextArea("eventLogsTabContentArea", text);
     }
     
     public void appendToApplicationLogsInApplication(String text)
     {
-        //logsPageController.appendToApplicationLogTabContentArea(text);
+        sceneHelper.appendToTextArea("applicationLogsTabContentArea", text);
     }
     
 }

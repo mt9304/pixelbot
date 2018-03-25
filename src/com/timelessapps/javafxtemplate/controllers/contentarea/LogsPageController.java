@@ -48,13 +48,14 @@ public class LogsPageController implements Initializable
     @FXML
     public void appendToEventLogTabContentArea(String text)
     {
-        eventLogsTabContentArea.appendText(text + "\n");
+        //eventLogsTabContentArea.appendText(text + "\n");
+        sceneHelper.appendToTextArea("eventLogsTabContentArea", text);
     }
             
     @FXML
     public  void appendToApplicationLogTabContentArea(String text)
     {
-        applicationLogsTabContentArea.appendText(text + "\n");
+        sceneHelper.appendToTextArea("applicationLogsTabContentArea", text);
     }
     
     @Override

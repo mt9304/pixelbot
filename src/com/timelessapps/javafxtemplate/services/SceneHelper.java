@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -45,6 +46,12 @@ public  class SceneHelper
         return (Label) scene.lookup("#"+labelName);
     }
     
+    public TextArea getTextAreaById(String labelName)
+    {
+        setMainScene();
+        return (TextArea) scene.lookup("#"+labelName);
+    }
+    
     public String getSourceName(Object source)
     {
         //Output of source is Button[id=logsButton, styleClass=button leftPaneButton]'Logs' so splitting by single quote gets the name of the object. 
@@ -57,6 +64,14 @@ public  class SceneHelper
         setMainScene();
         Label label = getLabelById(labelName);
         label.setText(newText);
+    }
+    
+    //Appends to textarea. 
+    public void appendToTextArea(String textAreaName, String text)
+    {
+        setMainScene();
+        TextArea textArea = getTextAreaById(textAreaName);
+        textArea.appendText(text);
     }
     
     public void bringNodeToFront(String nodeName, String appendingText)

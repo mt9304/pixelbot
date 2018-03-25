@@ -6,6 +6,7 @@
 package com.timelessapps.javafxtemplate.controllers.alwaysdisplayed;
 
 import com.timelessapps.javafxtemplate.Main;
+import com.timelessapps.javafxtemplate.controllers.contentarea.LogsPageController;
 import com.timelessapps.javafxtemplate.services.LoggingService;
 import com.timelessapps.javafxtemplate.services.SceneHelper;
 import java.io.FileNotFoundException;
@@ -21,7 +22,8 @@ public class LeftMenuPaneController implements Initializable
 {
     //Stage stage = Main.getMainStage();
     SceneHelper sceneHelper = new SceneHelper();
-    LoggingService log = new LoggingService();
+    LoggingService loggingService = new LoggingService();
+    LogsPageController logsPageController = new LogsPageController();
     
     @FXML
     private Button homeButton, applicationButton, apiDatabaseButton, _generalButton, logsButton;
@@ -78,8 +80,9 @@ public class LeftMenuPaneController implements Initializable
         sceneHelper.bringNodeToFront(buttonName, "Page");
         
         //For Logging. 
-        log.appendToApplicationLogsFile(buttonName);
-        log.appendToApplicationLogsInApplication(buttonName);
+        loggingService.appendToApplicationLogsFile(buttonName + "\n");
+        //sceneHelper.appendToTextArea("applicationLogsTabContentArea", buttonName + "\n");
+        logsPageController.appendToApplicationLogTabContentArea(buttonName + "\n");
     }
     
     @Override
