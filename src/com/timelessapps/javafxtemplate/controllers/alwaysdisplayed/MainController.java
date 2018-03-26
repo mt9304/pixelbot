@@ -1,6 +1,7 @@
 package com.timelessapps.javafxtemplate.controllers.alwaysdisplayed;
 
 import com.timelessapps.javafxtemplate.Main;
+import com.timelessapps.javafxtemplate.services.SceneHelper;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
@@ -12,6 +13,8 @@ import javafx.stage.Stage;
 
 public class MainController implements Initializable
 {
+    private SceneHelper sceneHelper; 
+    
     @FXML
     private AnchorPane mainWindow;
     
@@ -41,11 +44,10 @@ public class MainController implements Initializable
             @Override
             public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown)
             {
-                //ObersableValue ov will be true if window is focused, false if not focused (clicking another window). 
+                //ObservableValue ov will be true if window is focused, false if not focused (clicking another window). 
                 Boolean focused = ov.getValue();
                 toggleBorderColor(focused);
             }
         });
     }    
-    
 }

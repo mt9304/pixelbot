@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package com.timelessapps.javafxtemplate.controllers.alwaysdisplayed;
-
-import com.timelessapps.javafxtemplate.Main;
 import com.timelessapps.javafxtemplate.controllers.contentarea.LogsPageController;
 import com.timelessapps.javafxtemplate.services.LoggingService;
 import com.timelessapps.javafxtemplate.services.SceneHelper;
@@ -20,10 +18,10 @@ import javafx.scene.input.MouseEvent;
 
 public class LeftMenuPaneController implements Initializable
 {
-    //Stage stage = Main.getMainStage();
     SceneHelper sceneHelper = new SceneHelper();
     LoggingService loggingService = new LoggingService();
-    LogsPageController logsPageController = new LogsPageController();
+    
+    private Boolean logThreadStarted = false;
     
     @FXML
     private Button homeButton, applicationButton, apiDatabaseButton, _generalButton, logsButton;
@@ -82,13 +80,22 @@ public class LeftMenuPaneController implements Initializable
         //For Logging. 
         loggingService.appendToApplicationLogsFile(buttonName + "\n");
         //sceneHelper.appendToTextArea("applicationLogsTabContentArea", buttonName + "\n");
-        logsPageController.appendToApplicationLogTabContentArea(buttonName + "\n");
+        //logsPageController.appendToApplicationLogTabContentArea(buttonName + "\n");
+        //loggingService.updateEventLogsArea();
+        //sceneHelper.updateEventLogsArea();
+        
+        //Kicks off background thread for updating log files in application. Can move this to a toggleable option in future if better. 
+        if (buttonName.equals("Logs") && (!logThreadStarted))
+        {
+            sceneHelper.keepUpdatingLogsInApplication();
+            logThreadStarted = true;
+        }
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        
+
     }    
     
 }

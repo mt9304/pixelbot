@@ -2,6 +2,8 @@ package com.timelessapps.javafxtemplate.services;
 
 import com.timelessapps.javafxtemplate.Main;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -16,11 +18,6 @@ import javafx.scene.input.MouseEvent;
 public  class SceneHelper
 {
     private static Scene scene;
-    
-    public SceneHelper()
-    {
-        
-    }
     
     public void setMainScene()
     {
@@ -46,10 +43,10 @@ public  class SceneHelper
         return (Label) scene.lookup("#"+labelName);
     }
     
-    public TextArea getTextAreaById(String labelName)
+    public TextArea getTextAreaById(String textAreaName)
     {
         setMainScene();
-        return (TextArea) scene.lookup("#"+labelName);
+        return (TextArea) scene.lookup("#"+textAreaName);
     }
     
     public String getSourceName(Object source)
@@ -67,11 +64,11 @@ public  class SceneHelper
     }
     
     //Appends to textarea. 
-    public void appendToTextArea(String textAreaName, String text)
+    public void setTextArea(String textAreaName, String text)
     {
         setMainScene();
         TextArea textArea = getTextAreaById(textAreaName);
-        textArea.appendText(text);
+        textArea.setText(text);
     }
     
     public void bringNodeToFront(String nodeName, String appendingText)
@@ -122,4 +119,31 @@ public  class SceneHelper
         return text;
     }
     
+    public void keepUpdatingLogsInApplication()
+    {
+        Runnable task = new Runnable()
+        {
+            public void run()
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    setTextArea("eventLogsTabContentArea", "hello " + i);
+                    try 
+                    {
+                        Thread.sleep(1000);
+                    } 
+                    catch (InterruptedException ex) 
+                    {
+                        Logger.getLogger(SceneHelper.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        };
+        //Run the task in a background thread
+        Thread backgroundThread = new Thread(task);
+        //Terminate the running thread if the application exits
+        backgroundThread.setDaemon(true);
+        //Start the thread
+        backgroundThread.start();
+    }
 }

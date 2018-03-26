@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 public class LogsPageController implements Initializable
 {
     SceneHelper sceneHelper = new SceneHelper();
+    
     @FXML
     private TextArea eventLogsTabContentArea, applicationLogsTabContentArea;
         
@@ -49,13 +50,41 @@ public class LogsPageController implements Initializable
     public void appendToEventLogTabContentArea(String text)
     {
         //eventLogsTabContentArea.appendText(text + "\n");
-        sceneHelper.appendToTextArea("eventLogsTabContentArea", text);
+        sceneHelper.setTextArea("eventLogsTabContentArea", text);
     }
             
     @FXML
     public  void appendToApplicationLogTabContentArea(String text)
     {
-        sceneHelper.appendToTextArea("applicationLogsTabContentArea", text);
+        sceneHelper.setTextArea("applicationLogsTabContentArea", text);
+    }
+    
+    //To delete
+    @FXML
+    public void updateEventLogsArea()
+    {
+        eventLogsTabContentArea.setText("hello");
+        /*
+        Runnable task = new Runnable()
+        {
+            public void run()
+            {
+                eventLogsTabContentArea.setText("hello");
+            }
+        };
+        //Run the task in a background thread
+        Thread backgroundThread = new Thread(task);
+        //Terminate the running thread if the application exits
+        backgroundThread.setDaemon(true);
+        //Start the thread
+        backgroundThread.start();
+        */
+    }
+    
+    @FXML
+    public void updateApplicationLogArea()
+    {
+        
     }
     
     @Override
