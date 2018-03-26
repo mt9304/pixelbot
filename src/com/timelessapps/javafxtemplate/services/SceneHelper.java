@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 
-/**
+ /*
  * This class helps get FXML components from the main scene and can call functions from different controllers to change then. 
  * Used to prevent controllers from calling each other directly. 
  * For example, changing label text on the top menu pane when performing actions on a scene. 

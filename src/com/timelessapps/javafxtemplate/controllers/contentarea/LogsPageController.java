@@ -49,7 +49,6 @@ public class LogsPageController implements Initializable
     @FXML
     public void appendToEventLogTabContentArea(String text)
     {
-        //eventLogsTabContentArea.appendText(text + "\n");
         sceneHelper.setTextArea("eventLogsTabContentArea", text);
     }
             
@@ -57,34 +56,6 @@ public class LogsPageController implements Initializable
     public  void appendToApplicationLogTabContentArea(String text)
     {
         sceneHelper.setTextArea("applicationLogsTabContentArea", text);
-    }
-    
-    //To delete
-    @FXML
-    public void updateEventLogsArea()
-    {
-        eventLogsTabContentArea.setText("hello");
-        /*
-        Runnable task = new Runnable()
-        {
-            public void run()
-            {
-                eventLogsTabContentArea.setText("hello");
-            }
-        };
-        //Run the task in a background thread
-        Thread backgroundThread = new Thread(task);
-        //Terminate the running thread if the application exits
-        backgroundThread.setDaemon(true);
-        //Start the thread
-        backgroundThread.start();
-        */
-    }
-    
-    @FXML
-    public void updateApplicationLogArea()
-    {
-        
     }
     
     @Override

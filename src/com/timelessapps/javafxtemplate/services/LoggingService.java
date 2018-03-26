@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
-import javafx.fxml.FXML;
 
 public class LoggingService 
 {
@@ -46,32 +45,5 @@ public class LoggingService
     public void appendToApplicationLogsInApplication(String text)
     {
         sceneHelper.setTextArea("applicationLogsTabContentArea", text);
-    }
-    
-    //To delete. 
-    public void updateEventLogsArea()
-    {
-        sceneHelper.setTextArea("eventLogsTabContentArea", "hello1");
-        /*
-        Runnable task = new Runnable()
-        {
-            public void run()
-            {
-                eventLogsTabContentArea.setText("hello");
-            }
-        };
-        //Run the task in a background thread
-        Thread backgroundThread = new Thread(task);
-        //Terminate the running thread if the application exits
-        backgroundThread.setDaemon(true);
-        //Start the thread
-        backgroundThread.start();
-        */
-    }
-    
-    @FXML
-    public void updateApplicationLogArea()
-    {
-        
     }
 }

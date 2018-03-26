@@ -79,10 +79,6 @@ public class LeftMenuPaneController implements Initializable
         
         //For Logging. 
         loggingService.appendToApplicationLogsFile(buttonName + "\n");
-        //sceneHelper.appendToTextArea("applicationLogsTabContentArea", buttonName + "\n");
-        //logsPageController.appendToApplicationLogTabContentArea(buttonName + "\n");
-        //loggingService.updateEventLogsArea();
-        //sceneHelper.updateEventLogsArea();
         
         //Kicks off background thread for updating log files in application. Can move this to a toggleable option in future if better. 
         if (buttonName.equals("Logs") && (!logThreadStarted))
