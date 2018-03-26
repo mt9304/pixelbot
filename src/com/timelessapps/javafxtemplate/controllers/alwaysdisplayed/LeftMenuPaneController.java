@@ -62,7 +62,7 @@ public class LeftMenuPaneController implements Initializable
     }
     
     @FXML
-    private void menuButtonClicked(MouseEvent event) throws FileNotFoundException
+    private void menuButtonClicked(MouseEvent event) throws FileNotFoundException, InterruptedException
     {
         //Unhighlights the previous button that was clicked. 
         Node pageNameLabel = sceneHelper.getNodeById("pageNameLabel");
@@ -85,6 +85,12 @@ public class LeftMenuPaneController implements Initializable
         {
             sceneHelper.keepUpdatingLogsInApplication();
             logThreadStarted = true;
+        }
+        
+        //Testing pausing task. To Delete
+        if (buttonName.equals("Application"))
+        {
+            sceneHelper.pauseLogTask();
         }
     }
     

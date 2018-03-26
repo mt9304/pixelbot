@@ -120,22 +120,21 @@ public  class SceneHelper
         return text;
     }
     
+    Runnable logTask;
     //This keeps updating the logs area in the application with text from the logs file every second. Runs in a background thread to keep updating. 
     public void keepUpdatingLogsInApplication()
     {
-        Runnable task = new Runnable()
+         logTask = new Runnable()
         {
             public void run()
             {
                 FileHelper fileHelper = new FileHelper();
                 while (true)
                 {
-                    
-                    try {
+                    try 
+                    { 
                         setTextArea("eventLogsTabContentArea", fileHelper.getTextFromFile("applicationLog.txt"));
-                    } catch (IOException ex) {
-                        Logger.getLogger(SceneHelper.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    }   catch (IOException ex) {Logger.getLogger(SceneHelper.class.getName()).log(Level.SEVERE, null, ex);}
                     
                     //For auto scrolling to bottom to see most recent events. 
                     TextArea textArea = getTextAreaById("eventLogsTabContentArea");
@@ -144,19 +143,20 @@ public  class SceneHelper
                     try 
                     {
                         Thread.sleep(1000);
-                    } 
-                    catch (InterruptedException ex) 
-                    {
-                        Logger.getLogger(SceneHelper.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    }   catch (InterruptedException ex) { Logger.getLogger(SceneHelper.class.getName()).log(Level.SEVERE, null, ex);  }
                 }
             }
         };
         //Run the task in a background thread
-        Thread backgroundThread = new Thread(task);
+        Thread backgroundThread = new Thread(logTask);
         //Terminate the running thread if the application exits
         backgroundThread.setDaemon(true);
         //Start the thread
         backgroundThread.start();
+    }
+    
+        public void pauseLogTask() throws InterruptedException {
+        System.out.println("PAUSED NOW...");
+        logTask.wait();
     }
 }
