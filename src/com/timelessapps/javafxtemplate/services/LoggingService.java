@@ -9,7 +9,7 @@ public class LoggingService
 {
     private SceneHelper sceneHelper;
 
-    public void writeToFile(String fileName, String text) throws FileNotFoundException
+    public void writeLineToFile(String fileName, String text) throws FileNotFoundException
     {
         File file = new File(fileName);
         PrintWriter printWriter;
@@ -28,13 +28,13 @@ public class LoggingService
     public void appendToEventLogsFile(String logText) throws FileNotFoundException
     {
         String fileName = "eventLog.txt";
-        writeToFile(fileName, logText);
+        writeLineToFile(fileName, logText);
     }
     
     public void appendToApplicationLogsFile(String logText) throws FileNotFoundException
     {
         String fileName = "applicationLog.txt";
-        writeToFile(fileName, logText);
+        writeLineToFile(fileName, logText);
     }
     
     public void appendToEventLogsInApplication(String text)

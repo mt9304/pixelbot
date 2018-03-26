@@ -46,18 +46,6 @@ public class LogsPageController implements Initializable
         return tabNodeIDs;
     }
     
-    @FXML
-    public void appendToEventLogTabContentArea(String text)
-    {
-        sceneHelper.setTextArea("eventLogsTabContentArea", text);
-    }
-            
-    @FXML
-    public  void appendToApplicationLogTabContentArea(String text)
-    {
-        sceneHelper.setTextArea("applicationLogsTabContentArea", text);
-    }
-    
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {

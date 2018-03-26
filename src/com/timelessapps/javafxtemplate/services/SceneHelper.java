@@ -1,6 +1,7 @@
 package com.timelessapps.javafxtemplate.services;
 
 import com.timelessapps.javafxtemplate.Main;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -119,15 +120,27 @@ public  class SceneHelper
         return text;
     }
     
+    //This keeps updating the logs area in the application with text from the logs file every second. Runs in a background thread to keep updating. 
     public void keepUpdatingLogsInApplication()
     {
         Runnable task = new Runnable()
         {
             public void run()
             {
-                for (int i = 0; i < 10; i++)
+                FileHelper fileHelper = new FileHelper();
+                while (true)
                 {
-                    setTextArea("eventLogsTabContentArea", "hello " + i);
+                    
+                    try {
+                        setTextArea("eventLogsTabContentArea", fileHelper.getTextFromFile("applicationLog.txt"));
+                    } catch (IOException ex) {
+                        Logger.getLogger(SceneHelper.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    //For auto scrolling to bottom to see most recent events. 
+                    TextArea textArea = getTextAreaById("eventLogsTabContentArea");
+                    textArea.setScrollTop(Double.MAX_VALUE);
+                    
                     try 
                     {
                         Thread.sleep(1000);

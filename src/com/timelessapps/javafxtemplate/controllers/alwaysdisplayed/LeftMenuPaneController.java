@@ -77,8 +77,8 @@ public class LeftMenuPaneController implements Initializable
         //Brings the page clicked to the front. 
         sceneHelper.bringNodeToFront(buttonName, "Page");
         
-        //For Logging. 
-        loggingService.appendToApplicationLogsFile(buttonName + "\n");
+        //For Logging. To Delete
+        loggingService.appendToApplicationLogsFile(buttonName);
         
         //Kicks off background thread for updating log files in application. Can move this to a toggleable option in future if better. 
         if (buttonName.equals("Logs") && (!logThreadStarted))
