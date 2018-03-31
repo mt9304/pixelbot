@@ -19,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 public  class SceneHelper
 {
     private static Scene scene;
+    private boolean autoRefreshLogs = false; 
     
     public void setMainScene()
     {
@@ -129,7 +130,7 @@ public  class SceneHelper
             public void run()
             {
                 FileHelper fileHelper = new FileHelper();
-                while (true)
+                while (autoRefreshLogs)
                 {
                     try 
                     { 
@@ -155,8 +156,19 @@ public  class SceneHelper
         backgroundThread.start();
     }
     
-        public void pauseLogTask() throws InterruptedException {
+        public void pauseLogTask() throws InterruptedException
+        {
         System.out.println("PAUSED NOW...");
         logTask.wait();
-    }
+        }
+        
+        public void setAutoRefreshLogsTrue()
+        {
+            autoRefreshLogs = true;
+        }
+        
+        public void setAutoRefreshLogsFalse()
+        {
+            autoRefreshLogs = false;
+        }
 }
