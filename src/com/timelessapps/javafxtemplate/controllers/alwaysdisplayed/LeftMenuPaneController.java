@@ -79,6 +79,7 @@ public class LeftMenuPaneController implements Initializable
         
         //For Logging. TO DO remember  to delete this
         loggingService.appendToApplicationLogsFile(buttonName);
+        loggingService.appendToEventLogsFile(buttonName);
         
     }
     

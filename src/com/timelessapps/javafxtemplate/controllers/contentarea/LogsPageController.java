@@ -74,6 +74,7 @@ public class LogsPageController implements Initializable
                     
                     //For auto scrolling to bottom to see most recent events. 
                     applicationLogsTabContentArea.setScrollTop(Double.MAX_VALUE);
+                    eventLogsTabContentArea.setScrollTop(Double.MAX_VALUE);
                     
                     try 
                     {
