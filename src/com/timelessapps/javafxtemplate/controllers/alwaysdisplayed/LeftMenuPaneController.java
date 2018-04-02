@@ -80,21 +80,6 @@ public class LeftMenuPaneController implements Initializable
         //For Logging. To Delete
         loggingService.appendToApplicationLogsFile(buttonName);
         
-        //Kicks off background thread for updating log files in application. Can move this to a toggleable option in future if better. 
-        if (buttonName.equals("Application") && (!logThreadStarted))
-        {
-            sceneHelper.keepUpdatingLogsInApplication();
-            sceneHelper.setAutoRefreshLogsFalse();
-            logThreadStarted = true;
-        }
-        
-                if (buttonName.equals("General Settings") && (!logThreadStarted))
-        {
-            sceneHelper.keepUpdatingLogsInApplication();
-            sceneHelper.setAutoRefreshLogsTrue();
-            logThreadStarted = true;
-        }
-        
     }
     
     @Override
