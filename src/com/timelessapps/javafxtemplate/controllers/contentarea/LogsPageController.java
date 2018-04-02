@@ -69,6 +69,7 @@ public class LogsPageController implements Initializable
                     try 
                     { 
                         applicationLogsTabContentArea.setText(fileHelper.getTextFromFile("applicationLog.txt"));
+                        eventLogsTabContentArea.setText(fileHelper.getTextFromFile("eventLog.txt"));
                     }   catch (IOException ex) {Logger.getLogger(SceneHelper.class.getName()).log(Level.SEVERE, null, ex);}
                     
                     //For auto scrolling to bottom to see most recent events. 
