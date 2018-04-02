@@ -80,6 +80,7 @@ public  class SceneHelper
         getNodeById(nodeName).toFront();
     }
     
+    //Adds a white line at the bottom border of the tab to look like it is in front of the other tab. 
     public void activateTab(MouseEvent event)
     {
         //For tab part at the top. 
@@ -97,6 +98,7 @@ public  class SceneHelper
         bringNodeToFront(textAreaID, "TabContentArea");
     }
     
+    //Adds a black line at the bottom border of the tab to look like it is behind of the other tab. 
     public void deactivateTabs(ArrayList<String> tabNodeIDs)
     {
         for (String tabNodeID : tabNodeIDs)
@@ -111,10 +113,14 @@ public  class SceneHelper
         }
     }
     
+    /** Example use case for this function, when a button is clicked, you can do this: 
+     *      String buttonName = sceneHelper.getSourceName(event.getSource());
+     *      sceneHelper.bringNodeToFront(buttonName, "Page");
+     *  This will bring up the page with a name that has the same prefixed name as the button clicked.  **/
     public String convertStringToID(String text, String appendingText)
     {
-        //Lowers first letter of word and removes special characters. Page Ids should always be the button's name lowered plus "Page" in camel case. So the "Home" button would return "home" and the page Id would be homePage. 
-        //Appending text in the above example would be "Page", while a tab's content area would be "TextArea". 
+        //Lowers first letter of word and removes special characters. Page Ids should always be the button's name (first letter) lowered plus "Page" in camel case. So the "General Settings" button would return "generalSettings" and the page Id would be generalSettingsPage. 
+        //appendingText in the above example would be "Page", while a tab's content area would be "TextArea". 
         char c[] = text.toCharArray();
         c[0] = Character.toLowerCase(c[0]);
         text = (new String(c) + appendingText).replaceAll("[^a-zA-Z0-9]", "");

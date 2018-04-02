@@ -36,14 +36,4 @@ public class LoggingService
         String fileName = "applicationLog.txt";
         writeLineToFile(fileName, logText);
     }
-    
-    public void appendToEventLogsInApplication(String text)
-    {
-        sceneHelper.setTextArea("eventLogsTabContentArea", text);
-    }
-    
-    public void appendToApplicationLogsInApplication(String text)
-    {
-        sceneHelper.setTextArea("applicationLogsTabContentArea", text);
-    }
 }

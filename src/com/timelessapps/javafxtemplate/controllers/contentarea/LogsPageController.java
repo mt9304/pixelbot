@@ -55,8 +55,8 @@ public class LogsPageController implements Initializable
         return tabNodeIDs;
     }
     
-    //This keeps updating the logs area in the application with text from the logs file every second. Runs in a background thread to keep updating. 
-    @FXML
+    //This keeps updating the logs area in the application with text from the logs file every second. Runs in a background thread to keep updating if checkbox is selected. Remember to consider another braces formatting style since it looks really messy below with the try catches. 
+    @FXML //TO DO: Add update for event log area as well. 
     public void keepUpdatingLogsInApplication()
     {
          logTask = new Runnable()
@@ -64,7 +64,7 @@ public class LogsPageController implements Initializable
             public void run()
             {
                 FileHelper fileHelper = new FileHelper();
-                while (true)
+                while (autoRefreshCheckBox.isSelected())
                 {
                     try 
                     { 
