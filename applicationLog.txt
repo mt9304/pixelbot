@@ -429,3 +429,4 @@ Api/Database
 Application
 Logs
 Home
+Logs
