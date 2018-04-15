@@ -103,3 +103,23 @@ Home
 General Settings
 Logs
 General Settings
+Application
+Home
+Api/Database
+Logs
+General Settings
+Logs
+General Settings
+Logs
+Home
+Logs
+General Settings
+Api/Database
+Logs
+Api/Database
+Application
+Logs
+Logs
+General Settings
+Application
+Home

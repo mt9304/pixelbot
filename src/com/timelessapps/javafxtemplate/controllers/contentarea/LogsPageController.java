@@ -59,7 +59,7 @@ public class LogsPageController implements Initializable
     @FXML
     public void keepUpdatingLogsInApplication()
     {
-         logTask = new Runnable()
+        logTask = new Runnable()
         {
             public void run()
             {

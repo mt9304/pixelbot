@@ -5,25 +5,34 @@
  */
 package com.timelessapps.javafxtemplate.controllers.contentarea;
 
+import com.timelessapps.javafxtemplate.services.RobotService;
+import java.awt.AWTException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
-/**
- * FXML Controller class
- *
- * @author Max
- */
 public class HomePageController implements Initializable
 {
-
-    /**
-     * Initializes the controller class.
-     */
+    RobotService bot;
+    
+    public HomePageController()
+    {
+        
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
     }    
+    
+    @FXML
+    public void startApplication(MouseEvent event) throws AWTException
+    {
+        
+    }
     
 }
