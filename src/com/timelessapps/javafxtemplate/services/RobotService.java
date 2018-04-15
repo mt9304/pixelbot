@@ -31,17 +31,17 @@ public class RobotService extends Robot
     public void type (String text, int delayBetweenKeyPress)
     {
         String textUpper = text.toUpperCase();
-
-
-
+        
         for (int i=0; i < text.length(); ++i)
         {
             if (isUpperCase(text.charAt(i)))
             {
-                System.out.println("Upper case");
+                //For typing capital letters.
+                keyType((int)text.charAt(i), KeyEvent.VK_SHIFT);
             }
             else
             {
+                //For typing symbols and lowercase. 
                 typeChar(textUpper.charAt(i));
             }
             delay(delayBetweenKeyPress);
@@ -70,7 +70,6 @@ public class RobotService extends Robot
         Transferable transferable = new StringSelection(s);
         clipboard.setContents(transferable, null);
     }
-    
     
     private void keyType (int keyCode)
     {
