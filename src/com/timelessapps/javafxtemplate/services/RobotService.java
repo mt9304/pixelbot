@@ -1,6 +1,12 @@
 package com.timelessapps.javafxtemplate.services;
 
+import com.timelessapps.javafxtemplate.abstractsandenums.Coordinates;
+import static com.timelessapps.javafxtemplate.abstractsandenums.Coordinates.X;
+import static com.timelessapps.javafxtemplate.abstractsandenums.Coordinates.Y;
 import java.awt.AWTException;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -15,6 +21,7 @@ public class RobotService extends Robot
         //super();
     }
     
+    /** Section below is for typing related functions. **/
     private boolean isUpperCase(char c)
     {
         char[] capitalLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
@@ -168,4 +175,41 @@ public class RobotService extends Robot
             keyType(keyCode);
         }
     }
+    /** End typing section. **/
+    
+    /** Sections below is for mouse movement functions. **/
+    
+    public void mouseGlide(int x1, int y1, int x2, int y2, int t, int n) 
+    {
+        double dx = (x2 - x1) / ((double) n);
+        double dy = (y2 - y1) / ((double) n);
+        double dt = t / ((double) n);
+        for (int step = 1; step <= n; step++) 
+        {
+            delay((int) dt);
+            mouseMove((int) (x1 + dx * step), (int) (y1 + dy * step));
+        }
+    } 
+    
+    public int getCurrentMousePosition(Coordinates coord)
+    {
+        PointerInfo a = MouseInfo.getPointerInfo();
+        Point b = a.getLocation();
+        
+        int x = (int) b.getX();
+        int y = (int) b.getY();
+        
+        if (coord.equals(X))
+        {
+            return x;
+        }
+        else if (coord.equals(Y))
+        {
+            return y;
+        }
+        return 0;
+    }
+    
 }
+    
+    /** End mouse movement section. **/
