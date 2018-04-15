@@ -32,7 +32,9 @@ public class HomePageController implements Initializable
     @FXML
     public void startApplication(MouseEvent event) throws AWTException
     {
-        
+        bot = new RobotService();
+        bot.delay(2000);
+        bot.type("Test test TEST 123 !@#", 0);
     }
     
 }

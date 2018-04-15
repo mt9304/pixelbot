@@ -15,13 +15,35 @@ public class RobotService extends Robot
         //super();
     }
     
+    private boolean isUpperCase(char c)
+    {
+        char[] capitalLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+        for (char a:capitalLetters)
+        {
+            if (a == c)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public void type (String text, int delayBetweenKeyPress)
     {
         String textUpper = text.toUpperCase();
 
+
+
         for (int i=0; i < text.length(); ++i)
         {
-            typeChar(textUpper.charAt(i));
+            if (isUpperCase(text.charAt(i)))
+            {
+                System.out.println("Upper case");
+            }
+            else
+            {
+                typeChar(textUpper.charAt(i));
+            }
             delay(delayBetweenKeyPress);
         }
     }
