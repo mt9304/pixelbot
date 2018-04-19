@@ -5,6 +5,7 @@
         <group>
             <file>file:/C:/Projects/JavaProjects/javafxtemplate/src/com/timelessapps/javafxtemplate/controllers/contentarea/HomePageController.java</file>
             <file>file:/C:/Projects/JavaProjects/javafxtemplate/src/com/timelessapps/javafxtemplate/services/RobotService.java</file>
+            <file>file:/C:/Projects/JavaProjects/javafxtemplate/src/com/timelessapps/javafxtemplate/services/FileHelper.java</file>
             <file>file:/C:/Projects/JavaProjects/javafxtemplate/src/com/timelessapps/javafxtemplate/controllers/contentarea/LogsPageController.java</file>
             <file>file:/C:/Projects/JavaProjects/javafxtemplate/src/com/timelessapps/javafxtemplate/controllers/alwaysdisplayed/MainController.java</file>
             <file>file:/C:/Projects/JavaProjects/javafxtemplate/src/com/timelessapps/javafxtemplate/services/SceneHelper.java</file>
