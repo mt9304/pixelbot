@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.timelessapps.javafxtemplate.helpers.services.FileHelper;
-import com.timelessapps.javafxtemplate.helpers.services.SceneHelper;
+import com.timelessapps.javafxtemplate.helpers.services.CustomSceneHelper;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +23,7 @@ import javafx.scene.input.MouseEvent;
 
 public class LogsPageController implements Initializable
 {
-    SceneHelper sceneHelper = new SceneHelper();
+    CustomSceneHelper sceneHelper = new CustomSceneHelper();
     Runnable logTask;
     
     @FXML
@@ -72,7 +72,7 @@ public class LogsPageController implements Initializable
                     { 
                         applicationLogsTabContentArea.setText(fileHelper.getTextFromFile("applicationLog.txt"));
                         eventLogsTabContentArea.setText(fileHelper.getTextFromFile("eventLog.txt"));
-                    }   catch (IOException ex) {Logger.getLogger(SceneHelper.class.getName()).log(Level.SEVERE, null, ex);}
+                    }   catch (IOException ex) {Logger.getLogger(CustomSceneHelper.class.getName()).log(Level.SEVERE, null, ex);}
                     
                     //For auto scrolling to bottom to see most recent events. 
                     applicationLogsTabContentArea.setScrollTop(Double.MAX_VALUE);
@@ -81,7 +81,7 @@ public class LogsPageController implements Initializable
                     try 
                     {
                         Thread.sleep(1000);
-                    }   catch (InterruptedException ex) { Logger.getLogger(SceneHelper.class.getName()).log(Level.SEVERE, null, ex);  }
+                    }   catch (InterruptedException ex) { Logger.getLogger(CustomSceneHelper.class.getName()).log(Level.SEVERE, null, ex);  }
                 }
             }
         };

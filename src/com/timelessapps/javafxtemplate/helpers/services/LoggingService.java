@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 
 public class LoggingService 
 {
-    private SceneHelper sceneHelper;
+    private CustomSceneHelper sceneHelper;
 
     public void writeLineToFile(String fileName, String text) throws FileNotFoundException
     {

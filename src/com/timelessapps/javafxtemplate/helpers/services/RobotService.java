@@ -181,6 +181,11 @@ public class RobotService extends Robot
     
     /** Sections below is for mouse movement related functions. **/
     
+    public void mouseGlideHumanlike()
+    {
+    	
+    }
+    
     public void mouseGlide(int x1, int y1, int x2, int y2, int t, int n) 
     {
         double dx = (x2 - x1) / ((double) n);

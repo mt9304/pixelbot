@@ -1,7 +1,7 @@
 package com.timelessapps.javafxtemplate.controllers.alwaysdisplayed;
 
 import com.timelessapps.javafxtemplate.Main;
-import com.timelessapps.javafxtemplate.helpers.services.SceneHelper;
+import com.timelessapps.javafxtemplate.helpers.services.CustomSceneHelper;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 public class MainController implements Initializable
 {
-    private SceneHelper sceneHelper; 
+    private CustomSceneHelper sceneHelper; 
     
     @FXML
     private AnchorPane mainWindow;

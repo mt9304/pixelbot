@@ -6,7 +6,7 @@
 package com.timelessapps.javafxtemplate.controllers.alwaysdisplayed;
 import com.timelessapps.javafxtemplate.controllers.contentarea.LogsPageController;
 import com.timelessapps.javafxtemplate.helpers.services.LoggingService;
-import com.timelessapps.javafxtemplate.helpers.services.SceneHelper;
+import com.timelessapps.javafxtemplate.helpers.services.CustomSceneHelper;
 
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -19,7 +19,7 @@ import javafx.scene.input.MouseEvent;
 
 public class LeftMenuPaneController implements Initializable
 {
-    SceneHelper sceneHelper = new SceneHelper();
+    CustomSceneHelper sceneHelper = new CustomSceneHelper();
     LoggingService loggingService = new LoggingService();
     
     private Boolean logThreadStarted = false;
@@ -68,7 +68,7 @@ public class LeftMenuPaneController implements Initializable
         //Unhighlights the previous button that was clicked. 
         Node pageNameLabel = sceneHelper.getNodeById("pageNameLabel");
         String previousPageName = sceneHelper.getSourceName(pageNameLabel);
-        String previousPageNameID = sceneHelper.convertStringToID(previousPageName, "Button");
+        String previousPageNameID = sceneHelper.convertNameToID(previousPageName, "Button");
         unHighlightByID(previousPageNameID);
         
         //Changes name of the label in top left of top menu bar (id of pageNameLabel) to the name of the button clicked. 
@@ -78,10 +78,9 @@ public class LeftMenuPaneController implements Initializable
         //Brings the page clicked to the front. 
         sceneHelper.bringNodeToFront(buttonName, "Page");
         
-        //For Logging. TO DO remember  to delete this
+        //For Logging. TO DO remember to delete this
         loggingService.appendToApplicationLogsFile(buttonName);
-        loggingService.appendToEventLogsFile(buttonName);
-        
+        loggingService.appendToEventLogsFile(buttonName);    
     }
     
     @Override

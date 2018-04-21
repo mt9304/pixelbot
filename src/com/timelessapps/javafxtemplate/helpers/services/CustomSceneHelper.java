@@ -16,7 +16,7 @@ import javafx.scene.input.MouseEvent;
  * Used to prevent controllers from calling each other directly. 
  * For example, changing label text on the top menu pane when performing actions on a scene. 
  */
-public  class SceneHelper
+public  class CustomSceneHelper
 {
     private static Scene scene;
     private boolean autoRefreshLogs = false; 
@@ -73,9 +73,13 @@ public  class SceneHelper
         textArea.setText(text);
     }
     
-    public void bringNodeToFront(String nodeName, String appendingText)
+    /** Example use case for this function, when a button is clicked, you can do this: 
+     *      String buttonName = sceneHelper.getSourceName(event.getSource()); //buttonName could be "Home" (the value it shows to use in application). 
+     *      sceneHelper.bringNodeToFront(buttonName, "Page"); 
+     *  This will bring up the page with a name that has the same prefixed name as the button clicked.  **/
+    public void bringNodeToFront(String nodeName, String appendingText)//Appending text is the suffix of node name, such as "Page" or "Button" (first letter capiatlized). 
     {
-        nodeName = convertStringToID(nodeName, appendingText);
+        nodeName = convertNameToID(nodeName, appendingText);
         setMainScene();
         getNodeById(nodeName).toFront();
     }
@@ -113,13 +117,9 @@ public  class SceneHelper
         }
     }
     
-    /** Example use case for this function, when a button is clicked, you can do this: 
-     *      String buttonName = sceneHelper.getSourceName(event.getSource());
-     *      sceneHelper.bringNodeToFront(buttonName, "Page");
-     *  This will bring up the page with a name that has the same prefixed name as the button clicked.  **/
-    public String convertStringToID(String text, String appendingText)
+    public String convertNameToID(String text, String appendingText)
     {
-        //Lowers first letter of word and removes special characters. Page Ids should always be the button's name (first letter) lowered plus "Page" in camel case. So the "General Settings" button would return "generalSettings" and the page Id would be generalSettingsPage. 
+        //Lowers first letter of word and removes special characters. Page Ids should always be the button's name (first letter) lowered plus "Page" in camel case. So the "Api/Database" button would return "apiDatabase" and the page Id would be "apiDatabasePage". 
         //appendingText in the above example would be "Page", while a tab's content area would be "TextArea". 
         char c[] = text.toCharArray();
         c[0] = Character.toLowerCase(c[0]);
