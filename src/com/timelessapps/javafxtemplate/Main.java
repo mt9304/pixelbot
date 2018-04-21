@@ -24,7 +24,7 @@ public class Main extends Application
         stage.initStyle(StageStyle.UNDECORATED);
         setPrimaryStage(stage);
         setPrimaryScene(scene);
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/alwaysdisplayed/Main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/fxml/alwaysdisplayed/Main.fxml"));
 
         scene = new Scene(root);
         

@@ -5,12 +5,14 @@
  */
 package com.timelessapps.javafxtemplate.controllers.contentarea;
 
-import com.timelessapps.javafxtemplate.services.RobotService;
 import java.awt.AWTException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.timelessapps.javafxtemplate.helpers.services.RobotService;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;

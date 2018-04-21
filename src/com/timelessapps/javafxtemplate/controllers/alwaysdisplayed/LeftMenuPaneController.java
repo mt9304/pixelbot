@@ -5,8 +5,9 @@
  */
 package com.timelessapps.javafxtemplate.controllers.alwaysdisplayed;
 import com.timelessapps.javafxtemplate.controllers.contentarea.LogsPageController;
-import com.timelessapps.javafxtemplate.services.LoggingService;
-import com.timelessapps.javafxtemplate.services.SceneHelper;
+import com.timelessapps.javafxtemplate.helpers.services.LoggingService;
+import com.timelessapps.javafxtemplate.helpers.services.SceneHelper;
+
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;

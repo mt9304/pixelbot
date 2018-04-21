@@ -1,7 +1,8 @@
 package com.timelessapps.javafxtemplate.controllers.alwaysdisplayed;
 
 import com.timelessapps.javafxtemplate.Main;
-import com.timelessapps.javafxtemplate.services.SceneHelper;
+import com.timelessapps.javafxtemplate.helpers.services.SceneHelper;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
