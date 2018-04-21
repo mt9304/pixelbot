@@ -130,3 +130,11 @@ General Settings
 Logs
 Api/Database
 Logs
+Application
+Api/Database
+General Settings
+Logs
+Api/Database
+Logs
+General Settings
+Logs
