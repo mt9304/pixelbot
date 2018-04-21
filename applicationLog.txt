@@ -555,3 +555,10 @@ Logs
 General Settings
 Application
 Home
+Application
+Home
+Logs
+General Settings
+Logs
+Api/Database
+Logs
