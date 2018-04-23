@@ -181,20 +181,36 @@ public class RobotService extends Robot
     
     /** Sections below is for mouse movement related functions. **/
     
-    public void mouseGlideHumanlike()
+    public void mouseGlideHumanlike(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
     {
-    	
+        Boolean shouldCurveLeft = false;
+        Boolean shouldCurveRight = false;
+        Boolean isHalfwayDone = false;
+        
+        int pixelsCurvedX = 0;
+        int pixelsCurvedY = 0;
+        
+        double distanceOverStepsX = (endpointX - startingX) / ((double) numberOfSteps);
+        double distanceOverStepsY = (endpointY - startingY) / ((double) numberOfSteps);
+        double timeOverSteps = timeInMilis / ((double) numberOfSteps);
+        
+        for (int step = 1; step <= numberOfSteps; step++) 
+        {
+            delay((int) timeOverSteps);
+            mouseMove((int) (startingX + distanceOverStepsX * step), (int) (startingY + distanceOverStepsY * step));
+        }
     }
     
-    public void mouseGlide(int x1, int y1, int x2, int y2, int t, int n) 
+    public void mouseGlide(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps) 
     {
-        double dx = (x2 - x1) / ((double) n);
-        double dy = (y2 - y1) / ((double) n);
-        double dt = t / ((double) n);
-        for (int step = 1; step <= n; step++) 
+        double distanceOverStepsX = (endpointX - startingX) / ((double) numberOfSteps);
+        double distanceOverStepsY = (endpointY - startingY) / ((double) numberOfSteps);
+        double timeOverSteps = timeInMilis / ((double) numberOfSteps);
+        
+        for (int step = 1; step <= numberOfSteps; step++) 
         {
-            delay((int) dt);
-            mouseMove((int) (x1 + dx * step), (int) (y1 + dy * step));
+            delay((int) timeOverSteps);
+            mouseMove((int) (startingX + distanceOverStepsX * step), (int) (startingY + distanceOverStepsY * step));
         }
     } 
     
