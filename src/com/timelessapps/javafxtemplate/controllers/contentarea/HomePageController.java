@@ -49,7 +49,7 @@ public class HomePageController implements Initializable
         botRoutine.setDaemon(true);
         botRoutine.start();
         
-        GlobalKeyListenerThread globalKeyListenerThread = new GlobalKeyListenerThread();
+        GlobalKeyListenerThread globalKeyListenerThread = new GlobalKeyListenerThread(botRoutine);
         globalKeyListenerThread.setDaemon(true);
         globalKeyListenerThread.start();
     }
