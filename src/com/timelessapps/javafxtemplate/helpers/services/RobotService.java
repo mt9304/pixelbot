@@ -182,8 +182,13 @@ public class RobotService extends Robot
     
     /** Sections below is for mouse movement related functions. **/
     
+    public void mouseCurve(int endPointX, int endPointY)
+    {
+        
+    }
+    
     //Actual starting X may be different from declared value, since it starts with the startingX + other values. 
-    public void mouseCurveX(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
+    public void mouseCurveX1(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
     {
         double distanceOverStepsX = (endpointX - startingX) / ((double) numberOfSteps);
         double distanceOverStepsY = (endpointY - startingY) / ((double) numberOfSteps);
@@ -202,7 +207,7 @@ public class RobotService extends Robot
         }
     }
     
-    public void mouseCurveY(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
+    public void mouseCurveY1(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
     {
         double distanceOverStepsX = (endpointX - startingX) / ((double) numberOfSteps);
         double distanceOverStepsY = (endpointY - startingY) / ((double) numberOfSteps);
@@ -210,6 +215,45 @@ public class RobotService extends Robot
         
         //Runs in 3 phases. starts with i=1 to move Y down a bit, then 0 to go straight, then -1 to move the Y back to original endpoint. 
         for (int i = 1; i >=-1; i--)
+        {
+            for (int step = 1; step <= numberOfSteps/3; step++) 
+            {
+                delay((int) timeOverSteps);
+                mouseMove((int) (startingX + distanceOverStepsX * step), (int) (startingY + distanceOverStepsY * step)+(step*i));
+            }
+            startingX = getCurrentMousePosition(X);
+            startingY = getCurrentMousePosition(Y);
+        }
+    }
+    
+        //Actual starting X may be different from declared value, since it starts with the startingX + other values. 
+    public void mouseCurveX2(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
+    {
+        double distanceOverStepsX = (endpointX - startingX) / ((double) numberOfSteps);
+        double distanceOverStepsY = (endpointY - startingY) / ((double) numberOfSteps);
+        double timeOverSteps = timeInMilis / ((double) numberOfSteps);
+        
+        //Runs in 3 phases. starts with i=1 to move Y down a bit, then 0 to go straight, then -1 to move the Y back to original endpoint. 
+        for (int i = -1; i <= 1; i++)
+        {
+            for (int step = 1; step <= numberOfSteps/3; step++) 
+            {
+                delay((int) timeOverSteps);
+                mouseMove((int) (startingX + distanceOverStepsX * step)+(step*i), (int) (startingY + distanceOverStepsY * step));
+            }
+            startingX = getCurrentMousePosition(X);
+            startingY = getCurrentMousePosition(Y);
+        }
+    }
+    
+    public void mouseCurveY2(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
+    {
+        double distanceOverStepsX = (endpointX - startingX) / ((double) numberOfSteps);
+        double distanceOverStepsY = (endpointY - startingY) / ((double) numberOfSteps);
+        double timeOverSteps = timeInMilis / ((double) numberOfSteps);
+        
+        //Runs in 3 phases. starts with i=1 to move Y down a bit, then 0 to go straight, then -1 to move the Y back to original endpoint. 
+        for (int i = -1; i <= 1; i++)
         {
             for (int step = 1; step <= numberOfSteps/3; step++) 
             {

@@ -49,78 +49,240 @@ public class HomePageController implements Initializable
                 bot.delay(1000);
                 bot.mouseMove(500, 700);
                 bot.delay(1000);
-                //bot.mousePress(InputEvent.BUTTON1_MASK);
+                bot.mousePress(InputEvent.BUTTON1_MASK);
                 bot.delay(1000);
-                bot.mouseCurveX(500, 700, 100, 300, 1000, 100);
+                bot.mouseCurveX1(500, 700, 100, 300, 1000, 100);
                 bot.delay(1000);
-                //bot.mouseRelease(InputEvent.BUTTON1_MASK);
+                bot.mouseRelease(InputEvent.BUTTON1_MASK);
                 
                 bot.delay(1000);
-                bot.mouseMove(100,300);
+                bot.mouseMove(100,400);
                 bot.delay(1000);
-                //bot.mousePress(InputEvent.BUTTON1_MASK);
+                bot.mousePress(InputEvent.BUTTON1_MASK);
                 bot.delay(1000);
-                bot.mouseCurveX(100, 300, 500, 700, 1000, 100);
+                bot.mouseCurveX1(100, 300, 500, 700, 1000, 100);
                 bot.delay(1000);
-               // bot.mouseRelease(InputEvent.BUTTON1_MASK);
+                bot.mouseRelease(InputEvent.BUTTON1_MASK);
                 
                 bot.delay(1000);
                 bot.mouseMove(500,700);
                 bot.delay(1000);
-                //bot.mousePress(InputEvent.BUTTON3_MASK);
+                bot.mousePress(InputEvent.BUTTON3_MASK);
                 bot.delay(1000);
-                bot.mouseCurveY(500, 700, 100, 300, 1000, 100);
+                bot.mouseCurveY1(500, 700, 100, 300, 1000, 100);
                 bot.delay(1000);
-               // bot.mouseRelease(InputEvent.BUTTON3_MASK);
+                bot.mouseRelease(InputEvent.BUTTON3_MASK);
                 
                 bot.delay(1000);
-                bot.mouseMove(100,300);
+                bot.mouseMove(100,400);
                 bot.delay(1000);
-                //bot.mousePress(InputEvent.BUTTON3_MASK);
+                bot.mousePress(InputEvent.BUTTON3_MASK);
                 bot.delay(1000);
-                bot.mouseCurveY(100, 300, 500, 700, 1000, 100);
+                bot.mouseCurveY1(100, 300, 500, 700, 1000, 100);
                 bot.delay(1000);
-                //bot.mouseRelease(InputEvent.BUTTON3_MASK);
+                bot.mouseRelease(InputEvent.BUTTON3_MASK);
                 
                 //
                 
                 System.out.println("Part 1");
                 bot.delay(1000);
-                bot.mouseMove(500,300);
+                bot.mouseMove(500,400);
                 bot.delay(1000);
-                //bot.mousePress(InputEvent.BUTTON1_MASK);
+                bot.mousePress(InputEvent.BUTTON1_MASK);
                 bot.delay(1000);
-                bot.mouseCurveX(500, 300, 100, 700, 1000, 100);
+                bot.mouseCurveX1(500, 300, 100, 700, 1000, 100);
                 bot.delay(1000);
-                //bot.mouseRelease(InputEvent.BUTTON1_MASK);
+                bot.mouseRelease(InputEvent.BUTTON1_MASK);
                 
                 bot.delay(1000);
                 bot.mouseMove(100,700);
                 bot.delay(1000);
-                //bot.mousePress(InputEvent.BUTTON1_MASK);
+                bot.mousePress(InputEvent.BUTTON1_MASK);
                 bot.delay(1000);
-                bot.mouseCurveX(100, 700, 500, 300, 1000, 100);
+                bot.mouseCurveX1(100, 700, 500, 300, 1000, 100);
                 bot.delay(1000);
-                //bot.mouseRelease(InputEvent.BUTTON1_MASK);
+                bot.mouseRelease(InputEvent.BUTTON1_MASK);
                 
                 System.out.println("Part 2");
                 bot.delay(1000);
-                bot.mouseMove(500,300);
+                bot.mouseMove(500,400);
                 bot.delay(1000);
-                //bot.mousePress(InputEvent.BUTTON3_MASK);
+                bot.mousePress(InputEvent.BUTTON3_MASK);
                 bot.delay(1000);
-                bot.mouseCurveY(500, 300, 100, 700, 1000, 100);
+                bot.mouseCurveY1(500, 300, 100, 700, 1000, 100);
                 bot.delay(1000);
-                //bot.mouseRelease(InputEvent.BUTTON3_MASK);
+                bot.mouseRelease(InputEvent.BUTTON3_MASK);
                 
                 bot.delay(1000);
                 bot.mouseMove(100,700);
                 bot.delay(1000);
-                //bot.mousePress(InputEvent.BUTTON3_MASK);
+                bot.mousePress(InputEvent.BUTTON3_MASK);
                 bot.delay(1000);
-                bot.mouseCurveY(100, 700, 500, 300, 1000, 100);
+                bot.mouseCurveY1(100, 700, 500, 300, 1000, 100);
                 bot.delay(1000);
-                //bot.mouseRelease(InputEvent.BUTTON3_MASK);
+                bot.mouseRelease(InputEvent.BUTTON3_MASK);
+                
+                
+                // ** // ** //
+                
+                bot.delay(1000);
+                bot.mouseCurveX1(50, 50, 100, 350, 1000, 100);
+                bot.delay(1000);
+                bot.mousePress(InputEvent.BUTTON1_MASK);
+                bot.delay(1000);
+                bot.mouseCurveX1(100, 350, 700, 350, 1000, 100);
+                bot.delay(1000);
+                bot.mouseRelease(InputEvent.BUTTON1_MASK);
+                
+                bot.delay(1000);
+                bot.mouseMove(700,350);
+                bot.delay(1000);
+                bot.mousePress(InputEvent.BUTTON1_MASK);
+                bot.delay(1000);
+                bot.mouseCurveX1(700, 350, 100, 350, 1000, 100);
+                bot.delay(1000);
+                bot.mouseRelease(InputEvent.BUTTON1_MASK);
+                
+                bot.delay(1000);
+                bot.mouseMove(100,350);
+                bot.delay(1000);
+                bot.mousePress(InputEvent.BUTTON3_MASK);
+                bot.delay(1000);
+                bot.mouseCurveY1(100, 350, 700, 350, 1000, 100);
+                bot.delay(1000);
+                bot.mouseRelease(InputEvent.BUTTON3_MASK);
+                
+                bot.delay(1000);
+                bot.mouseMove(700,350);
+                bot.delay(1000);
+                bot.mousePress(InputEvent.BUTTON3_MASK);
+                bot.delay(1000);
+                bot.mouseCurveY1(700, 350, 100, 350, 1000, 100);
+                bot.delay(1000);
+                bot.mouseRelease(InputEvent.BUTTON3_MASK);
+                
+                //
+                
+                System.out.println("Part 1");
+                bot.delay(1000);
+                bot.mouseMove(400,400);
+                bot.delay(1000);
+                bot.mousePress(InputEvent.BUTTON1_MASK);
+                bot.delay(1000);
+                bot.mouseCurveX1(400, 400, 400, 800, 1000, 100);
+                bot.delay(1000);
+                bot.mouseRelease(InputEvent.BUTTON1_MASK);
+                
+                bot.delay(1000);
+                bot.mouseMove(400,800);
+                bot.delay(1000);
+                bot.mousePress(InputEvent.BUTTON1_MASK);
+                bot.delay(1000);
+                bot.mouseCurveX1(400, 800, 400, 400, 1000, 100);
+                bot.delay(1000);
+                bot.mouseRelease(InputEvent.BUTTON1_MASK);
+                
+                System.out.println("Part 2");
+                bot.delay(1000);
+                bot.mouseMove(400,400);
+                bot.delay(1000);
+                bot.mousePress(InputEvent.BUTTON3_MASK);
+                bot.delay(1000);
+                bot.mouseCurveY1(400, 400, 400, 800, 1000, 100);
+                bot.delay(1000);
+                bot.mouseRelease(InputEvent.BUTTON3_MASK);
+                
+                bot.delay(1000);
+                bot.mouseMove(400,800);
+                bot.delay(1000);
+                bot.mousePress(InputEvent.BUTTON3_MASK);
+                bot.delay(1000);
+                bot.mouseCurveY1(400, 800, 400, 400, 1000, 100);
+                bot.delay(1000);
+                bot.mouseRelease(InputEvent.BUTTON3_MASK);
+                
+                System.out.println("Change colors");
+                bot.delay(5000);
+                
+                bot.delay(1000);
+                bot.mouseMove(500,700);
+                bot.mouseClick(200);
+                
+                bot.delay(1000);
+                bot.mouseMove(500, 700);
+                bot.delay(1000);
+                bot.mousePress(InputEvent.BUTTON1_MASK);
+                bot.delay(1000);
+                bot.mouseCurveX2(500, 700, 100, 300, 1000, 100);
+                bot.delay(1000);
+                bot.mouseRelease(InputEvent.BUTTON1_MASK);
+                
+                bot.delay(1000);
+                bot.mouseMove(100,400);
+                bot.delay(1000);
+                bot.mousePress(InputEvent.BUTTON1_MASK);
+                bot.delay(1000);
+                bot.mouseCurveX2(100, 300, 500, 700, 1000, 100);
+                bot.delay(1000);
+                bot.mouseRelease(InputEvent.BUTTON1_MASK);
+                
+                bot.delay(1000);
+                bot.mouseMove(500,700);
+                bot.delay(1000);
+                bot.mousePress(InputEvent.BUTTON3_MASK);
+                bot.delay(1000);
+                bot.mouseCurveY2(500, 700, 100, 300, 1000, 100);
+                bot.delay(1000);
+                bot.mouseRelease(InputEvent.BUTTON3_MASK);
+                
+                bot.delay(1000);
+                bot.mouseMove(100,400);
+                bot.delay(1000);
+                bot.mousePress(InputEvent.BUTTON3_MASK);
+                bot.delay(1000);
+                bot.mouseCurveY2(100, 300, 500, 700, 1000, 100);
+                bot.delay(1000);
+                bot.mouseRelease(InputEvent.BUTTON3_MASK);
+                
+                //
+                
+                System.out.println("Part 1");
+                bot.delay(1000);
+                bot.mouseMove(500,400);
+                bot.delay(1000);
+                bot.mousePress(InputEvent.BUTTON1_MASK);
+                bot.delay(1000);
+                bot.mouseCurveX2(500, 300, 100, 700, 1000, 100);
+                bot.delay(1000);
+                bot.mouseRelease(InputEvent.BUTTON1_MASK);
+                
+                bot.delay(1000);
+                bot.mouseMove(100,700);
+                bot.delay(1000);
+                bot.mousePress(InputEvent.BUTTON1_MASK);
+                bot.delay(1000);
+                bot.mouseCurveX2(100, 700, 500, 300, 1000, 100);
+                bot.delay(1000);
+                bot.mouseRelease(InputEvent.BUTTON1_MASK);
+                
+                System.out.println("Part 2");
+                bot.delay(1000);
+                bot.mouseMove(500,400);
+                bot.delay(1000);
+                bot.mousePress(InputEvent.BUTTON3_MASK);
+                bot.delay(1000);
+                bot.mouseCurveY2(500, 300, 100, 700, 1000, 100);
+                bot.delay(1000);
+                bot.mouseRelease(InputEvent.BUTTON3_MASK);
+                
+                bot.delay(1000);
+                bot.mouseMove(100,700);
+                bot.delay(1000);
+                bot.mousePress(InputEvent.BUTTON3_MASK);
+                bot.delay(1000);
+                bot.mouseCurveY2(100, 700, 500, 300, 1000, 100);
+                bot.delay(1000);
+                bot.mouseRelease(InputEvent.BUTTON3_MASK);
                 
                 
                 // ** // ** //
@@ -130,7 +292,7 @@ public class HomePageController implements Initializable
                 bot.delay(1000);
                 bot.mousePress(InputEvent.BUTTON1_MASK);
                 bot.delay(1000);
-                bot.mouseCurveX(100, 350, 700, 350, 1000, 100);
+                bot.mouseCurveX2(100, 350, 700, 350, 1000, 100);
                 bot.delay(1000);
                 bot.mouseRelease(InputEvent.BUTTON1_MASK);
                 
@@ -139,7 +301,7 @@ public class HomePageController implements Initializable
                 bot.delay(1000);
                 bot.mousePress(InputEvent.BUTTON1_MASK);
                 bot.delay(1000);
-                bot.mouseCurveX(700, 350, 100, 350, 1000, 100);
+                bot.mouseCurveX2(700, 350, 100, 350, 1000, 100);
                 bot.delay(1000);
                 bot.mouseRelease(InputEvent.BUTTON1_MASK);
                 
@@ -148,7 +310,7 @@ public class HomePageController implements Initializable
                 bot.delay(1000);
                 bot.mousePress(InputEvent.BUTTON3_MASK);
                 bot.delay(1000);
-                bot.mouseCurveY(100, 350, 700, 350, 1000, 100);
+                bot.mouseCurveY2(100, 350, 700, 350, 1000, 100);
                 bot.delay(1000);
                 bot.mouseRelease(InputEvent.BUTTON3_MASK);
                 
@@ -157,7 +319,7 @@ public class HomePageController implements Initializable
                 bot.delay(1000);
                 bot.mousePress(InputEvent.BUTTON3_MASK);
                 bot.delay(1000);
-                bot.mouseCurveY(700, 350, 100, 350, 1000, 100);
+                bot.mouseCurveY2(700, 350, 100, 350, 1000, 100);
                 bot.delay(1000);
                 bot.mouseRelease(InputEvent.BUTTON3_MASK);
                 
@@ -169,7 +331,7 @@ public class HomePageController implements Initializable
                 bot.delay(1000);
                 bot.mousePress(InputEvent.BUTTON1_MASK);
                 bot.delay(1000);
-                bot.mouseCurveX(400, 400, 400, 800, 1000, 100);
+                bot.mouseCurveX2(400, 400, 400, 800, 1000, 100);
                 bot.delay(1000);
                 bot.mouseRelease(InputEvent.BUTTON1_MASK);
                 
@@ -178,7 +340,7 @@ public class HomePageController implements Initializable
                 bot.delay(1000);
                 bot.mousePress(InputEvent.BUTTON1_MASK);
                 bot.delay(1000);
-                bot.mouseCurveX(400, 800, 400, 400, 1000, 100);
+                bot.mouseCurveX2(400, 800, 400, 400, 1000, 100);
                 bot.delay(1000);
                 bot.mouseRelease(InputEvent.BUTTON1_MASK);
                 
@@ -188,7 +350,7 @@ public class HomePageController implements Initializable
                 bot.delay(1000);
                 bot.mousePress(InputEvent.BUTTON3_MASK);
                 bot.delay(1000);
-                bot.mouseCurveY(400, 400, 400, 800, 1000, 100);
+                bot.mouseCurveY2(400, 400, 400, 800, 1000, 100);
                 bot.delay(1000);
                 bot.mouseRelease(InputEvent.BUTTON3_MASK);
                 
@@ -197,7 +359,7 @@ public class HomePageController implements Initializable
                 bot.delay(1000);
                 bot.mousePress(InputEvent.BUTTON3_MASK);
                 bot.delay(1000);
-                bot.mouseCurveY(400, 800, 400, 400, 1000, 100);
+                bot.mouseCurveY2(400, 800, 400, 400, 1000, 100);
                 bot.delay(1000);
                 bot.mouseRelease(InputEvent.BUTTON3_MASK);
                 
@@ -206,6 +368,7 @@ public class HomePageController implements Initializable
         };
         
         Thread t1 = new Thread(startTask);
+        t1.setDaemon(true);
         t1.start();
 
     }
