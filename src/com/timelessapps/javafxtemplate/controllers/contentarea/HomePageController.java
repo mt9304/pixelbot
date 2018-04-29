@@ -48,10 +48,15 @@ public class HomePageController implements Initializable
             {
                 try {
                     RobotService bot = new RobotService();
-                    bot.wait();
+                    boolean keepGoing = true;
+                    
+                    while(keepGoing)
+                    {
+                        bot.delay(SHORT);
+                        System.out.println("Logging");
+                    }
+                    
                 } catch (AWTException ex) {
-                    Logger.getLogger(HomePageController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InterruptedException ex) {
                     Logger.getLogger(HomePageController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -66,7 +71,13 @@ public class HomePageController implements Initializable
             public void run()
             {
                 		try {
-			GlobalScreen.registerNativeHook();
+                                                    GlobalScreen.registerNativeHook();
+                                                    // Get the logger for "org.jnativehook" and set the level to warning.
+                                                    Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+                                                    logger.setLevel(Level.WARNING);
+
+                                                    // Don't forget to disable the parent handlers.
+                                                    logger.setUseParentHandlers(false);
 		}
 		catch (NativeHookException ex) {
 			System.err.println("There was a problem registering the native hook.");
