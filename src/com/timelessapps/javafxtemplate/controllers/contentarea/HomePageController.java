@@ -16,6 +16,8 @@ import java.util.logging.Logger;
 
 import com.timelessapps.javafxtemplate.helpers.services.RobotService;
 import com.timelessapps.javafxtemplate.helpers.services.GlobalKeyListener;
+import com.timelessapps.javafxtemplate.helpers.threadsandroutines.BotRoutine;
+import com.timelessapps.javafxtemplate.helpers.threadsandroutines.GlobalKeyListenerThread;
 import java.awt.event.InputEvent;
 
 import javafx.fxml.FXML;
@@ -42,58 +44,14 @@ public class HomePageController implements Initializable
     @FXML
     public void startApplication(MouseEvent event) 
     {
-        Runnable startTask = new Runnable()
-        {
-            public void run() 
-            {
-                try {
-                    RobotService bot = new RobotService();
-                    boolean keepGoing = true;
-                    
-                    while(keepGoing)
-                    {
-                        bot.delay(SHORT);
-                        System.out.println("Logging");
-                    }
-                    
-                } catch (AWTException ex) {
-                    Logger.getLogger(HomePageController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        };
+
+        BotRoutine botRoutine = new BotRoutine();
+        botRoutine.setDaemon(true);
+        botRoutine.start();
         
-        Thread t1 = new Thread(startTask);
-        t1.setDaemon(true);
-        t1.start();
-        
-        Runnable keyListener = new Runnable()
-        {
-            public void run()
-            {
-                		try {
-                                                    GlobalScreen.registerNativeHook();
-                                                    // Get the logger for "org.jnativehook" and set the level to warning.
-                                                    Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
-                                                    logger.setLevel(Level.WARNING);
-
-                                                    // Don't forget to disable the parent handlers.
-                                                    logger.setUseParentHandlers(false);
-		}
-		catch (NativeHookException ex) {
-			System.err.println("There was a problem registering the native hook.");
-			System.err.println(ex.getMessage());
-
-			System.exit(1);
-		}
-
-		GlobalScreen.addNativeKeyListener(new GlobalKeyListener());
-            }
-        };
-        
-        Thread keyListenerThread = new Thread(keyListener);
-        keyListenerThread.setDaemon(true);
-        keyListenerThread.start();
-
+        GlobalKeyListenerThread globalKeyListenerThread = new GlobalKeyListenerThread();
+        globalKeyListenerThread.setDaemon(true);
+        globalKeyListenerThread.start();
     }
     
 }
