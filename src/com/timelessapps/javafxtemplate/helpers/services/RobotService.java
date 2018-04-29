@@ -15,6 +15,7 @@ import java.awt.datatransfer.Transferable;
 import java.awt.event.KeyEvent;
 
 import com.timelessapps.javafxtemplate.helpers.abstractsandenums.Coordinates;
+import java.awt.event.InputEvent;
 
 public class RobotService extends Robot
 {
@@ -181,23 +182,42 @@ public class RobotService extends Robot
     
     /** Sections below is for mouse movement related functions. **/
     
-    public void mouseGlideHumanlike(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
+    //Actual starting X may be different from declared value, since it starts with the startingX + other values. 
+    public void mouseCurveX(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
     {
-        Boolean shouldCurveLeft = false;
-        Boolean shouldCurveRight = false;
-        Boolean isHalfwayDone = false;
-        
-        int pixelsCurvedX = 0;
-        int pixelsCurvedY = 0;
-        
         double distanceOverStepsX = (endpointX - startingX) / ((double) numberOfSteps);
         double distanceOverStepsY = (endpointY - startingY) / ((double) numberOfSteps);
         double timeOverSteps = timeInMilis / ((double) numberOfSteps);
         
-        for (int step = 1; step <= numberOfSteps; step++) 
+        //Runs in 3 phases. starts with i=1 to move Y down a bit, then 0 to go straight, then -1 to move the Y back to original endpoint. 
+        for (int i = 1; i >=-1; i--)
         {
-            delay((int) timeOverSteps);
-            mouseMove((int) (startingX + distanceOverStepsX * step), (int) (startingY + distanceOverStepsY * step));
+            for (int step = 1; step <= numberOfSteps/3; step++) 
+            {
+                delay((int) timeOverSteps);
+                mouseMove((int) (startingX + distanceOverStepsX * step)+(step*i), (int) (startingY + distanceOverStepsY * step));
+            }
+            startingX = getCurrentMousePosition(X);
+            startingY = getCurrentMousePosition(Y);
+        }
+    }
+    
+    public void mouseCurveY(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
+    {
+        double distanceOverStepsX = (endpointX - startingX) / ((double) numberOfSteps);
+        double distanceOverStepsY = (endpointY - startingY) / ((double) numberOfSteps);
+        double timeOverSteps = timeInMilis / ((double) numberOfSteps);
+        
+        //Runs in 3 phases. starts with i=1 to move Y down a bit, then 0 to go straight, then -1 to move the Y back to original endpoint. 
+        for (int i = 1; i >=-1; i--)
+        {
+            for (int step = 1; step <= numberOfSteps/3; step++) 
+            {
+                delay((int) timeOverSteps);
+                mouseMove((int) (startingX + distanceOverStepsX * step), (int) (startingY + distanceOverStepsY * step)+(step*i));
+            }
+            startingX = getCurrentMousePosition(X);
+            startingY = getCurrentMousePosition(Y);
         }
     }
     
@@ -231,6 +251,20 @@ public class RobotService extends Robot
             return y;
         }
         return 0;
+    }
+
+    public void mouseClick(int timeInMils)
+    {
+        mousePress(InputEvent.BUTTON1_MASK);
+        delay(timeInMils);
+        mouseRelease(InputEvent.BUTTON1_MASK);
+    }
+    
+    public void mouseRightClick(int timeInMils)
+    {
+        mousePress(InputEvent.BUTTON3_MASK);
+        delay(timeInMils);
+        mouseRelease(InputEvent.BUTTON3_MASK);
     }
     
 }
