@@ -235,7 +235,15 @@ public class RobotService extends Robot
         {
             for (int step = 1; step <= numberOfSteps/3; step++) 
             {
-                delay((int) timeOverSteps);
+                //Accelerates the mouse just a bit in the middle to look more natural. 
+                if (i==0)
+                {
+                    delay(((int) timeOverSteps)*4/5);
+                }
+                else
+                {
+                    delay((int) timeOverSteps);
+                }
                 mouseMove((int) (startingX + distanceOverStepsX * step)+(step*i), (int) (startingY + distanceOverStepsY * step));
             }
             startingX = getCurrentMousePosition(X);
@@ -253,7 +261,14 @@ public class RobotService extends Robot
         {
             for (int step = 1; step <= numberOfSteps/3; step++) 
             {
-                delay((int) timeOverSteps);
+                if (i==0)
+                {
+                    delay(((int) timeOverSteps)*4/5);
+                }
+                else
+                {
+                    delay((int) timeOverSteps);
+                }
                 mouseMove((int) (startingX + distanceOverStepsX * step), (int) (startingY + distanceOverStepsY * step)+(step*i));
             }
             startingX = getCurrentMousePosition(X);
@@ -271,7 +286,14 @@ public class RobotService extends Robot
         {
             for (int step = 1; step <= numberOfSteps/3; step++) 
             {
-                delay((int) timeOverSteps);
+               if (i==0)
+                {
+                    delay(((int) timeOverSteps)*4/5);
+                }
+                else
+                {
+                    delay((int) timeOverSteps);
+                }
                 mouseMove((int) (startingX + distanceOverStepsX * step)+(step*i), (int) (startingY + distanceOverStepsY * step));
             }
             startingX = getCurrentMousePosition(X);
@@ -289,7 +311,14 @@ public class RobotService extends Robot
         {
             for (int step = 1; step <= numberOfSteps/3; step++) 
             {
-                delay((int) timeOverSteps);
+               if (i==0)
+                {
+                    delay(((int) timeOverSteps)*4/5);
+                }
+                else
+                {
+                    delay((int) timeOverSteps);
+                }
                 mouseMove((int) (startingX + distanceOverStepsX * step), (int) (startingY + distanceOverStepsY * step)+(step*i));
             }
             startingX = getCurrentMousePosition(X);

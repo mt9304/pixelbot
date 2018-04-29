@@ -45,7 +45,7 @@ public class HomePageController implements Initializable
             {
                 try {bot = new RobotService();} catch (AWTException ex) {Logger.getLogger(HomePageController.class.getName()).log(Level.SEVERE, null, ex);}
                 
-                for(int i =0; i < 10; i++)
+                for(int i =0; i < 1; i++)
                 {
                     bot.delay(MEDIUM);
                     bot.mouseCurve(400, 400);
