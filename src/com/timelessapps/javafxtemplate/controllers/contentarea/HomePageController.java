@@ -15,11 +15,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.timelessapps.javafxtemplate.helpers.services.RobotService;
+import com.timelessapps.javafxtemplate.helpers.services.GlobalKeyListener;
 import java.awt.event.InputEvent;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
+import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeHookException;
 
 public class HomePageController implements Initializable
 {
@@ -43,79 +46,42 @@ public class HomePageController implements Initializable
         {
             public void run() 
             {
-                try {bot = new RobotService();} catch (AWTException ex) {Logger.getLogger(HomePageController.class.getName()).log(Level.SEVERE, null, ex);}
-                
-                for(int i =0; i < 1; i++)
-                {
-                    bot.delay(MEDIUM);
-                    bot.mouseCurve(400, 400);
-                    bot.mouseClick(200);
-                    bot.delay(SHORT);
-                    bot.mousePress(InputEvent.BUTTON1_MASK);
-                    bot.mouseCurve(800, 800);
-                    bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                    bot.delay(SHORT);
-
-                    bot.mouseCurve(800, 800);
-                    bot.delay(SHORT);
-                    bot.mousePress(InputEvent.BUTTON3_MASK);
-                    bot.mouseCurve(400, 400);
-                    bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                    bot.delay(SHORT);
-
-                    bot.mouseCurve(800, 400);
-                    bot.delay(SHORT);
-                    bot.mousePress(InputEvent.BUTTON1_MASK);
-                    bot.mouseCurve(400, 800);
-                    bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                    bot.delay(SHORT);
-
-                    bot.mouseCurve(400, 800);
-                    bot.delay(SHORT);
-                    bot.mousePress(InputEvent.BUTTON3_MASK);
-                    bot.mouseCurve(800, 400);
-                    bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                    bot.delay(SHORT);
-
-                    bot.delay(MEDIUM);
-                    bot.mouseCurve(400, 600);
-                    bot.delay(SHORT);
-                    bot.mousePress(InputEvent.BUTTON1_MASK);
-                    bot.mouseCurve(800, 600);
-                    bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                    bot.delay(SHORT);
-
-                    bot.mouseCurve(800, 600);
-                    bot.delay(SHORT);
-                    bot.mousePress(InputEvent.BUTTON3_MASK);
-                    bot.mouseCurve(400, 600);
-                    bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                    bot.delay(SHORT);
-
-                    bot.mouseCurve(600, 400);
-                    bot.delay(SHORT);
-                    bot.mousePress(InputEvent.BUTTON1_MASK);
-                    bot.mouseCurve(600, 800);
-                    bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                    bot.delay(SHORT);
-
-                    bot.mouseCurve(600, 800);
-                    bot.delay(SHORT);
-                    bot.mousePress(InputEvent.BUTTON3_MASK);
-                    bot.mouseCurve(600, 400);
-                    bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                    bot.delay(SHORT);
-
-                    System.out.println("Switch");
-                    bot.delay(LONG);
+                try {
+                    RobotService bot = new RobotService();
+                    bot.wait();
+                } catch (AWTException ex) {
+                    Logger.getLogger(HomePageController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(HomePageController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
             }
         };
         
         Thread t1 = new Thread(startTask);
         t1.setDaemon(true);
         t1.start();
+        
+        Runnable keyListener = new Runnable()
+        {
+            public void run()
+            {
+                		try {
+			GlobalScreen.registerNativeHook();
+		}
+		catch (NativeHookException ex) {
+			System.err.println("There was a problem registering the native hook.");
+			System.err.println(ex.getMessage());
+
+			System.exit(1);
+		}
+
+		GlobalScreen.addNativeKeyListener(new GlobalKeyListener());
+            }
+        };
+        
+        Thread keyListenerThread = new Thread(keyListener);
+        keyListenerThread.setDaemon(true);
+        keyListenerThread.start();
 
     }
     
