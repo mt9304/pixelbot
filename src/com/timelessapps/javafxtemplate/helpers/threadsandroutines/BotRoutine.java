@@ -9,20 +9,26 @@ import java.util.logging.Logger;
 
 public class BotRoutine extends Thread
 {
+    public Object routineLock = new Object();
+    
     public void run()
     {
-        try 
-        {
-            RobotService bot = new RobotService();
-            boolean keepGoing = true;
-
-            while(keepGoing)
+            synchronized (this)
             {
-                bot.delay(MEDIUM);
-                System.out.println("Logging");
-            }
-        } 
+                try 
+                {
+                    RobotService bot = new RobotService();
+                    boolean keepGoing = true;
 
-        catch (AWTException ex) {Logger.getLogger(HomePageController.class.getName()).log(Level.SEVERE, null, ex);}
+                    while(keepGoing)
+                    {
+                        bot.delay(MEDIUM);
+                        System.out.println("Logging");
+                    }
+                } 
+                catch (AWTException ex) {Logger.getLogger(HomePageController.class.getName()).log(Level.SEVERE, null, ex);}
+            }
+        }
     }
-}
+    
+

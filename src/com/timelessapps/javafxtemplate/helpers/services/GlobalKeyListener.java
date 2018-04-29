@@ -1,7 +1,5 @@
 package com.timelessapps.javafxtemplate.helpers.services;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
@@ -9,11 +7,11 @@ import org.jnativehook.keyboard.NativeKeyListener;
 
 public class GlobalKeyListener implements NativeKeyListener 
 {
-    private Thread threadToActionOn;
+    private Thread thread;
     
-    public GlobalKeyListener(Thread threadToActionOn)
+    public GlobalKeyListener(Thread thread)
     {
-        this.threadToActionOn = threadToActionOn;
+        this.thread = thread;
     }
     
     public void nativeKeyPressed(NativeKeyEvent e) 
@@ -27,16 +25,6 @@ public class GlobalKeyListener implements NativeKeyListener
         if (e.getKeyCode() == NativeKeyEvent.VC_F1) 
         {
             System.out.println("Pressed");
-            System.out.println(threadToActionOn.getState());
-            try
-            {
-                synchronized(threadToActionOn)
-                {
-                    threadToActionOn.wait();
-                }
-            } 
-            catch (InterruptedException ex) {Logger.getLogger(GlobalKeyListener.class.getName()).log(Level.SEVERE, null, ex);}
-            System.out.println(threadToActionOn.getState());
         }
 
     }

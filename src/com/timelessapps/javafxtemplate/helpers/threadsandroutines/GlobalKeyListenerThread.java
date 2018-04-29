@@ -8,11 +8,11 @@ import org.jnativehook.NativeHookException;
 
 public class GlobalKeyListenerThread extends Thread
 {
-    private Thread threadToActionOn;
+    private Thread thread;
     
-    public GlobalKeyListenerThread(Thread threadToActionOn)
+    public GlobalKeyListenerThread(Thread thread)
     {
-        this.threadToActionOn = threadToActionOn;
+        this.thread = thread;
     }
     
     public void run()
@@ -27,6 +27,6 @@ public class GlobalKeyListenerThread extends Thread
         }
         catch (NativeHookException ex) {System.err.println("There was a problem registering the native hook.");System.err.println(ex.getMessage());System.exit(1);}
 
-        GlobalScreen.addNativeKeyListener(new GlobalKeyListener(threadToActionOn));
+        GlobalScreen.addNativeKeyListener(new GlobalKeyListener(thread));
     }
 }
