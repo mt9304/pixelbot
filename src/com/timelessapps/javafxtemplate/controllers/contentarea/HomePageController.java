@@ -5,6 +5,9 @@
  */
 package com.timelessapps.javafxtemplate.controllers.contentarea;
 
+import static com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration.LONG;
+import static com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration.MEDIUM;
+import static com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration.SHORT;
 import java.awt.AWTException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -42,327 +45,70 @@ public class HomePageController implements Initializable
             {
                 try {bot = new RobotService();} catch (AWTException ex) {Logger.getLogger(HomePageController.class.getName()).log(Level.SEVERE, null, ex);}
                 
-                bot.delay(1000);
-                bot.mouseMove(500,700);
-                bot.mouseClick(200);
-                
-                bot.delay(1000);
-                bot.mouseMove(500, 700);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON1_MASK);
-                bot.delay(1000);
-                bot.mouseCurveX1(500, 700, 100, 300, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(100,400);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON1_MASK);
-                bot.delay(1000);
-                bot.mouseCurveX1(100, 300, 500, 700, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(500,700);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON3_MASK);
-                bot.delay(1000);
-                bot.mouseCurveY1(500, 700, 100, 300, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(100,400);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON3_MASK);
-                bot.delay(1000);
-                bot.mouseCurveY1(100, 300, 500, 700, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                
-                //
-                
-                System.out.println("Part 1");
-                bot.delay(1000);
-                bot.mouseMove(500,400);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON1_MASK);
-                bot.delay(1000);
-                bot.mouseCurveX1(500, 300, 100, 700, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(100,700);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON1_MASK);
-                bot.delay(1000);
-                bot.mouseCurveX1(100, 700, 500, 300, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                
-                System.out.println("Part 2");
-                bot.delay(1000);
-                bot.mouseMove(500,400);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON3_MASK);
-                bot.delay(1000);
-                bot.mouseCurveY1(500, 300, 100, 700, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(100,700);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON3_MASK);
-                bot.delay(1000);
-                bot.mouseCurveY1(100, 700, 500, 300, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                
-                
-                // ** // ** //
-                
-                bot.delay(1000);
-                bot.mouseCurveX1(50, 50, 100, 350, 1000, 100);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON1_MASK);
-                bot.delay(1000);
-                bot.mouseCurveX1(100, 350, 700, 350, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(700,350);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON1_MASK);
-                bot.delay(1000);
-                bot.mouseCurveX1(700, 350, 100, 350, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(100,350);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON3_MASK);
-                bot.delay(1000);
-                bot.mouseCurveY1(100, 350, 700, 350, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(700,350);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON3_MASK);
-                bot.delay(1000);
-                bot.mouseCurveY1(700, 350, 100, 350, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                
-                //
-                
-                System.out.println("Part 1");
-                bot.delay(1000);
-                bot.mouseMove(400,400);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON1_MASK);
-                bot.delay(1000);
-                bot.mouseCurveX1(400, 400, 400, 800, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(400,800);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON1_MASK);
-                bot.delay(1000);
-                bot.mouseCurveX1(400, 800, 400, 400, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                
-                System.out.println("Part 2");
-                bot.delay(1000);
-                bot.mouseMove(400,400);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON3_MASK);
-                bot.delay(1000);
-                bot.mouseCurveY1(400, 400, 400, 800, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(400,800);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON3_MASK);
-                bot.delay(1000);
-                bot.mouseCurveY1(400, 800, 400, 400, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                
-                System.out.println("Change colors");
-                bot.delay(5000);
-                
-                bot.delay(1000);
-                bot.mouseMove(500,700);
-                bot.mouseClick(200);
-                
-                bot.delay(1000);
-                bot.mouseMove(500, 700);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON1_MASK);
-                bot.delay(1000);
-                bot.mouseCurveX2(500, 700, 100, 300, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(100,400);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON1_MASK);
-                bot.delay(1000);
-                bot.mouseCurveX2(100, 300, 500, 700, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(500,700);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON3_MASK);
-                bot.delay(1000);
-                bot.mouseCurveY2(500, 700, 100, 300, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(100,400);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON3_MASK);
-                bot.delay(1000);
-                bot.mouseCurveY2(100, 300, 500, 700, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                
-                //
-                
-                System.out.println("Part 1");
-                bot.delay(1000);
-                bot.mouseMove(500,400);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON1_MASK);
-                bot.delay(1000);
-                bot.mouseCurveX2(500, 300, 100, 700, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(100,700);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON1_MASK);
-                bot.delay(1000);
-                bot.mouseCurveX2(100, 700, 500, 300, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                
-                System.out.println("Part 2");
-                bot.delay(1000);
-                bot.mouseMove(500,400);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON3_MASK);
-                bot.delay(1000);
-                bot.mouseCurveY2(500, 300, 100, 700, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(100,700);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON3_MASK);
-                bot.delay(1000);
-                bot.mouseCurveY2(100, 700, 500, 300, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                
-                
-                // ** // ** //
-                
-                bot.delay(1000);
-                bot.mouseMove(100, 350);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON1_MASK);
-                bot.delay(1000);
-                bot.mouseCurveX2(100, 350, 700, 350, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(700,350);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON1_MASK);
-                bot.delay(1000);
-                bot.mouseCurveX2(700, 350, 100, 350, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(100,350);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON3_MASK);
-                bot.delay(1000);
-                bot.mouseCurveY2(100, 350, 700, 350, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(700,350);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON3_MASK);
-                bot.delay(1000);
-                bot.mouseCurveY2(700, 350, 100, 350, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                
-                //
-                
-                System.out.println("Part 1");
-                bot.delay(1000);
-                bot.mouseMove(400,400);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON1_MASK);
-                bot.delay(1000);
-                bot.mouseCurveX2(400, 400, 400, 800, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(400,800);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON1_MASK);
-                bot.delay(1000);
-                bot.mouseCurveX2(400, 800, 400, 400, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON1_MASK);
-                
-                System.out.println("Part 2");
-                bot.delay(1000);
-                bot.mouseMove(400,400);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON3_MASK);
-                bot.delay(1000);
-                bot.mouseCurveY2(400, 400, 400, 800, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                
-                bot.delay(1000);
-                bot.mouseMove(400,800);
-                bot.delay(1000);
-                bot.mousePress(InputEvent.BUTTON3_MASK);
-                bot.delay(1000);
-                bot.mouseCurveY2(400, 800, 400, 400, 1000, 100);
-                bot.delay(1000);
-                bot.mouseRelease(InputEvent.BUTTON3_MASK);
-                
+                for(int i =0; i < 10; i++)
+                {
+                    bot.delay(MEDIUM);
+                    bot.mouseCurve(400, 400);
+                    bot.mouseClick(200);
+                    bot.delay(SHORT);
+                    bot.mousePress(InputEvent.BUTTON1_MASK);
+                    bot.mouseCurve(800, 800);
+                    bot.mouseRelease(InputEvent.BUTTON1_MASK);
+                    bot.delay(SHORT);
+
+                    bot.mouseCurve(800, 800);
+                    bot.delay(SHORT);
+                    bot.mousePress(InputEvent.BUTTON3_MASK);
+                    bot.mouseCurve(400, 400);
+                    bot.mouseRelease(InputEvent.BUTTON3_MASK);
+                    bot.delay(SHORT);
+
+                    bot.mouseCurve(800, 400);
+                    bot.delay(SHORT);
+                    bot.mousePress(InputEvent.BUTTON1_MASK);
+                    bot.mouseCurve(400, 800);
+                    bot.mouseRelease(InputEvent.BUTTON1_MASK);
+                    bot.delay(SHORT);
+
+                    bot.mouseCurve(400, 800);
+                    bot.delay(SHORT);
+                    bot.mousePress(InputEvent.BUTTON3_MASK);
+                    bot.mouseCurve(800, 400);
+                    bot.mouseRelease(InputEvent.BUTTON3_MASK);
+                    bot.delay(SHORT);
+
+                    bot.delay(MEDIUM);
+                    bot.mouseCurve(400, 600);
+                    bot.delay(SHORT);
+                    bot.mousePress(InputEvent.BUTTON1_MASK);
+                    bot.mouseCurve(800, 600);
+                    bot.mouseRelease(InputEvent.BUTTON1_MASK);
+                    bot.delay(SHORT);
+
+                    bot.mouseCurve(800, 600);
+                    bot.delay(SHORT);
+                    bot.mousePress(InputEvent.BUTTON3_MASK);
+                    bot.mouseCurve(400, 600);
+                    bot.mouseRelease(InputEvent.BUTTON3_MASK);
+                    bot.delay(SHORT);
+
+                    bot.mouseCurve(600, 400);
+                    bot.delay(SHORT);
+                    bot.mousePress(InputEvent.BUTTON1_MASK);
+                    bot.mouseCurve(600, 800);
+                    bot.mouseRelease(InputEvent.BUTTON1_MASK);
+                    bot.delay(SHORT);
+
+                    bot.mouseCurve(600, 800);
+                    bot.delay(SHORT);
+                    bot.mousePress(InputEvent.BUTTON3_MASK);
+                    bot.mouseCurve(600, 400);
+                    bot.mouseRelease(InputEvent.BUTTON3_MASK);
+                    bot.delay(SHORT);
+
+                    System.out.println("Switch");
+                    bot.delay(LONG);
+                }
                 
             }
         };

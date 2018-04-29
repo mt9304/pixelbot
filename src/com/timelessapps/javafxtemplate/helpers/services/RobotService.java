@@ -15,7 +15,9 @@ import java.awt.datatransfer.Transferable;
 import java.awt.event.KeyEvent;
 
 import com.timelessapps.javafxtemplate.helpers.abstractsandenums.Coordinates;
+import com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration;
 import java.awt.event.InputEvent;
+import java.util.Random;
 
 public class RobotService extends Robot
 {
@@ -182,11 +184,45 @@ public class RobotService extends Robot
     
     /** Sections below is for mouse movement related functions. **/
     
+    //Randomly selects a curving style with random speed and steps. 
     public void mouseCurve(int endPointX, int endPointY)
     {
-        
+            int startingX = getCurrentMousePosition(X);
+            int startingY = getCurrentMousePosition(Y);
+            
+            Random random = new Random();
+            
+            Boolean curveX = random.nextBoolean();
+            Boolean style1 = random.nextBoolean();
+            
+            int timeInMilis = random.nextInt(2000) + 200;
+            int steps = random.nextInt(125) + 75;
+            
+            if (curveX)
+            {
+                if (style1)
+                {
+                    mouseCurveX1(startingX, startingY, endPointX, endPointY, timeInMilis, steps);
+                }
+                else
+                {
+                    mouseCurveX2(startingX, startingY, endPointX, endPointY, timeInMilis, steps);
+                }
+            }
+            else
+            {
+                if (style1)
+                {
+                    mouseCurveY1(startingX, startingY, endPointX, endPointY, timeInMilis, steps);
+                }
+                else
+                {
+                    mouseCurveY2(startingX, startingY, endPointX, endPointY, timeInMilis, steps);
+                }
+            }
     }
     
+    //TODO: When happy with functions, remember to reduce it to one method. 
     //Actual starting X may be different from declared value, since it starts with the startingX + other values. 
     public void mouseCurveX1(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
     {
@@ -213,7 +249,6 @@ public class RobotService extends Robot
         double distanceOverStepsY = (endpointY - startingY) / ((double) numberOfSteps);
         double timeOverSteps = timeInMilis / ((double) numberOfSteps);
         
-        //Runs in 3 phases. starts with i=1 to move Y down a bit, then 0 to go straight, then -1 to move the Y back to original endpoint. 
         for (int i = 1; i >=-1; i--)
         {
             for (int step = 1; step <= numberOfSteps/3; step++) 
@@ -226,14 +261,12 @@ public class RobotService extends Robot
         }
     }
     
-        //Actual starting X may be different from declared value, since it starts with the startingX + other values. 
     public void mouseCurveX2(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
     {
         double distanceOverStepsX = (endpointX - startingX) / ((double) numberOfSteps);
         double distanceOverStepsY = (endpointY - startingY) / ((double) numberOfSteps);
         double timeOverSteps = timeInMilis / ((double) numberOfSteps);
         
-        //Runs in 3 phases. starts with i=1 to move Y down a bit, then 0 to go straight, then -1 to move the Y back to original endpoint. 
         for (int i = -1; i <= 1; i++)
         {
             for (int step = 1; step <= numberOfSteps/3; step++) 
@@ -252,7 +285,6 @@ public class RobotService extends Robot
         double distanceOverStepsY = (endpointY - startingY) / ((double) numberOfSteps);
         double timeOverSteps = timeInMilis / ((double) numberOfSteps);
         
-        //Runs in 3 phases. starts with i=1 to move Y down a bit, then 0 to go straight, then -1 to move the Y back to original endpoint. 
         for (int i = -1; i <= 1; i++)
         {
             for (int step = 1; step <= numberOfSteps/3; step++) 
@@ -297,20 +329,44 @@ public class RobotService extends Robot
         return 0;
     }
 
-    public void mouseClick(int timeInMils)
+    public void mouseClick(int timeInMilis)
     {
         mousePress(InputEvent.BUTTON1_MASK);
-        delay(timeInMils);
+        delay(timeInMilis);
         mouseRelease(InputEvent.BUTTON1_MASK);
     }
     
-    public void mouseRightClick(int timeInMils)
+    public void mouseRightClick(int timeInMilis)
     {
         mousePress(InputEvent.BUTTON3_MASK);
-        delay(timeInMils);
+        delay(timeInMilis);
         mouseRelease(InputEvent.BUTTON3_MASK);
     }
     
-}
+     /** End mouse movement section. **/
+    public void delay(Duration duration)
+    {
+        Random random = new Random();
+        
+        switch (duration) 
+        {
+        case SHORT: 
+            delay(random.nextInt(400)+100);
+            break;
+
+        case MEDIUM: 
+            delay(random.nextInt(1000)+500);
+            break;
+
+        case LONG:
+            delay(random.nextInt(4000)+1000);
+            break;
+            
+        default:
+            System.out.println("Midweek days are so-so.");
+            break;
+        }
+    }
     
-    /** End mouse movement section. **/
+}
+
