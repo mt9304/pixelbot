@@ -1,5 +1,6 @@
 package com.timelessapps.javafxtemplate.helpers.abstractsandenums;
 
+//Routines will be affected by the global listener hook, which can start, stop, and pause the threads when a set key is pressed. 
 public class Routine extends Thread
 {
     protected volatile boolean running = true; 

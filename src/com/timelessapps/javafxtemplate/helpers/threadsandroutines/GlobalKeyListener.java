@@ -52,6 +52,7 @@ public class GlobalKeyListener extends Thread implements NativeKeyListener
             routine.startRunning();
         }
         
+        //This is the exit button for the routine. When the routine stops, this thread should also stop. 
         if (e.getKeyCode() == NativeKeyEvent.VC_F3) 
         {
             routine.stopRunning();

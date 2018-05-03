@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 public class HomePageController implements Initializable
 {
     RobotService bot;
+    private boolean started = false;
     
     public HomePageController()
     {
@@ -27,16 +28,23 @@ public class HomePageController implements Initializable
     }    
     
     @FXML
-    public void startApplication(MouseEvent event) 
+    public void startApplication(MouseEvent event) throws InterruptedException 
     {
-
-        BotRoutine botRoutine = new BotRoutine();
-        botRoutine.setDaemon(true);
-        botRoutine.start();
-        
-        GlobalKeyListener globalKeyListenerThread = new GlobalKeyListener(botRoutine);
-        globalKeyListenerThread.setDaemon(true);
-        globalKeyListenerThread.start();
+            BotRoutine botRoutine = new BotRoutine();
+            botRoutine.setDaemon(true);
+            botRoutine.start();
+            
+            if (!started)
+            {
+                started = true; 
+                
+                GlobalKeyListener globalKeyListenerThread = new GlobalKeyListener(botRoutine);
+                globalKeyListenerThread.setDaemon(true);
+                globalKeyListenerThread.start();
+            }
+            
+            //botRoutine.join();
+            //System.out.println("Remember to re-active button. ");
     }
     
 }
