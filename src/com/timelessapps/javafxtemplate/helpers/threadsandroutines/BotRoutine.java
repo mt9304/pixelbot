@@ -10,8 +10,7 @@ import java.util.logging.Logger;
 
 public class BotRoutine extends Routine
 {
-    private volatile boolean running = true;
-    
+   
     public void run()
     {
             synchronized (this)
@@ -33,8 +32,6 @@ public class BotRoutine extends Routine
             }
         }
     
-
-        
     }
     
 

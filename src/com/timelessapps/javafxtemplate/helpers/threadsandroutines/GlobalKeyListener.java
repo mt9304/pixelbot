@@ -44,16 +44,17 @@ public class GlobalKeyListener extends Thread implements NativeKeyListener
         
         if (e.getKeyCode() == NativeKeyEvent.VC_F1) 
         {
-            System.out.println("Pressed");
-            routine.stopRunning();
-            System.out.println("Stopped Running");
+            routine.pauseRunning();
         }
         
         if (e.getKeyCode() == NativeKeyEvent.VC_F2) 
         {
-            System.out.println("Pressed");
             routine.startRunning();
-            System.out.println("Started Running");
+        }
+        
+        if (e.getKeyCode() == NativeKeyEvent.VC_F3) 
+        {
+            routine.stopRunning();
         }
 
     }
