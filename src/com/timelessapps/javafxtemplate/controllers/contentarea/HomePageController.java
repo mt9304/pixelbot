@@ -3,9 +3,9 @@ package com.timelessapps.javafxtemplate.controllers.contentarea;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.timelessapps.javafxtemplate.app.businesslogic.MainBotRoutine;
+import com.timelessapps.javafxtemplate.app.supportingthreads.GlobalKeyListener;
 import com.timelessapps.javafxtemplate.helpers.services.RobotService;
-import com.timelessapps.javafxtemplate.helpers.threadsandroutines.BotRoutine;
-import com.timelessapps.javafxtemplate.helpers.threadsandroutines.GlobalKeyListener;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,15 +30,15 @@ public class HomePageController implements Initializable
     @FXML
     public void startApplication(MouseEvent event) throws InterruptedException 
     {
-            BotRoutine botRoutine = new BotRoutine();
-            botRoutine.setDaemon(true);
-            botRoutine.start();
+            MainBotRoutine mainBotRoutine = new MainBotRoutine();
+            mainBotRoutine.setDaemon(true);
+            mainBotRoutine.start();
             
             if (!started)
             {
                 started = true; 
                 
-                GlobalKeyListener globalKeyListenerThread = new GlobalKeyListener(botRoutine);
+                GlobalKeyListener globalKeyListenerThread = new GlobalKeyListener(mainBotRoutine);
                 globalKeyListenerThread.setDaemon(true);
                 globalKeyListenerThread.start();
             }

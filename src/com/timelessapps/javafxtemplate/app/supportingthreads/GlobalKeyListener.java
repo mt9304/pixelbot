@@ -1,4 +1,4 @@
-package com.timelessapps.javafxtemplate.helpers.threadsandroutines;
+package com.timelessapps.javafxtemplate.app.supportingthreads;
 
 import com.timelessapps.javafxtemplate.helpers.abstractsandenums.Routine;
 import java.util.logging.Level;

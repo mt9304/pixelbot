@@ -1,4 +1,4 @@
-package com.timelessapps.javafxtemplate.helpers.threadsandroutines;
+package com.timelessapps.javafxtemplate.app.businesslogic;
 
 import com.timelessapps.javafxtemplate.controllers.contentarea.HomePageController;
 import static com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration.MEDIUM;
@@ -8,7 +8,7 @@ import java.awt.AWTException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class BotRoutine extends Routine
+public class MainBotRoutine extends Routine
 {
    
     public void run()
@@ -27,7 +27,7 @@ public class BotRoutine extends Routine
                         waitIfNotRunning();
                     }
                 } 
-                catch (AWTException ex) {Logger.getLogger(HomePageController.class.getName()).log(Level.SEVERE, null, ex);} catch (InterruptedException ex) {Logger.getLogger(BotRoutine.class.getName()).log(Level.SEVERE, null, ex);
+                catch (AWTException ex) {Logger.getLogger(HomePageController.class.getName()).log(Level.SEVERE, null, ex);} catch (InterruptedException ex) {Logger.getLogger(MainBotRoutine.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
