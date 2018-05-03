@@ -18,15 +18,25 @@ public class Routine extends Thread
         {
             try 
             {
-				waitIfNotRunning();
-	            System.out.println("Running");
+				waitIfPaused();
+	            System.out.println("Running blank routine. ");
 	            Thread.sleep(1000);
-	            waitIfNotRunning();
+	            waitIfPaused();
 			} catch (InterruptedException e) {e.printStackTrace();}
         }
     }
+    
+    public void checkIfPausedOrStopped() throws InterruptedException
+    {
+    	waitIfPaused();
+    	if (!running)
+    	{
+    		//Insert functions that you want ran here after thread exits, such as enableStartButton(); 
+    		//This is because the functions won't finish running the rest of the method (even finally blocks) if the routine exits while in wait() status. 
+    	}
+    }
      
-    public void waitIfNotRunning() throws InterruptedException
+    public void waitIfPaused() throws InterruptedException
     {
         synchronized (this)
         {
@@ -60,5 +70,10 @@ public class Routine extends Thread
     {
         System.out.println("Exiting. ");
         running = false;
+        //Need to wake up thread again to run the enable start button before the routine exits. 
+        synchronized (this)
+        {
+        	notify();
+        }
     }
 }

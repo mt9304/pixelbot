@@ -22,15 +22,25 @@ public class MainBotRoutine extends Routine
 	            disableStartButton();
 	            while(running)
 	            {
-	                waitIfNotRunning();
+	            	checkIfPausedOrStopped();
 	                System.out.println("Running");
 	                bot.delay(MEDIUM);
-	                waitIfNotRunning();
+	                checkIfPausedOrStopped();
 	            }
-	            enableStartButton();
+	            
 	        } 
 	        catch (AWTException ex) {Logger.getLogger(HomePageController.class.getName()).log(Level.SEVERE, null, ex);} catch (InterruptedException ex) {Logger.getLogger(MainBotRoutine.class.getName()).log(Level.SEVERE, null, ex);}
-        }
+	    }
+    }
+    
+    @Override
+    public void checkIfPausedOrStopped() throws InterruptedException
+    {
+    	waitIfPaused();
+    	if (!running)
+    	{
+    		enableStartButton();
+    	}
     }
 
 	private void disableStartButton() 
