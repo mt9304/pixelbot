@@ -1,10 +1,12 @@
 package com.timelessapps.javafxtemplate.helpers.services;
 
-import com.timelessapps.javafxtemplate.Main;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.timelessapps.javafxtemplate.Main;
+
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;

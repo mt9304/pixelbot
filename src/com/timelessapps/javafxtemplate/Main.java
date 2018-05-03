@@ -6,6 +6,7 @@
 package com.timelessapps.javafxtemplate;
 
 import com.timelessapps.javafxtemplate.controllers.contentarea.LogsPageController;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

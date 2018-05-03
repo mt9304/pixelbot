@@ -1,13 +1,15 @@
 package com.timelessapps.javafxtemplate.app.businesslogic;
 
-import com.timelessapps.javafxtemplate.controllers.contentarea.HomePageController;
 import static com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration.MEDIUM;
-import com.timelessapps.javafxtemplate.helpers.abstractsandenums.Routine;
-import com.timelessapps.javafxtemplate.helpers.services.CustomSceneHelper;
-import com.timelessapps.javafxtemplate.helpers.services.RobotService;
+
 import java.awt.AWTException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.timelessapps.javafxtemplate.controllers.contentarea.HomePageController;
+import com.timelessapps.javafxtemplate.helpers.abstractsandenums.Routine;
+import com.timelessapps.javafxtemplate.helpers.services.CustomSceneHelper;
+import com.timelessapps.javafxtemplate.helpers.services.RobotService;
 
 public class MainBotRoutine extends Routine
 {

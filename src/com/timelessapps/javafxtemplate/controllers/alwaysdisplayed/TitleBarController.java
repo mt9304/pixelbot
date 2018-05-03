@@ -1,9 +1,11 @@
 package com.timelessapps.javafxtemplate.controllers.alwaysdisplayed;
 
-import com.timelessapps.javafxtemplate.Main;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.timelessapps.javafxtemplate.Main;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;

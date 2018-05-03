@@ -4,13 +4,14 @@
  * and open the template in the editor.
  */
 package com.timelessapps.javafxtemplate.controllers.alwaysdisplayed;
-import com.timelessapps.javafxtemplate.controllers.contentarea.LogsPageController;
-import com.timelessapps.javafxtemplate.helpers.services.LoggingService;
-import com.timelessapps.javafxtemplate.helpers.services.CustomSceneHelper;
-
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.timelessapps.javafxtemplate.controllers.contentarea.LogsPageController;
+import com.timelessapps.javafxtemplate.helpers.services.CustomSceneHelper;
+import com.timelessapps.javafxtemplate.helpers.services.LoggingService;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;

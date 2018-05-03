@@ -1,12 +1,13 @@
 package com.timelessapps.javafxtemplate.app.supportingthreads;
 
-import com.timelessapps.javafxtemplate.helpers.abstractsandenums.Routine;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
+
+import com.timelessapps.javafxtemplate.helpers.abstractsandenums.Routine;
 
 public class GlobalKeyListener extends Thread implements NativeKeyListener 
 {

@@ -9,7 +9,6 @@ import com.timelessapps.javafxtemplate.helpers.services.RobotService;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
 public class HomePageController implements Initializable
@@ -31,16 +30,16 @@ public class HomePageController implements Initializable
     @FXML
     public void startApplication(MouseEvent event) throws InterruptedException 
     {
-		MainBotRoutine mainBotRoutine = new MainBotRoutine();
-		mainBotRoutine.setDaemon(true);
-		mainBotRoutine.start();
-		
-		GlobalKeyListener globalKeyListenerThread = new GlobalKeyListener(mainBotRoutine);
-		globalKeyListenerThread.setDaemon(true);
-		globalKeyListenerThread.start();
-		
-		//botRoutine.join();
-		//System.out.println("Remember to re-active button. ");
+	MainBotRoutine mainBotRoutine = new MainBotRoutine();
+	mainBotRoutine.setDaemon(true);
+	mainBotRoutine.start();
+
+	GlobalKeyListener globalKeyListenerThread = new GlobalKeyListener(mainBotRoutine);
+	globalKeyListenerThread.setDaemon(true);
+	globalKeyListenerThread.start();
+
+	//botRoutine.join();
+	//System.out.println("Remember to re-active button. ");
     }
     
 }
