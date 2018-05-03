@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import com.timelessapps.javafxtemplate.helpers.services.RobotService;
 import com.timelessapps.javafxtemplate.helpers.threadsandroutines.BotRoutine;
-import com.timelessapps.javafxtemplate.helpers.threadsandroutines.GlobalKeyListenerThread;
+import com.timelessapps.javafxtemplate.helpers.threadsandroutines.GlobalKeyListener;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,7 +34,7 @@ public class HomePageController implements Initializable
         botRoutine.setDaemon(true);
         botRoutine.start();
         
-        GlobalKeyListenerThread globalKeyListenerThread = new GlobalKeyListenerThread(botRoutine);
+        GlobalKeyListener globalKeyListenerThread = new GlobalKeyListener(botRoutine);
         globalKeyListenerThread.setDaemon(true);
         globalKeyListenerThread.start();
     }
