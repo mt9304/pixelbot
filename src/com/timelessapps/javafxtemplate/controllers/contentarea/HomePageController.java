@@ -35,8 +35,6 @@ public class HomePageController implements Initializable
             mainBotRoutine.start();
             
             GlobalKeyListener globalKeyListenerThread = new GlobalKeyListener(mainBotRoutine);
-            
-            globalKeyListenerThread = new GlobalKeyListener(mainBotRoutine);
             globalKeyListenerThread.setDaemon(true);
             globalKeyListenerThread.start();
             
