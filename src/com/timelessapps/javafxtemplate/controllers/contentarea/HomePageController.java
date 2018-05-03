@@ -34,14 +34,11 @@ public class HomePageController implements Initializable
             mainBotRoutine.setDaemon(true);
             mainBotRoutine.start();
             
-            if (!started)
-            {
-                started = true; 
-                
-                GlobalKeyListener globalKeyListenerThread = new GlobalKeyListener(mainBotRoutine);
-                globalKeyListenerThread.setDaemon(true);
-                globalKeyListenerThread.start();
-            }
+            GlobalKeyListener globalKeyListenerThread = new GlobalKeyListener(mainBotRoutine);
+            
+            globalKeyListenerThread = new GlobalKeyListener(mainBotRoutine);
+            globalKeyListenerThread.setDaemon(true);
+            globalKeyListenerThread.start();
             
             //botRoutine.join();
             //System.out.println("Remember to re-active button. ");

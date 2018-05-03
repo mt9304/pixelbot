@@ -22,8 +22,8 @@ public class MainBotRoutine extends Routine
                     while(running)
                     {
                         waitIfNotRunning();
-                        bot.delay(MEDIUM);
                         System.out.println("Running");
+                        bot.delay(MEDIUM);
                         waitIfNotRunning();
                     }
                 } 

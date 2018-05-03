@@ -36,26 +36,30 @@ public class GlobalKeyListener extends Thread implements NativeKeyListener
     
     public void nativeKeyPressed(NativeKeyEvent e) 
     {
-        //System.out.println("Key Pressed: " + NativeKeyEvent.getKeyText(e.getKeyCode()));
+    	/**
+        //Exits only this key listener thread. Uncomment/modify key code as needed. 
         if (e.getKeyCode() == NativeKeyEvent.VC_ESCAPE) 
         {
             try {GlobalScreen.unregisterNativeHook();} catch (NativeHookException e1) {e1.printStackTrace();}
         }
-        
+        **/
+        //Pauses the routine/thread that this listener is supporting. 
         if (e.getKeyCode() == NativeKeyEvent.VC_F1) 
         {
             routine.pauseRunning();
         }
         
+        //If routine is paused, starts the routine/thread that this listener is supporting. 
         if (e.getKeyCode() == NativeKeyEvent.VC_F2) 
         {
             routine.startRunning();
         }
         
-        //This is the exit button for the routine. When the routine stops, this thread should also stop. 
+        //This is the exit button for the both the routine and this key listener. When the routine stops, this thread should also stop. 
         if (e.getKeyCode() == NativeKeyEvent.VC_F3) 
         {
             routine.stopRunning();
+            try {GlobalScreen.unregisterNativeHook();} catch (NativeHookException e1) {e1.printStackTrace();}
         }
 
     }
