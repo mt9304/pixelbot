@@ -60,7 +60,7 @@ public class GlobalKeyListener extends Thread implements NativeKeyListener
         {
             routine.stopRunning();
             try {GlobalScreen.unregisterNativeHook();} catch (NativeHookException e1) {e1.printStackTrace();}
-            //Old listener doesn't completely exit. 
+            //Old listener doesn't completely exit.. 
         }
 
     }

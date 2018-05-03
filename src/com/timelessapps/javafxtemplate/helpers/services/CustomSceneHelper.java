@@ -36,7 +36,14 @@ public  class CustomSceneHelper
     public Node getNodeById(String nodeId)
     {
         setMainScene();
-        return scene.lookup("#"+nodeId);
+        if (nodeId.split("")[0].equals("#"))
+		{
+        	return scene.lookup(nodeId);
+		}
+        else
+		{
+        	return scene.lookup("#"+nodeId);
+		}
     }
     
     public Label getLabelById(String labelName)
