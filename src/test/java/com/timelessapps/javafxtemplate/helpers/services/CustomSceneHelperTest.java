@@ -1,17 +1,14 @@
-package com.timelessapps.javafxtemplate.helpers.services;
+package test.java.com.timelessapps.javafxtemplate.helpers.services;
 
+import com.timelessapps.javafxtemplate.helpers.services.CustomSceneHelper;
 import static org.junit.Assert.*;
-
 import org.junit.Test;
-
-import javafx.scene.Node;
 
 public class CustomSceneHelperTest 
 {
 	CustomSceneHelper sceneHelper = new CustomSceneHelper();
 	
 	/** This section tests buttons found in the LeftMenuPane for changing pages. **/
-	
 	@Test
 	public void getSourceID_homeButton() 
 	{
