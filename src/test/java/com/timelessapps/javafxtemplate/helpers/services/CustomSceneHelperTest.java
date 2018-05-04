@@ -1,8 +1,9 @@
 package test.java.com.timelessapps.javafxtemplate.helpers.services;
 
-import com.timelessapps.javafxtemplate.helpers.services.CustomSceneHelper;
 import static org.junit.Assert.*;
 import org.junit.Test;
+
+import main.java.com.timelessapps.javafxtemplate.helpers.services.CustomSceneHelper;
 
 public class CustomSceneHelperTest 
 {
