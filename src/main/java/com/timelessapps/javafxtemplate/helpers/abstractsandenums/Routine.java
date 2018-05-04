@@ -14,7 +14,7 @@ public class Routine extends Thread
 	    {
 		waitIfPaused();
 		System.out.println("Running blank routine. ");
-		Thread.sleep(1000);
+		Thread.sleep(100);
 		waitIfPaused();
 	    } catch (InterruptedException e) {e.printStackTrace();}
 	}
@@ -69,5 +69,15 @@ public class Routine extends Thread
         {
         	notify();
         }
+    }
+    
+    public boolean getRunning()
+    {
+	return running;
+    }
+    
+    public boolean getPaused()
+    {
+	return paused;
     }
 }

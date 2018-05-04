@@ -651,3 +651,6 @@ Logs
 Application
 Api/Database
 Logs
+Logs
+General Settings
+Logs
