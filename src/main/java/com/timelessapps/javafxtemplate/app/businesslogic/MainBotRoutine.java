@@ -24,10 +24,10 @@ public class MainBotRoutine extends Routine
 	            disableStartButton();
 	            while(running)
 	            {
-	            	checkIfPausedOrStopped();
-	                System.out.println("Running");
-	                bot.delay(MEDIUM);
-	                checkIfPausedOrStopped();
+		checkIfPausedOrStopped();
+		System.out.println("Running");
+		bot.delay(MEDIUM);
+		checkIfPausedOrStopped();
 	            }
 	            
 	        } 
@@ -45,16 +45,36 @@ public class MainBotRoutine extends Routine
     	}
     }
 
-	private void disableStartButton() 
-	{
-		CustomSceneHelper sceneHelper = new CustomSceneHelper();
-		sceneHelper.getNodeById("startButton").setDisable(true);
-	}
+    private void disableStartButton() 
+    {
+	    CustomSceneHelper sceneHelper = new CustomSceneHelper();
+	    sceneHelper.getNodeById("startButton").setDisable(true);
+    }
 
-	private void enableStartButton() 
-	{
-		CustomSceneHelper sceneHelper = new CustomSceneHelper();
-		sceneHelper.getNodeById("startButton").setDisable(false);
-	}
+    private void enableStartButton() 
+    {
+	    CustomSceneHelper sceneHelper = new CustomSceneHelper();
+	    sceneHelper.getNodeById("startButton").setDisable(false);
+    }
+    
+    /**This section below is for checking in-game statuses. **/
+    
+    public void moveToPrayButton()
+    {
+	
+    }
+    
+    public void flickPray()
+    {
+	
+    }
+    
+    public void checkHealth()
+    {
+	
+    }
+    
+    
+    
 }
     
