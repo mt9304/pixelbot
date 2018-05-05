@@ -60,7 +60,7 @@ public class MainBotRoutine extends Routine
 	    sceneHelper.getNodeById("startButton").setDisable(false);
     }
     
-    /**This section below is for checking in-game statuses. **/
+    /**This section below is for performaing game related functions. . **/
     
     public void moveToPrayButton()
     {
