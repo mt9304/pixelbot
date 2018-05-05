@@ -74,7 +74,20 @@ public class MainBotRoutine extends Routine
 	
     }
     
+    public void drinkAbsorbPotion()
+    {
+	
+    }
     
+    public void drinkOverloadPotion()
+    {
+	
+    }
+    
+    public void checkIfAbsorbNeeded()
+    {
+	
+    }
     
 }
     
