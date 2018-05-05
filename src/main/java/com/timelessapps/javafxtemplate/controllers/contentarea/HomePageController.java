@@ -1,5 +1,6 @@
 package main.java.com.timelessapps.javafxtemplate.controllers.contentarea;
 
+import java.awt.AWTException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,7 +28,7 @@ public class HomePageController implements Initializable
     }    
     
     @FXML
-    public void startApplication(MouseEvent event) throws InterruptedException 
+    public void startApplication(MouseEvent event) throws InterruptedException, AWTException 
     {
 	MainBotRoutine mainBotRoutine = new MainBotRoutine();
 	mainBotRoutine.setDaemon(true);

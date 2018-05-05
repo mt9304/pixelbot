@@ -1,26 +1,30 @@
 package main.java.com.timelessapps.javafxtemplate.app.businesslogic;
 
+import java.awt.AWTException;
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration.MEDIUM;
 
-import java.awt.AWTException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import main.java.com.timelessapps.javafxtemplate.controllers.contentarea.HomePageController;
 import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Routine;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.CustomSceneHelper;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
 
-public class MainBotRoutine extends Routine
+public class MainBotRoutine extends Routine 
 {
+   RobotService bot = new RobotService();
    
+   public MainBotRoutine() throws AWTException
+   {
+       
+   }
+    
     public void run()
     {
 	    synchronized (this)
 	    {
 	        try 
 	        {
-	            RobotService bot = new RobotService();
 	            disableStartButton();
 	            while(running)
 	            {
@@ -30,8 +34,7 @@ public class MainBotRoutine extends Routine
 		checkIfPausedOrStopped();
 	            }
 	            
-	        } 
-	        catch (AWTException ex) {Logger.getLogger(HomePageController.class.getName()).log(Level.SEVERE, null, ex);} catch (InterruptedException ex) {Logger.getLogger(MainBotRoutine.class.getName()).log(Level.SEVERE, null, ex);}
+	        }  catch (InterruptedException ex) {Logger.getLogger(MainBotRoutine.class.getName()).log(Level.SEVERE, null, ex);}
 	    }
     }
     
@@ -66,7 +69,7 @@ public class MainBotRoutine extends Routine
     
     public void flickPray()
     {
-	
+	bot.mouseClick(100);
     }
     
     public void checkHealth()
