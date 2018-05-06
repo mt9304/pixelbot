@@ -392,7 +392,7 @@ public class RobotService extends Robot
             break;
             
         default:
-            System.out.println("Midweek days are so-so.");
+            System.out.println("Not a valid Duration enum. ");
             break;
         }
     }
