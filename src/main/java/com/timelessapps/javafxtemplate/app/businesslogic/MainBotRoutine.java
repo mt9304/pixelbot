@@ -94,8 +94,7 @@ public class MainBotRoutine extends Routine
     int HPIconX = invXOffset; 
     int HPIconY = invYOffset - 51; //Remember to double check. 
     
-    int hpFullColor = 200;
-    int hpLowCOlor = 100;
+    int hpColor = 50;
 	
 	//After subtracting by reference point. 
 	int [][] absorbPots = new int[][]
