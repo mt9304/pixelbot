@@ -74,7 +74,7 @@ public class MainBotRoutine extends Routine
     /* Default, raw coords from laptop screen. 
     int[][] invSlots = new int[][] 
 	{
-		{1203, 432},{1256, 432},{1309, 423},{1361, 423},
+		{1203, 423},{1256, 423},{1309, 423},{1361, 423},
 		{1203, 470},{1256 ,470},{1309 ,470},{1361, 470},
 		{1203, 515},{1256, 515},{1309, 515},{1361, 515},
 		{1203, 558},{1256, 558},{1309, 558},{1361, 558},
@@ -86,39 +86,36 @@ public class MainBotRoutine extends Routine
     
     //Change this according to where Pray center is. 
     int invXOffset = 1176; 
-    int invYOffset = 254;
+    int invYOffset = 245;
     
     int prayButtonX = invXOffset;
     int prayButtonY = invYOffset;
     
-    int HPIconX = invXOffset; 
-    int HPIconY = invYOffset - 51; //Remember to double check. 
+    int HPIconX = 1166; 
+    int HPIconY = 207;
     
     int hpColor = 50;
 	
 	//After subtracting by reference point. 
-	int [][] absorbPots = new int[][]
+	int[][] invSlots = new int[][] 
 	{
-		{27+invXOffset, 178+invYOffset}, {80+invXOffset, 178+invYOffset}, {133+invXOffset, 178+invYOffset}, {185+invXOffset, 178+invYOffset}, 
-		{27+invXOffset, 216+invYOffset}, {80+invXOffset, 216+invYOffset}, {133+invXOffset, 216+invYOffset}, {185+invXOffset, 216+invYOffset}, 
-		{27+invXOffset, 261+invYOffset}, {80+invXOffset, 261+invYOffset}, {133+invXOffset, 261+invYOffset}, {185+invXOffset, 261+invYOffset}, 
-		{27+invXOffset, 304+invYOffset}, {80+invXOffset, 304+invYOffset}, {133+invXOffset, 304+invYOffset}, {185+invXOffset, 304+invYOffset}, 
-		{27+invXOffset, 348+invYOffset}, {80+invXOffset, 348+invYOffset}, {133+invXOffset, 348+invYOffset}, {185+invXOffset, 348+invYOffset}, 
-		{27+invXOffset, 393+invYOffset}, {80+invXOffset, 393+invYOffset}, {133+invXOffset, 393+invYOffset}, {185+invXOffset, 393+invYOffset}, 
-		{27+invXOffset, 439+invYOffset}, {80+invXOffset, 439+invYOffset}, {133+invXOffset, 439+invYOffset}, {185+invXOffset, 439+invXOffset}
+		{27+invXOffset, 179+invYOffset},   {80+invXOffset, 179+invYOffset},   {131+invXOffset, 179+invYOffset},   {185+invXOffset, 179+invYOffset},
+		{27+invXOffset, 223+invYOffset},   {80+invXOffset, 223+invYOffset},   {131+invXOffset, 223+invYOffset},   {185+invXOffset, 223+invYOffset},
+		{27+invXOffset, 267+invYOffset},   {80+invXOffset, 267+invYOffset},   {131+invXOffset, 267+invYOffset},   {185+invXOffset, 223+invYOffset},
+		{27+invXOffset, 312+invYOffset},   {80+invXOffset, 312+invYOffset},   {131+invXOffset, 312+invYOffset},   {185+invXOffset, 312+invYOffset},
+		{27+invXOffset, 358+invYOffset},   {80+invXOffset, 358+invYOffset},   {131+invXOffset, 358+invYOffset},   {185+invXOffset, 358+invYOffset}
 	};
 	
 	int [][] overloadPots = new int[][]
 	{
-		{27+invXOffset, 393+invYOffset}, {80+invXOffset, 393+invYOffset}, {133+invXOffset, 393+invYOffset}, {185+invXOffset, 393+invYOffset}, 
-		{27+invXOffset, 439+invYOffset}, {80+invXOffset, 439+invYOffset}, {133+invXOffset, 439+invYOffset}
-
+		{27+invXOffset, 401+invYOffset},   {80+invXOffset, 401+invYOffset},   {131+invXOffset, 401+invYOffset},   {185+invXOffset, 401+invYOffset},
+		{27+invXOffset, 448+invYOffset},   {80+invXOffset, 448+invYOffset},   {131+invXOffset, 448+invYOffset}
 	};
 	
 	//Can make this regular array, but just keeping it 2d for consistency sake. 
 	int [][] rockCake = new int[][]
 	{
-		{185+invXOffset, 439+invXOffset}
+		{185+invXOffset, 448+invYOffset}
 	};
     
     public void moveToPrayButton()
