@@ -1,18 +1,26 @@
 package main.java.com.timelessapps.javafxtemplate.app.businesslogic;
 
 import java.awt.AWTException;
-import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration.MEDIUM;
+import java.io.FileNotFoundException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.BuffTimer;
+import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Buff.ABSORB;
+import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Buff.OVERLOAD;
 
 import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Routine;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.CustomSceneHelper;
+import main.java.com.timelessapps.javafxtemplate.helpers.services.LoggingService;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
 
 public class MainBotRoutine extends Routine 
 {
    RobotService bot = new RobotService();
+   LoggingService log = new LoggingService();
+   
+   boolean shouldOverload = false;
+   boolean shouldAbsorb = false;
    
    public MainBotRoutine() throws AWTException
    {
@@ -21,6 +29,14 @@ public class MainBotRoutine extends Routine
     
     public void run()
     {
+	    try 
+	    {
+		log.appendToEventLogsFile("Starting bot routine in 3 seconds. ");
+	    } catch (FileNotFoundException ex) {Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);}
+			
+	    System.out.println("Starting bot routine in 3 seconds. ");
+	    bot.delay(3000);
+	    
 	    synchronized (this)
 	    {
 	        try 
@@ -29,8 +45,24 @@ public class MainBotRoutine extends Routine
 	            while(running)
 	            {
 		checkIfPausedOrStopped();
-		System.out.println("Running");
-		bot.delay(MEDIUM);
+
+		if (!shouldOverload)
+		{
+		    BuffTimer overloadTimer = new BuffTimer(this, 1000, OVERLOAD);
+		    overloadTimer.setDaemon(true);
+		    overloadTimer.start();
+		}
+		
+		if (!shouldAbsorb)
+		{
+		    BuffTimer absorbTimer = new BuffTimer(this, 1000, ABSORB); 
+		    absorbTimer.setDaemon(true);
+		    absorbTimer.start();
+		}
+		
+		
+		
+		
 		checkIfPausedOrStopped();
 	            }
 	            
@@ -128,9 +160,14 @@ public class MainBotRoutine extends Routine
     	bot.mouseClick(100);
     }
     
-    public void checkHealth()
+    public boolean healthIsLow()
     {
-	
+	if (true)
+	{
+	    System.out.println("Checking Health. ");
+	    return true;
+	}
+	return false;
     }
     
     public void drinkAbsorbPotion()
@@ -142,10 +179,15 @@ public class MainBotRoutine extends Routine
     {
 	
     }
-    
-    public void checkIfAbsorbNeeded()
+
+    public void setShouldOverloadTrue() 
     {
-	
+	shouldOverload = true;
+    }
+    
+    public void setShouldAbsorbTrue() 
+    {
+	shouldAbsorb = true;
     }
     
 }
