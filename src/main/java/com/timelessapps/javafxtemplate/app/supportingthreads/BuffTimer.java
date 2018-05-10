@@ -10,7 +10,7 @@ import main.java.com.timelessapps.javafxtemplate.helpers.services.LoggingService
 public class BuffTimer extends Thread
 {
     LoggingService log = new LoggingService();
-    
+     
     MainBotRoutine mainBotRoutine;
     int timeToWait;
     Buff buff;

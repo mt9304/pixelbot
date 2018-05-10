@@ -22,7 +22,7 @@ public class MainBotRoutine extends Routine
    Random random = new Random();
    
    boolean shouldOverload = true;
-   boolean shouldAbsorb = true;
+   boolean shouldAbsorb = true; 
    
    public MainBotRoutine() throws AWTException
    {
