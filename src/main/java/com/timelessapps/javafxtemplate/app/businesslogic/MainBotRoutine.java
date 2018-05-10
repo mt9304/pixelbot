@@ -2,6 +2,7 @@ package main.java.com.timelessapps.javafxtemplate.app.businesslogic;
 
 import java.awt.AWTException;
 import java.io.FileNotFoundException;
+import java.util.Random;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,9 +19,10 @@ public class MainBotRoutine extends Routine
 {
    RobotService bot = new RobotService();
    LoggingService log = new LoggingService();
+   Random random = new Random();
    
-   boolean shouldOverload = false;
-   boolean shouldAbsorb = false;
+   boolean shouldOverload = true;
+   boolean shouldAbsorb = true;
    
    public MainBotRoutine() throws AWTException
    {
@@ -46,23 +48,27 @@ public class MainBotRoutine extends Routine
 	            {
 		checkIfPausedOrStopped();
 
-		if (!shouldOverload)
+		if (shouldOverload)
 		{
-		    BuffTimer overloadTimer = new BuffTimer(this, 1000, OVERLOAD);
+		    setShouldOverload(false);
+		    drinkOverload();
+		    BuffTimer overloadTimer = new BuffTimer(this, 300000, OVERLOAD);
 		    overloadTimer.setDaemon(true);
 		    overloadTimer.start();
 		}
 		
-		if (!shouldAbsorb)
+		if (shouldAbsorb)
 		{
-		    BuffTimer absorbTimer = new BuffTimer(this, 1000, ABSORB); 
+		    setShouldAbsorb(false);
+		    drinkAbsorb();
+		    BuffTimer absorbTimer = new BuffTimer(this, 150000, ABSORB); 
 		    absorbTimer.setDaemon(true);
 		    absorbTimer.start();
 		}
 		
+		flickPray();
 		
-		
-		
+		Thread.sleep(random.nextInt(20000) + 20000); //HP goes up every minute, so have to make sure this runs around every 45 seconds or less. 
 		checkIfPausedOrStopped();
 	            }
 	            
@@ -170,24 +176,24 @@ public class MainBotRoutine extends Routine
 	return false;
     }
     
-    public void drinkAbsorbPotion()
+    public void drinkAbsorb()
     {
 	
     }
     
-    public void drinkOverloadPotion()
+    public void drinkOverload()
     {
 	
     }
 
-    public void setShouldOverloadTrue() 
+    public void setShouldOverload(boolean bool)
     {
-	shouldOverload = true;
+	shouldOverload = bool;
     }
     
-    public void setShouldAbsorbTrue() 
+    public void setShouldAbsorb(boolean bool)
     {
-	shouldAbsorb = true;
+	shouldAbsorb = bool;
     }
     
 }

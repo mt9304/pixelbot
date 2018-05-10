@@ -41,11 +41,11 @@ public class BuffTimer extends Thread
 	switch (buff)
 	{
 	    case ABSORB:
-		mainBotRoutine.setShouldAbsorbTrue();
+		mainBotRoutine.setShouldAbsorb(true);
 		break;
 		
 	    case OVERLOAD:
-		mainBotRoutine.setShouldOverloadTrue();
+		mainBotRoutine.setShouldOverload(true);
 		break;
 		
 	    default:
