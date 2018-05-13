@@ -24,7 +24,7 @@ public class MainBotRoutine extends Routine
    boolean shouldOverload = true;
    boolean shouldAbsorb = true; 
    
-   int absorbCounter = 0;
+   int absorbCounter = 4;
    int overloadCounter = 0;
    int overloadDoseCounter = 0;
    
