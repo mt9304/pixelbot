@@ -18,6 +18,8 @@ public class BuffTimer extends Thread
     public BuffTimer(MainBotRoutine mainBotRoutine, int timeToWait, Buff buff)
     {
 	this.mainBotRoutine = mainBotRoutine;
+	this.timeToWait = timeToWait;
+	this.buff = buff;
     }
     
     @Override

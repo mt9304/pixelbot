@@ -9,6 +9,9 @@ import java.util.logging.Logger;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.BuffTimer;
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Buff.ABSORB;
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Buff.OVERLOAD;
+import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Coordinates;
+import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Coordinates.X;
+import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Coordinates.Y;
 
 import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Routine;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.CustomSceneHelper;
@@ -24,7 +27,7 @@ public class MainBotRoutine extends Routine
    boolean shouldOverload = true;
    boolean shouldAbsorb = true; 
    
-   int absorbCounter = 4;
+   int absorbCounter = 5;
    int overloadCounter = 0;
    int overloadDoseCounter = 0;
    
@@ -68,7 +71,7 @@ public class MainBotRoutine extends Routine
 					    setShouldAbsorb(false);
 					    moveToAbsorb();
 					    drinkAbsorb();
-					    BuffTimer absorbTimer = new BuffTimer(this, 150000, ABSORB); 
+					    BuffTimer absorbTimer = new BuffTimer(this, 301000, ABSORB); 
 					    absorbTimer.setDaemon(true);
 					    absorbTimer.start();
 					}
@@ -76,7 +79,7 @@ public class MainBotRoutine extends Routine
 					moveToPrayButton();
 					flickPray();
 					
-					Thread.sleep(random.nextInt(20000) + 20000); //HP goes up every minute, so have to make sure this runs around every 45 seconds or less. 
+					Thread.sleep(random.nextInt(15000) + 10000); //HP goes up every minute, so have to make sure this runs around every 45 seconds or less. 
 					checkIfPausedOrStopped();
 	            }
 				            
@@ -87,6 +90,11 @@ public class MainBotRoutine extends Routine
     @Override
     public void checkIfPausedOrStopped() throws InterruptedException
     {
+	if (absorbCounter > 21)
+	{
+	    paused = true;
+	}
+	
     	waitIfPaused();
     	if (!running)
     	{
@@ -167,6 +175,7 @@ public class MainBotRoutine extends Routine
     
     public void moveToPrayButton()
     {
+	if (!(bot.getCurrentMousePosition(X) == prayButtonX && bot.getCurrentMousePosition(Y) == prayButtonY))
     	bot.moveCursorTo(prayButtonX, prayButtonY);
     	bot.delay(200);
     }
@@ -232,7 +241,7 @@ public class MainBotRoutine extends Routine
         bot.mouseClick();
         overloadDoseCounter++;
         
-        if (overloadDoseCounter >= 3)
+        if (overloadDoseCounter >= 4)
         {
         	overloadDoseCounter = 0;
         	overloadCounter++;
