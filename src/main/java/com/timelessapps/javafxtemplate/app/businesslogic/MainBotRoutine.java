@@ -152,6 +152,7 @@ public class MainBotRoutine extends Routine
 	
 	//Can make this regular array, but just keeping it 2d for consistency sake. 
 	int [][] rockCake = new int[][]
+		
 	{
 		{185+invXOffset, 448+invYOffset}
 	};
