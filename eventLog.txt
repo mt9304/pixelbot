@@ -337,3 +337,8 @@ The timer for buff: OVERLOADhas started for 1000milliseconds.
 The timer for buff: ABSORBhas started for 1000milliseconds. 
 The timer for buff: OVERLOADhas expired. 
 The timer for buff: ABSORBhas expired. 
+Starting bot routine in 3 seconds. 
+The timer for buff: OVERLOADhas started for 1000milliseconds. 
+The timer for buff: ABSORBhas started for 1000milliseconds. 
+The timer for buff: OVERLOADhas expired. 
+The timer for buff: ABSORBhas expired. 

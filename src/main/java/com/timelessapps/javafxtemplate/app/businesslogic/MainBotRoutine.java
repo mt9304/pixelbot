@@ -29,7 +29,7 @@ public class MainBotRoutine extends Routine
    boolean shouldOverload = true;
    boolean shouldAbsorb = true; 
    
-   int absorbCounter = 5;
+   int absorbCounter = 4;
    int overloadCounter = 0;
    int overloadDoseCounter = 0;
    
@@ -60,10 +60,10 @@ public class MainBotRoutine extends Routine
 					if (shouldOverload)
 					{
 					    setShouldOverload(false);
-					    //moveToOverload();
+					    moveToOverload();
 					    bot.delay(100);
-					    //drinkOverload();
-					    BuffTimer overloadTimer = new BuffTimer(this, 1000, OVERLOAD); //300800
+					    drinkOverload();
+					    BuffTimer overloadTimer = new BuffTimer(this, 300800, OVERLOAD); //300800
 					    overloadTimer.setDaemon(true);
 					    overloadTimer.start();
 					}
@@ -71,24 +71,19 @@ public class MainBotRoutine extends Routine
 					if (shouldAbsorb)
 					{
 					    setShouldAbsorb(false);
-					    //moveToAbsorb();
+					    moveToAbsorb();
 					    bot.delay(100);
-					    //drinkAbsorb();
-					    BuffTimer absorbTimer = new BuffTimer(this, 1000, ABSORB); //301000
+					    drinkAbsorb();
+					    BuffTimer absorbTimer = new BuffTimer(this, 301000, ABSORB); //301000
 					    absorbTimer.setDaemon(true);
 					    absorbTimer.start();
 					}
+			
+					moveToPrayButton();
+					flickPray();
 					
-					while (true)
-					{
-						bot.type("1", 0);
-					}
-					
-					//moveToPrayButton();
-					//flickPray();
-					
-					//Thread.sleep(random.nextInt(15000) + 10000); //HP goes up every minute, so have to make sure this runs around every 45 seconds or less. 
-					//checkIfPausedOrStopped();
+					Thread.sleep(random.nextInt(15000) + 10000); //HP goes up every minute, so have to make sure this runs around every 45 seconds or less. 
+					checkIfPausedOrStopped();
 	            }
 				            
 	        }  catch (InterruptedException ex) {Logger.getLogger(MainBotRoutine.class.getName()).log(Level.SEVERE, null, ex);}
