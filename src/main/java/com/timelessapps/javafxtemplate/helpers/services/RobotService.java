@@ -383,17 +383,19 @@ public class RobotService extends Robot
         return 0;
     }
 
-    public void mouseClick(int timeInMilis)
+    public void mouseClick()
     {
+    	Random random = new Random();
         mousePress(InputEvent.BUTTON1_MASK);
-        delay(timeInMilis);
+        delay(random.nextInt(300)+75);
         mouseRelease(InputEvent.BUTTON1_MASK);
     }
     
-    public void mouseRightClick(int timeInMilis)
+    public void mouseRightClick()
     {
+    	Random random = new Random();
         mousePress(InputEvent.BUTTON3_MASK);
-        delay(timeInMilis);
+        delay(random.nextInt(300)+75);
         mouseRelease(InputEvent.BUTTON3_MASK);
     }
     

@@ -24,6 +24,10 @@ public class MainBotRoutine extends Routine
    boolean shouldOverload = true;
    boolean shouldAbsorb = true; 
    
+   int absorbCounter = 0;
+   int overloadCounter = 0;
+   int overloadDoseCounter = 0;
+   
    public MainBotRoutine() throws AWTException
    {
        
@@ -46,32 +50,36 @@ public class MainBotRoutine extends Routine
 	            disableStartButton();
 	            while(running)
 	            {
-		checkIfPausedOrStopped();
+	            	checkIfPausedOrStopped();
 
-		if (shouldOverload)
-		{
-		    setShouldOverload(false);
-		    drinkOverload();
-		    BuffTimer overloadTimer = new BuffTimer(this, 300000, OVERLOAD);
-		    overloadTimer.setDaemon(true);
-		    overloadTimer.start();
-		}
-		
-		if (shouldAbsorb)
-		{
-		    setShouldAbsorb(false);
-		    drinkAbsorb();
-		    BuffTimer absorbTimer = new BuffTimer(this, 150000, ABSORB); 
-		    absorbTimer.setDaemon(true);
-		    absorbTimer.start();
-		}
-		
-		flickPray();
-		
-		Thread.sleep(random.nextInt(20000) + 20000); //HP goes up every minute, so have to make sure this runs around every 45 seconds or less. 
-		checkIfPausedOrStopped();
+					if (shouldOverload)
+					{
+					    setShouldOverload(false);
+					    moveToOverload();
+					    bot.delay(100);
+					    drinkOverload();
+					    BuffTimer overloadTimer = new BuffTimer(this, 300800, OVERLOAD);
+					    overloadTimer.setDaemon(true);
+					    overloadTimer.start();
+					}
+					
+					if (shouldAbsorb)
+					{
+					    setShouldAbsorb(false);
+					    moveToAbsorb();
+					    drinkAbsorb();
+					    BuffTimer absorbTimer = new BuffTimer(this, 150000, ABSORB); 
+					    absorbTimer.setDaemon(true);
+					    absorbTimer.start();
+					}
+					
+					moveToPrayButton();
+					flickPray();
+					
+					Thread.sleep(random.nextInt(20000) + 20000); //HP goes up every minute, so have to make sure this runs around every 45 seconds or less. 
+					checkIfPausedOrStopped();
 	            }
-	            
+				            
 	        }  catch (InterruptedException ex) {Logger.getLogger(MainBotRoutine.class.getName()).log(Level.SEVERE, null, ex);}
 	    }
     }
@@ -135,7 +143,7 @@ public class MainBotRoutine extends Routine
     int hpColor = 50;
 	
 	//After subtracting by reference point. 
-	int[][] invSlots = new int[][] 
+	int[][] absorbSlots = new int[][] 
 	{
 		{27+invXOffset, 179+invYOffset},   {80+invXOffset, 179+invYOffset},   {131+invXOffset, 179+invYOffset},   {185+invXOffset, 179+invYOffset},
 		{27+invXOffset, 223+invYOffset},   {80+invXOffset, 223+invYOffset},   {131+invXOffset, 223+invYOffset},   {185+invXOffset, 223+invYOffset},
@@ -144,14 +152,14 @@ public class MainBotRoutine extends Routine
 		{27+invXOffset, 358+invYOffset},   {80+invXOffset, 358+invYOffset},   {131+invXOffset, 358+invYOffset},   {185+invXOffset, 358+invYOffset}
 	};
 	
-	int [][] overloadPots = new int[][]
+	int [][] overloadSlots = new int[][]
 	{
 		{27+invXOffset, 401+invYOffset},   {80+invXOffset, 401+invYOffset},   {131+invXOffset, 401+invYOffset},   {185+invXOffset, 401+invYOffset},
 		{27+invXOffset, 448+invYOffset},   {80+invXOffset, 448+invYOffset},   {131+invXOffset, 448+invYOffset}
 	};
 	
 	//Can make this regular array, but just keeping it 2d for consistency sake. 
-	int [][] rockCake = new int[][]
+	int [][] rockCakeSlot = new int[][]
 		
 	{
 		{185+invXOffset, 448+invYOffset}
@@ -159,42 +167,86 @@ public class MainBotRoutine extends Routine
     
     public void moveToPrayButton()
     {
-	
+    	bot.moveCursorTo(prayButtonX, prayButtonY);
+    	bot.delay(200);
+    }
+    
+    public void moveToAbsorb()
+    {
+    	if (absorbCounter < 20)
+    	{
+    		bot.moveCursorTo(absorbSlots[absorbCounter][0], absorbSlots[absorbCounter][1]);
+    	}
+    }
+    
+    public void moveToOverload()
+    {
+    	if (overloadCounter < 7)
+    	{
+    		bot.moveCursorTo(overloadSlots[overloadCounter][0], overloadSlots[overloadCounter][1]);
+    	}
     }
     
     public void flickPray()
     {
-    	bot.mouseClick(100);
+    	Random random = new Random();
+    	bot.mouseClick();
+    	bot.delay(random.nextInt(500)+500);
+    	bot.mouseClick();
+    	bot.delay(500);
+    	
     }
     
     public boolean healthIsLow()
     {
-	if (true)
-	{
-	    System.out.println("Checking Health. ");
-	    return true;
-	}
+		if (true)
+		{
+		    System.out.println("Checking Health. ");
+		    return true;
+		}
 	return false;
     }
     
     public void drinkAbsorb()
     {
-	
+    	if (absorbCounter < 20)
+    	{
+	    	Random random = new Random();
+	    	
+	    	bot.delay(300);
+	    	
+	    	for (int i=0; i < 4; i++)
+	    	{
+	        	bot.mouseClick();
+	        	bot.delay(random.nextInt(750)+750);
+	    	}
+	    	absorbCounter++;
+    	}
     }
     
     public void drinkOverload()
     {
-	
+    	Random random = new Random();
+    	
+    	bot.delay(300);
+        bot.mouseClick();
+        overloadDoseCounter++;
+        
+        if (overloadDoseCounter >= 3)
+        {
+        	overloadDoseCounter = 0;
+        	overloadCounter++;
+        }
     }
 
     public void setShouldOverload(boolean bool)
     {
-	shouldOverload = bool;
+    	shouldOverload = bool;
     }
     
     public void setShouldAbsorb(boolean bool)
     {
-	shouldAbsorb = bool;
+    	shouldAbsorb = bool;
     }
     
 }
