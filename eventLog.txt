@@ -233,3 +233,5 @@ General Settings
 Api/Database
 Application
 Home
+Logs
+Home
