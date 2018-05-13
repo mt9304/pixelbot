@@ -20,6 +20,8 @@ import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
 
 public class MainBotRoutine extends Routine 
 {
+	
+   //Based on 88 absorbs and 20 overloads. 
    RobotService bot = new RobotService();
    LoggingService log = new LoggingService();
    Random random = new Random();
@@ -35,7 +37,7 @@ public class MainBotRoutine extends Routine
    {
        
    }
-    
+   
     public void run()
     {
 	    try 
@@ -58,10 +60,10 @@ public class MainBotRoutine extends Routine
 					if (shouldOverload)
 					{
 					    setShouldOverload(false);
-					    moveToOverload();
+					    //moveToOverload();
 					    bot.delay(100);
-					    drinkOverload();
-					    BuffTimer overloadTimer = new BuffTimer(this, 300800, OVERLOAD);
+					    //drinkOverload();
+					    BuffTimer overloadTimer = new BuffTimer(this, 1000, OVERLOAD); //300800
 					    overloadTimer.setDaemon(true);
 					    overloadTimer.start();
 					}
@@ -69,18 +71,24 @@ public class MainBotRoutine extends Routine
 					if (shouldAbsorb)
 					{
 					    setShouldAbsorb(false);
-					    moveToAbsorb();
-					    drinkAbsorb();
-					    BuffTimer absorbTimer = new BuffTimer(this, 301000, ABSORB); 
+					    //moveToAbsorb();
+					    bot.delay(100);
+					    //drinkAbsorb();
+					    BuffTimer absorbTimer = new BuffTimer(this, 1000, ABSORB); //301000
 					    absorbTimer.setDaemon(true);
 					    absorbTimer.start();
 					}
 					
-					moveToPrayButton();
-					flickPray();
+					while (true)
+					{
+						bot.type("1", 0);
+					}
 					
-					Thread.sleep(random.nextInt(15000) + 10000); //HP goes up every minute, so have to make sure this runs around every 45 seconds or less. 
-					checkIfPausedOrStopped();
+					//moveToPrayButton();
+					//flickPray();
+					
+					//Thread.sleep(random.nextInt(15000) + 10000); //HP goes up every minute, so have to make sure this runs around every 45 seconds or less. 
+					//checkIfPausedOrStopped();
 	            }
 				            
 	        }  catch (InterruptedException ex) {Logger.getLogger(MainBotRoutine.class.getName()).log(Level.SEVERE, null, ex);}
@@ -260,6 +268,16 @@ public class MainBotRoutine extends Routine
     public void setShouldAbsorb(boolean bool)
     {
     	shouldAbsorb = bool;
+    }
+    
+    public boolean getShouldOverload()
+    {
+    	return shouldOverload;
+    }
+    
+    public boolean getShouldAbsorb()
+    {
+    	return shouldAbsorb;
     }
     
 }
