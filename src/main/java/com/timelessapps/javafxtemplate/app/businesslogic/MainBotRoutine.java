@@ -176,9 +176,12 @@ public class MainBotRoutine extends Routine
     
     public void moveToPrayButton()
     {
-	if (!(bot.getCurrentMousePosition(X) == prayButtonX && bot.getCurrentMousePosition(Y) == prayButtonY))
-    	bot.moveCursorTo(prayButtonX, prayButtonY);
-    	bot.delay(200);
+    	//If mouse is already within 5 pixels of prayButton Coords, then skip moveCursor. 
+		if (!((bot.getCurrentMousePosition(X) >= prayButtonX && bot.getCurrentMousePosition(X) <= prayButtonX + 5) && (bot.getCurrentMousePosition(Y) >= prayButtonX && bot.getCurrentMousePosition(Y) <= prayButtonX + 5)))
+		{
+	    	bot.moveCursorTo(prayButtonX, prayButtonY);
+	    	bot.delay(200);
+		}
     }
     
     public void moveToAbsorb()
