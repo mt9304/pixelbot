@@ -2,6 +2,8 @@ package main.java.com.timelessapps.javafxtemplate.app.businesslogic;
 
 import java.awt.AWTException;
 import java.io.FileNotFoundException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Random;
 
 import java.util.logging.Level;
@@ -31,6 +33,10 @@ public class MainBotRoutine extends Routine
    int absorbCounter = 4;
    int overloadCounter = 0;
    int overloadDoseCounter = 0;
+   
+   	private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+	private SimpleDateFormat currentDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+	private String currentDate = currentDateFormat.format(timestamp);
    
    public MainBotRoutine() throws AWTException
    {

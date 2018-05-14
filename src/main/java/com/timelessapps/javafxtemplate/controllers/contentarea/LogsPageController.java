@@ -7,6 +7,8 @@ package main.java.com.timelessapps.javafxtemplate.controllers.contentarea;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -19,11 +21,16 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.CustomSceneHelper;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.FileHelper;
+import main.java.com.timelessapps.javafxtemplate.helpers.services.LoggingService;
 
 public class LogsPageController implements Initializable
 {
     CustomSceneHelper sceneHelper = new CustomSceneHelper();
     Runnable logTask;
+    private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    private SimpleDateFormat currentDateFormat = new SimpleDateFormat("yyyyMMdd");
+    private String currentDate = currentDateFormat.format(timestamp);
+		private LoggingService log = new LoggingService();
     
     @FXML
     private TextArea eventLogsTabContentArea, applicationLogsTabContentArea;
@@ -69,8 +76,8 @@ public class LogsPageController implements Initializable
                 {
                     try 
                     { 
-                        applicationLogsTabContentArea.setText(fileHelper.getTextFromFile("applicationLog.txt"));
-                        eventLogsTabContentArea.setText(fileHelper.getTextFromFile("eventLog.txt"));
+                        applicationLogsTabContentArea.setText(fileHelper.getTextFromFile(currentDate + "_" + "ApplicationLog.txt"));
+                        eventLogsTabContentArea.setText(fileHelper.getTextFromFile(currentDate + "_" + "EventLog.txt"));
                     }   catch (IOException ex) {Logger.getLogger(CustomSceneHelper.class.getName()).log(Level.SEVERE, null, ex);}
                     
                     //For auto scrolling to bottom to see most recent events. 

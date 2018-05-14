@@ -4,10 +4,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class LoggingService 
 {
     private CustomSceneHelper sceneHelper;
+    private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    private static SimpleDateFormat currentDateFormat = new SimpleDateFormat("yyyyMMdd");
+    private static SimpleDateFormat currentTimeFormat = new SimpleDateFormat("HH:mm:ss");
+    private String currentDate;
+    private String currentTime;
 
     public void writeLineToFile(String fileName, String text) throws FileNotFoundException
     {
@@ -27,13 +34,23 @@ public class LoggingService
     
     public void appendToEventLogsFile(String logText) throws FileNotFoundException
     {
-        String fileName = "eventLog.txt";
-        writeLineToFile(fileName, logText);
+        timestamp = new Timestamp(System.currentTimeMillis());
+        currentDate = currentDateFormat.format(timestamp);
+        currentTime = currentTimeFormat.format(timestamp);
+	
+        String fileName = currentDate + "_" + "EventLog.txt";
+        String formattedLogText = "[" + currentTime + "]: " + logText;
+        writeLineToFile(fileName, formattedLogText);
     }
     
     public void appendToApplicationLogsFile(String logText) throws FileNotFoundException
     {
-        String fileName = "applicationLog.txt";
-        writeLineToFile(fileName, logText);
+        timestamp = new Timestamp(System.currentTimeMillis());
+        currentDate = currentDateFormat.format(timestamp);
+        currentTime = currentTimeFormat.format(timestamp);
+	
+        String fileName = currentDate + "_" + "ApplicationLog.txt";
+        String formattedLogText = "[" + currentTime + "]: " + logText;
+        writeLineToFile(fileName, formattedLogText);
     }
 }
