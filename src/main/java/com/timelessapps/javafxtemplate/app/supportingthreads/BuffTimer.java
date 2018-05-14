@@ -17,20 +17,18 @@ public class BuffTimer extends Thread
     
     public BuffTimer(MainBotRoutine mainBotRoutine, int timeToWait, Buff buff)
     {
-	this.mainBotRoutine = mainBotRoutine;
-	this.timeToWait = timeToWait;
-	this.buff = buff;
+				this.mainBotRoutine = mainBotRoutine;
+				this.timeToWait = timeToWait;
+				this.buff = buff;
     }
     
     @Override
     public void run()
     {
-    	System.out.println("From Absorb before Timer: " + mainBotRoutine.getState());	
-    	System.out.println("From Overload before Timer: " + mainBotRoutine.getState());	
     	
 		try 
 		{
-		    log.appendToEventLogsFile("The timer for buff: " + buff + "has started for " + timeToWait + "milliseconds. ");
+		    log.appendToEventLogsFile("The timer for " + buff + " has started for " + timeToWait + " milliseconds. ");
 		} catch (FileNotFoundException ex) {Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);}
 		
 		try 
@@ -40,7 +38,7 @@ public class BuffTimer extends Thread
 		
 		try 
 		{
-		    log.appendToEventLogsFile("The timer for buff: " + buff + "has expired. ");
+		    log.appendToEventLogsFile("The timer for " + buff + " has expired. ");
 		} catch (FileNotFoundException ex) {Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);}
 		
 		String mainBotState = mainBotRoutine.getState().toString();
@@ -58,7 +56,13 @@ public class BuffTimer extends Thread
 		    		mainBotState = mainBotRoutine.getState().toString();
 		    	}
 		    	mainBotRoutine.setShouldAbsorb(true);
-			break;
+				
+				try 
+				{
+								log.appendToEventLogsFile("Setting shouldAbsorb to true. Currently shouldAbsorb is: " + mainBotRoutine.getShouldAbsorb() + " (Should be true)");
+				} catch (FileNotFoundException ex) {Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);}
+				
+				break;
 			
 		    case OVERLOAD:
 		    	while (!(mainBotState.toString().equals("TIMED_WAITING")))
@@ -71,7 +75,13 @@ public class BuffTimer extends Thread
 		    		mainBotState = mainBotRoutine.getState().toString();
 		    	}
 		    	mainBotRoutine.setShouldOverload(true);
-			break;
+							
+				try 
+				{
+								log.appendToEventLogsFile("Setting shouldAbsorb to true. Currently shouldOverload is: " + mainBotRoutine.getShouldOverload() + " (Should be true)");
+				} catch (FileNotFoundException ex) {Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);}
+				
+				break;
 			
 		    default:
 			try 

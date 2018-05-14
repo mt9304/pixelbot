@@ -34,10 +34,6 @@ public class MainBotRoutine extends Routine
    int overloadCounter = 0;
    int overloadDoseCounter = 0;
    
-   	private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-	private SimpleDateFormat currentDateFormat = new SimpleDateFormat("yyyy.MM.dd");
-	private String currentDate = currentDateFormat.format(timestamp);
-   
    public MainBotRoutine() throws AWTException
    {
        
@@ -153,10 +149,10 @@ public class MainBotRoutine extends Routine
     int prayButtonX = invXOffset;
     int prayButtonY = invYOffset;
     
-    int HPIconX = 1166; 
-    int HPIconY = 207;
+    //int HPIconX = 1166; 
+    //int HPIconY = 207;
     
-    int hpColor = 50;
+    //int hpColor = 50;
 	
 	//After subtracting by reference point. 
 	int[][] absorbSlots = new int[][] 
@@ -218,23 +214,13 @@ public class MainBotRoutine extends Routine
     	
     }
     
-    public boolean healthIsLow()
-    {
-		if (true)
-		{
-		    System.out.println("Checking Health. ");
-		    return true;
-		}
-	return false;
-    }
-    
-    public void drinkAbsorb()
-    {
+     public void drinkAbsorb()
+     {
     	if (absorbCounter < 20)
     	{
 	    	Random random = new Random();
 	    	
-	    	bot.delay(300);
+	    	bot.delay(350);
 	    	
 	    	for (int i=0; i < 4; i++)
 	    	{
