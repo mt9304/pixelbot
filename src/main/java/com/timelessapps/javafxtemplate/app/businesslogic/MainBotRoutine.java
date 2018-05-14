@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.BuffTimer;
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Buff.ABSORB;
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Buff.OVERLOAD;
-import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Coordinates;
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Coordinates.X;
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Coordinates.Y;
 
