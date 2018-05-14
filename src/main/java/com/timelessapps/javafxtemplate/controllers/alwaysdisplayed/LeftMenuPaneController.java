@@ -78,9 +78,11 @@ public class LeftMenuPaneController implements Initializable
         //Brings the page clicked to the front. 
         sceneHelper.bringNodeToFront(buttonName, "Page");
         
+				/*
         //For Logging. TO DO remember to delete this
         loggingService.appendToApplicationLogsFile(buttonName);
         loggingService.appendToEventLogsFile(buttonName);    
+				*/
     }
     
     @Override
