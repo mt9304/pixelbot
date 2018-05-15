@@ -14,6 +14,7 @@ public class BuffTimer extends Thread
     MainBotRoutine mainBotRoutine;
     int timeToWait;
     Buff buff;
+		String mainBotState;
     
     public BuffTimer(MainBotRoutine mainBotRoutine, int timeToWait, Buff buff)
     {
@@ -41,12 +42,12 @@ public class BuffTimer extends Thread
 		    log.appendToEventLogsFile("The timer for " + buff + " has expired. ");
 		} catch (FileNotFoundException ex) {Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);}
 		
-		String mainBotState = mainBotRoutine.getState().toString();
+		mainBotState = mainBotRoutine.getState().toString();
 		
 		switch (buff)
 		{
 		    case ABSORB:
-		    	while (!(mainBotState.toString().equals("TIMED_WAITING")))
+		    	while (!(mainBotState.equals("TIMED_WAITING")))
 		    	{
 		    		try 
 		    		{
@@ -65,7 +66,7 @@ public class BuffTimer extends Thread
 				break;
 			
 		    case OVERLOAD:
-		    	while (!(mainBotState.toString().equals("TIMED_WAITING")))
+		    	while (!(mainBotState.equals("TIMED_WAITING")))
 		    	{
 		    		try 
 		    		{

@@ -75,7 +75,7 @@ public class MainBotRoutine extends Routine
 					    moveToAbsorb();
 					    bot.delay(100);
 					    drinkAbsorb();
-					    BuffTimer absorbTimer = new BuffTimer(this, 301000, ABSORB); //301000
+					    BuffTimer absorbTimer = new BuffTimer(this, 302800, ABSORB); //301000
 					    absorbTimer.setDaemon(true);
 					    absorbTimer.start();
 					}
@@ -87,7 +87,9 @@ public class MainBotRoutine extends Routine
 					checkIfPausedOrStopped();
 	            }
 				            
-	        }  catch (InterruptedException ex) {Logger.getLogger(MainBotRoutine.class.getName()).log(Level.SEVERE, null, ex);}
+	        }  catch (InterruptedException ex) {Logger.getLogger(MainBotRoutine.class.getName()).log(Level.SEVERE, null, ex);} catch (FileNotFoundException ex) {
+													Logger.getLogger(MainBotRoutine.class.getName()).log(Level.SEVERE, null, ex);
+									}
 	    }
     }
     
@@ -188,15 +190,17 @@ public class MainBotRoutine extends Routine
 		}
     }
     
-    public void moveToAbsorb()
+    public synchronized void moveToAbsorb() throws FileNotFoundException
     {
-    	if (absorbCounter < 20)
-    	{
-    		bot.moveCursorTo(absorbSlots[absorbCounter][0], absorbSlots[absorbCounter][1]);
-    	}
+								log.appendToEventLogsFile("Absorb counter: " + Integer.toString(absorbCounter));
+								if (absorbCounter < 21)
+								{
+								log.appendToEventLogsFile("Moving to absorb slot: " + absorbSlots[absorbCounter][0] + ", " + absorbSlots[absorbCounter][1]);
+									bot.moveCursorTo(absorbSlots[absorbCounter][0], absorbSlots[absorbCounter][1]);
+								}
     }
     
-    public void moveToOverload()
+    public synchronized void moveToOverload()
     {
     	if (overloadCounter < 7)
     	{
@@ -214,9 +218,9 @@ public class MainBotRoutine extends Routine
     	
     }
     
-     public void drinkAbsorb()
+     public synchronized void drinkAbsorb()
      {
-    	if (absorbCounter < 20)
+    	if (absorbCounter < 21)
     	{
 	    	Random random = new Random();
 	    	
@@ -231,7 +235,7 @@ public class MainBotRoutine extends Routine
     	}
     }
     
-    public void drinkOverload()
+    public synchronized void drinkOverload()
     {
     	Random random = new Random();
     	
@@ -246,14 +250,16 @@ public class MainBotRoutine extends Routine
         }
     }
 
-    public void setShouldOverload(boolean bool)
+    public void setShouldOverload(boolean bool) throws FileNotFoundException
     {
     	shouldOverload = bool;
+					log.appendToEventLogsFile("ShouldOverload set to true. ");
     }
     
-    public void setShouldAbsorb(boolean bool)
+    public void setShouldAbsorb(boolean bool) throws FileNotFoundException
     {
     	shouldAbsorb = bool;
+					log.appendToEventLogsFile("ShouldAbsorb set to true. ");
     }
     
     public boolean getShouldOverload()
