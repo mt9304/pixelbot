@@ -56,7 +56,13 @@ public class BuffTimer extends Thread
 		    		
 		    		mainBotState = mainBotRoutine.getState().toString();
 		    	}
-		    	mainBotRoutine.setShouldAbsorb(true);
+		{
+						try {
+										mainBotRoutine.setShouldAbsorb(true);
+						} catch (FileNotFoundException ex) {
+										Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);
+						}
+		}
 				
 				try 
 				{
@@ -75,7 +81,13 @@ public class BuffTimer extends Thread
 		    		
 		    		mainBotState = mainBotRoutine.getState().toString();
 		    	}
-		    	mainBotRoutine.setShouldOverload(true);
+		{
+						try {
+										mainBotRoutine.setShouldOverload(true);
+						} catch (FileNotFoundException ex) {
+										Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);
+						}
+		}
 							
 				try 
 				{
