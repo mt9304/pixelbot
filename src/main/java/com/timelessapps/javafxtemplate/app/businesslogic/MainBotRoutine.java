@@ -193,11 +193,11 @@ public class MainBotRoutine extends Routine
     public synchronized void moveToAbsorb() throws FileNotFoundException
     {
 								log.appendToEventLogsFile("Absorb counter: " + Integer.toString(absorbCounter));
-								if (absorbCounter < 21)
-								{
+								//if (absorbCounter < 21)
+								//{
 								log.appendToEventLogsFile("Moving to absorb slot: " + absorbSlots[absorbCounter][0] + ", " + absorbSlots[absorbCounter][1]);
 									bot.moveCursorTo(absorbSlots[absorbCounter][0], absorbSlots[absorbCounter][1]);
-								}
+								//}
     }
     
     public synchronized void moveToOverload()
@@ -220,8 +220,8 @@ public class MainBotRoutine extends Routine
     
      public synchronized void drinkAbsorb()
      {
-    	if (absorbCounter < 21)
-    	{
+       //if (absorbCounter < 21)
+			//{
 	    	Random random = new Random();
 	    	
 	    	bot.delay(350);
@@ -232,7 +232,7 @@ public class MainBotRoutine extends Routine
 	        	bot.delay(random.nextInt(750)+750);
 	    	}
 	    	absorbCounter++;
-    	}
+      	//}
     }
     
     public synchronized void drinkOverload()
