@@ -75,7 +75,7 @@ public class MainBotRoutine extends Routine
 					    moveToAbsorb();
 					    bot.delay(100);
 					    drinkAbsorb();
-					    BuffTimer absorbTimer = new BuffTimer(this, 302800, ABSORB); //301000
+					    BuffTimer absorbTimer = new BuffTimer(this, 302300, ABSORB); //301000
 					    absorbTimer.setDaemon(true);
 					    absorbTimer.start();
 					}
@@ -98,6 +98,44 @@ public class MainBotRoutine extends Routine
     {
 	if (absorbCounter > 21)
 	{
+					System.out.println("Preparing to exit. ");
+					//For waking up and preparing to sleep computer. 
+					Thread.sleep(200000);
+					bot.mouseClick();
+					bot.delay(1000);
+					bot.mouseClick();
+					
+					Thread.sleep(200000);
+					bot.mouseClick();
+					bot.delay(1000);
+					bot.mouseClick();
+					
+					Thread.sleep(200000);
+					bot.mouseClick();
+					bot.delay(1000);
+					bot.mouseClick();
+
+					//For sleeping computer. 
+					bot.delay(1000);
+					bot.moveCursorTo(35, 1050);
+					bot.delay(1000);
+					bot.mouseClick();
+					bot.delay(1000);
+					bot.moveCursorTo(35, 985);
+					bot.delay(1000);
+					bot.mouseClick();
+					bot.delay(1000);
+					bot.moveCursorTo(35, 811);
+					bot.delay(1000);
+					bot.mouseClick();
+					System.out.println("About to exit. ");
+					
+					System.exit(0);
+					try {
+									log.appendToEventLogsFile("Absorb counter over 21, about to exit. ");
+					} catch (FileNotFoundException ex) {
+									Logger.getLogger(MainBotRoutine.class.getName()).log(Level.SEVERE, null, ex);
+					}
 	    paused = true;
 	}
 	
@@ -200,12 +238,19 @@ public class MainBotRoutine extends Routine
 								//}
     }
     
-    public synchronized void moveToOverload()
+    public synchronized void moveToOverload() throws FileNotFoundException
     {
     	if (overloadCounter < 7)
     	{
+								log.appendToEventLogsFile("Overload counter: " + Integer.toString(overloadCounter) + ", Overload dose counter: " + Integer.toString(overloadDoseCounter));
+								log.appendToEventLogsFile("Moving to overload slot: " + overloadSlots[overloadCounter][0] + ", " + overloadSlots[overloadCounter][1]);
     		bot.moveCursorTo(overloadSlots[overloadCounter][0], overloadSlots[overloadCounter][1]);
     	}
+					if (overloadCounter > 4)
+					{
+									System.out.println("Overload count is 7 or above. Exiting. ");
+									System.exit(0);
+					}
     }
     
     public void flickPray()
@@ -229,7 +274,7 @@ public class MainBotRoutine extends Routine
 	    	for (int i=0; i < 4; i++)
 	    	{
 	        	bot.mouseClick();
-	        	bot.delay(random.nextInt(750)+750);
+	        	bot.delay(random.nextInt(1000)+750);
 	    	}
 	    	absorbCounter++;
       	//}

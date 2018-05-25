@@ -88,11 +88,12 @@ public class BuffTimer extends Thread
 										Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);
 						}
 		}
-							
+							/*
 				try 
 				{
 								log.appendToEventLogsFile("Setting shouldAbsorb to true. Currently shouldOverload is: " + mainBotRoutine.getShouldOverload() + " (Should be true)");
 				} catch (FileNotFoundException ex) {Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);}
+*/
 				
 				break;
 			
