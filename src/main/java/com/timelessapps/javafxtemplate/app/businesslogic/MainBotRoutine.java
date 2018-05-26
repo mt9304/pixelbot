@@ -92,7 +92,7 @@ public class MainBotRoutine extends Routine
 									}
 	    }
     }
-    
+    //188
     @Override
     public void checkIfPausedOrStopped() throws InterruptedException
     {
