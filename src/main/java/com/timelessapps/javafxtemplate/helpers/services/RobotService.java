@@ -208,6 +208,31 @@ public class RobotService extends Robot
 	    mouseCurve(endPointOffsetX, endPointOffsetY);
 	}
     }
+				
+				    //Main movement function to call for the bot to move mouse. Gives a random small offset for where the mouse should end up, as well as a chance to completely miss the spot on first try. 
+    public void accuratelyMoveCursor(int x, int y)
+    {
+				Random random = new Random();
+				int endPointOffsetX = x + random.nextInt(2);
+				int endPointOffsetY = y + random.nextInt(2);
+
+				int fakeEndPointOffsetX = x + random.nextInt(12) + 12;
+				int fakeEndPointOffsetY = y + random.nextInt(12) + 12;
+
+				int chanceToMiss = random.nextInt(9);
+
+				//If it misses. 
+				if (chanceToMiss > 7)
+				{
+								mouseCurve(fakeEndPointOffsetX, fakeEndPointOffsetY);
+								delay(random.nextInt(200)+25);
+								mouseCurve(endPointOffsetX, endPointOffsetY);
+				}
+				else
+				{
+								mouseCurve(endPointOffsetX, endPointOffsetY);
+				}
+    }
     
     //Randomly selects a curving style with random speed and steps. 
     public void mouseCurve(int endPointX, int endPointY)
