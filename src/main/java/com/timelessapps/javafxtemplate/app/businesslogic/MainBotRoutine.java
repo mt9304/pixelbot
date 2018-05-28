@@ -57,7 +57,7 @@ public class MainBotRoutine extends Routine
 	            while(running)
 	            {
 	            	checkIfPausedOrStopped();
-
+	            	/** Start routine here.  **/ 
 					if (shouldOverload)
 					{
 					    setShouldOverload(false);
@@ -84,6 +84,7 @@ public class MainBotRoutine extends Routine
 					flickPray();
 					
 					Thread.sleep(random.nextInt(15000) + 10000); //HP goes up every minute, so have to make sure this runs around every 45 seconds or less. 
+					/** End routine here. **/
 					checkIfPausedOrStopped();
 	            }
 				            
