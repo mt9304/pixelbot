@@ -18,6 +18,7 @@ import java.util.Random;
 
 import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Coordinates;
 import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration;
+import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.FKeys;
 
 public class RobotService extends Robot
 {
@@ -106,69 +107,69 @@ public class RobotService extends Robot
 
         switch (c)
         {
-        case '~':
-            keyCode = (int)'`';
-            break;
-        case '!':
-            keyCode = (int)'1';
-            break;
-        case '@':
-            keyCode = (int)'2';
-            break;
-        case '#':
-            keyCode = (int)'3';
-            break;
-        case '$':
-            keyCode = (int)'4';
-            break;
-        case '%':
-            keyCode = (int)'5';
-            break;
-        case '^':
-            keyCode = (int)'6';
-            break;
-        case '&':
-            keyCode = (int)'7';
-            break;
-        case '*':
-            keyCode = (int)'8';
-            break;
-        case '(':
-            keyCode = (int)'9';
-            break;
-        case ')':
-            keyCode = (int)'0';
-            break;
-        case ':':
-            keyCode = (int)';';
-            break;
-        case '_':
-            keyCode = (int)'-';
-            break;
-        case '+':
-            keyCode = (int)'=';
-            break;
-        case '|':
-            keyCode = (int)'\\';
-            break;
-        case '?':
-            keyCode = (int)'/';
-            break;
-        case '{':
-            keyCode = (int)'[';
-            break;
-        case '}':
-            keyCode = (int)']';
-            break;
-        case '<':
-            keyCode = (int)',';
-            break;
-        case '>':
-            keyCode = (int)'.';
-            break;
-        default:
-            keyCode = (int)c;
-            shift = false;
+	        case '~':
+	            keyCode = (int)'`';
+	            break;
+	        case '!':
+	            keyCode = (int)'1';
+	            break;
+	        case '@':
+	            keyCode = (int)'2';
+	            break;
+	        case '#':
+	            keyCode = (int)'3';
+	            break;
+	        case '$':
+	            keyCode = (int)'4';
+	            break;
+	        case '%':
+	            keyCode = (int)'5';
+	            break;
+	        case '^':
+	            keyCode = (int)'6';
+	            break;
+	        case '&':
+	            keyCode = (int)'7';
+	            break;
+	        case '*':
+	            keyCode = (int)'8';
+	            break;
+	        case '(':
+	            keyCode = (int)'9';
+	            break;
+	        case ')':
+	            keyCode = (int)'0';
+	            break;
+	        case ':':
+	            keyCode = (int)';';
+	            break;
+	        case '_':
+	            keyCode = (int)'-';
+	            break;
+	        case '+':
+	            keyCode = (int)'=';
+	            break;
+	        case '|':
+	            keyCode = (int)'\\';
+	            break;
+	        case '?':
+	            keyCode = (int)'/';
+	            break;
+	        case '{':
+	            keyCode = (int)'[';
+	            break;
+	        case '}':
+	            keyCode = (int)']';
+	            break;
+	        case '<':
+	            keyCode = (int)',';
+	            break;
+	        case '>':
+	            keyCode = (int)'.';
+	            break;
+	        default:
+	            keyCode = (int)c;
+	            shift = false;
         }
 
         if (shift)
@@ -180,6 +181,35 @@ public class RobotService extends Robot
             keyType(keyCode);
         }
     }
+    
+    //For pressing special game keys. 
+    public void pressFKey(FKeys fKey)
+    {
+    	Random random = new Random();
+    	int randomDelay = random.nextInt(100)+50;
+    	switch (fKey)
+    	{
+	    	case F5:
+	    		keyPress(KeyEvent.VK_F5);
+	    		delay(randomDelay);
+	    		keyRelease(KeyEvent.VK_F5);
+	    		delay(randomDelay);
+	    		break;
+	    	case F6:
+	    		keyPress(KeyEvent.VK_F6);
+	    		delay(randomDelay);
+	    		keyRelease(KeyEvent.VK_F6);
+	    		delay(randomDelay);
+	    		break;
+	    	case F7:
+	    		keyPress(KeyEvent.VK_F7);
+	    		delay(randomDelay);
+	    		keyRelease(KeyEvent.VK_F7);
+	    		delay(randomDelay);
+	    		break;
+    	}
+    }
+    
     /** End typing section. **/
     
     /** Sections below is for mouse movement related functions. **/
