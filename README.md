@@ -3,7 +3,7 @@
 - [Introduction](#introduction)
 - [Prerequisites](#prerequisites)
 	- [Suggested Environment](#suggested-environment)
-	- [Installing](#installing)
+	- [Installation](#Installation)
 - [Extending Functions](#extending-functionality)
 	- [Starting A Routine](#starting-a-routine)
 - [Other Information](#other-information)
@@ -22,7 +22,7 @@ This is a bot originally created for one of my favourite rpg games in my childho
 1. Java IDE with Maven installed
 2. JavaFX installed for IDE
 
-### Installing
+### Installation
 1. In terminal, go to directory you want to save project in and type: 
 ```
 git clone https://github.com/mt9304/botforfun.git
