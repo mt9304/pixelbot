@@ -3,7 +3,7 @@
 - [Introduction](#introduction)
 - [Prerequisites](#prerequisites)
 	- [Suggested Environment](#suggested-environment)
-	- [Installation](#Installation)
+	- [Installation](#installation)
 - [Extending Functions](#extending-functionality)
 	- [Starting A Routine](#starting-a-routine)
 - [Other Information](#other-information)
