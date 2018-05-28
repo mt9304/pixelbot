@@ -6,8 +6,8 @@
 	- [Installing](#installing)
 - [Extending Functions](#extending-functionality)
 	- [Starting A Routine](#starting-a-routine)
-	- [Bot Service Info](#bot-service-info)
 - [Other Information](#other-information)
+	- [Bot Service Info](#bot-service-info)
 	- [Delay Between Actions](#delay-between-actions)
 	- [Expanding On UI](#expanding-on-ui)
 
@@ -45,6 +45,8 @@ mvn install
 	3. `moveCursorTo(int, int);` for gliding the mouse to the designated X and Y location. 
 	4. `type(String);` for typing strings of text. 
 
+## Other Information
+
 ### Bot Service Info
 
 1. The `moveCursorTo(int, int);` gliding function is necessary to avoid some bot detection methods. The default mouseMove option teleports the cursor to the specified location, but seems unnatural. The game I created this for seems to send information on mouse movement, so I used this as a precaution to mimic human movement: 
@@ -54,8 +56,6 @@ mvn install
 	- The endpoint will have an offset of 5px in both X and Y (may have to implement more accurate one function if there is no margin for error in the routine). 
 2. The `type(String);` function can type regular text, since the original Robot library's functions only allow single key presses. For special and unexpected characters (maybe a different language), use `typeFromClipboard(String);` to type using the clipboard. 
 3. The `delay(int);` function is used in most of the functions and has a semi-random int value. Having 0 delay between actions might seem suspicious. 
-
-## Other Information
 
 ### Delay Between Actions
 
