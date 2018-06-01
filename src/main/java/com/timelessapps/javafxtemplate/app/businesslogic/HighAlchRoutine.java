@@ -1,14 +1,15 @@
 package main.java.com.timelessapps.javafxtemplate.app.businesslogic;
 
 import java.awt.AWTException;
+import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.util.Random;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.BuffTimer;
-
 import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Routine;
+import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Slots;
+import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Slots.BOOK;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.CustomSceneHelper;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.LoggingService;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
@@ -21,17 +22,23 @@ public class HighAlchRoutine extends Routine
 
 				//For arrows, remember to include more in inv than stated number, otherwise stack will shrink and pixel detector may be off. 
 				int numberToAlch = 1000;
-				int alchX = 0;
-				int alchY = 0;
+				int alchX = 1369;
+				int alchY = 546;
 				
-				int equippedArrowSlotX = 0;
-				int equippedArrowSlotY = 0;
+				int equippedArrowSlotX = 1334;
+				int equippedArrowSlotY = 463;
 				
-				int blankInvSlotX = 0;
-				int blankInvSlotY = 0;
+				int blankInvSlotX = 1165;
+				int blankInvSlotY = 416;
 				
 				int firstInvSlotX = 0;
 				int firstInvSlotY = 0;
+				
+				//Superheat item red part. 
+				int bookIndicatorX = 1313;
+				int bookIndicatorY = 518;
+				
+				volatile Boolean bookStillLoading = true; 
 
 				public HighAlchRoutine () throws AWTException
 				{
@@ -57,12 +64,26 @@ public class HighAlchRoutine extends Routine
 																{
 																				checkIfPausedOrStopped();
 																				/** Start routine here.  **/ 
+																				//F5 = Inv, F6 = Equipment, F7 = SpellBook.
+																				//Move to starting spot. 
+																				bookStillLoading = true;
+																				bot.delay(250);
+																				bot.accuratelyMoveCursor(alchX, alchY);
+																				bot.delay(random.nextInt(250)+ 450);
 																				
-																				
-																				
+																				//Cast High Alch. 
+																				switchTo(BOOK);
+																				bot.mouseClick();
+																				bot.delay(random.nextInt(250)+ 450);
+																				bot.mouseClick();
+																				bot.delay(random.nextInt(500)+500);
+																																								
+																				//Check if finished casting. 
+																				checkIfStillCasting();
 																				
 																				/** End routine here. **/
-																				Thread.sleep(random.nextInt(15000) + 10000); //HP goes up every minute, so have to make sure this runs around every 45 seconds or less. 
+																				bot.delay(random.nextInt(200)+300);
+																				numberToAlch--;
 																				checkIfPausedOrStopped();
 																}
 												}  catch (InterruptedException ex) {Logger.getLogger(MainBotRoutine.class.getName()).log(Level.SEVERE, null, ex);}
@@ -72,11 +93,31 @@ public class HighAlchRoutine extends Routine
 				@Override
 				public void checkIfPausedOrStopped() throws InterruptedException
 				{
+								if (numberToAlch <= 0)
+								{
+												System.out.println("Preparing to shut down. ");
+												running = false;
+												//For sleeping computer. 
+												bot.delay(1000);
+												bot.moveCursorTo(35, 1050);
+												bot.delay(1000);
+												bot.mouseClick();
+												bot.delay(1000);
+												bot.moveCursorTo(35, 985);
+												bot.delay(1000);
+												bot.mouseClick();
+												bot.delay(1000);
+												bot.moveCursorTo(35, 811);
+												bot.delay(1000);
+												bot.mouseClick();
+								}
+								
 								waitIfPaused();
 								if (!running)
 								{
 												enableStartButton();
 								}
+								
 				}
 
 				private void disableStartButton() 
@@ -109,6 +150,43 @@ public class HighAlchRoutine extends Routine
 				private void unequiptArrowAndPutBackInPlace()
 				{
 								
+				}
+				
+				private void switchTo(Slots slot)
+				{
+								switch (slot)
+								{
+												case INV:
+																bot.keyPress(KeyEvent.VK_F5);
+																bot.delay(random.nextInt(20)+ 10);
+																bot.keyRelease(KeyEvent.VK_F5);
+																break;
+												case EQUIP:
+																bot.keyPress(KeyEvent.VK_F6);
+																bot.delay(random.nextInt(20)+ 10);
+																bot.keyRelease(KeyEvent.VK_F6);
+																break;
+												case BOOK:
+																bot.keyPress(KeyEvent.VK_F7);
+																bot.delay(random.nextInt(20)+ 10);
+																bot.keyRelease(KeyEvent.VK_F7);
+								}
+				}
+				
+				private void checkIfStillCasting()
+				{
+								while (bookStillLoading)
+								{
+												if (bot.getPixelColor(bookIndicatorX, bookIndicatorY).getBlue() < 45)
+												{
+																System.out.println("Detected. Superheat item blue value is: " + bot.getPixelColor(bookIndicatorX, bookIndicatorY).getBlue());
+																bookStillLoading = false;
+												}
+												else {
+																System.out.println("Not detected. Superheat item blue value is: " + bot.getPixelColor(bookIndicatorX, bookIndicatorY).getBlue());
+																bot.delay(500);
+												}
+								}
 				}
 }
     

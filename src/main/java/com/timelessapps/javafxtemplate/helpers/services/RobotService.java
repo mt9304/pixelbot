@@ -182,34 +182,6 @@ public class RobotService extends Robot
         }
     }
     
-    //For pressing special game keys. 
-    public void pressFKey(FKeys fKey)
-    {
-    	Random random = new Random();
-    	int randomDelay = random.nextInt(100)+50;
-    	switch (fKey)
-    	{
-	    	case F5:
-	    		keyPress(KeyEvent.VK_F5);
-	    		delay(randomDelay);
-	    		keyRelease(KeyEvent.VK_F5);
-	    		delay(randomDelay);
-	    		break;
-	    	case F6:
-	    		keyPress(KeyEvent.VK_F6);
-	    		delay(randomDelay);
-	    		keyRelease(KeyEvent.VK_F6);
-	    		delay(randomDelay);
-	    		break;
-	    	case F7:
-	    		keyPress(KeyEvent.VK_F7);
-	    		delay(randomDelay);
-	    		keyRelease(KeyEvent.VK_F7);
-	    		delay(randomDelay);
-	    		break;
-    	}
-    }
-    
     /** End typing section. **/
     
     /** Sections below is for mouse movement related functions. **/
