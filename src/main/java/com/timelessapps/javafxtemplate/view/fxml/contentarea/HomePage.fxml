@@ -15,5 +15,10 @@
             <Font size="18.0" />
          </font>
       </Button>
+      <Button id="startButton" fx:id="alchButton" layoutX="153.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#startAlchRoutine" prefHeight="58.0" prefWidth="135.0" styleClass="alchButton" text="Alch">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

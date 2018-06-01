@@ -7,6 +7,8 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.BuffTimer;
+import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Coordinates.X;
+import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Coordinates.Y;
 import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Routine;
 import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Slots;
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Slots.BOOK;
@@ -21,7 +23,7 @@ public class HighAlchRoutine extends Routine
 				Random random = new Random();
 
 				//For arrows, remember to include more in inv than stated number, otherwise stack will shrink and pixel detector may be off. 
-				int numberToAlch = 1000;
+				int numberToAlch = 100;
 				int alchX = 1369;
 				int alchY = 546;
 				
@@ -68,13 +70,23 @@ public class HighAlchRoutine extends Routine
 																				//Move to starting spot. 
 																				bookStillLoading = true;
 																				bot.delay(250);
-																				bot.accuratelyMoveCursor(alchX, alchY);
-																				bot.delay(random.nextInt(250)+ 450);
+																				System.out.println("Moving to alch spot. ");
+																				if (!((bot.getCurrentMousePosition(X) >= alchX-2 && bot.getCurrentMousePosition(X) <= alchX + 2) && (bot.getCurrentMousePosition(Y) >= alchY-2 && bot.getCurrentMousePosition(Y) <= alchY + 2)))
+																				{
+																								bot.accuratelyMoveCursor(alchX, alchY);
+																								bot.delay(random.nextInt(500)+ 500);
+																				}
+																
+																				if (numberToAlch % 20 == 0)
+																				{
+																								bot.accuratelyMoveCursor(alchX, alchY);
+																								bot.delay(random.nextInt(500)+ 500);
+																				}
 																				
 																				//Cast High Alch. 
-																				switchTo(BOOK);
+																				//switchTo(BOOK);
 																				bot.mouseClick();
-																				bot.delay(random.nextInt(250)+ 450);
+																				bot.delay(random.nextInt(500)+ 500);
 																				bot.mouseClick();
 																				bot.delay(random.nextInt(500)+500);
 																																								
@@ -82,7 +94,7 @@ public class HighAlchRoutine extends Routine
 																				checkIfStillCasting();
 																				
 																				/** End routine here. **/
-																				bot.delay(random.nextInt(200)+300);
+																				bot.delay(random.nextInt(500)+500);
 																				numberToAlch--;
 																				checkIfPausedOrStopped();
 																}
