@@ -70,15 +70,27 @@ public class HighAlchRoutine extends Routine
 																				//Move to starting spot. 
 																				bookStillLoading = true;
 																				bot.delay(250);
-																				System.out.println("Moving to alch spot. ");
+																				//System.out.println("Moving to alch spot. ");
 																				if (!((bot.getCurrentMousePosition(X) >= alchX-2 && bot.getCurrentMousePosition(X) <= alchX + 2) && (bot.getCurrentMousePosition(Y) >= alchY-2 && bot.getCurrentMousePosition(Y) <= alchY + 2)))
 																				{
 																								bot.accuratelyMoveCursor(alchX, alchY);
 																								bot.delay(random.nextInt(500)+ 500);
 																				}
 																
-																				if (numberToAlch % 20 == 0)
+																				//For random taking a break and readjusting mouse. 
+																				if (random.nextInt(50) == 25)
 																				{
+																								System.out.println("Moving mouse. ");
+																								bot.moveCursorTo(100, 100);
+																								Thread.sleep(random.nextInt(4000)+4000);
+																								bot.accuratelyMoveCursor(alchX, alchY);
+																								bot.delay(random.nextInt(500)+ 500);
+																				}
+																				
+																				//For readjusting mouse. 
+																				if (random.nextInt(40) == 10)
+																				{
+																								System.out.println("Readjusting mouse. ");
 																								bot.accuratelyMoveCursor(alchX, alchY);
 																								bot.delay(random.nextInt(500)+ 500);
 																				}
@@ -191,11 +203,11 @@ public class HighAlchRoutine extends Routine
 								{
 												if (bot.getPixelColor(bookIndicatorX, bookIndicatorY).getBlue() < 45)
 												{
-																System.out.println("Detected. Superheat item blue value is: " + bot.getPixelColor(bookIndicatorX, bookIndicatorY).getBlue());
+																//System.out.println("Detected. Superheat item blue value is: " + bot.getPixelColor(bookIndicatorX, bookIndicatorY).getBlue());
 																bookStillLoading = false;
 												}
 												else {
-																System.out.println("Not detected. Superheat item blue value is: " + bot.getPixelColor(bookIndicatorX, bookIndicatorY).getBlue());
+																//System.out.println("Not detected. Superheat item blue value is: " + bot.getPixelColor(bookIndicatorX, bookIndicatorY).getBlue());
 																bot.delay(500);
 												}
 								}
