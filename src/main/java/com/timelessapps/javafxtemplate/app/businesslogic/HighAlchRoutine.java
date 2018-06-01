@@ -23,7 +23,7 @@ public class HighAlchRoutine extends Routine
 				Random random = new Random();
 
 				//For arrows, remember to include more in inv than stated number, otherwise stack will shrink and pixel detector may be off. 
-				int numberToAlch = 100;
+				int numberToAlch = 5000;
 				int alchX = 1369;
 				int alchY = 546;
 				
@@ -81,7 +81,7 @@ public class HighAlchRoutine extends Routine
 																				if (random.nextInt(50) == 25)
 																				{
 																								System.out.println("Moving mouse. ");
-																								bot.moveCursorTo(100, 100);
+																								bot.moveCursorTo(random.nextInt(100), random.nextInt(700)+100);
 																								Thread.sleep(random.nextInt(4000)+4000);
 																								bot.accuratelyMoveCursor(alchX, alchY);
 																								bot.delay(random.nextInt(500)+ 500);
