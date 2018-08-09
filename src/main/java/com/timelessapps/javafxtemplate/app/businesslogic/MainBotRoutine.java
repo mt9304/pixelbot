@@ -75,7 +75,7 @@ public class MainBotRoutine extends Routine
 					    moveToAbsorb();
 					    bot.delay(100);
 					    drinkAbsorb();
-					    BuffTimer absorbTimer = new BuffTimer(this, 302300, ABSORB); //301000
+					    BuffTimer absorbTimer = new BuffTimer(this, 295300, ABSORB); //301000. Works with dhide at 302300
 					    absorbTimer.setDaemon(true);
 					    absorbTimer.start();
 					}
@@ -275,7 +275,7 @@ public class MainBotRoutine extends Routine
 	    	for (int i=0; i < 4; i++)
 	    	{
 	        	bot.mouseClick();
-	        	bot.delay(random.nextInt(1000)+750);
+	        	bot.delay(random.nextInt(1250)+750);
 	    	}
 	    	absorbCounter++;
       	//}

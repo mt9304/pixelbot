@@ -78,17 +78,17 @@ public class HighAlchRoutine extends Routine
 																				}
 																
 																				//For random taking a break and readjusting mouse. 
-																				if (random.nextInt(50) == 25)
+																				if (random.nextInt(130) == 25)
 																				{
 																								System.out.println("Moving mouse. ");
-																								bot.moveCursorTo(random.nextInt(100), random.nextInt(700)+100);
+																								bot.moveCursorTo(random.nextInt(50)+1700, random.nextInt(300)+300);
 																								Thread.sleep(random.nextInt(4000)+4000);
 																								bot.accuratelyMoveCursor(alchX, alchY);
 																								bot.delay(random.nextInt(500)+ 500);
 																				}
 																				
 																				//For readjusting mouse. 
-																				if (random.nextInt(40) == 10)
+																				if (random.nextInt(80) == 10)
 																				{
 																								System.out.println("Readjusting mouse. ");
 																								bot.accuratelyMoveCursor(alchX, alchY);
