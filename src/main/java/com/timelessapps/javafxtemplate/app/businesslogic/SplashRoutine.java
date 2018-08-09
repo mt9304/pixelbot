@@ -70,6 +70,7 @@ public class SplashRoutine extends Routine
 																				String randomLetter = getRandomLetter(randomNumber);
 																				bot.type(randomLetter, random.nextInt(15)+35);
 																				counter++;
+																				System.out.println("Typed letter. ");
 																				Thread.sleep(random.nextInt(120000)+120000);	
 																				checkIfPausedOrStopped();
 																}
