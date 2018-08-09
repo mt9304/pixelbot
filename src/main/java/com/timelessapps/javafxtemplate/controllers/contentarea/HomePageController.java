@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.HighAlchRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.MainBotRoutine;
+import main.java.com.timelessapps.javafxtemplate.app.businesslogic.SplashRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.GlobalKeyListener;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.LoggingService;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
@@ -64,6 +65,21 @@ public class HomePageController implements Initializable
 				highAlchRoutine.start();
 
 				GlobalKeyListener globalKeyListener = new GlobalKeyListener(highAlchRoutine);
+				globalKeyListener.setDaemon(true);
+				globalKeyListener.start();
+
+				//botRoutine.join();
+				//System.out.println("Remember to re-active button. ");
+     }
+				
+  @FXML
+    public void startSplashRoutine(MouseEvent event) throws InterruptedException, AWTException 
+    {
+				SplashRoutine splashRoutine = new SplashRoutine();
+				splashRoutine.setDaemon(true);
+				splashRoutine.start();
+
+				GlobalKeyListener globalKeyListener = new GlobalKeyListener(splashRoutine);
 				globalKeyListener.setDaemon(true);
 				globalKeyListener.start();
 

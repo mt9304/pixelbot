@@ -20,5 +20,10 @@
             <Font size="18.0" />
          </font>
       </Button>
+      <Button id="splashButton" fx:id="splashButton" layoutX="153.0" layoutY="223.0" mnemonicParsing="false" onMouseClicked="#startSplashRoutine" prefHeight="58.0" prefWidth="135.0" styleClass="splashButton" text="Splash">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
