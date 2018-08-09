@@ -38,6 +38,7 @@ public class SplashRoutine extends Routine
 				int bookIndicatorY = 518;
 				
 				volatile Boolean bookStillLoading = true; 
+				int counter = 0;
 
 				public SplashRoutine() throws AWTException
 				{
@@ -60,6 +61,7 @@ public class SplashRoutine extends Routine
 												{
 																disableStartButton();
 																Random random = new Random();
+
 																while(running)
 																{
 																				checkIfPausedOrStopped();
@@ -67,7 +69,8 @@ public class SplashRoutine extends Routine
 																				int randomNumber = random.nextInt(27);
 																				String randomLetter = getRandomLetter(randomNumber);
 																				bot.type(randomLetter, random.nextInt(15)+35);
-																				Thread.sleep(random.nextInt(120000)+120000);
+																				counter++;
+																				Thread.sleep(random.nextInt(120000)+120000);	
 																				checkIfPausedOrStopped();
 																}
 												}  catch (InterruptedException ex) {Logger.getLogger(MainBotRoutine.class.getName()).log(Level.SEVERE, null, ex);}
@@ -77,23 +80,10 @@ public class SplashRoutine extends Routine
 				@Override
 				public void checkIfPausedOrStopped() throws InterruptedException
 				{
-								if (numberToAlch <= 0)
+								if (counter > 70)
 								{
-												System.out.println("Preparing to shut down. ");
+												System.out.println("Counter is: " + counter + ". Stopping routine. ");
 												running = false;
-												//For sleeping computer. 
-												bot.delay(1000);
-												bot.moveCursorTo(35, 1050);
-												bot.delay(1000);
-												bot.mouseClick();
-												bot.delay(1000);
-												bot.moveCursorTo(35, 985);
-												bot.delay(1000);
-												bot.mouseClick();
-												bot.delay(1000);
-												bot.moveCursorTo(35, 811);
-												bot.delay(1000);
-												bot.mouseClick();
 								}
 								
 								waitIfPaused();
