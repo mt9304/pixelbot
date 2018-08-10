@@ -81,7 +81,7 @@ public class SplashRoutine extends Routine
 				@Override
 				public void checkIfPausedOrStopped() throws InterruptedException
 				{
-								if (counter > 70)
+								if (counter > 180)
 								{
 												System.out.println("Counter is: " + counter + ". Stopping routine. ");
 												running = false;
