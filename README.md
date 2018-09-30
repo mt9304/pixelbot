@@ -30,7 +30,7 @@ Pixel based just means that it relies on detecting pixels on the screen to check
 ### Installation
 1. In terminal, go to directory you want to save project in and type: 
 ```
-git clone https://github.com/mt9304/botforfun.git
+git clone https://github.com/mt9304/pixelbot
 ```
 2. Go into project folder and type: 
 ```
