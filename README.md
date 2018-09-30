@@ -17,6 +17,7 @@
 
 This is a bot originally created for one of my favourite rpg games in my childhood. This serves as a template for other pixel based bots for other tasks/games. 
 
+
 Note: 
 
 Pixel based just means that it relies on detecting pixels on the screen to check the state of the game and moves your mouse according to the pixels. This approach avoids certain bot detection methods that involve interacting with the machine's memory. Running the program/game in a VM and the bot on the main machine can potentially reduce the risk of being detected (unless virtual inputs are not allowed). 
