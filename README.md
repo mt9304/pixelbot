@@ -1,4 +1,6 @@
-# Extended from [JavaFX Template project](https://github.com/mt9304/javafxtemplate). 
+#Pixel Based Bot
+
+##Extended from [JavaFX Template project](https://github.com/mt9304/javafxtemplate). 
 
 - [Introduction](#introduction)
 - [Prerequisites](#prerequisites)
