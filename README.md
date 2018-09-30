@@ -26,7 +26,7 @@ Pixel based just means that it relies on detecting pixels on the screen to check
 
 ### Suggested Environment
 
-1. Java IDE with Maven installed
+1. Java IDE with Maven installed (JDK/JRE 8)
 2. JavaFX installed for IDE
 
 ### Installation
