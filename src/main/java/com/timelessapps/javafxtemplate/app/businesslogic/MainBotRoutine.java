@@ -75,7 +75,7 @@ public class MainBotRoutine extends Routine
 					    moveToAbsorb();
 					    bot.delay(100);
 					    drinkAbsorb();
-					    BuffTimer absorbTimer = new BuffTimer(this, 295300, ABSORB); //301000. Works with dhide at 302300
+					    BuffTimer absorbTimer = new BuffTimer(this, 500000, ABSORB); //301000. Works with dhide at 302300
 					    absorbTimer.setDaemon(true);
 					    absorbTimer.start();
 					}
@@ -243,9 +243,13 @@ public class MainBotRoutine extends Routine
     {
     	if (overloadCounter < 7)
     	{
-								log.appendToEventLogsFile("Overload counter: " + Integer.toString(overloadCounter) + ", Overload dose counter: " + Integer.toString(overloadDoseCounter));
-								log.appendToEventLogsFile("Moving to overload slot: " + overloadSlots[overloadCounter][0] + ", " + overloadSlots[overloadCounter][1]);
-    		bot.moveCursorTo(overloadSlots[overloadCounter][0], overloadSlots[overloadCounter][1]);
+    							try {
+    								log.appendToEventLogsFile("Overload counter: " + Integer.toString(overloadCounter) + ", Overload dose counter: " + Integer.toString(overloadDoseCounter));
+									log.appendToEventLogsFile("Moving to overload slot: " + overloadSlots[overloadCounter][0] + ", " + overloadSlots[overloadCounter][1]);
+									bot.moveCursorTo(overloadSlots[overloadCounter][0], overloadSlots[overloadCounter][1]);
+								} catch (Exception e) {
+									System.out.println("Overload slot out of bounds: "+e);
+								}
     	}
 					if (overloadCounter > 4)
 					{
