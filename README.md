@@ -1,4 +1,6 @@
-# Extended from [JavaFX Template project](https://github.com/mt9304/javafxtemplate). 
+# Pixel Based Bot
+
+## Extended from [JavaFX Template project](https://github.com/mt9304/javafxtemplate). 
 
 - [Introduction](#introduction)
 - [Prerequisites](#prerequisites)
@@ -15,17 +17,22 @@
 
 This is a bot originally created for one of my favourite rpg games in my childhood. This serves as a template for other pixel based bots for other tasks/games. 
 
+
+Note: 
+
+Pixel based just means that it relies on detecting pixels on the screen to check the state of the game and moves your mouse according to the pixels. This approach avoids certain bot detection methods that involve interacting with the machine's memory. Running the program/game in a VM and the bot on the main machine can potentially reduce the risk of being detected (unless virtual inputs are not allowed). 
+
 ## Prerequisites
 
 ### Suggested Environment
 
-1. Java IDE with Maven installed
+1. Java IDE with Maven installed (JDK/JRE 8)
 2. JavaFX installed for IDE
 
 ### Installation
 1. In terminal, go to directory you want to save project in and type: 
 ```
-git clone https://github.com/mt9304/botforfun.git
+git clone https://github.com/mt9304/pixelbot
 ```
 2. Go into project folder and type: 
 ```
