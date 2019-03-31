@@ -23,7 +23,7 @@ public class HumidifyRoutine extends Routine {
 	LoggingService log = new LoggingService();
 	Random random = new Random();
 	
-	int numberOfClay = 10000; //Will decrement by 27 each inv. 
+	int numberOfClay = 9001; //Will decrement by 27 each inv. 
 
 	int[] bankX = { 788,800,812 };
 	int[] bankY = { 391,395,410 };
