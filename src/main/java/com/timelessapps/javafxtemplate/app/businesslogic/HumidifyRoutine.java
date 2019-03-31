@@ -1,6 +1,7 @@
 package main.java.com.timelessapps.javafxtemplate.app.businesslogic;
 
 import java.awt.AWTException;
+import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.logging.Level;
@@ -9,20 +10,22 @@ import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.BuffTimer
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Coordinates.X;
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Coordinates.Y;
 import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Routine;
+import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Slots;
+import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Slots.BOOK;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.CustomSceneHelper;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.LoggingService;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
 
-public class SplashRoutine extends Routine {
+public class HumidifyRoutine extends Routine {
 	RobotService bot = new RobotService();
 	LoggingService log = new LoggingService();
 	Random random = new Random();
 
 	// For arrows, remember to include more in inv than stated number, otherwise
 	// stack will shrink and pixel detector may be off.
-	int numberToAlch = 5000;
-	int alchX = 1369;
-	int alchY = 546;
+	int numberToAlch = 980;
+	int alchX = 1372; // 1369
+	int alchY = 520; // 546
 
 	int equippedArrowSlotX = 1334;
 	int equippedArrowSlotY = 463;
@@ -38,9 +41,8 @@ public class SplashRoutine extends Routine {
 	int bookIndicatorY = 518;
 
 	volatile Boolean bookStillLoading = true;
-	int counter = 0;
 
-	public SplashRoutine() throws AWTException {
+	public HumidifyRoutine() throws AWTException {
 
 	}
 
@@ -56,18 +58,18 @@ public class SplashRoutine extends Routine {
 
 		synchronized (this) {
 			try {
-				disableSplashButton();
-				Random random = new Random();
-
+				disableHumidifyButton();
 				while (running) {
 					checkIfPausedOrStopped();
 					/** Start routine here. **/
-					int randomNumber = random.nextInt(27);
-					String randomLetter = getRandomLetter(randomNumber);
-					bot.type(randomLetter, random.nextInt(15) + 35);
-					counter++;
-					System.out.println("Typed letter. ");
-					Thread.sleep(random.nextInt(120000) + 120000);
+					// F5 = Inv, F6 = Equipment, F7 = SpellBook.
+					// Move to starting spot.
+					bookStillLoading = true;
+					bot.delay(250);
+
+
+					/** End routine here. **/
+					bot.delay(random.nextInt(500) + 500);
 					checkIfPausedOrStopped();
 				}
 			} catch (InterruptedException ex) {
@@ -78,119 +80,39 @@ public class SplashRoutine extends Routine {
 
 	@Override
 	public void checkIfPausedOrStopped() throws InterruptedException {
-		if (counter > 180) {
-			System.out.println("Counter is: " + counter + ". Stopping routine. ");
+		if (numberToAlch <= 0) {
+			System.out.println("Preparing to shut down. ");
 			running = false;
+			// For sleeping computer.
+			bot.delay(1000);
+			bot.moveCursorTo(35, 1050);
+			bot.delay(1000);
+			bot.mouseClick();
+			bot.delay(1000);
+			bot.moveCursorTo(35, 985);
+			bot.delay(1000);
+			bot.mouseClick();
+			bot.delay(1000);
+			bot.moveCursorTo(35, 811);
+			bot.delay(1000);
+			bot.mouseClick();
 		}
 
 		waitIfPaused();
 		if (!running) {
-			enableSplashButton();
+			enableHumidifyButton();
 		}
 
 	}
 
-	private void disableSplashButton() {
+	private void disableHumidifyButton() {
 		CustomSceneHelper sceneHelper = new CustomSceneHelper();
-		sceneHelper.getNodeById("splashButton").setDisable(true);
+		sceneHelper.getNodeById("humidifyButton").setDisable(true);
 	}
 
-	private void enableSplashButton() {
+	private void enableHumidifyButton() {
 		CustomSceneHelper sceneHelper = new CustomSceneHelper();
-		sceneHelper.getNodeById("splashButton").setDisable(false);
+		sceneHelper.getNodeById("humidifyButton").setDisable(false);
 	}
 
-	private String getRandomLetter(int x) {
-		String letter = "0";
-		switch (x) {
-		case 0:
-			letter = "1";
-			break;
-		case 1:
-			letter = "a";
-			break;
-		case 2:
-			letter = "b";
-			break;
-		case 3:
-			letter = "c";
-			break;
-		case 4:
-			letter = "d";
-			break;
-		case 5:
-			letter = "e";
-			break;
-		case 6:
-			letter = "f";
-			break;
-		case 7:
-			letter = "g";
-			break;
-		case 8:
-			letter = "h";
-			break;
-		case 9:
-			letter = "i";
-			break;
-		case 10:
-			letter = "j";
-			break;
-		case 11:
-			letter = "a";
-			break;
-		case 12:
-			letter = "k";
-			break;
-		case 13:
-			letter = "l";
-			break;
-		case 14:
-			letter = "m";
-			break;
-		case 15:
-			letter = "n";
-			break;
-		case 16:
-			letter = "o";
-			break;
-		case 17:
-			letter = "p";
-			break;
-		case 18:
-			letter = "q";
-			break;
-		case 19:
-			letter = "r";
-			break;
-		case 20:
-			letter = "s";
-			break;
-		case 21:
-			letter = "t";
-			break;
-		case 22:
-			letter = "u";
-			break;
-		case 23:
-			letter = "v";
-			break;
-		case 24:
-			letter = "w";
-			break;
-		case 25:
-			letter = "x";
-			break;
-		case 26:
-			letter = "y";
-			break;
-		case 27:
-			letter = "z";
-			break;
-		default:
-			letter = " ";
-			break;
-		}
-		return letter;
-	}
 }
