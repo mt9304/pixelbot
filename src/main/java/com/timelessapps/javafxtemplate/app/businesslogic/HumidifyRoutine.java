@@ -86,7 +86,7 @@ public class HumidifyRoutine extends Routine {
 					
 					castHumidify();
 					openBank();
-					while (bankIsOpen) {
+					while (!bankIsOpen) {
 						checkIfBankOpen();
 					}
 					depositSoftClay();
@@ -94,7 +94,7 @@ public class HumidifyRoutine extends Routine {
 					closeBank();
 
 					/** End routine here. **/
-					bot.delay(random.nextInt(500) + 500);
+					bot.delay(random.nextInt(250) + 250);
 					numberOfClay -= 27;
 					randomlyTakeBreak();
 					checkIfPausedOrStopped();
@@ -161,7 +161,7 @@ public class HumidifyRoutine extends Routine {
 		bot.moveCursorTo(humidifyX, humidifyY);
 		bot.delay(Duration.SHORT);
 		bot.mouseClick();
-		bot.delay(Duration.SHORT);
+		bot.delay(Duration.MEDIUM);
 	}
 	
 	private void openBank() {
@@ -171,7 +171,7 @@ public class HumidifyRoutine extends Routine {
 		bot.moveCursorTo(bankX[rand], bankY[rand]);
 		bot.delay(Duration.SHORT);
 		bot.mouseClick();
-		bot.delay(Duration.SHORT);
+		bot.delay(Duration.MEDIUM);
 	}
 	
 	private void moveToInvSlots() {
@@ -194,7 +194,7 @@ public class HumidifyRoutine extends Routine {
 			bot.moveCursorTo(thirdPriorityClaySlots[slot][0], thirdPriorityClaySlots[slot][1]);
 		}
 		
-		bot.delay(Duration.SHORT);
+		bot.delay(Duration.MEDIUM);
 	}
 	
 	private void depositSoftClay() {
@@ -202,6 +202,7 @@ public class HumidifyRoutine extends Routine {
 		moveToInvSlots();
 		bot.delay(Duration.SHORT);
 		bot.mouseClick();
+		bot.delay(Duration.MEDIUM);
 	}
 	
 	private void withdrawClay() {
@@ -211,7 +212,7 @@ public class HumidifyRoutine extends Routine {
 		bot.moveCursorTo(clayX[rand], clayY[rand]);
 		bot.delay(Duration.SHORT);
 		bot.mouseClick();
-		bot.delay(Duration.SHORT);
+		bot.delay(Duration.MEDIUM);
 	}
 	
 	private void closeBank() {
@@ -228,13 +229,15 @@ public class HumidifyRoutine extends Routine {
 	private void checkIfBankOpen() {
 		System.out.println("Checking if bank is open. ");
 		int redValue = bot.getPixelColor(allButtonX, allButtonY).getRed();
-		
+		//System.out.println("RED is: " + redValue);
 		if (redValue > 100) {
 			bankIsOpen = true;
 			System.out.println("Bank is open. ");
 		} else {
 			System.out.println("Bank is not open, waiting. ");
 			bot.delay(Duration.MEDIUM);
+			bot.mouseClick();
+			bot.delay(Duration.SHORT);
 		}
 	}
 
