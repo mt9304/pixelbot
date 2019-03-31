@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.BuffTimer;
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Coordinates.X;
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Coordinates.Y;
+
+import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration;
 import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Routine;
 import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Slots;
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Slots.BOOK;
@@ -20,12 +22,17 @@ public class HumidifyRoutine extends Routine {
 	RobotService bot = new RobotService();
 	LoggingService log = new LoggingService();
 	Random random = new Random();
+	
+	int numberOfClay = 10000; //Will decrement by 27 each inv. 
 
 	int[] bankX = { 788,800,812 };
 	int[] bankY = { 391,395,410 };
 	
 	int[] closeBankX = { 1084,1093 };
 	int[] closeBankY = { 158,160 };
+	
+	int clayX[] = { 646,654 };
+	int clayY[] = { 254,255 };
 	
 	int humidifyX = 1282;
 	int humidifyY = 435;
@@ -50,6 +57,8 @@ public class HumidifyRoutine extends Routine {
 	//Red is: r129 g31 b29 and Grey is: r82 g82 b78
 	int allButtonX = 891;
 	int allButtonY = 540;
+	
+	boolean bankIsOpen = false;
 
 	public HumidifyRoutine() throws AWTException {
 
@@ -73,14 +82,38 @@ public class HumidifyRoutine extends Routine {
 					/** Start routine here. **/
 					// F5 = Inv, F6 = Equipment, F7 = SpellBook.
 					// Move to starting spot. Open spell book, stand at Edgeville bank, select All for bank option, select clay tab so normal clay is second slot, make astral runes in the last inv slot. 
-					
 					bot.delay(250);
 					
-					
+					castHumidify();
+					openBank();
+					while (bankIsOpen) {
+						checkIfBankOpen();
+					}
+					depositSoftClay();
+					withdrawClay();
+					closeBank();
 
 					/** End routine here. **/
 					bot.delay(random.nextInt(500) + 500);
+					numberOfClay -= 27;
+					randomlyTakeBreak();
 					checkIfPausedOrStopped();
+					
+					//If no more clay left, sleep the machine and exit. 
+					if (numberOfClay <= 0) {
+						bot.moveCursorTo(37, 1047);
+						bot.delay(Duration.MEDIUM);
+						bot.mouseClick();
+						
+						bot.moveCursorTo(39, 983);
+						bot.delay(Duration.MEDIUM);
+						bot.mouseClick();
+						
+						bot.moveCursorTo(38, 801);
+						bot.delay(Duration.MEDIUM);
+						bot.mouseClick();
+						System.exit(0);
+					}
 				}
 			} catch (InterruptedException ex) {
 				Logger.getLogger(MainBotRoutine.class.getName()).log(Level.SEVERE, null, ex);
@@ -109,7 +142,7 @@ public class HumidifyRoutine extends Routine {
 	
 	private void randomlyTakeBreak() {
 		if (random.nextInt(204) == 25) {
-			System.out.println("Moving mouse. ");
+			System.out.println("Taking a random break. ");
 			bot.moveCursorTo(random.nextInt(50) + 1700, random.nextInt(300) + 300);
 			try {
 				Thread.sleep(random.nextInt(4000) + 4000);
@@ -119,6 +152,89 @@ public class HumidifyRoutine extends Routine {
 			
 			bot.moveCursorTo((random.nextInt(800) + 500), (random.nextInt(500) + 170));
 			bot.delay(random.nextInt(500) + 500);
+		}
+	}
+	
+	private void castHumidify() {
+		System.out.println("Casting Humidify. ");
+		bot.delay(Duration.SHORT);
+		bot.moveCursorTo(humidifyX, humidifyY);
+		bot.delay(Duration.SHORT);
+		bot.mouseClick();
+		bot.delay(Duration.SHORT);
+	}
+	
+	private void openBank() {
+		System.out.println("Opening bank. ");
+		int rand = random.nextInt(2);
+		bot.delay(Duration.SHORT);
+		bot.moveCursorTo(bankX[rand], bankY[rand]);
+		bot.delay(Duration.SHORT);
+		bot.mouseClick();
+		bot.delay(Duration.SHORT);
+	}
+	
+	private void moveToInvSlots() {
+		int priority = random.nextInt(200);
+		System.out.println("Moving to inv slot. Rolled " + priority);
+		bot.delay(Duration.SHORT);
+		
+		if (priority < 150) {
+			//First priority slot. 
+			int slot = random.nextInt(6);
+			bot.moveCursorTo(firstPriorityClaySlots[slot][0], firstPriorityClaySlots[slot][1]);
+			
+		} else if (priority >= 150 && priority <= 195) {
+			//Second priority slot. 
+			int slot = random.nextInt(5);
+			bot.moveCursorTo(secondPriorityClaySlots[slot][0], secondPriorityClaySlots[slot][1]);
+		} else if (priority > 195) {
+			//Third priority slot. 
+			int slot = random.nextInt(5);
+			bot.moveCursorTo(thirdPriorityClaySlots[slot][0], thirdPriorityClaySlots[slot][1]);
+		}
+		
+		bot.delay(Duration.SHORT);
+	}
+	
+	private void depositSoftClay() {
+		System.out.println("Depositing the soft clay. ");
+		moveToInvSlots();
+		bot.delay(Duration.SHORT);
+		bot.mouseClick();
+	}
+	
+	private void withdrawClay() {
+		System.out.println("Withdrawing clay. ");
+		int rand = random.nextInt(1);
+		bot.delay(Duration.SHORT);
+		bot.moveCursorTo(clayX[rand], clayY[rand]);
+		bot.delay(Duration.SHORT);
+		bot.mouseClick();
+		bot.delay(Duration.SHORT);
+	}
+	
+	private void closeBank() {
+		System.out.println("Closing bank. ");
+		int rand = random.nextInt(1);
+		bot.delay(Duration.SHORT);
+		bot.moveCursorTo(closeBankX[rand], closeBankY[rand]);
+		bot.delay(Duration.SHORT);
+		bot.mouseClick();
+		bot.delay(Duration.SHORT);
+		bankIsOpen = false;
+	}
+	
+	private void checkIfBankOpen() {
+		System.out.println("Checking if bank is open. ");
+		int redValue = bot.getPixelColor(allButtonX, allButtonY).getRed();
+		
+		if (redValue > 100) {
+			bankIsOpen = true;
+			System.out.println("Bank is open. ");
+		} else {
+			System.out.println("Bank is not open, waiting. ");
+			bot.delay(Duration.MEDIUM);
 		}
 	}
 
