@@ -22,7 +22,7 @@ import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
 public class MainBotRoutine extends Routine 
 {
 	
-   //Based on 88 absorbs and 20 overloads. 
+   //Based on 88 absorbs and 20 overloads. Changing to 80 absorbs and 28 overloads with 70+ def and full rune (0405_80def)
    RobotService bot = new RobotService();
    LoggingService log = new LoggingService();
    Random random = new Random();
@@ -75,7 +75,7 @@ public class MainBotRoutine extends Routine
 					    moveToAbsorb();
 					    bot.delay(100);
 					    drinkAbsorb();
-					    BuffTimer absorbTimer = new BuffTimer(this, 500000, ABSORB); //301000. Works with dhide at 302300
+					    BuffTimer absorbTimer = new BuffTimer(this, 580000, ABSORB); //301000. Works with dhide at 302300, 500000 works for full rune at 45 def
 					    absorbTimer.setDaemon(true);
 					    absorbTimer.start();
 					}
@@ -202,13 +202,13 @@ public class MainBotRoutine extends Routine
 		{27+invXOffset, 223+invYOffset},   {80+invXOffset, 223+invYOffset},   {131+invXOffset, 223+invYOffset},   {185+invXOffset, 223+invYOffset},
 		{27+invXOffset, 267+invYOffset},   {80+invXOffset, 267+invYOffset},   {131+invXOffset, 267+invYOffset},   {185+invXOffset, 223+invYOffset},
 		{27+invXOffset, 312+invYOffset},   {80+invXOffset, 312+invYOffset},   {131+invXOffset, 312+invYOffset},   {185+invXOffset, 312+invYOffset},
-		{27+invXOffset, 358+invYOffset},   {80+invXOffset, 358+invYOffset},   {131+invXOffset, 358+invYOffset},   {185+invXOffset, 358+invYOffset},
-		{27+invXOffset, 401+invYOffset},   {80+invXOffset, 401+invYOffset}
+		{27+invXOffset, 358+invYOffset},   {80+invXOffset, 358+invYOffset},   {131+invXOffset, 358+invYOffset},   {185+invXOffset, 358+invYOffset}
+		/* {27+invXOffset, 401+invYOffset},   {80+invXOffset, 401+invYOffset} */
 	};
 	
 	int [][] overloadSlots = new int[][]
 	{
-	            /* {27+invXOffset, 401+invYOffset},   {80+invXOffset, 401+invYOffset},*/   {131+invXOffset, 401+invYOffset},   {185+invXOffset, 401+invYOffset},
+	    {27+invXOffset, 401+invYOffset},   {80+invXOffset, 401+invYOffset},   {131+invXOffset, 401+invYOffset},   {185+invXOffset, 401+invYOffset},
 		{27+invXOffset, 448+invYOffset},   {80+invXOffset, 448+invYOffset},   {131+invXOffset, 448+invYOffset}
 	};
 	
@@ -241,7 +241,7 @@ public class MainBotRoutine extends Routine
     
     public synchronized void moveToOverload() throws FileNotFoundException
     {
-    	if (overloadCounter < 7)
+    	if (overloadCounter < 9)
     	{
     							try {
     								log.appendToEventLogsFile("Overload counter: " + Integer.toString(overloadCounter) + ", Overload dose counter: " + Integer.toString(overloadDoseCounter));
@@ -253,7 +253,7 @@ public class MainBotRoutine extends Routine
     	}
 					if (overloadCounter > 4)
 					{
-									System.out.println("Overload count is 7 or above. Exiting. ");
+									System.out.println("Overload count is 9 or above. Exiting. ");
 									System.exit(0);
 					}
     }
