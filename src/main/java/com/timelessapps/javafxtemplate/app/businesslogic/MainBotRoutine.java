@@ -21,7 +21,7 @@ import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
 
 public class MainBotRoutine extends Routine 
 {
-	
+   //This class is for NMZ
    //Based on 88 absorbs and 20 overloads. Changing to 80 absorbs and 28 overloads with 70+ def and full rune (0405_80def)
    RobotService bot = new RobotService();
    LoggingService log = new LoggingService();
