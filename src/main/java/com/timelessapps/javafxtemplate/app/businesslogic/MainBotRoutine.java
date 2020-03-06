@@ -241,7 +241,7 @@ public class MainBotRoutine extends Routine
     
     public synchronized void moveToOverload() throws FileNotFoundException
     {
-    	if (overloadCounter < 9)
+    	if (overloadCounter < 12)
     	{
     							try {
     								log.appendToEventLogsFile("Overload counter: " + Integer.toString(overloadCounter) + ", Overload dose counter: " + Integer.toString(overloadDoseCounter));
@@ -251,9 +251,9 @@ public class MainBotRoutine extends Routine
 									System.out.println("Overload slot out of bounds: "+e);
 								}
     	}
-					if (overloadCounter > 4)
+					if (overloadCounter > 6)
 					{
-									System.out.println("Overload count is 9 or above. Exiting. ");
+									System.out.println("Overload count is 12 or above. " + overloadCounter + "Exiting. ");
 									System.exit(0);
 					}
     }
