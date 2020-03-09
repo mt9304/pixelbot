@@ -40,6 +40,9 @@ mvn install
 ```
 3. Build/Run the Main.java file in the javafxtemplate folder. 
 
+If you get a bunch of "Access Restriction" errors, then you probably are not using certain JavaFX exentions for your IDE. You can work around this by: 
+Right click project > Properties > Java Build Path > Libraries > Expand JRE Systems Library > Select "Access rules: ..." > Edit > Add > Resolution: Accessible, Rule Pattern: javafx/** > OK
+
 ## Extending Functionality
 
 ### Starting A Routine
