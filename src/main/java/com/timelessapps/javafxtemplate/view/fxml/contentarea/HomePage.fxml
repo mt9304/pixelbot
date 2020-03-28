@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="homePage" fx:id="homePage" prefHeight="362.0" prefWidth="440.0" style="-fx-background-color: #1E1F23;" styleClass="homePage" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.timelessapps.javafxtemplate.controllers.contentarea.HomePageController">
+<AnchorPane id="homePage" fx:id="homePage" prefHeight="362.0" prefWidth="440.0" style="-fx-background-color: #1E1F23;" styleClass="homePage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.timelessapps.javafxtemplate.controllers.contentarea.HomePageController">
     <stylesheets>
         <URL value="@/main/java/com/timelessapps/javafxtemplate/view/css/contentarea/HomePage.css" />
     </stylesheets>
@@ -26,6 +26,11 @@
          </font>
       </Button>
       <Button id="humidifyButton" fx:id="humidifyButton" layoutX="248.0" layoutY="77.0" mnemonicParsing="false" onMouseClicked="#startHumidifyRoutine" prefHeight="58.0" prefWidth="135.0" styleClass="humidifyButton" text="Humidify">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button id="grandExchangeButton" fx:id="grandExchangeButton" layoutX="248.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#startGrandExchangeRoutine" prefHeight="58.0" prefWidth="135.0" styleClass="grandExchangeButton" text="GE">
          <font>
             <Font size="18.0" />
          </font>

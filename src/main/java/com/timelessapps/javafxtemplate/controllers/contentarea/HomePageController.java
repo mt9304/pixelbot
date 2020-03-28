@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
+import main.java.com.timelessapps.javafxtemplate.app.businesslogic.GrandExchangeRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.HighAlchRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.HumidifyRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.MainBotRoutine;
@@ -30,16 +31,13 @@ public class HomePageController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		if (!hasStarted) {
-			try {
-				log.appendToEventLogsFile("ApplicationStarted. ");
-				log.appendToApplicationLogsFile("ApplicationStarted. ");
-			} catch (FileNotFoundException ex) {
-				Logger.getLogger(HomePageController.class.getName()).log(Level.SEVERE, null, ex);
-			}
+			log.appendToEventLogsFile("ApplicationStarted. ");
+			log.appendToApplicationLogsFile("ApplicationStarted. ");
 		}
 		hasStarted = true;
 	}
 
+	//For NMZ
 	@FXML
 	public void startApplication(MouseEvent event) throws InterruptedException, AWTException {
 		MainBotRoutine mainBotRoutine = new MainBotRoutine();
@@ -96,4 +94,17 @@ public class HomePageController implements Initializable {
 		// System.out.println("Remember to re-active button. ");
 	}
 
+	@FXML
+	public void startGrandExchangeRoutine(MouseEvent event) throws InterruptedException, AWTException {
+		GrandExchangeRoutine grandExchangeRoutine = new GrandExchangeRoutine();
+		grandExchangeRoutine.setDaemon(true);
+		grandExchangeRoutine.start();
+
+		GlobalKeyListener globalKeyListener = new GlobalKeyListener(grandExchangeRoutine);
+		globalKeyListener.setDaemon(true);
+		globalKeyListener.start();
+
+		// botRoutine.join();
+		// System.out.println("Remember to re-active button. ");
+	}
 }

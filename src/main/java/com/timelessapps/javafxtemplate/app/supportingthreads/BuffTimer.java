@@ -27,20 +27,18 @@ public class BuffTimer extends Thread
     public void run()
     {
     	
-		try 
-		{
+
 		    log.appendToEventLogsFile("The timer for " + buff + " has started for " + timeToWait + " milliseconds. ");
-		} catch (FileNotFoundException ex) {Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);}
+
 		
 		try 
 		{
 		    Thread.sleep(timeToWait);
 		} catch (InterruptedException ex) {Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);}
 		
-		try 
-		{
+
 		    log.appendToEventLogsFile("The timer for " + buff + " has expired. ");
-		} catch (FileNotFoundException ex) {Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);}
+
 		
 		mainBotState = mainBotRoutine.getState().toString();
 		
@@ -64,10 +62,8 @@ public class BuffTimer extends Thread
 						}
 		}
 				
-				try 
-				{
 								log.appendToEventLogsFile("Setting shouldAbsorb to true. Currently shouldAbsorb is: " + mainBotRoutine.getShouldAbsorb() + " (Should be true)");
-				} catch (FileNotFoundException ex) {Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);}
+
 				
 				break;
 			
@@ -81,13 +77,13 @@ public class BuffTimer extends Thread
 		    		
 		    		mainBotState = mainBotRoutine.getState().toString();
 		    	}
-		{
-						try {
-										mainBotRoutine.setShouldOverload(true);
-						} catch (FileNotFoundException ex) {
-										Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);
-						}
-		}
+		    	{
+					try {
+									mainBotRoutine.setShouldOverload(true);
+					} catch (FileNotFoundException ex) {
+									Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);
+					}
+		    	}
 							/*
 				try 
 				{
@@ -98,10 +94,7 @@ public class BuffTimer extends Thread
 				break;
 			
 		    default:
-			try 
-			{
 			    log.appendToEventLogsFile("The current buff (" + buff.toString() + ") could not be handled. ");
-			} catch (FileNotFoundException ex) {Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);}
 			break;
 		}
 	

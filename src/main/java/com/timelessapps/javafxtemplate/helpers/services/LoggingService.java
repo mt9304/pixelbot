@@ -32,25 +32,39 @@ public class LoggingService
         printWriter.close();
     }
     
-    public void appendToEventLogsFile(String logText) throws FileNotFoundException
+    public void appendToEventLogsFile(String logText)
     {
-        timestamp = new Timestamp(System.currentTimeMillis());
-        currentDate = currentDateFormat.format(timestamp);
-        currentTime = currentTimeFormat.format(timestamp);
-	
-        String fileName = currentDate + "_" + "EventLog.txt";
-        String formattedLogText = "[" + currentTime + "]: " + logText;
-        writeLineToFile(fileName, formattedLogText);
+    	try 
+    	{
+	        timestamp = new Timestamp(System.currentTimeMillis());
+	        currentDate = currentDateFormat.format(timestamp);
+	        currentTime = currentTimeFormat.format(timestamp);
+		
+	        String fileName = currentDate + "_" + "EventLog.txt";
+	        String formattedLogText = "[" + currentTime + "]: " + logText;
+	        writeLineToFile(fileName, formattedLogText);
+    	}
+    	catch (Exception e) 
+    	{
+    		System.out.println(e);
+    	}
     }
     
-    public void appendToApplicationLogsFile(String logText) throws FileNotFoundException
+    public void appendToApplicationLogsFile(String logText)
     {
-        timestamp = new Timestamp(System.currentTimeMillis());
-        currentDate = currentDateFormat.format(timestamp);
-        currentTime = currentTimeFormat.format(timestamp);
-	
-        String fileName = currentDate + "_" + "ApplicationLog.txt";
-        String formattedLogText = "[" + currentTime + "]: " + logText;
-        writeLineToFile(fileName, formattedLogText);
+    	try 
+    	{
+	        timestamp = new Timestamp(System.currentTimeMillis());
+	        currentDate = currentDateFormat.format(timestamp);
+	        currentTime = currentTimeFormat.format(timestamp);
+		
+	        String fileName = currentDate + "_" + "ApplicationLog.txt";
+	        String formattedLogText = "[" + currentTime + "]: " + logText;
+	        writeLineToFile(fileName, formattedLogText);
+    	}
+    	catch (Exception e) 
+    	{
+    		System.out.println(e);
+    	}
     }
 }

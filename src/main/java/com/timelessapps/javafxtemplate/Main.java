@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.com.timelessapps.javafxtemplate.controllers.contentarea.LogsPageController;
+import main.java.com.timelessapps.javafxtemplate.helpers.coords.RSCoordinates;
 
 public class Main extends Application
 {
@@ -32,9 +33,25 @@ public class Main extends Application
         stage.show();  
     }
     
+    //If no argument, launch with JavaFX UI, else just do the routine. 
     public static void main(String[] args)
     {
-        launch(args);
+    	try 
+    	{
+        	if (!args[0].isEmpty())
+        	{
+        		System.out.println("starting");
+        		RSCoordinates rsc = new RSCoordinates();
+        		int y = rsc.getYOffSet();
+        		int x = rsc.getXOffSet(y);
+        		System.out.println("X: " + x  + " " + "Y: " + y);
+        		return;
+        	}
+    	}
+    	catch (Exception e)
+    	{
+    		launch(args);
+    	}
     }
 
     private void setPrimaryStage(Stage stage) 

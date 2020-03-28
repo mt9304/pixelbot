@@ -45,11 +45,7 @@ public class SplashRoutine extends Routine {
 	}
 
 	public void run() {
-		try {
-			log.appendToEventLogsFile("Starting bot routine in 3 seconds. ");
-		} catch (FileNotFoundException ex) {
-			Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);
-		}
+		log.appendToEventLogsFile("Starting bot routine in 3 seconds. ");
 
 		System.out.println("Starting bot routine in 3 seconds. ");
 		bot.delay(3000);

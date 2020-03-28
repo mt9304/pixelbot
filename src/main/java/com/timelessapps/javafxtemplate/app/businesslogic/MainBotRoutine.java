@@ -41,10 +41,7 @@ public class MainBotRoutine extends Routine
    
     public void run()
     {
-	    try 
-	    {
-		log.appendToEventLogsFile("Starting bot routine in 3 seconds. ");
-	    } catch (FileNotFoundException ex) {Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);}
+	    log.appendToEventLogsFile("Starting bot routine in 3 seconds. ");
 			
 	    System.out.println("Starting bot routine in 3 seconds. ");
 	    bot.delay(3000);
@@ -132,11 +129,7 @@ public class MainBotRoutine extends Routine
 					System.out.println("About to exit. ");
 					
 					System.exit(0);
-					try {
-									log.appendToEventLogsFile("Absorb counter over 21, about to exit. ");
-					} catch (FileNotFoundException ex) {
-									Logger.getLogger(MainBotRoutine.class.getName()).log(Level.SEVERE, null, ex);
-					}
+					log.appendToEventLogsFile("Absorb counter over 21, about to exit. ");
 	    paused = true;
 	}
 	
