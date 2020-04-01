@@ -14,84 +14,260 @@ import javax.imageio.ImageIO;
 
 public class RSCoordinates 
 {
-	public int offSetX = 481; //577 //96
-	public int offSetY = 53; //43 //11
-	public int existingUserButtonX = 1054;
-	public int existingUserButtonY = 417;
-	public int changeWorldButtonX = 552;
-	public int changeWorldButtonY = 654;
-	public int freeWorldButtonX = 1311; //World 464
-	public int freeWorldButtonY = 348; //World 464
-	public int clickHereToPlayButtonX = 962;
-	public int clickHereToPlayButtonY = 448;
+	public int offsetX = 481; //577 //96
+	public int offsetY = 53; //43 //11
 	
-	public int grandExchangeClerkX = 1011; //Space, 2, space
-	public int grandExchangeClerkY = 63;
-	public int buyButton1X = 553; //634
-	public int buyButton1Y = 214; //173
-	public int sellButton1X = 621;
-	public int sellButton1Y = 215;
-	public int buyButton2X = 706; 
-	public int buyButton2Y = 216;
-	public int sellButton2X = 764;
-	public int sellButton2Y = 215;
-	public int buyButton3X = 844;
-	public int buyButton3Y = 215;
-	public int sellButton3X = 920;
-	public int sellButton3Y = 214;
+	public int getOffsetX() {
+		return offsetX;
+	}
 	
-	public int exchangeButtonX = 565; //Shows up in history screen. 
-	public int exchangeButtonY = 76;
-	public int historyButtonX = 535; //Shows up in exchange screen and default. 
-	public int historyButtonY = 77;
+	public int getOffsetY() {
+		return offsetY;
+	}
 	
-	public int firstSearchResultX = 517;
-	public int firstSearchResultY = 510;
-	public int secondSearchResultX = 171;
-	public int secondSearchResultY = 507;
-	public int decreasePriceX = 849;
-	public int decreasePriceY = 292;
-	public int increasePriceX = 1041;
-	public int increasePriceY = 293;
-	public int specifyPriceButtonX = 971;
-	public int speciftPriceButtonY = 295;
-	public int confirmTradeButtonX = 813;
-	public int confirmTradeButtonY = 388;
-	public int firstInventorySlotX = 1204;
-	public int firstInventorySlotY = 316;
-	public int secondInventorySlotX = 1259;
-	public int secondInventorySlotY = 316;
-	public int thirdInventorySlotX = 1306;
-	public int thirdInventorySlotY = 312;
-	/*
-	public int queuedButton1X = ; 
-	public int queuedButton1Y = ;
-	public int progressBar1X = ;
-	public int progressBar1Y = ;
-	public int queuedButton2X = ; 
-	public int queuedButton2Y = ;
-	public int progressBar2X = ;
-	public int progressBar2Y = ;
-	public int queuedButton3X = ;
-	public int queuedButton3Y = ;
-	public int progressBar3X = ;
-	public int progressBar3Y = ;
+	public int existingUserButtonX() {
+		return getOffsetX + ;
+	}
+	public int existingUserButtonY() {
+		return getOffsetY + ;
+	}
+	public int changeWorldButtonX() {
+		return getOffSetX + ;
+	}
+	public int changeWorldButtonY() {
+		return getOffSetY + ;
+	}
+	public int freeWorldButtonX() {
+		return getOffSetX + ;
+	}
+	public int freeWorldButtonY() {
+		return getOffSetY + ;
+	}
+	public int clickHereToPlayButtonX() {
+		return getOffSetX + ;
+	}
+	public int clickHereToPlayButtonY() {
+		return getOffSetY + ;
+	}
 	
-	public int cancelOrderButtonX = ;
-	public int cancelOrderButtonY = ;
-	public int firstSoldItemSlotX = ;
-	public int firstSoldItemSlotY = ;
-	public int secondSoldItemSlotX = ;
-	public int secondSoldItemSlotY = ;
-	public int collectButtonX = ;
-	public int collectButtonY = ;
-	public int redXButtonX = ;
-	public int redXButtonY = ;
-	*/
-	public Rectangle firstHistoryRowPrice = new Rectangle();
-	public Rectangle secondHistoryRowPrice = new Rectangle();
-	public Rectangle clickHereToPlayButton = new Rectangle(917, 434, 171, 24); 
-	public Rectangle existingUserButton = new Rectangle(997, 403, 131, 29);
+	public int grandExchangeClerkX() {
+		return getOffsetX + ;
+	}
+	public int grandExchangeClerkY() {
+		return getOffsetY + ;
+	}
+	public int buyButton1X() {
+		return getOffsetX + ;
+	}
+	public int buyButton1Y() {
+		return getOffsetY + ;
+	}
+	public int sellButton1X() {
+		return getOffsetX + ;
+	}
+	public int sellButton1Y() {
+		return getOffsetY + ;
+	}
+	public int buyButton2X() {
+		return getOffsetX + ;
+	}
+	public int buyButton2Y() {
+		return getOffsetY + ;
+	}
+	public int sellButton2X() {
+		return getOffsetX + ;
+	}
+	public int sellButton2Y() {
+		return getOffsetY + ;
+	}
+	public int buyButton3X() {
+		return getOffsetX + ;
+	}
+	public int buyButton3Y() {
+		return getOffsetY + ;
+	}
+	public int sellButton3X() {
+		return getOffsetX + ;
+	}
+	public int sellButton3Y() {
+		return getOffsetY + ;
+	}
+	
+	public int exchangeButtonX() { //Shows up in history screen. 
+		return getOffsetX + ;
+	}
+	public int exchangeButtonY() {
+		return getOffsetY + ;
+	}
+	public int historyButtonX() { //Shows up in exchange screen and default. 
+		return getOffsetX + ;
+	}
+	public int historyButtonY() {
+		return getOffsetY + ;
+	}
+	
+	public int firstSearchResultX() {
+		return getOffsetX + ;
+	}
+	public int firstSearchResultY() {
+		return getOffsetY + ;
+	}
+	public int secondSearchResultX() {
+		return getOffsetX + ;
+	}
+	public int secondSearchResultY() {
+		return getOffsetY + ;
+	}
+	public int decreasePriceX() {
+		return getOffsetX + ;
+	}
+	public int decreasePriceY() {
+		return getOffsetY + ;
+	}
+	public int increasePriceX() {
+		return getOffsetX + ;
+	}
+	public int increasePriceY() {
+		return getOffsetY + ;
+	}
+	public int specifyPriceButtonX() {
+		return getOffsetX + ;
+	}
+	public int speciftPriceButtonY() {
+		return getOffsetY + ;
+	}
+	public int confirmTradeButtonX() {
+		return getOffsetX + ;
+	}
+	public int confirmTradeButtonY() {
+		return getOffsetY + ;
+	}
+	public int firstInventorySlotX() {
+		return getOffsetX + ;
+	}
+	public int firstInventorySlotY() {
+		return getOffsetY + ;
+	};
+	public int secondInventorySlotX() {
+		return getOffsetX + ;
+	}
+	public int secondInventorySlotY() {
+		return getOffsetY + ;
+	}
+	public int thirdInventorySlotX() {
+		return getOffsetX + ;
+	}
+	public int thirdInventorySlotY() {
+		return getOffsetY + ;
+	}
+	
+	public int queuedButton1X() {
+		return getOffsetX + ;
+	}
+	
+	public int queuedButton1Y() {
+		return getOffsetY + ;
+	}
+	
+	public int progressBar1X() {
+		return getOffsetX + ;
+	}
+	
+	public int progressBar1Y() {
+		return getOffsetY + ;
+	}
+	
+	public int queuedButton2X() {
+		return getOffsetX + ;
+	}
+	
+	public int queuedButton2Y() {
+		return getOffsetY + ;
+	}
+	
+	public int progressBar2X() {
+		return getOffsetX + ;
+	}
+	
+	public int progressBar2Y() {
+		return getOffsetY + ;
+	}
+	
+	public int queuedButton3X() {
+		return getOffsetX + ;
+	}
+	
+	public int queuedButton3Y() {
+		return getOffsetY + ;
+	}
+	
+	public int progressBar3X() {
+		return getOffsetX + ;
+	}
+	
+	public int progressBar3Y() {
+		return getOffsetY + ;
+	}
+	
+	public int cancelOrderButtonX() {
+		return getOffsetX + ;
+	}
+	
+	public int cancelOrderButtonY() {
+		return getOffsetY + ;
+	}
+	
+	public int firstSoldItemSlotX() {
+		return getOffsetX + ;
+	}
+	
+	public int firstSoldItemSlotY() {
+		return getOffsetY + ;
+	};
+	
+	public int secondSoldItemSlotX() {
+		return getOffsetX + ;
+	}
+	
+	public int secondSoldItemSlotY() {
+		return getOffsetY + ;
+	}
+	public int collectButtonX() {
+		return getOffsetX + ;
+	}
+	public int collectButtonY() {
+		return getOffsetY + ;
+	}
+	public int redXButtonX() {
+		return getOffsetX + ;
+	}
+	public int redXButtonY() {
+		return getOffsetY + ;
+	}
+
+	public Rectangle firstHistoryRowPrice() {
+		//Coords
+		Rectangle result = new Rectangle();
+		return result;
+	}
+	
+	public Rectangle secondHistoryRowPrice() {
+		//Coords
+		Rectangle result = new Rectangle();
+		return result;
+	}
+	
+	public Rectangle clickHereToPlayButton() {
+		//Coords
+		Rectangle result = new Rectangle();
+		return result;
+	}
+	
+	public Rectangle existingUserButton() {
+		//Coords
+		Rectangle result = new Rectangle();
+		return result;
+	}
 	
 	public RSCoordinates()
 	{
@@ -117,7 +293,7 @@ public class RSCoordinates
 	 * @return the Y coordinate of the top of RS game area
 	 * @throws AWTException 
 	 */
-	public Integer getYOffset() throws AWTException
+	public Integer getInitialOffsetY() throws AWTException
 	{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int middleX = (int) screenSize.getWidth()/2;
@@ -161,7 +337,7 @@ public class RSCoordinates
 	 * @return the X coordinate of the top of RS game area
 	 * @throws AWTException
 	 */
-	public Integer getXOffset(int y) throws AWTException {
+	public Integer getInitialOffsetX(int y) throws AWTException {
 		Robot bot = new Robot();
 		bot.getPixelColor(0, 0);
 		
