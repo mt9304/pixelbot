@@ -7,11 +7,15 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class RSCoordinates 
 {
 	public int offSetX = 481; //577 //96
-	public int offSetY = 54; //43 //11
+	public int offSetY = 53; //43 //11
 	public int existingUserButtonX = 1054;
 	public int existingUserButtonY = 417;
 	public int changeWorldButtonX = 552;
@@ -36,26 +40,30 @@ public class RSCoordinates
 	public int sellButton3X = 920;
 	public int sellButton3Y = 214;
 	
-	public int historyButtonX = 535;
+	public int exchangeButtonX = 565; //Shows up in history screen. 
+	public int exchangeButtonY = 76;
+	public int historyButtonX = 535; //Shows up in exchange screen and default. 
 	public int historyButtonY = 77;
-	public int firstHistoryRowPriceX = ;
-	public int firstHistoryRowPriceY = ;
-	public int secondHistoryRowPriceX = ;
-	public int secondHistoryRowPriceY = ;
 	
 	public int firstSearchResultX = 517;
 	public int firstSearchResultY = 510;
-	public int secondSearchResultX = ;
-	public int secondSearchResultY = ;
-	public int decreasePriceX = ;
-	public int decreasePriceY = ;
-	public int increasePriceX = ;
-	public int increasePriceY = ;
-	public int confirmTradeButtonX = ;
-	public int confirmTradeButtonY = ;
-	public int firstInventorySlotX = ;
-	public int firstInventorySlotY = ;
-	
+	public int secondSearchResultX = 171;
+	public int secondSearchResultY = 507;
+	public int decreasePriceX = 849;
+	public int decreasePriceY = 292;
+	public int increasePriceX = 1041;
+	public int increasePriceY = 293;
+	public int specifyPriceButtonX = 971;
+	public int speciftPriceButtonY = 295;
+	public int confirmTradeButtonX = 813;
+	public int confirmTradeButtonY = 388;
+	public int firstInventorySlotX = 1204;
+	public int firstInventorySlotY = 316;
+	public int secondInventorySlotX = 1259;
+	public int secondInventorySlotY = 316;
+	public int thirdInventorySlotX = 1306;
+	public int thirdInventorySlotY = 312;
+	/*
 	public int queuedButton1X = ; 
 	public int queuedButton1Y = ;
 	public int progressBar1X = ;
@@ -79,13 +87,29 @@ public class RSCoordinates
 	public int collectButtonY = ;
 	public int redXButtonX = ;
 	public int redXButtonY = ;
-	
+	*/
+	public Rectangle firstHistoryRowPrice = new Rectangle();
+	public Rectangle secondHistoryRowPrice = new Rectangle();
 	public Rectangle clickHereToPlayButton = new Rectangle(917, 434, 171, 24); 
-	public Rectangle existingUserButton = new Rectangle(997, 403, 131, 29); 
+	public Rectangle existingUserButton = new Rectangle(997, 403, 131, 29);
 	
 	public RSCoordinates()
 	{
-		
+		Rectangle screen = new Rectangle(945,117,60,20);
+		BufferedImage capture = null;
+		try {
+			capture = new Robot().createScreenCapture(screen);
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		File output = new File("C:\\Users\\Max\\Desktop\\test2.png");
+		try {
+			ImageIO.write(capture, "png", output);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -93,7 +117,7 @@ public class RSCoordinates
 	 * @return the Y coordinate of the top of RS game area
 	 * @throws AWTException 
 	 */
-	public Integer getYOffSet() throws AWTException
+	public Integer getYOffset() throws AWTException
 	{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int middleX = (int) screenSize.getWidth()/2;
