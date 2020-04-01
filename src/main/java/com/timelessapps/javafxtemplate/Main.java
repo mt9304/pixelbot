@@ -42,8 +42,8 @@ public class Main extends Application
         	{
         		System.out.println("starting");
         		RSCoordinates rsc = new RSCoordinates();
-        		int y = rsc.getOffsetY();
-        		int x = rsc.getOffsetX(y);
+        		int y = rsc.getInitialOffsetY();
+        		int x = rsc.getInitialOffsetX(y);
         		System.out.println("X: " + x  + " " + "Y: " + y);
         		return;
         	}

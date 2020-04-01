@@ -14,8 +14,8 @@ import javax.imageio.ImageIO;
 
 public class RSCoordinates 
 {
-	public int offsetX = 481; //577 //96
-	public int offsetY = 53; //43 //11
+	public int offsetX = 577;
+	public int offsetY = 43;
 	
 	public int getOffsetX() {
 		return offsetX;
@@ -26,266 +26,308 @@ public class RSCoordinates
 	}
 	
 	public int existingUserButtonX() {
-		return getOffsetX + ;
+		return getOffsetX() + 1036;
 	}
 	public int existingUserButtonY() {
-		return getOffsetY + ;
+		return getOffsetY() + 334;
 	}
 	public int changeWorldButtonX() {
-		return getOffSetX + ;
+		return getOffsetX() + 631;
 	}
 	public int changeWorldButtonY() {
-		return getOffSetY + ;
+		return getOffsetY() + 524;
 	}
-	public int freeWorldButtonX() {
-		return getOffSetX + ;
+	public int freeWorldButtonX() { // World 474
+		return getOffsetX() + 1237;
 	}
-	public int freeWorldButtonY() {
-		return getOffSetY + ;
+	public int freeWorldButtonY() { // World 474
+		return getOffsetY() + 315;
 	}
 	public int clickHereToPlayButtonX() {
-		return getOffSetX + ;
+		return getOffsetX() + 966;
 	}
 	public int clickHereToPlayButtonY() {
-		return getOffSetY + ;
+		return getOffsetY() + 360;
 	}
 	
 	public int grandExchangeClerkX() {
-		return getOffsetX + ;
+		return getOffsetX() + 971;
 	}
+	
 	public int grandExchangeClerkY() {
-		return getOffsetY + ;
+		return getOffsetY() + 51;
 	}
+	
 	public int buyButton1X() {
-		return getOffsetX + ;
+		return getOffsetX() + 632;
 	}
+	
 	public int buyButton1Y() {
-		return getOffsetY + ;
+		return getOffsetY() + 173;
 	}
+	
 	public int sellButton1X() {
-		return getOffsetX + ;
+		return getOffsetX() + 685;
 	}
+	
 	public int sellButton1Y() {
-		return getOffsetY + ;
+		return getOffsetY() + 173;
 	}
+	
 	public int buyButton2X() {
-		return getOffsetX + ;
+		return getOffsetX() + 749;
 	}
+	
 	public int buyButton2Y() {
-		return getOffsetY + ;
+		return getOffsetY() + 173;
 	}
+	
 	public int sellButton2X() {
-		return getOffsetX + ;
+		return getOffsetX() + 802;
 	}
+	
 	public int sellButton2Y() {
-		return getOffsetY + ;
+		return getOffsetY() + 173;
 	}
+	
 	public int buyButton3X() {
-		return getOffsetX + ;
+		return getOffsetX() + 865;
 	}
+	
 	public int buyButton3Y() {
-		return getOffsetY + ;
+		return getOffsetY() + 173;
 	}
+	
 	public int sellButton3X() {
-		return getOffsetX + ;
+		return getOffsetX() + 918;
 	}
+	
 	public int sellButton3Y() {
-		return getOffsetY + ;
+		return getOffsetY() + 173;
+	}
+	
+	public int historyButtonX() { //Shows up in exchange screen and default. 
+		return getOffsetX() + 622;
+	}
+	public int historyButtonY() {
+		return getOffsetY() + 60;
 	}
 	
 	public int exchangeButtonX() { //Shows up in history screen. 
-		return getOffsetX + ;
+		return getOffsetX() + 639;
 	}
+	
 	public int exchangeButtonY() {
-		return getOffsetY + ;
-	}
-	public int historyButtonX() { //Shows up in exchange screen and default. 
-		return getOffsetX + ;
-	}
-	public int historyButtonY() {
-		return getOffsetY + ;
+		return getOffsetY() + 62;
 	}
 	
 	public int firstSearchResultX() {
-		return getOffsetX + ;
-	}
-	public int firstSearchResultY() {
-		return getOffsetY + ;
-	}
-	public int secondSearchResultX() {
-		return getOffsetX + ;
-	}
-	public int secondSearchResultY() {
-		return getOffsetY + ;
-	}
-	public int decreasePriceX() {
-		return getOffsetX + ;
-	}
-	public int decreasePriceY() {
-		return getOffsetY + ;
-	}
-	public int increasePriceX() {
-		return getOffsetX + ;
-	}
-	public int increasePriceY() {
-		return getOffsetY + ;
-	}
-	public int specifyPriceButtonX() {
-		return getOffsetX + ;
-	}
-	public int speciftPriceButtonY() {
-		return getOffsetY + ;
-	}
-	public int confirmTradeButtonX() {
-		return getOffsetX + ;
-	}
-	public int confirmTradeButtonY() {
-		return getOffsetY + ;
-	}
-	public int firstInventorySlotX() {
-		return getOffsetX + ;
-	}
-	public int firstInventorySlotY() {
-		return getOffsetY + ;
-	};
-	public int secondInventorySlotX() {
-		return getOffsetX + ;
-	}
-	public int secondInventorySlotY() {
-		return getOffsetY + ;
-	}
-	public int thirdInventorySlotX() {
-		return getOffsetX + ;
-	}
-	public int thirdInventorySlotY() {
-		return getOffsetY + ;
+		return getOffsetX() + 638;
 	}
 	
+	public int firstSearchResultY() {
+		return getOffsetY() + 407;
+	}
+	
+	public int secondSearchResultX() {
+		return getOffsetX() + 802;
+	}
+	
+	public int secondSearchResultY() {
+		return getOffsetY() + 407;
+	}
+	
+	public int decreasePriceX() {
+		return getOffsetX() + 866;
+	}
+	
+	public int decreasePriceY() {
+		return getOffsetY() + 237;
+	}
+	
+	public int increasePriceX() {
+		return getOffsetX() + 1023;
+	}
+	
+	public int increasePriceY() {
+		return getOffsetY() + 236;
+	}
+	
+	public int specifyPriceButtonX() {
+		return getOffsetX() + 965;
+	}
+	
+	public int speciftPriceButtonY() {
+		return getOffsetY() + 237;
+	}
+	
+	public int confirmTradeButtonX() {
+		return getOffsetX() + 833;
+	}
+	
+	public int confirmTradeButtonY() {
+		return getOffsetY() + 312;
+	}
+	
+	public int firstInventorySlotX() {
+		return getOffsetX() + 1152;
+	}
+	
+	public int firstInventorySlotY() {
+		return getOffsetY() + 253;
+	};
+	
+	public int secondInventorySlotX() {
+		return getOffsetX() + 1195;
+	}
+	
+	public int secondInventorySlotY() {
+		return getOffsetY() + 252;
+	}
+	
+	public int thirdInventorySlotX() {
+		return getOffsetX() + 1239;
+	}
+	
+	public int thirdInventorySlotY() {
+		return getOffsetY() + 251;
+	}
+	
+	/*
 	public int queuedButton1X() {
-		return getOffsetX + ;
+		return getOffsetX() + ;
 	}
 	
 	public int queuedButton1Y() {
-		return getOffsetY + ;
+		return getOffsetY() + ;
 	}
+	*/
 	
 	public int progressBar1X() {
-		return getOffsetX + ;
+		return getOffsetX() + 624;
 	}
 	
 	public int progressBar1Y() {
-		return getOffsetY + ;
+		return getOffsetY() + 189;
 	}
 	
+	/*
 	public int queuedButton2X() {
-		return getOffsetX + ;
+		return getOffsetX() + ;
 	}
 	
 	public int queuedButton2Y() {
-		return getOffsetY + ;
+		return getOffsetY() + ;
 	}
+	*/
 	
 	public int progressBar2X() {
-		return getOffsetX + ;
+		return getOffsetX() + 742;
 	}
 	
 	public int progressBar2Y() {
-		return getOffsetY + ;
+		return getOffsetY() + 189;
 	}
 	
+	/*
 	public int queuedButton3X() {
-		return getOffsetX + ;
+		return getOffsetX() + ;
 	}
 	
 	public int queuedButton3Y() {
-		return getOffsetY + ;
+		return getOffsetY() + ;
 	}
+	*/
 	
 	public int progressBar3X() {
-		return getOffsetX + ;
+		return getOffsetX() + 859;
 	}
 	
 	public int progressBar3Y() {
-		return getOffsetY + ;
+		return getOffsetY() + 189;
 	}
 	
 	public int cancelOrderButtonX() {
-		return getOffsetX + ;
+		return getOffsetX() + 933;
 	}
 	
 	public int cancelOrderButtonY() {
-		return getOffsetY + ;
+		return getOffsetY() + 301;
 	}
 	
 	public int firstSoldItemSlotX() {
-		return getOffsetX + ;
+		return getOffsetX() + 990;
 	}
 	
 	public int firstSoldItemSlotY() {
-		return getOffsetY + ;
+		return getOffsetY() + 310;
 	};
 	
-	public int secondSoldItemSlotX() {
-		return getOffsetX + ;
+	public int secondSoldItemSlotX() { //Should be gold here
+		return getOffsetX() + 1040;
 	}
 	
-	public int secondSoldItemSlotY() {
-		return getOffsetY + ;
+	public int secondSoldItemSlotY() { //Should be gold here
+		return getOffsetY() + 313;
 	}
+	
+	public int backButtonX() { //White arrow to go back to exchange screen
+		return getOffsetX() + 627;
+	}
+	
+	public int backButtonY() { //White arrow to go back to exchange screen
+		return getOffsetY() + 311;
+	}
+	
 	public int collectButtonX() {
-		return getOffsetX + ;
+		return getOffsetX() + 1027;
 	}
+	
 	public int collectButtonY() {
-		return getOffsetY + ;
+		return getOffsetY() + 93;
 	}
-	public int redXButtonX() {
-		return getOffsetX + ;
-	}
-	public int redXButtonY() {
-		return getOffsetY + ;
-	}
-
+	
 	public Rectangle firstHistoryRowPrice() {
-		//Coords
+		//Coords 930, 98, 73, 8
 		Rectangle result = new Rectangle();
 		return result;
 	}
 	
 	public Rectangle secondHistoryRowPrice() {
-		//Coords
+		//Coords 930, 136, 73, 8
 		Rectangle result = new Rectangle();
 		return result;
 	}
 	
 	public Rectangle clickHereToPlayButton() {
-		//Coords
+		//Coords 926, 349, 138, 23
 		Rectangle result = new Rectangle();
 		return result;
 	}
 	
 	public Rectangle existingUserButton() {
-		//Coords
+		//Coords 984, 303, 100, 20
 		Rectangle result = new Rectangle();
 		return result;
 	}
-	
+
 	public RSCoordinates()
 	{
+		/*
 		Rectangle screen = new Rectangle(945,117,60,20);
 		BufferedImage capture = null;
 		try {
 			capture = new Robot().createScreenCapture(screen);
 		} catch (AWTException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		File output = new File("C:\\Users\\Max\\Desktop\\test2.png");
 		try {
 			ImageIO.write(capture, "png", output);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 	}
 	
 	/**
@@ -307,7 +349,6 @@ public class RSCoordinates
 			int red = bot.getPixelColor(middleX, y).getRed();
 			int green = bot.getPixelColor(middleX, y).getGreen();
 			int blue = bot.getPixelColor(middleX, y).getBlue();
-			//System.out.println(red + " " + green + " " + blue);
 			
 			if (red == 0 && green == 0 && blue == 0) //If black
 			{
@@ -322,7 +363,6 @@ public class RSCoordinates
 			int green = bot.getPixelColor(middleX, y).getGreen();
 			int blue = bot.getPixelColor(middleX, y).getBlue();
 			
-			//System.out.println(red + " " + green + " " + blue);
 			if (!(red == 0 && green == 0 && blue == 0)) //If not black
 			{
 				return y;
@@ -349,7 +389,6 @@ public class RSCoordinates
 		//Binary search style scanning of screen for the starting X coordinate of game area. 
 		for (int i = 0; i < 1000; i++) //Set to 1000 because it should not take over 1000 iterations to find it due to screen size. 
 		{
-			//System.out.println(i);
 			Color currentColor = bot.getPixelColor(midpointX, y);
 			if (isSameColor(currentColor, black))
 			{
@@ -363,7 +402,6 @@ public class RSCoordinates
 					minX = midpointX;
 					midpointX = minX + ((maxX-minX)/2);
 				}
-				System.out.println("Current X is black: " + midpointX);
 			}
 			else if (!isSameColor(currentColor, black))
 			{
@@ -377,7 +415,6 @@ public class RSCoordinates
 					maxX = midpointX;
 					midpointX = minX + ((maxX-minX)/2);
 				}
-				System.out.println("Current X is not black: " + midpointX);
 			}
 			
 		}
