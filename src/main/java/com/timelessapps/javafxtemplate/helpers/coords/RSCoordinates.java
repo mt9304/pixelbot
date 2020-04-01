@@ -26,287 +26,288 @@ public class RSCoordinates
 	}
 	
 	public int existingUserButtonX() {
-		return getOffsetX() + 1036;
+		return getOffsetX() + 459;
 	}
+	
 	public int existingUserButtonY() {
-		return getOffsetY() + 334;
+		return getOffsetY() + 291;
 	}
+	
 	public int changeWorldButtonX() {
-		return getOffsetX() + 631;
+		return getOffsetX() + 54;
 	}
+	
 	public int changeWorldButtonY() {
-		return getOffsetY() + 524;
+		return getOffsetY() + 481;
 	}
+	
 	public int freeWorldButtonX() { // World 474
-		return getOffsetX() + 1237;
+		return getOffsetX() + 660;
 	}
+	
 	public int freeWorldButtonY() { // World 474
-		return getOffsetY() + 315;
+		return getOffsetY() + 272;
 	}
+
 	public int clickHereToPlayButtonX() {
-		return getOffsetX() + 966;
+		return getOffsetX() + 389;
 	}
+	
 	public int clickHereToPlayButtonY() {
-		return getOffsetY() + 360;
+		return getOffsetY() + 317;
 	}
 	
 	public int grandExchangeClerkX() {
-		return getOffsetX() + 971;
+		return getOffsetX() + 340;
 	}
 	
 	public int grandExchangeClerkY() {
-		return getOffsetY() + 51;
+		return getOffsetY() + 8;
 	}
 	
 	public int buyButton1X() {
-		return getOffsetX() + 632;
+		return getOffsetX() + 55;
 	}
 	
 	public int buyButton1Y() {
-		return getOffsetY() + 173;
+		return getOffsetY() + 130;
 	}
 	
 	public int sellButton1X() {
-		return getOffsetX() + 685;
+		return getOffsetX() + 108;
 	}
 	
 	public int sellButton1Y() {
-		return getOffsetY() + 173;
+		return getOffsetY() + 130;
 	}
 	
 	public int buyButton2X() {
-		return getOffsetX() + 749;
+		return getOffsetX() + 169;
 	}
 	
 	public int buyButton2Y() {
-		return getOffsetY() + 173;
+		return getOffsetY() + 130;
 	}
-	
+
 	public int sellButton2X() {
-		return getOffsetX() + 802;
+		return getOffsetX() + 225;
 	}
 	
 	public int sellButton2Y() {
-		return getOffsetY() + 173;
+		return getOffsetY() + 130;
 	}
-	
+
 	public int buyButton3X() {
-		return getOffsetX() + 865;
+		return getOffsetX() + 288;
 	}
 	
 	public int buyButton3Y() {
-		return getOffsetY() + 173;
+		return getOffsetY() + 130;
 	}
 	
 	public int sellButton3X() {
-		return getOffsetX() + 918;
+		return getOffsetX() + 341;
 	}
 	
 	public int sellButton3Y() {
-		return getOffsetY() + 173;
+		return getOffsetY() + 130;
 	}
-	
+	//
 	public int historyButtonX() { //Shows up in exchange screen and default. 
-		return getOffsetX() + 622;
+		return getOffsetX() + 45;
 	}
 	public int historyButtonY() {
-		return getOffsetY() + 60;
+		return getOffsetY() + 17;
 	}
 	
 	public int exchangeButtonX() { //Shows up in history screen. 
-		return getOffsetX() + 639;
+		return getOffsetX() + 62;
 	}
 	
 	public int exchangeButtonY() {
-		return getOffsetY() + 62;
+		return getOffsetY() + 19;
 	}
 	
 	public int firstSearchResultX() {
-		return getOffsetX() + 638;
+		return getOffsetX() + 61;
 	}
 	
 	public int firstSearchResultY() {
-		return getOffsetY() + 407;
+		return getOffsetY() + 364;
 	}
-	
+	//
 	public int secondSearchResultX() {
-		return getOffsetX() + 802;
+		return getOffsetX() + 225;
 	}
 	
 	public int secondSearchResultY() {
-		return getOffsetY() + 407;
+		return getOffsetY() + 364;
 	}
 	
 	public int decreasePriceX() {
-		return getOffsetX() + 866;
+		return getOffsetX() + 289;
 	}
 	
 	public int decreasePriceY() {
-		return getOffsetY() + 237;
+		return getOffsetY() + 194;
 	}
 	
 	public int increasePriceX() {
-		return getOffsetX() + 1023;
+		return getOffsetX() + 446;
 	}
 	
 	public int increasePriceY() {
-		return getOffsetY() + 236;
+		return getOffsetY() + 193;
 	}
 	
 	public int specifyPriceButtonX() {
-		return getOffsetX() + 965;
+		return getOffsetX() + 388;
 	}
 	
 	public int speciftPriceButtonY() {
-		return getOffsetY() + 237;
+		return getOffsetY() + 194;
 	}
-	
+	//
 	public int confirmTradeButtonX() {
-		return getOffsetX() + 833;
+		return getOffsetX() + 256;
 	}
 	
 	public int confirmTradeButtonY() {
-		return getOffsetY() + 312;
+		return getOffsetY() + 269;
 	}
 	
 	public int firstInventorySlotX() {
-		return getOffsetX() + 1152;
+		return getOffsetX() + 575;
 	}
 	
 	public int firstInventorySlotY() {
-		return getOffsetY() + 253;
+		return getOffsetY() + 210;
 	};
 	
 	public int secondInventorySlotX() {
-		return getOffsetX() + 1195;
+		return getOffsetX() + 618;
 	}
 	
 	public int secondInventorySlotY() {
-		return getOffsetY() + 252;
+		return getOffsetY() + 209;
 	}
 	
 	public int thirdInventorySlotX() {
-		return getOffsetX() + 1239;
+		return getOffsetX() + 662;
 	}
 	
 	public int thirdInventorySlotY() {
-		return getOffsetY() + 251;
+		return getOffsetY() + 208;
 	}
 	
-	/*
 	public int queuedButton1X() {
-		return getOffsetX() + ;
+		return getOffsetX() + 83;
 	}
 	
 	public int queuedButton1Y() {
-		return getOffsetY() + ;
+		return getOffsetY() + 124;
 	}
-	*/
-	
+	//
 	public int progressBar1X() {
-		return getOffsetX() + 624;
+		return getOffsetX() + 47;
 	}
 	
 	public int progressBar1Y() {
-		return getOffsetY() + 189;
+		return getOffsetY() + 146;
 	}
 	
-	/*
 	public int queuedButton2X() {
-		return getOffsetX() + ;
+		return getOffsetX() + 200;
 	}
 	
 	public int queuedButton2Y() {
-		return getOffsetY() + ;
+		return getOffsetY() + 124;
 	}
-	*/
 	
 	public int progressBar2X() {
-		return getOffsetX() + 742;
+		return getOffsetX() + 165;
 	}
 	
 	public int progressBar2Y() {
-		return getOffsetY() + 189;
+		return getOffsetY() + 146;
 	}
 	
-	/*
 	public int queuedButton3X() {
-		return getOffsetX() + ;
+		return getOffsetX() + 316;
 	}
 	
 	public int queuedButton3Y() {
-		return getOffsetY() + ;
+		return getOffsetY() + 124;
 	}
-	*/
 	
 	public int progressBar3X() {
-		return getOffsetX() + 859;
+		return getOffsetX() + 282;
 	}
 	
 	public int progressBar3Y() {
-		return getOffsetY() + 189;
+		return getOffsetY() + 146;
 	}
 	
 	public int cancelOrderButtonX() {
-		return getOffsetX() + 933;
+		return getOffsetX() + 356;
 	}
 	
 	public int cancelOrderButtonY() {
-		return getOffsetY() + 301;
+		return getOffsetY() + 258;
 	}
 	
 	public int firstSoldItemSlotX() {
-		return getOffsetX() + 990;
+		return getOffsetX() + 413;
 	}
 	
 	public int firstSoldItemSlotY() {
-		return getOffsetY() + 310;
+		return getOffsetY() + 267;
 	};
-	
+	//
 	public int secondSoldItemSlotX() { //Should be gold here
-		return getOffsetX() + 1040;
+		return getOffsetX() + 463;
 	}
 	
 	public int secondSoldItemSlotY() { //Should be gold here
-		return getOffsetY() + 313;
+		return getOffsetY() + 270;
 	}
 	
 	public int backButtonX() { //White arrow to go back to exchange screen
-		return getOffsetX() + 627;
+		return getOffsetX() + 50;
 	}
 	
 	public int backButtonY() { //White arrow to go back to exchange screen
-		return getOffsetY() + 311;
+		return getOffsetY() + 268;
 	}
 	
 	public int collectButtonX() {
-		return getOffsetX() + 1027;
+		return getOffsetX() + 450;
 	}
 	
 	public int collectButtonY() {
-		return getOffsetY() + 93;
+		return getOffsetY() + 50;
 	}
 	
 	public Rectangle firstHistoryRowPrice() {
-		//Coords 930, 98, 73, 8
+		//Coords 353 + x , 55 + y , 73, 8
 		Rectangle result = new Rectangle();
 		return result;
 	}
 	
 	public Rectangle secondHistoryRowPrice() {
-		//Coords 930, 136, 73, 8
+		//Coords 353 + x , 93 + y , 73, 8
 		Rectangle result = new Rectangle();
 		return result;
 	}
 	
 	public Rectangle clickHereToPlayButton() {
-		//Coords 926, 349, 138, 23
+		//Coords 349 + x , 306 + y , 138, 23
 		Rectangle result = new Rectangle();
 		return result;
 	}
 	
 	public Rectangle existingUserButton() {
-		//Coords 984, 303, 100, 20
+		//Coords 407 + x , 260 + y , 100, 20
 		Rectangle result = new Rectangle();
 		return result;
 	}
