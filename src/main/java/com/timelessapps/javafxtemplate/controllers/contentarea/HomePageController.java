@@ -96,7 +96,7 @@ public class HomePageController implements Initializable {
 
 	@FXML
 	public void startGrandExchangeRoutine(MouseEvent event) throws InterruptedException, AWTException {
-		GrandExchangeRoutine grandExchangeRoutine = new GrandExchangeRoutine();
+		GrandExchangeRoutine grandExchangeRoutine = new GrandExchangeRoutine("");
 		grandExchangeRoutine.setDaemon(true);
 		grandExchangeRoutine.start();
 

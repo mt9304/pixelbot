@@ -76,6 +76,12 @@ public class RSImageReader
     private BufferedImage getSnapShot(Rectangle rectangle) throws AWTException 
     {
     	BufferedImage capture = new Robot().createScreenCapture(rectangle);
+    	try {
+			ImageIO.write(capture, "tif", new File("C:\\Users\\Max\\Desktop\\tempimage\\images\\test2.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	return capture;
     }
     
@@ -102,6 +108,40 @@ public class RSImageReader
 					image.setRGB(x, y, black.getRGB());
 				}
 				else if (color.getRed()== 255 && color.getGreen() == 255 && color.getBlue() == 0) //If color does equals to the proper shade of yellow that the text uses. 
+				{
+					Color black = new Color(0, 0, 0);
+					image.setRGB(x, y, black.getRGB());
+				}
+				else
+				{
+					Color white = new Color(255, 255, 255);
+					image.setRGB(x, y, white.getRGB());
+				}
+			}
+		}
+		try 
+		{
+			ImageIO.write(image, "tif", new File("C:\\Users\\Max\\Desktop\\tempimage\\images\\test.png"));
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		return image;
+    }
+    
+    /** For white text on login screen **/
+    private BufferedImage convertWhiteTextToBlackWhite(BufferedImage input) 
+    {
+    	BufferedImage image = input;
+		int width = image.getWidth();
+		int height = image.getHeight();
+		
+		for (int y = 0; y < height; y++)
+		{
+			for (int x = 0; x < width; x++) 
+			{
+				Color color = new Color(image.getRGB(x, y));
+				if (color.getRed()== 255 && color.getGreen() == 255 && color.getBlue() == 255) //If color does equals to white
 				{
 					Color black = new Color(0, 0, 0);
 					image.setRGB(x, y, black.getRGB());
@@ -254,6 +294,17 @@ public class RSImageReader
     	BufferedImage resizedImage = getResizedImage(filteredImage, percent);
     	
     	String imageText = getImageTextUsingTess(resizedImage, whitelist);
+    	return imageText;
+    }
+    
+    public String getRSLoginText(Rectangle rectangle) throws Exception
+    {
+    	double percent = 4.0; // Needs to be 400% larger for better results. 
+    	BufferedImage originalSnapShot = getSnapShot(rectangle);
+    	BufferedImage filteredImage = convertWhiteTextToBlackWhite(originalSnapShot);
+    	BufferedImage resizedImage = getResizedImage(filteredImage, percent);
+    	
+    	String imageText = getImageTextUsingTess(resizedImage);
     	return imageText;
     }
     

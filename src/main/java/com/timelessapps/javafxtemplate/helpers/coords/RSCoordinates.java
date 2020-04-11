@@ -17,6 +17,14 @@ public class RSCoordinates
 	public int offsetX = 577;
 	public int offsetY = 43;
 	
+	public void setOffsetX(int x) {
+		offsetX = x;
+	}
+	
+	public void setOffsetY(int y) {
+		offsetY = y;
+	}
+	
 	public int getOffsetX() {
 		return offsetX;
 	}
@@ -58,7 +66,7 @@ public class RSCoordinates
 	}
 	
 	public int grandExchangeClerkX() {
-		return getOffsetX() + 340;
+		return getOffsetX() + 474;
 	}
 	
 	public int grandExchangeClerkY() {
@@ -302,13 +310,14 @@ public class RSCoordinates
 	
 	public Rectangle clickHereToPlayButton() {
 		//Coords 349 + x , 306 + y , 138, 23
-		Rectangle result = new Rectangle();
+		Rectangle result = new Rectangle(353 + getOffsetX(), 309 + getOffsetY(), 129, 14);
 		return result;
 	}
 	
 	public Rectangle existingUserButton() {
 		//Coords 407 + x , 260 + y , 100, 20
-		Rectangle result = new Rectangle();
+		//992, 326, 95, 16
+		Rectangle result = new Rectangle(415 + getOffsetX(), 283 + getOffsetY(), 95, 16);
 		return result;
 	}
 

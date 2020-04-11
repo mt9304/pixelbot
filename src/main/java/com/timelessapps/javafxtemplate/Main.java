@@ -5,14 +5,22 @@
  */
 package main.java.com.timelessapps.javafxtemplate;
 
+import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.util.Random;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import main.java.com.timelessapps.javafxtemplate.app.businesslogic.GrandExchangeRoutine;
+import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.GlobalKeyListener;
 import main.java.com.timelessapps.javafxtemplate.controllers.contentarea.LogsPageController;
+import main.java.com.timelessapps.javafxtemplate.helpers.OCR.RSImageReader;
 import main.java.com.timelessapps.javafxtemplate.helpers.coords.RSCoordinates;
+import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
 
 public class Main extends Application
 {
@@ -38,14 +46,16 @@ public class Main extends Application
     {
     	try 
     	{
-        	if (!args[0].isEmpty())
+        	if (args[0].equals("ge"))
         	{
         		System.out.println("starting");
-        		RSCoordinates rsc = new RSCoordinates();
-        		int y = rsc.getInitialOffsetY();
-        		int x = rsc.getInitialOffsetX(y);
-        		System.out.println("X: " + x  + " " + "Y: " + y);
-        		return;
+        		GrandExchangeRoutine grandExchangeRoutine = new GrandExchangeRoutine(args[1]);
+        		grandExchangeRoutine.setDaemon(true);
+        		grandExchangeRoutine.start();
+
+        		GlobalKeyListener globalKeyListener = new GlobalKeyListener(grandExchangeRoutine);
+        		globalKeyListener.setDaemon(true);
+        		globalKeyListener.start();
         	}
     	}
     	catch (Exception e)
