@@ -163,6 +163,40 @@ public class RSImageReader
 		return image;
     }
     
+    /** For black text on GE search area **/
+    private BufferedImage convertBlackTextToBlackWhite(BufferedImage input) 
+    {
+    	BufferedImage image = input;
+		int width = image.getWidth();
+		int height = image.getHeight();
+		
+		for (int y = 0; y < height; y++)
+		{
+			for (int x = 0; x < width; x++) 
+			{
+				Color color = new Color(image.getRGB(x, y));
+				if (color.getRed()== 0 && color.getGreen() == 0 && color.getBlue() == 0) //If color does equals to black
+				{
+					Color black = new Color(0, 0, 0);
+					image.setRGB(x, y, black.getRGB());
+				}
+				else
+				{
+					Color white = new Color(255, 255, 255);
+					image.setRGB(x, y, white.getRGB());
+				}
+			}
+		}
+		try 
+		{
+			ImageIO.write(image, "tif", new File("C:\\Users\\Max\\Desktop\\tempimage\\images\\test.png"));
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		return image;
+    }
+    
     private BufferedImage getResizedImage(BufferedImage input, double percent) throws IOException 
     {
         BufferedImage inputImage = input;
@@ -308,6 +342,17 @@ public class RSImageReader
     	return imageText;
     }
     
+    public String getGESearchAreaText(Rectangle rectangle) throws Exception
+    {
+    	double percent = 4.0; // Needs to be 400% larger for better results. 
+    	BufferedImage originalSnapShot = getSnapShot(rectangle);
+    	BufferedImage filteredImage = convertBlackTextToBlackWhite(originalSnapShot);
+    	BufferedImage resizedImage = getResizedImage(filteredImage, percent);
+    	
+    	String imageText = getImageTextUsingTess(resizedImage);
+    	return imageText;
+    }
+    
     public Integer getRSNumber(Rectangle rectangle) throws Exception
     { 
     	BufferedImage originalSnapShot = getSnapShot(rectangle);
@@ -315,4 +360,23 @@ public class RSImageReader
     	Integer number = getRSNumberFromBlackAndWhiteImage(blackAndWhiteImage);
     	return number;
     }
+    
+	public static boolean isSameColor(Color firstColor, Color secondColor)
+	{
+		if (firstColor.getRed() == secondColor.getRed())
+		{
+			if  (firstColor.getGreen() == secondColor.getGreen())
+			{
+				if (firstColor.getBlue() == secondColor.getBlue())
+				{
+					return true;
+				}
+			}
+		} 
+		else 
+		{
+			return false;
+		}
+		return false;
+	}
 }

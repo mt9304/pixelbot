@@ -48,6 +48,7 @@ public class Main extends Application
     	{
         	if (args[0].equals("ge"))
         	{
+        		
         		System.out.println("starting");
         		GrandExchangeRoutine grandExchangeRoutine = new GrandExchangeRoutine(args[1]);
         		grandExchangeRoutine.setDaemon(true);
@@ -56,6 +57,7 @@ public class Main extends Application
         		GlobalKeyListener globalKeyListener = new GlobalKeyListener(grandExchangeRoutine);
         		globalKeyListener.setDaemon(true);
         		globalKeyListener.start();
+        		
         	}
     	}
     	catch (Exception e)

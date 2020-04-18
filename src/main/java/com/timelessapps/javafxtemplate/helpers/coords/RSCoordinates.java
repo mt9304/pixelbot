@@ -12,6 +12,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import main.java.com.timelessapps.javafxtemplate.helpers.OCR.RSImageReader;
+
 public class RSCoordinates 
 {
 	public int offsetX = 577;
@@ -73,52 +75,53 @@ public class RSCoordinates
 		return getOffsetY() + 8;
 	}
 	
-	public int buyButton1X() {
+	private int buyButton1X() {
 		return getOffsetX() + 55;
 	}
 	
-	public int buyButton1Y() {
+	private int buyButton1Y() {
 		return getOffsetY() + 130;
 	}
 	
-	public int sellButton1X() {
-		return getOffsetX() + 108;
+	private int sellButton1X() {
+		return getOffsetX() + 111;
 	}
 	
-	public int sellButton1Y() {
-		return getOffsetY() + 130;
+	private int sellButton1Y() {
+		return getOffsetY() + 118;
 	}
 	
-	public int buyButton2X() {
+	private int buyButton2X() {
 		return getOffsetX() + 169;
 	}
 	
-	public int buyButton2Y() {
+	private int buyButton2Y() {
 		return getOffsetY() + 130;
 	}
 
-	public int sellButton2X() {
-		return getOffsetX() + 225;
+	private int sellButton2X() {
+		return getOffsetX() + 228;
 	}
 	
-	public int sellButton2Y() {
-		return getOffsetY() + 130;
+	private int sellButton2Y() {
+		return getOffsetY() + 117;
 	}
 
-	public int buyButton3X() {
+	private int buyButton3X() {
 		return getOffsetX() + 288;
 	}
 	
-	public int buyButton3Y() {
+	private int buyButton3Y() {
 		return getOffsetY() + 130;
 	}
 	
-	public int sellButton3X() {
-		return getOffsetX() + 341;
+	private int sellButton3X() {
+		return getOffsetX() + 345;
 	}
 	
-	public int sellButton3Y() {
-		return getOffsetY() + 130;
+	private int sellButton3Y() {
+		//922, 161
+		return getOffsetY() + 118;
 	}
 	//
 	public int historyButtonX() { //Shows up in exchange screen and default. 
@@ -208,51 +211,51 @@ public class RSCoordinates
 		return getOffsetY() + 208;
 	}
 	
-	public int queuedButton1X() {
+	private int queuedButton1X() {
 		return getOffsetX() + 83;
 	}
 	
-	public int queuedButton1Y() {
+	private int queuedButton1Y() {
 		return getOffsetY() + 124;
 	}
 	//
-	public int progressBar1X() {
+	private int progressBar1X() {
 		return getOffsetX() + 47;
 	}
 	
-	public int progressBar1Y() {
+	private int progressBar1Y() {
 		return getOffsetY() + 146;
 	}
 	
-	public int queuedButton2X() {
+	private int queuedButton2X() {
 		return getOffsetX() + 200;
 	}
 	
-	public int queuedButton2Y() {
+	private int queuedButton2Y() {
 		return getOffsetY() + 124;
 	}
 	
-	public int progressBar2X() {
+	private int progressBar2X() {
 		return getOffsetX() + 165;
 	}
 	
-	public int progressBar2Y() {
+	private int progressBar2Y() {
 		return getOffsetY() + 146;
 	}
 	
-	public int queuedButton3X() {
+	private int queuedButton3X() {
 		return getOffsetX() + 316;
 	}
 	
-	public int queuedButton3Y() {
+	private int queuedButton3Y() {
 		return getOffsetY() + 124;
 	}
 	
-	public int progressBar3X() {
+	private int progressBar3X() {
 		return getOffsetX() + 282;
 	}
 	
-	public int progressBar3Y() {
+	private int progressBar3Y() {
 		return getOffsetY() + 146;
 	}
 	
@@ -319,6 +322,80 @@ public class RSCoordinates
 		//992, 326, 95, 16
 		Rectangle result = new Rectangle(415 + getOffsetX(), 283 + getOffsetY(), 95, 16);
 		return result;
+	}
+	
+	public Rectangle buySearchAreaText() {
+		Rectangle result = new Rectangle(162 + getOffsetX(), 326 + getOffsetY(), 186, 18);
+		return result;
+	}
+	
+	public Rectangle mainGrandExchangeText() {
+		Rectangle result = new Rectangle(202 + getOffsetX(), 9 + getOffsetY(), 113, 18);
+		return result;
+	}
+	
+	public int[] buyButtonX() {
+		int[] slots = new int[3];
+		slots[0] = buyButton1X();
+		slots[1] = buyButton2X();
+		slots[2] = buyButton3X();
+		return slots;
+	}
+	
+	public int[] buyButtonY() {
+		int[] slots = new int[3];
+		slots[0] = buyButton1Y();
+		slots[1] = buyButton2Y();
+		slots[2] = buyButton3Y();
+		return slots;
+	}
+	
+	public int[] sellButtonX() {
+		int[] slots = new int[3];
+		slots[0] = sellButton1X();
+		slots[1] = sellButton2X();
+		slots[2] = sellButton3X();
+		return slots;
+	}
+	
+	public int[] sellButtonY() {
+		int[] slots = new int[3];
+		slots[0] = sellButton1Y();
+		slots[1] = sellButton2Y();
+		slots[2] = sellButton3Y();
+		return slots;
+	}
+	
+	public int[] progressBarX() {
+		int[] slots = new int[3];
+		slots[0] = progressBar1X();
+		slots[1] = progressBar2X();
+		slots[2] = progressBar3X();
+		return slots;
+	}
+	
+	public int[] progressBarY() {
+		int[] slots = new int[3];
+		slots[0] = progressBar1Y();
+		slots[1] = progressBar2Y();
+		slots[2] = progressBar3Y();
+		return slots;
+	}
+	
+	public int[] queuedButtonX() {
+		int[] slots = new int[3];
+		slots[0] = queuedButton1X();
+		slots[1] = queuedButton2X();
+		slots[2] = queuedButton3X();
+		return slots;
+	}
+	
+	public int[] queuedButtonY() {
+		int[] slots = new int[3];
+		slots[0] = queuedButton1Y();
+		slots[1] = queuedButton2Y();
+		slots[2] = queuedButton3Y();
+		return slots;
 	}
 
 	public RSCoordinates()
@@ -400,10 +477,10 @@ public class RSCoordinates
 		for (int i = 0; i < 1000; i++) //Set to 1000 because it should not take over 1000 iterations to find it due to screen size. 
 		{
 			Color currentColor = bot.getPixelColor(midpointX, y);
-			if (isSameColor(currentColor, black))
+			if (RSImageReader.isSameColor(currentColor, black))
 			{
 				Color rightOfCurrentColor = bot.getPixelColor(midpointX+1, y);
-				if (!isSameColor(rightOfCurrentColor, black))
+				if (!RSImageReader.isSameColor(rightOfCurrentColor, black))
 				{
 					return midpointX+1;
 				}
@@ -413,10 +490,10 @@ public class RSCoordinates
 					midpointX = minX + ((maxX-minX)/2);
 				}
 			}
-			else if (!isSameColor(currentColor, black))
+			else if (!RSImageReader.isSameColor(currentColor, black))
 			{
 				Color leftOfCurrentColor = bot.getPixelColor(midpointX-1, y);
-				if (isSameColor(leftOfCurrentColor, black))
+				if (RSImageReader.isSameColor(leftOfCurrentColor, black))
 				{
 					return midpointX;
 				}
@@ -430,24 +507,4 @@ public class RSCoordinates
 		}
 		return null;
 	}
-	
-	public boolean isSameColor(Color firstColor, Color secondColor)
-	{
-		if (firstColor.getRed() == secondColor.getRed())
-		{
-			if  (firstColor.getGreen() == secondColor.getGreen())
-			{
-				if (firstColor.getBlue() == secondColor.getBlue())
-				{
-					return true;
-				}
-			}
-		} 
-		else 
-		{
-			return false;
-		}
-		return false;
-	}
-
 }

@@ -61,6 +61,27 @@ public class RobotService extends Robot
         }
     }
     
+    public void type (String text)
+    {
+        String textUpper = text.toUpperCase();
+        Random rand = new Random();
+        for (int i=0; i < text.length(); ++i)
+        {
+            if (isUpperCase(text.charAt(i)))
+            {
+                //For typing capital letters.
+                keyType((int)text.charAt(i), KeyEvent.VK_SHIFT);
+            }
+            else
+            {
+                //For typing symbols and lowercase. 
+                typeChar(textUpper.charAt(i));
+            }
+            int randomDelay = rand.nextInt((800 - 200) + 1) + 200;
+            delay(randomDelay);
+        }
+    }
+    
     //Used if getting text from a source that may contain weird symbols and other stuff that is not covered by the normal typing function. 
     public void typeFromClipboard(String text)
     {
@@ -186,7 +207,13 @@ public class RobotService extends Robot
     
     /** Sections below is for mouse movement related functions. **/
     
-    //Main movement function to call for the bot to move mouse. Gives a random small offset for where the mouse should end up, as well as a chance to completely miss the spot on first try. 
+    /**
+     * This function will glide the cursor to the location at a random speed. 
+     * This is different than mouseMove because it does not teleport the cursor directly to the destination. 
+     * Gives a random offset of up to 5px in each direction for where the cursor should end up, as well as a chance to completely miss the spot on first try. 
+     * @param x
+     * @param y
+     */
     public void moveCursorTo(int x, int y)
     {
 	Random random = new Random();
@@ -211,7 +238,13 @@ public class RobotService extends Robot
 	}
     }
 				
-				    //Main movement function to call for the bot to move mouse. Gives a random small offset for where the mouse should end up, as well as a chance to completely miss the spot on first try. 
+    /**
+     * This function will glide the cursor to the location at a random speed. 
+     * This is different than mouseMove because it does not teleport the cursor directly to the destination. 
+     * Gives a random offset of up to 2px in each direction for where the cursor should end up, as well as a chance to completely miss the spot on first try. 
+     * @param x
+     * @param y
+     */
     public void accuratelyMoveCursor(int x, int y)
     {
 				Random random = new Random();
@@ -237,7 +270,7 @@ public class RobotService extends Robot
     }
     
     //Randomly selects a curving style with random speed and steps. 
-    public void mouseCurve(int endPointX, int endPointY)
+    private void mouseCurve(int endPointX, int endPointY)
     {
             int startingX = getCurrentMousePosition(X);
             int startingY = getCurrentMousePosition(Y);
@@ -276,7 +309,7 @@ public class RobotService extends Robot
     
     //TODO: When happy with functions, remember to reduce it to one method. 
     //Actual starting X may be different from declared value, since it starts with the startingX + other values. 
-    public void mouseCurveX1(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
+    private void mouseCurveX1(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
     {
         double distanceOverStepsX = (endpointX - startingX) / ((double) numberOfSteps);
         double distanceOverStepsY = (endpointY - startingY) / ((double) numberOfSteps);
@@ -303,7 +336,7 @@ public class RobotService extends Robot
         }
     }
     
-    public void mouseCurveY1(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
+    private void mouseCurveY1(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
     {
         double distanceOverStepsX = (endpointX - startingX) / ((double) numberOfSteps);
         double distanceOverStepsY = (endpointY - startingY) / ((double) numberOfSteps);
@@ -328,7 +361,7 @@ public class RobotService extends Robot
         }
     }
     
-    public void mouseCurveX2(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
+    private void mouseCurveX2(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
     {
         double distanceOverStepsX = (endpointX - startingX) / ((double) numberOfSteps);
         double distanceOverStepsY = (endpointY - startingY) / ((double) numberOfSteps);
@@ -353,7 +386,7 @@ public class RobotService extends Robot
         }
     }
     
-    public void mouseCurveY2(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
+    private void mouseCurveY2(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps)
     {
         double distanceOverStepsX = (endpointX - startingX) / ((double) numberOfSteps);
         double distanceOverStepsY = (endpointY - startingY) / ((double) numberOfSteps);
@@ -378,7 +411,7 @@ public class RobotService extends Robot
         }
     }
     
-    public void mouseGlide(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps) 
+    private void mouseGlide(int startingX, int startingY, int endpointX, int endpointY, int timeInMilis, int numberOfSteps) 
     {
         double distanceOverStepsX = (endpointX - startingX) / ((double) numberOfSteps);
         double distanceOverStepsY = (endpointY - startingY) / ((double) numberOfSteps);
@@ -427,6 +460,11 @@ public class RobotService extends Robot
     }
     
      /** End mouse movement section. **/
+    
+    /**
+     * SHORT is 400ms-100ms, MEDIUM is 1000ms-1500ms, LONG is 4000ms-5000ms. 
+     * @param duration Can be SHORT, MEDIUM, or LONG. 
+     */
     public void delay(Duration duration)
     {
         Random random = new Random();
