@@ -78,7 +78,7 @@ public class RSImageReader
     	BufferedImage capture = new Robot().createScreenCapture(rectangle);
     	try {
 			ImageIO.write(capture, "tif", new File("C:\\Users\\Max\\Desktop\\tempimage\\images\\test2.png"));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -156,7 +156,7 @@ public class RSImageReader
 		try 
 		{
 			ImageIO.write(image, "tif", new File("C:\\Users\\Max\\Desktop\\tempimage\\images\\test.png"));
-		} catch (IOException e) 
+		} catch (Exception e) 
 		{
 			e.printStackTrace();
 		}

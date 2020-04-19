@@ -17,7 +17,7 @@ public class VerifyGrandExchange
 			for (int i = 0; i < 20; i++)
 			{
 				String loginText = rsir.getRSLoginText(rsc.existingUserButton());
-				
+				System.out.println("Login text: " + loginText);
 				if (loginText.contains("Existing User"))
 				{
 					return;
@@ -51,7 +51,7 @@ public class VerifyGrandExchange
 		}
 		catch (Exception e)
 		{
-			System.out.println(e);
+			System.out.println("Could not click here to play: " + e);
 		}
 	}
 	

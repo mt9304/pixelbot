@@ -36,6 +36,8 @@ public class GrandExchangeRoutine extends Routine
 	String[] items = { "Coal", "Nature Rune", "Death Rune"};
 	int lowPrice = 0;
 	int highPrice = 0;
+	int currentGold = 40000;
+	int geLimit = 11000; //GE limits the amount of an item that can be bought every 8 hours. 
 
 	public GrandExchangeRoutine(String pass) throws AWTException {
 		this.pass = pass;
@@ -57,7 +59,8 @@ public class GrandExchangeRoutine extends Routine
 				login();
 				verifyGE.clickHereToPlayIsPresent();
 				clickClickHereToPlayButton();
-				Thread.sleep(5000);
+				Thread.sleep(5000); //Add verify chat box loaded
+				scrollIn();
 				exchangeWithClerk(); //Opens exchange menu
 				
 				while (running) {
@@ -86,7 +89,7 @@ public class GrandExchangeRoutine extends Routine
 					}
 				}
 			} catch (Exception ex) {
-				System.out.println(ex);
+				System.out.println("Bot could not complete routine: " + ex);
 				Logger.getLogger(MainBotRoutine.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
@@ -250,7 +253,8 @@ public class GrandExchangeRoutine extends Routine
 				bot.moveCursorTo(rsc.cancelOrderButtonX(), rsc.cancelOrderButtonY());
 				bot.delay(MEDIUM);
 				bot.mouseClick();
-				bot.delay(SHORT);
+				bot.delay(MEDIUM);
+				bot.delay(MEDIUM);
 				bot.moveCursorTo(rsc.secondSoldItemSlotX(), rsc.secondSoldItemSlotY());
 				bot.delay(SHORT);
 				bot.mouseClick();
@@ -317,6 +321,23 @@ public class GrandExchangeRoutine extends Routine
 		catch (Exception e)
 		{
 			log.appendToEventLogsFile("Could not buyHigh: " + e);
+		}
+	}
+	
+	private void scrollIn()
+	{
+		try
+		{
+			for (int i = 0; i < 10; i++)
+			{
+				bot.mouseWheel(-1);
+				bot.delay(SHORT);
+			}
+			bot.delay(MEDIUM);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Could not scroll in" + e);
 		}
 	}
 }
