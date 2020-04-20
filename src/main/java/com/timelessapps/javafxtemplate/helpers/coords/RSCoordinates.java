@@ -175,7 +175,7 @@ public class RSCoordinates
 		return getOffsetX() + 388;
 	}
 	
-	public int speciftPriceButtonY() {
+	public int specifyPriceButtonY() {
 		return getOffsetY() + 194;
 	}
 	//
@@ -301,13 +301,13 @@ public class RSCoordinates
 	
 	public Rectangle firstHistoryRowPrice() {
 		//Coords 353 + x , 55 + y , 73, 8
-		Rectangle result = new Rectangle();
+		Rectangle result = new Rectangle(359 + getOffsetX(), 55 + getOffsetY(), 64, 8);
 		return result;
 	}
 	
 	public Rectangle secondHistoryRowPrice() {
 		//Coords 353 + x , 93 + y , 73, 8
-		Rectangle result = new Rectangle();
+		Rectangle result = new Rectangle(359 + getOffsetX(), 93 + getOffsetY(), 64, 8);
 		return result;
 	}
 	
@@ -324,13 +324,23 @@ public class RSCoordinates
 		return result;
 	}
 	
+	public Rectangle mainGrandExchangeText() {
+		Rectangle result = new Rectangle(202 + getOffsetX(), 9 + getOffsetY(), 113, 18);
+		return result;
+	}
+	
 	public Rectangle buySearchAreaText() {
 		Rectangle result = new Rectangle(162 + getOffsetX(), 326 + getOffsetY(), 186, 18);
 		return result;
 	}
 	
-	public Rectangle mainGrandExchangeText() {
-		Rectangle result = new Rectangle(202 + getOffsetX(), 9 + getOffsetY(), 113, 18);
+	public Rectangle sellOfferText() {
+		Rectangle result = new Rectangle(77 + getOffsetX(), 43 + getOffsetY(), 78, 18);
+		return result;
+	}
+	
+	public Rectangle tradeHistoryText() {
+		Rectangle result = new Rectangle(266 + getOffsetX(), 10 + getOffsetY(), 95, 18);
 		return result;
 	}
 	

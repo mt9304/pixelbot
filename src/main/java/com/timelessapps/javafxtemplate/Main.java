@@ -44,25 +44,32 @@ public class Main extends Application
     //If no argument, launch with JavaFX UI, else just do the routine. 
     public static void main(String[] args)
     {
-    	try 
-    	{
-        	if (args[0].equals("ge"))
-        	{
-        		
-        		System.out.println("starting");
-        		GrandExchangeRoutine grandExchangeRoutine = new GrandExchangeRoutine(args[1]);
-        		grandExchangeRoutine.setDaemon(true);
-        		grandExchangeRoutine.start();
-
-        		GlobalKeyListener globalKeyListener = new GlobalKeyListener(grandExchangeRoutine);
-        		globalKeyListener.setDaemon(true);
-        		globalKeyListener.start();
-        		
-        	}
-    	}
-    	catch (Exception e)
+    	if (args.length == 0)
     	{
     		launch(args);
+    	}
+    	else
+    	{
+	    	try 
+	    	{
+	        	if (args[0].equals("ge"))
+	        	{
+	        		System.out.println("starting");
+	        		GrandExchangeRoutine grandExchangeRoutine = new GrandExchangeRoutine(args[1]);
+	        		grandExchangeRoutine.setDaemon(true);
+	        		grandExchangeRoutine.start();
+	
+	        		GlobalKeyListener globalKeyListener = new GlobalKeyListener(grandExchangeRoutine);
+	        		globalKeyListener.setDaemon(true);
+	        		globalKeyListener.start();
+	        		
+	        	}
+	    	}
+	    	catch (Exception e)
+	    	{
+	    		System.out.println("Could not complete routine normally, exiting: " + e);
+	    		System.exit(1);
+	    	}
     	}
     }
 

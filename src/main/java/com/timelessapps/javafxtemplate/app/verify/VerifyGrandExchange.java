@@ -1,15 +1,31 @@
 package main.java.com.timelessapps.javafxtemplate.app.verify;
 
+import java.awt.AWTException;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+
 import main.java.com.timelessapps.javafxtemplate.helpers.OCR.RSImageReader;
+import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration;
 import main.java.com.timelessapps.javafxtemplate.helpers.coords.RSCoordinates;
 import main.java.com.timelessapps.javafxtemplate.helpers.exceptions.ElementNotFoundException;
+import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
 
-public class VerifyGrandExchange 
+import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration.SHORT;
+import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration.MEDIUM;
+import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration.LONG;
+
+public class VerifyGrandExchange
 {
+	RobotService bot = new RobotService();
 	RSImageReader rsir = new RSImageReader();
 	RSCoordinates rsc = new RSCoordinates();
 	
-	public void loginScreenIsLoaded() throws ElementNotFoundException 
+	public VerifyGrandExchange() throws AWTException
+	{
+		
+	}
+	
+	public void loginScreenIsLoaded() throws Exception 
 	{
 		System.out.println("Verifying login screen loaded. ");
 		try
@@ -20,6 +36,7 @@ public class VerifyGrandExchange
 				System.out.println("Login text: " + loginText);
 				if (loginText.contains("Existing User"))
 				{
+					System.out.println("Existing user button detected. ");
 					return;
 				}
 				Thread.sleep(1500);
@@ -29,10 +46,11 @@ public class VerifyGrandExchange
 		catch (Exception e)
 		{
 			System.out.println(e);
+			throw e;
 		}
 	}
 	
-	public void clickHereToPlayIsPresent() throws ElementNotFoundException 
+	public void clickHereToPlayIsPresent() throws Exception 
 	{
 		System.out.println("Verifying login screen loaded. ");
 		try
@@ -43,6 +61,7 @@ public class VerifyGrandExchange
 				System.out.println("Text: " + clickHereToPlayText);
 				if (clickHereToPlayText.contains("CLICK HERE TO FLAY"))
 				{
+					System.out.println("Click here to play button detected. ");
 					return;
 				}
 				Thread.sleep(1500);
@@ -52,10 +71,11 @@ public class VerifyGrandExchange
 		catch (Exception e)
 		{
 			System.out.println("Could not click here to play: " + e);
+			throw e;
 		}
 	}
 	
-	public void isOnBuyScreen() throws ElementNotFoundException
+	public void isOnBuyScreen() throws Exception
 	{
 		System.out.println("Veryfying RS is on buy screen at GE. ");
 		try
@@ -66,6 +86,7 @@ public class VerifyGrandExchange
 				System.out.println("Text: " + buyText);
 				if (buyText.contains("What would you")) //Text in game should turn out as What would you like to huH?
 				{
+					System.out.println("Buy screen detected. ");
 					return;
 				}
 				Thread.sleep(1500);
@@ -75,10 +96,11 @@ public class VerifyGrandExchange
 		catch (Exception e)
 		{
 			System.out.println(e);
+			throw e;
 		}
 	}
 
-	public void isOnGEScreen() 
+	public void isOnGEScreen() throws Exception 
 	{
 		System.out.println("Veryfying RS is on the main GE screen. ");
 		try
@@ -89,6 +111,7 @@ public class VerifyGrandExchange
 				System.out.println("Text: " + geText);
 				if (geText.contains("Grand"))
 				{
+					System.out.println("GE screen detected. ");
 					return;
 				}
 				Thread.sleep(1500);
@@ -98,6 +121,117 @@ public class VerifyGrandExchange
 		catch (Exception e)
 		{
 			System.out.println(e);
+			throw e;
+		}
+	}
+
+	public void transactionCompleted(int geSlot) throws Exception {
+		System.out.println("Verifying that all items have sold in GE slot: " + geSlot);
+		try
+		{
+			for (int i = 0; i < 31; i++)
+			{
+				System.out.println("Checking " + i + "/30 times. ");
+				Color green = new Color(0, 95, 0);
+				Color currentColor = bot.getPixelColor(rsc.progressBarX()[geSlot], rsc.progressBarY()[geSlot]);
+				
+				if (RSImageReader.isSameColor(green, currentColor))
+				{
+					System.out.println("Green progress bar detected for slot: " + geSlot);
+					return;
+				}
+				bot.type(" "); //Typing to prevent being disconnected. 
+				bot.keyPress(KeyEvent.VK_BACK_SPACE);
+				bot.delay(SHORT);
+				bot.keyRelease(KeyEvent.VK_BACK_SPACE);
+				Thread.sleep(1500);
+			}
+			throw new ElementNotFoundException("Could not detect green progress bar. ");
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+			throw e;
+		}
+	}
+	
+	public void transactionCompleted(int geSlot, Duration duration) throws Exception {
+		System.out.println("Verifying that all items have sold in GE slot: " + geSlot);
+		try
+		{
+			for (int i = 0; i < 51; i++)
+			{
+				System.out.println("Checking " + i + "/50 times. ");
+				Color green = new Color(0, 95, 0);
+				Color currentColor = bot.getPixelColor(rsc.progressBarX()[geSlot], rsc.progressBarY()[geSlot]);
+				
+				if (RSImageReader.isSameColor(green, currentColor))
+				{
+					System.out.println("Green progress bar detected for slot: " + geSlot);
+					return;
+				}
+				bot.type(" "); //Typing to prevent being disconnected. 
+				bot.keyPress(KeyEvent.VK_BACK_SPACE);
+				bot.delay(SHORT);
+				bot.keyRelease(KeyEvent.VK_BACK_SPACE);
+				Thread.sleep(5000);
+			}
+			throw new ElementNotFoundException("Could not detect green progress bar. ");
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+			throw e;
+		}
+	}
+
+	public void isOnSellScreen() throws Exception 
+	{
+		System.out.println("Veryfying RS is on the GE sell screen. ");
+		try
+		{
+			for (int i = 0; i < 5; i++)
+			{
+				String geText = rsir.getRSText(rsc.sellOfferText());
+				System.out.println("Text: " + geText);
+				if (geText.contains("ell"))
+				{
+					System.out.println("Sell screen detected. ");
+					return;
+				}
+				Thread.sleep(1000);
+			}
+			throw new ElementNotFoundException("Could not detect Sell offer text on the GE sell screen. ");
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+			throw e;
+		}
+	}
+
+	public void isOnTradeHistoryScreen() throws Exception 
+	{
+		System.out.println("Veryfying RS is on the trade history screen");
+		try
+		{
+			for (int i = 0; i < 5; i++)
+			{
+				String geText = rsir.getRSText(rsc.tradeHistoryText());
+				System.out.println("Text: " + geText);
+				if (geText.contains("Trade"))
+				{
+					System.out.println("Trade History screen detected. ");
+					return;
+				}
+				Thread.sleep(1000);
+			}
+			throw new ElementNotFoundException("Could not detect trade history screen. ");
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+			throw e;
 		}
 	}
 }

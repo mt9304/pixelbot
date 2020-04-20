@@ -462,7 +462,7 @@ public class RobotService extends Robot
      /** End mouse movement section. **/
     
     /**
-     * SHORT is 400ms-100ms, MEDIUM is 1000ms-1500ms, LONG is 4000ms-5000ms. 
+     * SHORT is 100ms-400ms, MEDIUM is 1000ms-1500ms, LONG is 4000ms-5000ms. 
      * @param duration Can be SHORT, MEDIUM, or LONG. 
      */
     public void delay(Duration duration)
