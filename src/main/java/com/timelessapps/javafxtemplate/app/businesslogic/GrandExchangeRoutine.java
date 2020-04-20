@@ -34,12 +34,13 @@ public class GrandExchangeRoutine extends Routine
 	Rectangle rect = rsc.existingUserButton();
 	VerifyGrandExchange verifyGE = new VerifyGrandExchange();
 	String pass = "";
-	String[] items = { "death", "coal", "nature"};
+	String[] items = { "death", "coal", "nature", "iron ore", "chaos", "gold ore", "law", "gold bar"};
 	int lowPrice = 0;
 	int highPrice = 0;
 	int currentGold = 40000;
 	int geLimit = 11000; //GE limits the amount of an item that can be bought every 8 hours. 
 	int currentSlot = 0; //Up to 3 slots for f2p
+	int currentItemIndex = 0;
 
 	public GrandExchangeRoutine(String pass) throws AWTException {
 		this.pass = pass;
@@ -65,46 +66,44 @@ public class GrandExchangeRoutine extends Routine
 				scrollIn();
 				exchangeWithClerk(); //Opens exchange menu
 				
-				while (running) {
-					for (int i = 0; i < 10; i++)
+				while (running && currentItemIndex < 8) {
+					checkIfPausedOrStopped();
+					/** Start routine here. **/
+					
+					verifyGE.isOnGEScreen();
+					if(collectFromGE(currentSlot))
 					{
 						checkIfPausedOrStopped();
-						/** Start routine here. **/
-						
-						verifyGE.isOnGEScreen();
-						if(collectFromGE(currentSlot))
-						{
-							checkIfPausedOrStopped();
-							sellLow(currentSlot);
-						}
-						//Sell first inventory slot
-						buyHigh(items[currentSlot], currentSlot);
-						collectFromGEWhenSuccessful(currentSlot);
-						checkIfPausedOrStopped();
 						sellLow(currentSlot);
-						collectFromGEWhenSuccessful(currentSlot);
+					}
+					//Sell first inventory slot
+					buyHigh(items[currentSlot], currentSlot);
+					collectFromGEWhenSuccessful(currentSlot);
+					checkIfPausedOrStopped();
+					sellLow(currentSlot);
+					collectFromGEWhenSuccessful(currentSlot);
+					checkIfPausedOrStopped();
+					if (!pricesSuccessfullySet()) //Will go to trade history to read values
+					{
 						checkIfPausedOrStopped();
-						if (!pricesSuccessfullySet()) //Will go to trade history to read values
-						{
-							checkIfPausedOrStopped();
-							clickExchangeButton(); //Returns the screen to the main GE page. 
-							resetPrices();
-							incrementCurrentSlot();
-							continue;
-						}
-						clickExchangeButton();
-						buyLow(items[currentSlot], currentSlot);
-						collectFromGEWhenSuccessful(currentSlot, LONG);
-						checkIfPausedOrStopped();
-						sellHigh(currentSlot);
-						collectFromGEWhenSuccessful(currentSlot, LONG);
-						checkIfPausedOrStopped();
+						clickExchangeButton(); //Returns the screen to the main GE page. 
 						resetPrices();
 						incrementCurrentSlot();
-						Thread.sleep(random.nextInt(1000) + 1000);
-						checkIfPausedOrStopped();
+						currentItemIndex++;
+						continue;
 					}
-					return;
+					clickExchangeButton();
+					buyLow(items[currentSlot], currentSlot);
+					collectFromGEWhenSuccessful(currentSlot, LONG);
+					checkIfPausedOrStopped();
+					sellHigh(currentSlot);
+					collectFromGEWhenSuccessful(currentSlot, LONG);
+					checkIfPausedOrStopped();
+					resetPrices();
+					incrementCurrentSlot();
+					currentItemIndex++;
+					Thread.sleep(random.nextInt(1000) + 1000);
+					checkIfPausedOrStopped();
 				}
 			} catch (Exception ex) {
 				System.out.println("Bot could not complete routine: " + ex);
@@ -115,17 +114,17 @@ public class GrandExchangeRoutine extends Routine
 	
 	@Override
 	public void checkIfPausedOrStopped() throws InterruptedException {
-		/*
-		if (counter > 180) {
-			System.out.println("Counter is: " + counter + ". Stopping routine. ");
-			running = false;
+		try 
+		{
+			waitIfPaused();
+			if (!running) {
+				enableGrandExchangeButton();
+			}
 		}
-		*/
-		waitIfPaused();
-		if (!running) {
-			enableGrandExchangeButton();
+		catch (Exception e)
+		{
+			System.out.println(e);
 		}
-
 	}
 
 	private void disableGrandExchangeButton() {
