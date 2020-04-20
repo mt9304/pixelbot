@@ -16,14 +16,14 @@ import main.java.com.timelessapps.javafxtemplate.helpers.OCR.RSImageReader;
 
 public class RSCoordinates 
 {
-	public int offsetX = 577;
-	public int offsetY = 43;
+	public static int offsetX = 577;
+	public static int offsetY = 43;
 	
-	public void setOffsetX(int x) {
+	public static void setOffsetX(int x) {
 		offsetX = x;
 	}
 	
-	public void setOffsetY(int y) {
+	public static void setOffsetY(int y) {
 		offsetY = y;
 	}
 	
@@ -337,6 +337,7 @@ public class RSCoordinates
 		//Coords 407 + x , 260 + y , 100, 20
 		//992, 326, 95, 16
 		Rectangle result = new Rectangle(415 + getOffsetX(), 283 + getOffsetY(), 95, 16);
+		System.out.println(415 + getOffsetX() + ", " + 283 + getOffsetY());
 		return result;
 	}
 	
@@ -448,7 +449,7 @@ public class RSCoordinates
 	 * @return the Y coordinate of the top of RS game area
 	 * @throws AWTException 
 	 */
-	public Integer getInitialOffsetY() throws AWTException
+	public static Integer getInitialOffsetY() throws AWTException
 	{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int middleX = (int) screenSize.getWidth()/2;
@@ -490,7 +491,7 @@ public class RSCoordinates
 	 * @return the X coordinate of the top of RS game area
 	 * @throws AWTException
 	 */
-	public Integer getInitialOffsetX(int y) throws AWTException {
+	public static Integer getInitialOffsetX(int y) throws AWTException {
 		Robot bot = new Robot();
 		bot.getPixelColor(0, 0);
 		

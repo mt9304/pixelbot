@@ -34,7 +34,7 @@ public class GrandExchangeRoutine extends Routine
 	Rectangle rect = rsc.existingUserButton();
 	VerifyGrandExchange verifyGE = new VerifyGrandExchange();
 	String pass = "";
-	String[] items = { "nature", "death", "coal", "iron ore", "chaos", "gold ore", "law", "gold bar"};
+	String[] items = { "coal", "death", "nature", "iron ore", "chaos", "gold ore", "law", "gold bar"};
 	int lowPrice = 0;
 	int highPrice = 0;
 	int currentGold = 40000;
@@ -48,6 +48,7 @@ public class GrandExchangeRoutine extends Routine
 
 	public void run() {
 		log.appendToEventLogsFile("Starting bot routine in 3 seconds. ");
+		log.appendToApplicationLogsFile("Starting bot routine in 3 seconds. ");
 		System.out.println("Starting bot routine in 3 seconds. ");
 		bot.delay(3000);
 
@@ -155,11 +156,11 @@ public class GrandExchangeRoutine extends Routine
 		System.out.println("Initializing. ");
 		try
 		{
-			int y = rsc.getInitialOffsetY();
-			int x = rsc.getInitialOffsetX(y);
-			rsc.setOffsetX(x);
-			rsc.setOffsetY(y);
-			log.appendToEventLogsFile("Detected game area, starting coordinates (x,y): " + x + ", " + y);
+			int y = RSCoordinates.getInitialOffsetY();
+			int x = RSCoordinates.getInitialOffsetX(y);
+			RSCoordinates.setOffsetX(x);
+			RSCoordinates.setOffsetY(y);
+			log.appendToApplicationLogsFile("Detected game area, starting coordinates (x,y): " + x + ", " + y);
 		}
 		catch (Exception e)
 		{
@@ -171,7 +172,7 @@ public class GrandExchangeRoutine extends Routine
 	private void chooseWorld()
 	{
 		System.out.println("Choosing world. ");
-		log.appendToEventLogsFile("Choosing world. ");
+		log.appendToApplicationLogsFile("Choosing world. ");
 		try
 		{
 			bot.delay(500);
@@ -186,7 +187,7 @@ public class GrandExchangeRoutine extends Routine
 		catch (Exception e)
 		{
 			System.out.println("Could not choose world GE routine: " + e);
-			log.appendToEventLogsFile("Could not choose world GE routine: " + e);
+			log.appendToApplicationLogsFile("Could not choose world GE routine: " + e);
 			throw e;
 		}
 	}
@@ -194,7 +195,7 @@ public class GrandExchangeRoutine extends Routine
 	private void login()
 	{
 		System.out.println("Logging in. ");
-		log.appendToEventLogsFile("Logging in. ");
+		log.appendToApplicationLogsFile("Logging in. ");
 		try
 		{
     		bot.delay(500);
@@ -210,7 +211,7 @@ public class GrandExchangeRoutine extends Routine
 		catch (Exception e)
 		{
 			System.out.println("Could not login GE routine: " + e);
-			log.appendToEventLogsFile("Could not login GE routine: " + e);
+			log.appendToApplicationLogsFile("Could not login GE routine: " + e);
 			throw e;
 		}
 	}
@@ -218,7 +219,7 @@ public class GrandExchangeRoutine extends Routine
 	private void clickClickHereToPlayButton()
 	{
 		System.out.println("Clicking here to play");
-		log.appendToEventLogsFile("Clicking play button. ");
+		log.appendToApplicationLogsFile("Clicking play button. ");
 		try
 		{
     		bot.delay(500);
@@ -229,7 +230,7 @@ public class GrandExchangeRoutine extends Routine
 		catch (Exception e)
 		{
 			System.out.println("Could not click here to play GE routine: " + e);
-			log.appendToEventLogsFile("Could not click here to play GE routine: " + e);
+			log.appendToApplicationLogsFile("Could not click here to play GE routine: " + e);
 			throw e;
 		}
 	}
@@ -291,7 +292,7 @@ public class GrandExchangeRoutine extends Routine
 	private boolean collectFromGE(int i)
 	{
 		System.out.println("Attempting to collect from GE slot: " + i);
-		log.appendToEventLogsFile("Attempting to collect trade items from slot: " + i);
+		log.appendToApplicationLogsFile("Attempting to collect trade items from slot: " + i);
 		try
 		{
 			int sellButtonX = rsc.sellButtonX()[i];
@@ -328,7 +329,7 @@ public class GrandExchangeRoutine extends Routine
 			}
 			else
 			{
-				log.appendToEventLogsFile("No active trade detected, skipping collect. ");
+				log.appendToApplicationLogsFile("No active trade detected, skipping collect. ");
 				System.out.println(" No active trade detected, skipping collect. ");
 				return false;
 			}
@@ -389,7 +390,7 @@ public class GrandExchangeRoutine extends Routine
 		}
 		catch (Exception e)
 		{
-			log.appendToEventLogsFile("Could not buyHigh: " + e);
+			log.appendToApplicationLogsFile("Could not buyHigh: " + e);
 			System.out.println("Could not buyHigh: " + e);
 			throw e;
 		}
