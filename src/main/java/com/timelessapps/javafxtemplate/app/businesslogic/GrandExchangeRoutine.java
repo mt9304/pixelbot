@@ -88,6 +88,8 @@ public class GrandExchangeRoutine extends Routine
 						{
 							checkIfPausedOrStopped();
 							clickExchangeButton(); //Returns the screen to the main GE page. 
+							resetPrices();
+							incrementCurrentSlot();
 							continue;
 						}
 						clickExchangeButton();

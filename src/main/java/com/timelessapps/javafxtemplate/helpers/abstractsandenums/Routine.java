@@ -44,11 +44,13 @@ public class Routine extends Thread
     
     public void pauseRunning()
     {
+    	System.out.println("Pausing... ");
         paused = true;
     }
     
     public void startRunning()
     {
+    	System.out.println("Resuming... ");
         if (this.getState().equals(Thread.State.WAITING))
         {
             System.out.println("Resuming. ");
@@ -62,7 +64,7 @@ public class Routine extends Thread
     
     public void stopRunning()
     {
-        System.out.println("Exiting. ");
+        System.out.println("Exiting... ");
         running = false;
         //Need to wake up thread again to run the enable start button before the routine exits. 
         synchronized (this)
