@@ -34,7 +34,7 @@ public class GrandExchangeRoutine extends Routine
 	Rectangle rect = rsc.existingUserButton();
 	VerifyGrandExchange verifyGE = new VerifyGrandExchange();
 	String pass = "";
-	String[] items = { "death", "coal", "nature", "iron ore", "chaos", "gold ore", "law", "gold bar"};
+	String[] items = { "nature", "death", "coal", "iron ore", "chaos", "gold ore", "law", "gold bar"};
 	int lowPrice = 0;
 	int highPrice = 0;
 	int currentGold = 40000;
@@ -48,7 +48,6 @@ public class GrandExchangeRoutine extends Routine
 
 	public void run() {
 		log.appendToEventLogsFile("Starting bot routine in 3 seconds. ");
-		
 		System.out.println("Starting bot routine in 3 seconds. ");
 		bot.delay(3000);
 
@@ -160,6 +159,7 @@ public class GrandExchangeRoutine extends Routine
 			int x = rsc.getInitialOffsetX(y);
 			rsc.setOffsetX(x);
 			rsc.setOffsetY(y);
+			log.appendToEventLogsFile("Detected game area, starting coordinates (x,y): " + x + ", " + y);
 		}
 		catch (Exception e)
 		{
@@ -171,6 +171,7 @@ public class GrandExchangeRoutine extends Routine
 	private void chooseWorld()
 	{
 		System.out.println("Choosing world. ");
+		log.appendToEventLogsFile("Choosing world. ");
 		try
 		{
 			bot.delay(500);
@@ -185,6 +186,7 @@ public class GrandExchangeRoutine extends Routine
 		catch (Exception e)
 		{
 			System.out.println("Could not choose world GE routine: " + e);
+			log.appendToEventLogsFile("Could not choose world GE routine: " + e);
 			throw e;
 		}
 	}
@@ -192,6 +194,7 @@ public class GrandExchangeRoutine extends Routine
 	private void login()
 	{
 		System.out.println("Logging in. ");
+		log.appendToEventLogsFile("Logging in. ");
 		try
 		{
     		bot.delay(500);
@@ -207,6 +210,7 @@ public class GrandExchangeRoutine extends Routine
 		catch (Exception e)
 		{
 			System.out.println("Could not login GE routine: " + e);
+			log.appendToEventLogsFile("Could not login GE routine: " + e);
 			throw e;
 		}
 	}
@@ -214,6 +218,7 @@ public class GrandExchangeRoutine extends Routine
 	private void clickClickHereToPlayButton()
 	{
 		System.out.println("Clicking here to play");
+		log.appendToEventLogsFile("Clicking play button. ");
 		try
 		{
     		bot.delay(500);
@@ -224,6 +229,7 @@ public class GrandExchangeRoutine extends Routine
 		catch (Exception e)
 		{
 			System.out.println("Could not click here to play GE routine: " + e);
+			log.appendToEventLogsFile("Could not click here to play GE routine: " + e);
 			throw e;
 		}
 	}
@@ -233,6 +239,7 @@ public class GrandExchangeRoutine extends Routine
 	 */
 	private void scrollIn()
 	{
+		log.appendToApplicationLogsFile("Setting zoom... ");
 		try
 		{
 			for (int i = 0; i < 10; i++)
@@ -245,6 +252,7 @@ public class GrandExchangeRoutine extends Routine
 		catch (Exception e)
 		{
 			System.out.println("Could not scroll in" + e);
+			log.appendToApplicationLogsFile("Could not scroll in" + e);
 			throw e;
 		}
 	}
@@ -252,6 +260,7 @@ public class GrandExchangeRoutine extends Routine
 	private void exchangeWithClerk() 
 	{
 		System.out.println("Exchanging with clerk");
+		log.appendToApplicationLogsFile("Exchanging with clerk");
 		try
 		{
     		bot.delay(500);
@@ -269,6 +278,7 @@ public class GrandExchangeRoutine extends Routine
 		catch (Exception e)
 		{
 			System.out.println("Could not exchange with clerk: " + e);
+			log.appendToApplicationLogsFile("Could not exchange with clerk: " + e);
 			throw e;
 		}
 	}
@@ -333,6 +343,7 @@ public class GrandExchangeRoutine extends Routine
 	
 	private void buyHigh(String item, int slot) throws Exception {
 		System.out.println("Attempting to buy " + item + " at high price to find market high. ");
+		log.appendToApplicationLogsFile("Attempting to buy " + item + " at high price to find market high. ");
 		try
 		{
 			//Search for item
@@ -374,6 +385,7 @@ public class GrandExchangeRoutine extends Routine
 			bot.delay(SHORT);
 			bot.mouseClick();
 			System.out.println("Finished buying high. ");
+			log.appendToApplicationLogsFile("Finished buying at high price. ");
 		}
 		catch (Exception e)
 		{
@@ -386,15 +398,18 @@ public class GrandExchangeRoutine extends Routine
 	private void collectFromGEWhenSuccessful(int geSlot) throws Exception 
 	{
 		System.out.println("Waiting for transaction to complete before collecting. ");
+		log.appendToApplicationLogsFile("Waiting for transaction to complete before collecting. ");
 		try
 		{
 			verifyGE.transactionCompleted(geSlot);
 			collectFromGE(geSlot);
 			System.out.println("Finished collecting from GE. ");
+			log.appendToApplicationLogsFile("Finished collecting from GE. ");
 		}
 		catch (Exception e)
 		{
 			System.out.println("Could not collectFromGEWhenSuccessful(): " + e);
+			log.appendToApplicationLogsFile("Could not collectFromGEWhenSuccessful(): " + e);
 			throw e;
 		}
 	}
@@ -402,15 +417,18 @@ public class GrandExchangeRoutine extends Routine
 	private void collectFromGEWhenSuccessful(int geSlot, Duration duration) throws Exception 
 	{
 		System.out.println("Waiting for transaction to complete before collecting. ");
+		log.appendToApplicationLogsFile("Waiting for transaction to complete before collecting. ");
 		try
 		{
 			verifyGE.transactionCompleted(geSlot, LONG);
 			collectFromGE(geSlot);
 			System.out.println("Finished collecting from GE. ");
+			log.appendToApplicationLogsFile("Finished collecting from GE. ");
 		}
 		catch (Exception e)
 		{
 			System.out.println("Could not collectFromGEWhenSuccessful(): " + e);
+			log.appendToApplicationLogsFile("Could not collectFromGEWhenSuccessful(): " + e);
 			throw e;
 		}
 	}
@@ -418,6 +436,7 @@ public class GrandExchangeRoutine extends Routine
 	private void sellLow(int slot) throws Exception
 	{
 		System.out.println("Selling item below market price to find market low. ");
+		log.appendToApplicationLogsFile("Selling item below market price to find market low. ");
 		try
 		{
 			verifyGE.isOnGEScreen();
@@ -444,10 +463,12 @@ public class GrandExchangeRoutine extends Routine
 			bot.delay(SHORT);
 			bot.mouseClick();
 			System.out.println("Finished selling low. ");
+			log.appendToApplicationLogsFile("Finished selling at low price. ");
 		}
 		catch (Exception e)
 		{
 			System.out.println("Could not sellLow(): " + e);
+			log.appendToApplicationLogsFile("Could not sellLow(): " + e);
 			throw e;
 		}
 	}
@@ -461,6 +482,7 @@ public class GrandExchangeRoutine extends Routine
 	private boolean pricesSuccessfullySet() throws Exception 
 	{
 		System.out.println("Validating item prices. "); 
+		log.appendToApplicationLogsFile("Validating item prices. "); 
 		try
 		{
 			bot.delay(SHORT);
@@ -482,11 +504,13 @@ public class GrandExchangeRoutine extends Routine
 			if (priceDifference < 1 || priceDifference > 5) //If price difference is too high, then this is not a typical scenario suitable for automated trading. Should skip to next item and wait for volatility to decrease. 
 			{
 				System.out.println("Current price difference is too high for effective trading. " + priceDifference);
+				log.appendToApplicationLogsFile("Current price difference is too high for effective trading. " + priceDifference);
 				return false;
 			}
 			if (priceDifference == 5 || priceDifference == 4) //Sometimes the price difference will be a lot, but still sort of reasonable. If it is 4 or 5, then decrease the high and lows by 1 to get faster trading times. 
 			{
 				System.out.println("Adjusted priced by 1 in each direction. ");
+				log.appendToApplicationLogsFile("Adjusted priced by 1 in each direction. ");
 				lowPrice = lowPrice + 1;
 				highPrice = highPrice - 1;
 			}
@@ -495,15 +519,17 @@ public class GrandExchangeRoutine extends Routine
 			if (quantity < 1)
 			{
 				System.out.println("Not enough gold to buy items. ");
+				log.appendToApplicationLogsFile("Not enough gold to buy items. ");
 				throw new InvalidPricesException("Not enough gold to buy items. ");
 			}
-			
+			log.appendToApplicationLogsFile("Current price differences are reasonable. Low: " + lowPrice + " . High: " + highPrice);
 			System.out.println("Current price differences are reasonable. Low: " + lowPrice + " . High: " + highPrice);
 			return true;
 		}
 		catch (Exception e)
 		{
 			System.out.println("Could not validateItemPrices(): " + e);
+			log.appendToApplicationLogsFile("Could not validateItemPrices(): " + e);
 			throw e;
 		}
 	}
@@ -511,6 +537,7 @@ public class GrandExchangeRoutine extends Routine
 	private void clickExchangeButton() throws Exception
 	{
 		System.out.println("Clicking Exchange Button. ");
+		log.appendToApplicationLogsFile("Clicking Exchange Button. ");
 		try
 		{
 			bot.delay(SHORT);
@@ -525,6 +552,7 @@ public class GrandExchangeRoutine extends Routine
 		catch (Exception e)
 		{
 			System.out.println("Could not clickExchangeButton(): " + e);
+			log.appendToApplicationLogsFile("Could not clickExchangeButton(): " + e);
 			throw e;
 		}
 	}
@@ -532,6 +560,7 @@ public class GrandExchangeRoutine extends Routine
 	private void buyLow(String item, int slot) throws Exception 
 	{
 		System.out.println("Buying low");
+		log.appendToApplicationLogsFile("Buying at low price");
 		try
 		{
 			//Search for item
@@ -588,10 +617,12 @@ public class GrandExchangeRoutine extends Routine
 			bot.mouseClick();
 			bot.delay(SHORT);
 			System.out.println("Finished buyingLow()");
+			log.appendToApplicationLogsFile("Finished setting up buy request");
 		}
 		catch (Exception e)
 		{
 			System.out.println("Could not buyLow(): " + e);
+			log.appendToApplicationLogsFile("Could not buyLow(): " + e);
 			throw e;
 		}
 	}
@@ -599,6 +630,7 @@ public class GrandExchangeRoutine extends Routine
 	private void sellHigh(int slot) throws Exception 
 	{
 		System.out.println("Selling high");
+		log.appendToApplicationLogsFile("Selling at high price");
 		try
 		{
 			verifyGE.isOnGEScreen();
@@ -630,10 +662,12 @@ public class GrandExchangeRoutine extends Routine
 			bot.mouseClick();
 			bot.delay(SHORT);
 			System.out.println("Finished selling high. ");
+			log.appendToApplicationLogsFile("Finished selling at high price");
 		}
 		catch (Exception e)
 		{
 			System.out.println("Could not sellHigh(): " + e);
+			log.appendToApplicationLogsFile("Could not sellHigh(): " + e);
 			throw e;
 		}
 	}

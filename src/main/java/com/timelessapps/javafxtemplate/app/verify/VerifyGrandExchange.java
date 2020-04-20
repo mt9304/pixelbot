@@ -8,6 +8,7 @@ import main.java.com.timelessapps.javafxtemplate.helpers.OCR.RSImageReader;
 import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration;
 import main.java.com.timelessapps.javafxtemplate.helpers.coords.RSCoordinates;
 import main.java.com.timelessapps.javafxtemplate.helpers.exceptions.ElementNotFoundException;
+import main.java.com.timelessapps.javafxtemplate.helpers.services.LoggingService;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
 
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration.SHORT;
@@ -19,6 +20,7 @@ public class VerifyGrandExchange
 	RobotService bot = new RobotService();
 	RSImageReader rsir = new RSImageReader();
 	RSCoordinates rsc = new RSCoordinates();
+	LoggingService log = new LoggingService();
 	
 	public VerifyGrandExchange() throws AWTException
 	{
@@ -28,6 +30,7 @@ public class VerifyGrandExchange
 	public void loginScreenIsLoaded() throws Exception 
 	{
 		System.out.println("Verifying login screen loaded. ");
+		log.appendToApplicationLogsFile("Verifying login screen loaded. ");
 		try
 		{
 			for (int i = 0; i < 20; i++)
@@ -37,6 +40,7 @@ public class VerifyGrandExchange
 				if (loginText.contains("Existing User"))
 				{
 					System.out.println("Existing user button detected. ");
+					log.appendToApplicationLogsFile("Existing user button detected. ");
 					return;
 				}
 				Thread.sleep(1500);
@@ -53,6 +57,7 @@ public class VerifyGrandExchange
 	public void clickHereToPlayIsPresent() throws Exception 
 	{
 		System.out.println("Verifying login screen loaded. ");
+		log.appendToApplicationLogsFile("Verifying login screen loaded. ");
 		try
 		{
 			for (int i = 0; i < 20; i++)
@@ -62,6 +67,7 @@ public class VerifyGrandExchange
 				if (clickHereToPlayText.contains("CLICK HERE TO FLAY"))
 				{
 					System.out.println("Click here to play button detected. ");
+					log.appendToApplicationLogsFile("Click here to play button detected. ");
 					return;
 				}
 				Thread.sleep(1500);
@@ -78,6 +84,7 @@ public class VerifyGrandExchange
 	public void isOnBuyScreen() throws Exception
 	{
 		System.out.println("Veryfying RS is on buy screen at GE. ");
+		log.appendToApplicationLogsFile("Veryfying RS is on buy screen at GE. ");
 		try
 		{
 			for (int i = 0; i < 10; i++)
@@ -87,6 +94,7 @@ public class VerifyGrandExchange
 				if (buyText.contains("What would you")) //Text in game should turn out as What would you like to huH?
 				{
 					System.out.println("Buy screen detected. ");
+					log.appendToApplicationLogsFile("Buy screen detected. ");
 					return;
 				}
 				Thread.sleep(1500);
@@ -103,6 +111,7 @@ public class VerifyGrandExchange
 	public void isOnGEScreen() throws Exception 
 	{
 		System.out.println("Veryfying RS is on the main GE screen. ");
+		log.appendToApplicationLogsFile("Veryfying RS is on the main GE screen. ");
 		try
 		{
 			for (int i = 0; i < 10; i++)
@@ -112,6 +121,7 @@ public class VerifyGrandExchange
 				if (geText.contains("Grand"))
 				{
 					System.out.println("GE screen detected. ");
+					log.appendToApplicationLogsFile("GE screen detected. ");
 					return;
 				}
 				Thread.sleep(1500);
@@ -127,6 +137,7 @@ public class VerifyGrandExchange
 
 	public void transactionCompleted(int geSlot) throws Exception {
 		System.out.println("Verifying that all items have sold in GE slot: " + geSlot);
+		log.appendToApplicationLogsFile("Verifying that all items have sold in GE slot: " + geSlot);
 		try
 		{
 			for (int i = 0; i < 31; i++)
@@ -138,6 +149,7 @@ public class VerifyGrandExchange
 				if (RSImageReader.isSameColor(green, currentColor))
 				{
 					System.out.println("Green progress bar detected for slot: " + geSlot);
+					log.appendToApplicationLogsFile("Green progress bar detected for slot: " + geSlot);
 					return;
 				}
 				bot.type(" "); //Typing to prevent being disconnected. 
@@ -157,6 +169,7 @@ public class VerifyGrandExchange
 	
 	public void transactionCompleted(int geSlot, Duration duration) throws Exception {
 		System.out.println("Verifying that all items have sold in GE slot: " + geSlot);
+		log.appendToApplicationLogsFile("Verifying that all items have sold in GE slot: " + geSlot);
 		try
 		{
 			for (int i = 0; i < 101; i++)
@@ -168,6 +181,7 @@ public class VerifyGrandExchange
 				if (RSImageReader.isSameColor(green, currentColor))
 				{
 					System.out.println("Green progress bar detected for slot: " + geSlot);
+					log.appendToApplicationLogsFile("Green progress bar detected for slot: " + geSlot);
 					return;
 				}
 				bot.type(" "); //Typing to prevent being disconnected. 
@@ -188,6 +202,7 @@ public class VerifyGrandExchange
 	public void isOnSellScreen() throws Exception 
 	{
 		System.out.println("Veryfying RS is on the GE sell screen. ");
+		log.appendToApplicationLogsFile("Veryfying RS is on the GE sell screen. ");
 		try
 		{
 			for (int i = 0; i < 5; i++)
@@ -197,6 +212,7 @@ public class VerifyGrandExchange
 				if (geText.contains("ell"))
 				{
 					System.out.println("Sell screen detected. ");
+					log.appendToApplicationLogsFile("Sell screen detected. ");
 					return;
 				}
 				Thread.sleep(1000);
@@ -213,6 +229,7 @@ public class VerifyGrandExchange
 	public void isOnTradeHistoryScreen() throws Exception 
 	{
 		System.out.println("Veryfying RS is on the trade history screen");
+		log.appendToApplicationLogsFile("Veryfying RS is on the trade history screen");
 		try
 		{
 			for (int i = 0; i < 5; i++)
@@ -222,6 +239,7 @@ public class VerifyGrandExchange
 				if (geText.contains("Trade"))
 				{
 					System.out.println("Trade History screen detected. ");
+					log.appendToApplicationLogsFile("Trade History screen detected. ");
 					return;
 				}
 				Thread.sleep(1000);
