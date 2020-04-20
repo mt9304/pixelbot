@@ -34,11 +34,12 @@ public class GrandExchangeRoutine extends Routine
 	Rectangle rect = rsc.existingUserButton();
 	VerifyGrandExchange verifyGE = new VerifyGrandExchange();
 	String pass = "";
-	String[] items = { "death rune", "coal", "nature rune"};
+	String[] items = { "death", "coal", "nature"};
 	int lowPrice = 0;
 	int highPrice = 0;
 	int currentGold = 40000;
 	int geLimit = 11000; //GE limits the amount of an item that can be bought every 8 hours. 
+	int currentSlot = 0; //Up to 3 slots for f2p
 
 	public GrandExchangeRoutine(String pass) throws AWTException {
 		this.pass = pass;
@@ -65,35 +66,43 @@ public class GrandExchangeRoutine extends Routine
 				exchangeWithClerk(); //Opens exchange menu
 				
 				while (running) {
-					for (int i = 0; i < 3; i++)
+					for (int i = 0; i < 10; i++)
 					{
 						checkIfPausedOrStopped();
 						/** Start routine here. **/
 						
 						verifyGE.isOnGEScreen();
-						if(collectFromGE(i))
+						if(collectFromGE(currentSlot))
 						{
-							sellLow(i);
+							checkIfPausedOrStopped();
+							sellLow(currentSlot);
 						}
 						//Sell first inventory slot
-						buyHigh(items[i], i);
-						collectFromGEWhenSuccessful(i);
-						sellLow(i);
-						collectFromGEWhenSuccessful(i);
-						if (!reasonablePricesSet()) //Will go to trade history to read values
+						buyHigh(items[currentSlot], currentSlot);
+						collectFromGEWhenSuccessful(currentSlot);
+						checkIfPausedOrStopped();
+						sellLow(currentSlot);
+						collectFromGEWhenSuccessful(currentSlot);
+						checkIfPausedOrStopped();
+						if (!pricesSuccessfullySet()) //Will go to trade history to read values
 						{
+							checkIfPausedOrStopped();
 							clickExchangeButton(); //Returns the screen to the main GE page. 
 							continue;
 						}
 						clickExchangeButton();
-						buyLow(items[i], i);
-						collectFromGEWhenSuccessful(i, LONG);
-						sellHigh(i);
-						collectFromGEWhenSuccessful(i, LONG);
+						buyLow(items[currentSlot], currentSlot);
+						collectFromGEWhenSuccessful(currentSlot, LONG);
+						checkIfPausedOrStopped();
+						sellHigh(currentSlot);
+						collectFromGEWhenSuccessful(currentSlot, LONG);
+						checkIfPausedOrStopped();
 						resetPrices();
+						incrementCurrentSlot();
 						Thread.sleep(random.nextInt(1000) + 1000);
 						checkIfPausedOrStopped();
 					}
+					return;
 				}
 			} catch (Exception ex) {
 				System.out.println("Bot could not complete routine: " + ex);
@@ -286,10 +295,15 @@ public class GrandExchangeRoutine extends Routine
 				bot.delay(SHORT);
 				bot.mouseClick();
 				bot.delay(SHORT);
-				bot.moveCursorTo(rsc.cancelOrderButtonX(), rsc.cancelOrderButtonY());
-				bot.delay(MEDIUM);
-				bot.mouseClick();
-				bot.delay(MEDIUM);
+				
+				Color greenProgressBar = new Color(0, 95, 0);
+				if (RSImageReader.isSameColor(bot.getPixelColor(rsc.largeProgressBarX(), rsc.largeProgressBarY()), greenProgressBar))
+				{
+					bot.moveCursorTo(rsc.cancelOrderButtonX(), rsc.cancelOrderButtonY());
+					bot.delay(MEDIUM);
+					bot.mouseClick();
+					bot.delay(MEDIUM);
+				}
 				bot.delay(MEDIUM);
 				bot.moveCursorTo(rsc.secondSoldItemSlotX(), rsc.secondSoldItemSlotY());
 				bot.delay(SHORT);
@@ -327,6 +341,7 @@ public class GrandExchangeRoutine extends Routine
 			bot.mouseClick();
 			bot.delay(SHORT);
 			verifyGE.isOnBuyScreen();
+			bot.delay(MEDIUM);
 			bot.type(item);
 			bot.delay(MEDIUM);
 			bot.delay(MEDIUM);
@@ -436,9 +451,15 @@ public class GrandExchangeRoutine extends Routine
 		}
 	}
 	
-	private boolean reasonablePricesSet() throws Exception 
+	/**
+	 * This function will to the trade history screen on the GE page to check last 2 transations and see the price difference. 
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	private boolean pricesSuccessfullySet() throws Exception 
 	{
-		System.out.println("Validating item prices. ");
+		System.out.println("Validating item prices. "); 
 		try
 		{
 			bot.delay(SHORT);
@@ -468,6 +489,14 @@ public class GrandExchangeRoutine extends Routine
 				lowPrice = lowPrice + 1;
 				highPrice = highPrice - 1;
 			}
+			
+			int quantity = currentGold/lowPrice;
+			if (quantity < 1)
+			{
+				System.out.println("Not enough gold to buy items. ");
+				throw new InvalidPricesException("Not enough gold to buy items. ");
+			}
+			
 			System.out.println("Current price differences are reasonable. Low: " + lowPrice + " . High: " + highPrice);
 			return true;
 		}
@@ -511,6 +540,7 @@ public class GrandExchangeRoutine extends Routine
 			bot.mouseClick();
 			bot.delay(SHORT);
 			verifyGE.isOnBuyScreen();
+			bot.delay(MEDIUM);
 			bot.type(item);
 			bot.delay(MEDIUM);
 			bot.delay(MEDIUM);
@@ -526,17 +556,32 @@ public class GrandExchangeRoutine extends Routine
 				bot.keyPress(KeyEvent.VK_ENTER);
 				bot.keyRelease(KeyEvent.VK_ENTER);
 			}
+			//Specify price
 			bot.delay(SHORT);
 			bot.moveCursorTo(rsc.specifyPriceButtonX(), rsc.specifyPriceButtonY());
 			bot.delay(SHORT);
 			bot.mouseClick();
-			bot.delay(SHORT);
-			bot.delay(SHORT);
+			bot.delay(MEDIUM);
+			
+			bot.delay(MEDIUM);
 			bot.type(Integer.toString(lowPrice));
 			bot.delay(SHORT);
 			bot.keyPress(KeyEvent.VK_ENTER);
 			bot.keyRelease(KeyEvent.VK_ENTER);
 			bot.delay(SHORT);
+			//Specify quantity
+			bot.moveCursorTo(rsc.specifyQuantityButtonX(), rsc.specifyQuantityButtonY());
+			bot.delay(SHORT);
+			bot.mouseClick();
+			bot.delay(MEDIUM);
+			bot.delay(MEDIUM);
+			int quantity = currentGold/lowPrice;
+			bot.type(Integer.toString(quantity));
+			bot.delay(SHORT);
+			bot.keyPress(KeyEvent.VK_ENTER);
+			bot.keyRelease(KeyEvent.VK_ENTER);
+			bot.delay(SHORT);
+			//Confirm trade
 			bot.moveCursorTo(rsc.confirmTradeButtonX(), rsc.confirmTradeButtonY());
 			bot.delay(SHORT);
 			bot.mouseClick();
@@ -570,7 +615,8 @@ public class GrandExchangeRoutine extends Routine
 			bot.moveCursorTo(rsc.specifyPriceButtonX(), rsc.specifyPriceButtonY());
 			bot.delay(SHORT);
 			bot.mouseClick();
-			bot.delay(SHORT);
+			bot.delay(MEDIUM);
+			bot.delay(MEDIUM);
 			bot.type(Integer.toString(highPrice));
 			bot.delay(SHORT);
 			bot.keyPress(KeyEvent.VK_ENTER);
@@ -595,5 +641,14 @@ public class GrandExchangeRoutine extends Routine
 	{
 		lowPrice = 0;
 		highPrice = 0;
+	}
+	
+	private void incrementCurrentSlot()
+	{
+		currentSlot++;
+		if (currentSlot > 2)
+		{
+			currentSlot = 0;
+		}
 	}
 }

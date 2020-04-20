@@ -178,7 +178,15 @@ public class RSCoordinates
 	public int specifyPriceButtonY() {
 		return getOffsetY() + 194;
 	}
-	//
+	
+	public int specifyQuantityButtonX() {
+		return getOffsetX() + 233;
+	}
+	
+	public int specifyQuantityButtonY() {
+		return getOffsetY() + 191;
+	}
+	
 	public int confirmTradeButtonX() {
 		return getOffsetX() + 256;
 	}
@@ -257,6 +265,14 @@ public class RSCoordinates
 	
 	private int progressBar3Y() {
 		return getOffsetY() + 146;
+	}
+	
+	public int largeProgressBarX() { //The progress bar at the bottom when clicking a slot
+		return getOffsetX() + 210;
+	}
+	
+	public int largeProgressBarY() { //The progress bar at the bottom when clicking a slot
+		return getOffsetX() + 286;
 	}
 	
 	public int cancelOrderButtonX() {

@@ -33,7 +33,7 @@ public class VerifyGrandExchange
 			for (int i = 0; i < 20; i++)
 			{
 				String loginText = rsir.getRSLoginText(rsc.existingUserButton());
-				System.out.println("Login text: " + loginText);
+				//System.out.println("Login text: " + loginText);
 				if (loginText.contains("Existing User"))
 				{
 					System.out.println("Existing user button detected. ");
@@ -58,7 +58,7 @@ public class VerifyGrandExchange
 			for (int i = 0; i < 20; i++)
 			{
 				String clickHereToPlayText = rsir.getRSLoginText(rsc.clickHereToPlayButton());
-				System.out.println("Text: " + clickHereToPlayText);
+				//System.out.println("Text: " + clickHereToPlayText);
 				if (clickHereToPlayText.contains("CLICK HERE TO FLAY"))
 				{
 					System.out.println("Click here to play button detected. ");
@@ -83,7 +83,7 @@ public class VerifyGrandExchange
 			for (int i = 0; i < 10; i++)
 			{
 				String buyText = rsir.getGESearchAreaText(rsc.buySearchAreaText());
-				System.out.println("Text: " + buyText);
+				//System.out.println("Text: " + buyText);
 				if (buyText.contains("What would you")) //Text in game should turn out as What would you like to huH?
 				{
 					System.out.println("Buy screen detected. ");
@@ -108,7 +108,7 @@ public class VerifyGrandExchange
 			for (int i = 0; i < 10; i++)
 			{
 				String geText = rsir.getRSText(rsc.mainGrandExchangeText());
-				System.out.println("Text: " + geText);
+				//System.out.println("Text: " + geText);
 				if (geText.contains("Grand"))
 				{
 					System.out.println("GE screen detected. ");
@@ -159,9 +159,9 @@ public class VerifyGrandExchange
 		System.out.println("Verifying that all items have sold in GE slot: " + geSlot);
 		try
 		{
-			for (int i = 0; i < 51; i++)
+			for (int i = 0; i < 101; i++)
 			{
-				System.out.println("Checking " + i + "/50 times. ");
+				System.out.println("Checking " + i + "/100 times. ");
 				Color green = new Color(0, 95, 0);
 				Color currentColor = bot.getPixelColor(rsc.progressBarX()[geSlot], rsc.progressBarY()[geSlot]);
 				
@@ -193,7 +193,7 @@ public class VerifyGrandExchange
 			for (int i = 0; i < 5; i++)
 			{
 				String geText = rsir.getRSText(rsc.sellOfferText());
-				System.out.println("Text: " + geText);
+				//System.out.println("Text: " + geText);
 				if (geText.contains("ell"))
 				{
 					System.out.println("Sell screen detected. ");
@@ -218,7 +218,7 @@ public class VerifyGrandExchange
 			for (int i = 0; i < 5; i++)
 			{
 				String geText = rsir.getRSText(rsc.tradeHistoryText());
-				System.out.println("Text: " + geText);
+				//System.out.println("Text: " + geText);
 				if (geText.contains("Trade"))
 				{
 					System.out.println("Trade History screen detected. ");
