@@ -315,6 +315,24 @@ public class RSCoordinates
 		return getOffsetY() + 50;
 	}
 	
+	//Top left text that appears when you hover over an inventory item while GE menu open. If there is an item, pixel here should be 206, 206, 206
+	public int offerTextX() {
+		return getOffsetX() + 19;
+	}
+	
+	//Top left text that appears when you hover over an inventory item while GE menu open. If there is an item, pixel here should be 206, 206, 206
+	public int offerTextY() {
+		return getOffsetY() + 1;
+	}
+	
+	public int cancelOrderRedPixelX() {
+		return getOffsetX() + 359;
+	}
+	
+	public int cancelOrderRedPixelY() {
+		return getOffsetY() + 260;
+	}
+	
 	public Rectangle firstHistoryRowPrice() {
 		//Coords 353 + x , 55 + y , 73, 8
 		Rectangle result = new Rectangle(359 + getOffsetX(), 55 + getOffsetY(), 64, 8);

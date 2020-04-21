@@ -8,6 +8,7 @@ import main.java.com.timelessapps.javafxtemplate.helpers.OCR.RSImageReader;
 import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration;
 import main.java.com.timelessapps.javafxtemplate.helpers.coords.RSCoordinates;
 import main.java.com.timelessapps.javafxtemplate.helpers.exceptions.ElementNotFoundException;
+import main.java.com.timelessapps.javafxtemplate.helpers.exceptions.TransactionIncompleteException;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.LoggingService;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
 
@@ -56,8 +57,8 @@ public class VerifyGrandExchange
 	
 	public void clickHereToPlayIsPresent() throws Exception 
 	{
-		System.out.println("Verifying login screen loaded. ");
-		log.appendToApplicationLogsFile("Verifying login screen loaded. ");
+		System.out.println("Verifying click to play screen is loaded. ");
+		log.appendToApplicationLogsFile("Verifying click to play screen is loaded. ");
 		try
 		{
 			for (int i = 0; i < 20; i++)
@@ -172,9 +173,9 @@ public class VerifyGrandExchange
 		log.appendToApplicationLogsFile("Verifying that all items have sold in GE slot: " + geSlot);
 		try
 		{
-			for (int i = 0; i < 101; i++)
+			for (int i = 0; i < 51; i++)
 			{
-				System.out.println("Checking " + i + "/100 times. ");
+				System.out.println("Checking " + i + "/50 times. ");
 				Color green = new Color(0, 95, 0);
 				Color currentColor = bot.getPixelColor(rsc.progressBarX()[geSlot], rsc.progressBarY()[geSlot]);
 				
@@ -190,7 +191,7 @@ public class VerifyGrandExchange
 				bot.keyRelease(KeyEvent.VK_BACK_SPACE);
 				Thread.sleep(5000);
 			}
-			throw new ElementNotFoundException("Could not detect green progress bar. ");
+			throw new TransactionIncompleteException("Did not detect green progress bar in time. ");
 		}
 		catch (Exception e)
 		{
@@ -245,6 +246,35 @@ public class VerifyGrandExchange
 				Thread.sleep(1000);
 			}
 			throw new ElementNotFoundException("Could not detect trade history screen. ");
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+			throw e;
+		}
+	}
+
+	public boolean isItemToSell() {
+		try
+		{
+			bot.delay(MEDIUM);
+			bot.moveCursorTo(rsc.firstInventorySlotX(), rsc.firstInventorySlotY());
+			bot.delay(SHORT);
+			Color grey = new Color(219, 219, 218);
+			Color currentColor = bot.getPixelColor(rsc.offerTextX(), rsc.offerTextY());
+			bot.delay(SHORT);
+			bot.delay(MEDIUM);
+			//If there is an item collected, then sell it at high price
+			if (currentColor.getRed() > 150 && currentColor.getGreen() > 150 && currentColor.getBlue() > 150)
+			{
+				log.appendToApplicationLogsFile("Detected item to sell. ");
+				return true;
+			}
+			else
+			{
+				log.appendToApplicationLogsFile("Did not detect item to sell. ");
+				return false;
+			}
 		}
 		catch (Exception e)
 		{

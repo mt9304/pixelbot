@@ -16,6 +16,8 @@ import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Durat
 import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Routine;
 import main.java.com.timelessapps.javafxtemplate.helpers.coords.RSCoordinates;
 import main.java.com.timelessapps.javafxtemplate.helpers.exceptions.InvalidPricesException;
+import main.java.com.timelessapps.javafxtemplate.helpers.exceptions.NoItemsToSellException;
+import main.java.com.timelessapps.javafxtemplate.helpers.exceptions.TransactionIncompleteException;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.CustomSceneHelper;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.LoggingService;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
@@ -34,7 +36,7 @@ public class GrandExchangeRoutine extends Routine
 	Rectangle rect = rsc.existingUserButton();
 	VerifyGrandExchange verifyGE = new VerifyGrandExchange();
 	String pass = "";
-	String[] items = { "coal", "death", "nature", "iron ore", "chaos", "gold ore", "law", "gold bar"};
+	String[] items = { "coal", "nature", "death", "iron ore", "chaos", "gold ore", "law", "gold bar"};
 	int lowPrice = 0;
 	int highPrice = 0;
 	int currentGold = 40000;
@@ -77,7 +79,7 @@ public class GrandExchangeRoutine extends Routine
 						sellLow(currentSlot);
 					}
 					//Sell first inventory slot
-					buyHigh(items[currentSlot], currentSlot);
+					buyHigh(items[currentItemIndex], currentSlot);
 					collectFromGEWhenSuccessful(currentSlot);
 					checkIfPausedOrStopped();
 					sellLow(currentSlot);
@@ -88,7 +90,7 @@ public class GrandExchangeRoutine extends Routine
 						checkIfPausedOrStopped();
 						clickExchangeButton(); //Returns the screen to the main GE page. 
 						resetPrices();
-						incrementCurrentSlot();
+						//incrementCurrentSlot(); //Uncomment when there is enough gp to use multiple slots
 						currentItemIndex++;
 						continue;
 					}
@@ -96,11 +98,20 @@ public class GrandExchangeRoutine extends Routine
 					buyLow(items[currentSlot], currentSlot);
 					collectFromGEWhenSuccessful(currentSlot, LONG);
 					checkIfPausedOrStopped();
-					sellHigh(currentSlot);
-					collectFromGEWhenSuccessful(currentSlot, LONG);
+					if (verifyGE.isItemToSell())
+					{
+						sellHigh(currentSlot);
+						collectFromGEWhenSuccessful(currentSlot, LONG);
+					}
+					//Below only runs if there is left over unsold items at high price. Need to sell it at low price to recover gp and move on. 
+					if (verifyGE.isItemToSell())
+					{
+						sellLow(currentSlot);
+						collectFromGEWhenSuccessful(currentSlot);
+					}
 					checkIfPausedOrStopped();
 					resetPrices();
-					incrementCurrentSlot();
+					//incrementCurrentSlot(); //Uncomment when there is enough gp to use multiple slots
 					currentItemIndex++;
 					Thread.sleep(random.nextInt(1000) + 1000);
 					checkIfPausedOrStopped();
@@ -308,8 +319,10 @@ public class GrandExchangeRoutine extends Routine
 				bot.mouseClick();
 				bot.delay(SHORT);
 				
-				Color greenProgressBar = new Color(0, 95, 0);
-				if (RSImageReader.isSameColor(bot.getPixelColor(rsc.largeProgressBarX(), rsc.largeProgressBarY()), greenProgressBar))
+				Color cancelButtonRed = bot.getPixelColor(rsc.cancelOrderRedPixelX(), rsc.cancelOrderRedPixelY());
+				//Color greenProgressBar = new Color(0, 95, 0);
+				//if (RSImageReader.isSameColor(bot.getPixelColor(rsc.largeProgressBarX(), rsc.largeProgressBarY()), greenProgressBar))
+				if (cancelButtonRed.getRed() > 80)
 				{
 					bot.moveCursorTo(rsc.cancelOrderButtonX(), rsc.cancelOrderButtonY());
 					bot.delay(MEDIUM);
@@ -343,8 +356,8 @@ public class GrandExchangeRoutine extends Routine
 	}
 	
 	private void buyHigh(String item, int slot) throws Exception {
-		System.out.println("Attempting to buy " + item + " at high price to find market high. ");
-		log.appendToApplicationLogsFile("Attempting to buy " + item + " at high price to find market high. ");
+		System.out.println("Attempting to buy " + item + " at high price. ");
+		log.appendToApplicationLogsFile("Attempting to buy " + item + " at high price. ");
 		try
 		{
 			//Search for item
@@ -426,6 +439,11 @@ public class GrandExchangeRoutine extends Routine
 			System.out.println("Finished collecting from GE. ");
 			log.appendToApplicationLogsFile("Finished collecting from GE. ");
 		}
+		catch (TransactionIncompleteException ex)
+		{
+			log.appendToApplicationLogsFile("Caught TransactionIncompleteException, will sell remaining items if found. ");
+			collectFromGE(geSlot);
+		}
 		catch (Exception e)
 		{
 			System.out.println("Could not collectFromGEWhenSuccessful(): " + e);
@@ -436,8 +454,8 @@ public class GrandExchangeRoutine extends Routine
 	
 	private void sellLow(int slot) throws Exception
 	{
-		System.out.println("Selling item below market price to find market low. ");
-		log.appendToApplicationLogsFile("Selling item below market price to find market low. ");
+		System.out.println("Selling item below market price. ");
+		log.appendToApplicationLogsFile("Selling item below market price. ");
 		try
 		{
 			verifyGE.isOnGEScreen();
@@ -664,6 +682,10 @@ public class GrandExchangeRoutine extends Routine
 			bot.delay(SHORT);
 			System.out.println("Finished selling high. ");
 			log.appendToApplicationLogsFile("Finished selling at high price");
+		}
+		catch (NoItemsToSellException ex)
+		{
+			log.appendToApplicationLogsFile("Caught NoItemsToSellException, skipping sell. ");
 		}
 		catch (Exception e)
 		{
