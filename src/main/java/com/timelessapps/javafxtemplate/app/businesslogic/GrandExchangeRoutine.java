@@ -36,10 +36,10 @@ public class GrandExchangeRoutine extends Routine
 	Rectangle rect = rsc.existingUserButton();
 	VerifyGrandExchange verifyGE = new VerifyGrandExchange();
 	String pass = "";
-	String[] items = { "coal", "nature", "death", "iron ore", "chaos", "gold ore", "law", "gold bar"};
+	String[] items = { "coal", "nature", "death", "iron ore", "chaos", "gold ore", "law"};
 	int lowPrice = 0;
 	int highPrice = 0;
-	int currentGold = 40000;
+	int currentGold = 122000;
 	int geLimit = 11000; //GE limits the amount of an item that can be bought every 8 hours. 
 	int currentSlot = 0; //Up to 3 slots for f2p
 	int currentItemIndex = 0;
@@ -68,7 +68,7 @@ public class GrandExchangeRoutine extends Routine
 				scrollIn();
 				exchangeWithClerk(); //Opens exchange menu
 				
-				while (running && currentItemIndex < 8) {
+				while (running && currentItemIndex < 7) {
 					checkIfPausedOrStopped();
 					/** Start routine here. **/
 					
@@ -95,7 +95,7 @@ public class GrandExchangeRoutine extends Routine
 						continue;
 					}
 					clickExchangeButton();
-					buyLow(items[currentSlot], currentSlot);
+					buyLow(items[currentItemIndex], currentSlot);
 					collectFromGEWhenSuccessful(currentSlot, LONG);
 					checkIfPausedOrStopped();
 					if (verifyGE.isItemToSell())
@@ -516,6 +516,7 @@ public class GrandExchangeRoutine extends Routine
 			bot.delay(SHORT);
 			int priceDifference = highPrice - lowPrice;
 			System.out.println("Current low: " + lowPrice + " Current high: " + highPrice);
+			log.appendToApplicationLogsFile("Current low: " + lowPrice + " Current high: " + highPrice);
 			if (lowPrice == 0 || highPrice == 0) //Prices should never be 0, 0 is the default value assigned and something would have been wrong if either stayed at 0. Program should throw error and stop for analysis. 
 			{
 				throw new InvalidPricesException("Current prices are not valid, lowPrice: " + lowPrice + " highPrice: " + highPrice);
