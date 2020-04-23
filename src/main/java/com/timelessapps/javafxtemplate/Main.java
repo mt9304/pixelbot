@@ -63,6 +63,7 @@ public class Main extends Application
 	        		globalKeyListener.setDaemon(true);
 	        		globalKeyListener.start();
 	        		
+	        		grandExchangeRoutine.join();
 	        		System.out.println("Completed GE routine, shutting down. ");
 	        		System.exit(0);
 	        	}
