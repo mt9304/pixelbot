@@ -60,12 +60,14 @@ public class MeleeRoutine extends Routine
 				clickClickHereToPlayButton();
 				Thread.sleep(5000); //Add verify chat box loaded
 				scrollIn();
+				//start clicking thread. reads top left, clicks mouse if text found. 
 				
 				while (running) {
 					checkIfPausedOrStopped();
 					/** Start routine here. **/
 					
-					
+					//verifyHPHighEnough();
+					//move mouse around after 10 to 15 seconds
 					
 					/** End routine here. **/
 					Thread.sleep(random.nextInt(1000) + 1000);
