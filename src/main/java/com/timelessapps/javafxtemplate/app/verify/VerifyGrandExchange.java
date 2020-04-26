@@ -153,7 +153,10 @@ public class VerifyGrandExchange
 					log.appendToApplicationLogsFile("Green progress bar detected for slot: " + geSlot);
 					return;
 				}
-				bot.type(" "); //Typing to prevent being disconnected. 
+				if (i % 5 == 0)
+				{
+					bot.type(" "); //Typing to prevent being disconnected. 
+				}
 				bot.keyPress(KeyEvent.VK_BACK_SPACE);
 				bot.delay(SHORT);
 				bot.keyRelease(KeyEvent.VK_BACK_SPACE);
@@ -185,7 +188,10 @@ public class VerifyGrandExchange
 					log.appendToApplicationLogsFile("Green progress bar detected for slot: " + geSlot);
 					return;
 				}
-				bot.type(" "); //Typing to prevent being disconnected. 
+				if (i % 5 == 0)
+				{
+					bot.type(" "); //Typing to prevent being disconnected. 
+				}
 				bot.keyPress(KeyEvent.VK_BACK_SPACE);
 				bot.delay(SHORT);
 				bot.keyRelease(KeyEvent.VK_BACK_SPACE);

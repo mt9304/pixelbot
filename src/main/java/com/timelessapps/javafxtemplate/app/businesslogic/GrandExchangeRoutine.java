@@ -36,10 +36,10 @@ public class GrandExchangeRoutine extends Routine
 	Rectangle rect = rsc.existingUserButton();
 	VerifyGrandExchange verifyGE = new VerifyGrandExchange();
 	String pass = "";
-	String[] items = { "nature", "death", "coal", "iron ore", "chaos", "gold ore", "law"};
+	String[] items = { "coal", "nature", "death", "iron ore", "chaos", "gold ore", "law"};
 	int lowPrice = 0;
 	int highPrice = 0;
-	int currentGold = 150000 ;
+	int currentGold = 210000 ;
 	int geLimit = 11000; //GE limits the amount of an item that can be bought every 8 hours. 
 	int currentSlot = 0; //Up to 3 slots for f2p
 	int currentItemIndex = 0;
