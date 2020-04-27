@@ -1,7 +1,5 @@
 package main.java.com.timelessapps.javafxtemplate.app.businesslogic;
 
-package main.java.com.timelessapps.javafxtemplate.app.businesslogic;
-
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Rectangle;
