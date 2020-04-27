@@ -16,6 +16,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.GrandExchangeRoutine;
+import main.java.com.timelessapps.javafxtemplate.app.businesslogic.MeleeRoutine;
+import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.AttackTimer;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.GlobalKeyListener;
 import main.java.com.timelessapps.javafxtemplate.controllers.contentarea.LogsPageController;
 import main.java.com.timelessapps.javafxtemplate.helpers.OCR.RSImageReader;
@@ -54,8 +56,8 @@ public class Main extends Application
 	    	{
 	        	if (args[0].equals("ge"))
 	        	{
-	        		System.out.println("starting");
-	        		GrandExchangeRoutine grandExchangeRoutine = new GrandExchangeRoutine(args[1]);
+	        		System.out.println("Starting GE routine");
+	        		GrandExchangeRoutine grandExchangeRoutine = new GrandExchangeRoutine(args[1], args[2]); //pass and gp
 	        		grandExchangeRoutine.setDaemon(true);
 	        		grandExchangeRoutine.start();
 	
@@ -66,6 +68,26 @@ public class Main extends Application
 	        		grandExchangeRoutine.join();
 	        		System.out.println("Completed GE routine, shutting down. ");
 	        		System.exit(0);
+	        	}
+	        	if (args[0].equals("melee"))
+	        	{
+	        		AttackTimer at = new AttackTimer();
+	        		at.test();
+	        		System.out.println("Completed test. ");
+	        		/*
+	        		System.out.println("Starting melee routine");
+	        		MeleeRoutine meleeRoutine = new MeleeRoutine(args[1]); //pass and gp
+	        		meleeRoutine.setDaemon(true);
+	        		meleeRoutine.start();
+	
+	        		GlobalKeyListener globalKeyListener = new GlobalKeyListener(meleeRoutine);
+	        		globalKeyListener.setDaemon(true);
+	        		globalKeyListener.start();
+	        		
+	        		meleeRoutine.join();
+	        		System.out.println("Completed melee routine, shutting down. ");
+	        		System.exit(0);
+	        		*/
 	        	}
 	    	}
 	    	catch (Exception e)

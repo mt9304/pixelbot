@@ -56,7 +56,7 @@ public class RSCoordinates
 	}
 	
 	public int freeWorldButtonY() { // World 474
-		return getOffsetY() + 272;
+		return getOffsetY() + 232;
 	}
 
 	public int clickHereToPlayButtonX() {
@@ -376,6 +376,11 @@ public class RSCoordinates
 	
 	public Rectangle tradeHistoryText() {
 		Rectangle result = new Rectangle(266 + getOffsetX(), 10 + getOffsetY(), 95, 18);
+		return result;
+	}
+	
+	public Rectangle topLeftText() {
+		Rectangle result = new Rectangle(3 + getOffsetX(), -18 + getOffsetY(), 320, 24);
 		return result;
 	}
 	

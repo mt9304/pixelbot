@@ -216,26 +216,50 @@ public class RobotService extends Robot
      */
     public void moveCursorTo(int x, int y)
     {
-	Random random = new Random();
-	int endPointOffsetX = x + random.nextInt(5);
-	int endPointOffsetY = y + random.nextInt(5);
-	
-	int fakeEndPointOffsetX = x + random.nextInt(12) + 12;
-	int fakeEndPointOffsetY = y + random.nextInt(12) + 12;
-	
-	int chanceToMiss = random.nextInt(9);
-	
-	//If it misses. 
-	if (chanceToMiss > 7)
-	{
-	    mouseCurve(fakeEndPointOffsetX, fakeEndPointOffsetY);
-	    delay(random.nextInt(200)+25);
-	    mouseCurve(endPointOffsetX, endPointOffsetY);
-	}
-	else
-	{
-	    mouseCurve(endPointOffsetX, endPointOffsetY);
-	}
+		Random random = new Random();
+		int endPointOffsetX = x + random.nextInt(5);
+		int endPointOffsetY = y + random.nextInt(5);
+		
+		int fakeEndPointOffsetX = x + random.nextInt(12) + 12;
+		int fakeEndPointOffsetY = y + random.nextInt(12) + 12;
+		
+		int chanceToMiss = random.nextInt(9);
+		
+		//If it misses. 
+		if (chanceToMiss > 7)
+		{
+		    mouseCurve(fakeEndPointOffsetX, fakeEndPointOffsetY);
+		    delay(random.nextInt(200)+25);
+		    mouseCurve(endPointOffsetX, endPointOffsetY);
+		}
+		else
+		{
+		    mouseCurve(endPointOffsetX, endPointOffsetY);
+		}
+    }
+    
+    public void moveCursorSlowlyTo(int x, int y)
+    {
+		Random random = new Random();
+		int endPointOffsetX = x + random.nextInt(5);
+		int endPointOffsetY = y + random.nextInt(5);
+		
+		int fakeEndPointOffsetX = x + random.nextInt(12) + 12;
+		int fakeEndPointOffsetY = y + random.nextInt(12) + 12;
+		
+		int chanceToMiss = random.nextInt(9);
+		
+		//If it misses. 
+		if (chanceToMiss > 7)
+		{
+		    mouseCurveSlow(fakeEndPointOffsetX, fakeEndPointOffsetY);
+		    delay(random.nextInt(250)+25);
+		    mouseCurveSlow(endPointOffsetX, endPointOffsetY);
+		}
+		else
+		{
+		    mouseCurveSlow(endPointOffsetX, endPointOffsetY);
+		}
     }
 				
     /**
@@ -282,6 +306,43 @@ public class RobotService extends Robot
             
             int timeInMilis = random.nextInt(2000) + 200;
             int steps = random.nextInt(125) + 75;
+            
+            if (curveX)
+            {
+                if (style1)
+                {
+                    mouseCurveX1(startingX, startingY, endPointX, endPointY, timeInMilis, steps);
+                }
+                else
+                {
+                    mouseCurveX2(startingX, startingY, endPointX, endPointY, timeInMilis, steps);
+                }
+            }
+            else
+            {
+                if (style1)
+                {
+                    mouseCurveY1(startingX, startingY, endPointX, endPointY, timeInMilis, steps);
+                }
+                else
+                {
+                    mouseCurveY2(startingX, startingY, endPointX, endPointY, timeInMilis, steps);
+                }
+            }
+    }
+    
+    private void mouseCurveSlow(int endPointX, int endPointY)
+    {
+            int startingX = getCurrentMousePosition(X);
+            int startingY = getCurrentMousePosition(Y);
+            
+            Random random = new Random();
+            
+            Boolean curveX = random.nextBoolean();
+            Boolean style1 = random.nextBoolean();
+            
+            int timeInMilis = random.nextInt(2000) + 5000;
+            int steps = random.nextInt(100) + 250;
             
             if (curveX)
             {

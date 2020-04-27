@@ -7,6 +7,7 @@ import java.awt.Robot;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
@@ -115,6 +116,79 @@ public class RSImageReader
 				else
 				{
 					Color white = new Color(255, 255, 255);
+					image.setRGB(x, y, white.getRGB());
+				}
+			}
+		}
+		try 
+		{
+			ImageIO.write(image, "tif", new File("C:\\Users\\Max\\Desktop\\tempimage\\images\\test.png"));
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		return image;
+    }
+    
+    /** For custom colored text sections **/
+    private BufferedImage convertColoredTextToBlackAndWhite(BufferedImage input, ArrayList<Color> colors) 
+    {
+    	BufferedImage image = input;
+		int width = image.getWidth();
+		int height = image.getHeight();
+		Color white = new Color(255, 255, 255);
+		Color black = new Color(0, 0, 0);
+		
+		for (int y = 0; y < height; y++)
+		{
+			for (int x = 0; x < width; x++) 
+			{
+				Color color = new Color(image.getRGB(x, y));
+				
+				for (Color customColor : colors)
+				{
+					if (isSameColor(color, customColor))
+					{
+						image.setRGB(x, y, black.getRGB());
+					}
+					else
+					{
+						image.setRGB(x, y, white.getRGB());
+					}
+				}
+			}
+		}
+		try 
+		{
+			ImageIO.write(image, "tif", new File("C:\\Users\\Max\\Desktop\\tempimage\\images\\test.png"));
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		return image;
+    }
+    
+    /** For yellow text sections **/
+    private BufferedImage convertYellowTextToBlackAndWhite(BufferedImage input) 
+    {
+    	BufferedImage image = input;
+		int width = image.getWidth();
+		int height = image.getHeight();
+		Color white = new Color(255, 255, 255);
+		Color black = new Color(0, 0, 0);
+		
+		for (int y = 0; y < height; y++)
+		{
+			for (int x = 0; x < width; x++) 
+			{
+				Color color = new Color(image.getRGB(x, y));
+
+				if (color.getRed() > 198 && color.getGreen() > 198 && color.getBlue() < 10)
+				{
+					image.setRGB(x, y, black.getRGB());
+				}
+				else
+				{
 					image.setRGB(x, y, white.getRGB());
 				}
 			}
@@ -328,6 +402,28 @@ public class RSImageReader
     	BufferedImage resizedImage = getResizedImage(filteredImage, percent);
     	
     	String imageText = getImageTextUsingTess(resizedImage, whitelist);
+    	return imageText;
+    }
+    
+    public String getRSText(Rectangle rectangle, ArrayList<Color> colors) throws Exception
+    {
+    	double percent = 4.0; // Needs to be 400% larger for better results. 
+    	BufferedImage originalSnapShot = getSnapShot(rectangle);
+    	BufferedImage filteredImage = convertColoredTextToBlackAndWhite(originalSnapShot, colors);
+    	BufferedImage resizedImage = getResizedImage(filteredImage, percent);
+    	
+    	String imageText = getImageTextUsingTess(resizedImage);
+    	return imageText;
+    }
+    
+    public String getYellowRSText(Rectangle rectangle) throws Exception
+    {
+    	double percent = 4.0; // Needs to be 400% larger for better results. 
+    	BufferedImage originalSnapShot = getSnapShot(rectangle);
+    	BufferedImage filteredImage = convertYellowTextToBlackAndWhite(originalSnapShot);
+    	//BufferedImage resizedImage = getResizedImage(filteredImage, percent);
+    	
+    	String imageText = getImageTextUsingTess(filteredImage);
     	return imageText;
     }
     

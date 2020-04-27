@@ -44,8 +44,12 @@ public class GrandExchangeRoutine extends Routine
 	int currentSlot = 0; //Up to 3 slots for f2p
 	int currentItemIndex = 0;
 
-	public GrandExchangeRoutine(String pass) throws AWTException {
+	public GrandExchangeRoutine(String pass, String currentGold) throws AWTException {
 		this.pass = pass;
+		if (!currentGold.isEmpty())
+		{
+			this.currentGold = Integer.parseInt(currentGold);
+		}
 	}
 
 	public void run() {
