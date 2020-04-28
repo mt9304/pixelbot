@@ -57,7 +57,7 @@ public class Main extends Application
 	        	if (args[0].equals("ge"))
 	        	{
 	        		System.out.println("Starting GE routine");
-	        		GrandExchangeRoutine grandExchangeRoutine = new GrandExchangeRoutine(args[1], args[2]); //pass and gp
+	        		GrandExchangeRoutine grandExchangeRoutine = new GrandExchangeRoutine(args[1]); //pass and gp
 	        		grandExchangeRoutine.setDaemon(true);
 	        		grandExchangeRoutine.start();
 	
@@ -71,10 +71,7 @@ public class Main extends Application
 	        	}
 	        	if (args[0].equals("melee"))
 	        	{
-	        		AttackTimer at = new AttackTimer();
-	        		at.test();
-	        		System.out.println("Completed test. ");
-	        		/*
+
 	        		System.out.println("Starting melee routine");
 	        		MeleeRoutine meleeRoutine = new MeleeRoutine(args[1]); //pass and gp
 	        		meleeRoutine.setDaemon(true);
@@ -87,7 +84,6 @@ public class Main extends Application
 	        		meleeRoutine.join();
 	        		System.out.println("Completed melee routine, shutting down. ");
 	        		System.exit(0);
-	        		*/
 	        	}
 	    	}
 	    	catch (Exception e)

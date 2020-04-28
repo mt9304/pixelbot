@@ -11,7 +11,7 @@ import main.java.com.timelessapps.javafxtemplate.helpers.OCR.RSImageReader;
 import main.java.com.timelessapps.javafxtemplate.helpers.coords.RSCoordinates;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
 
-public class AttackTimer
+public class AttackTimer extends Thread
 {
 	private RSImageReader rsir = new RSImageReader();
 	private RSCoordinates rsc = new RSCoordinates();
@@ -25,29 +25,27 @@ public class AttackTimer
 		
 	}
 	
-	public void test()
+	@Override
+	public void run()
 	{
 		try 
 		{
-			/*
 			while (killCount < numberOfMonstersToKill)
 			{
 				attackText = rsir.getYellowRSText(rsc.topLeftText()).trim();
 				System.out.println("Text: " + attackText);
-				if (attackText.equals("Minotaur") || attackText.equals("Wolf"))
+				if (attackText.contains("Min") || attackText.equals("Wolf")) //Minotaur
 				{
 					bot.mouseClick();
-					Thread.sleep(random.nextInt(10000) + 10000);
+					Thread.sleep(random.nextInt(4000) + 4000);
 					killCount++;
 				}
 			}
-			*/
 			Thread.sleep(2000);
-			bot.moveCursorSlowlyTo(577, 43);
 			return; 
 		} catch (Exception e) 
 		{
-			System.out.println("Could not get attackText with AttackTimer. " + e);
+			System.out.println("AttackTimer was not able to function properly: " + e);
 			return;
 		}
 	}

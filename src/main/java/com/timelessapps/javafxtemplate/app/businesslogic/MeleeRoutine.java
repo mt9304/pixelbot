@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 
 import javax.sound.midi.Soundbank;
 
+import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.AttackTimer;
+import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.BuffTimer;
 import main.java.com.timelessapps.javafxtemplate.app.verify.VerifyGrandExchange;
 import main.java.com.timelessapps.javafxtemplate.helpers.OCR.RSImageReader;
 import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration;
@@ -24,6 +26,7 @@ import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
 
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration.SHORT;
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration.MEDIUM;
+import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Buff.OVERLOAD;
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Duration.LONG;
 
 public class MeleeRoutine extends Routine 
@@ -35,6 +38,8 @@ public class MeleeRoutine extends Routine
 	RSImageReader rsir = new RSImageReader();
 	VerifyGrandExchange verifyGE = new VerifyGrandExchange();
 	String pass = "";
+	Color hpArea = new Color(0,0,0);
+	int cursorMovementStyle = 5;
 
 	public MeleeRoutine(String pass) throws AWTException {
 		this.pass = pass;
@@ -48,7 +53,7 @@ public class MeleeRoutine extends Routine
 
 		synchronized (this) {
 			try {
-				disableGrandExchangeButton();
+				disableMeleeButton();
 				
 				initialize();
 				verifyGE.loginScreenIsLoaded();
@@ -57,18 +62,36 @@ public class MeleeRoutine extends Routine
 				verifyGE.clickHereToPlayIsPresent();
 				clickClickHereToPlayButton();
 				Thread.sleep(5000); //Add verify chat box loaded
-				scrollIn();
+				//scrollIn();
+				tiltScreenUp();
 				//start clicking thread. reads top left, clicks mouse if text found. 
+				
+			    AttackTimer attackTimer = new AttackTimer(); //300800
+			    attackTimer.setDaemon(true);
+			    attackTimer.start();
 				
 				while (running) {
 					checkIfPausedOrStopped();
 					/** Start routine here. **/
 					
-					//verifyHPHighEnough();
+					//Check if hp is enough. Currently checking if halfway. 
+					hpArea = bot.getPixelColor(rsc.middleHPX(), rsc.middleHPY()); //Halfway point for hp bar. 
+					if (hpArea.getRed() < 40) // Red value is higher if the hp bar is filled, less than 40 is empty. 
+					{
+						System.out.println("Red part in HP area not detected, stopping routine. ");
+						return; 
+					}
 					//move mouse around after 10 to 15 seconds
+					//cursorMovementStyle = random.nextInt(8);
+					moveMouseRandomly(cursorMovementStyle);
 					
 					/** End routine here. **/
-					Thread.sleep(random.nextInt(1000) + 1000);
+					Thread.sleep(random.nextInt(2000) + 2000);
+					if(attackTimer.getState() == Thread.State.TERMINATED)
+					{ 
+						System.out.println("Attach timer has stopped. Exiting. ");
+						return;
+					}
 					checkIfPausedOrStopped();
 				}
 			} catch (Exception ex) {
@@ -85,7 +108,7 @@ public class MeleeRoutine extends Routine
 		{
 			waitIfPaused();
 			if (!running) {
-				enableGrandExchangeButton();
+				enableMeleeButton();
 			}
 		}
 		catch (Exception e)
@@ -94,11 +117,11 @@ public class MeleeRoutine extends Routine
 		}
 	}
 
-	private void disableGrandExchangeButton() {
+	private void disableMeleeButton() {
 		try 
 		{
 			CustomSceneHelper sceneHelper = new CustomSceneHelper();
-			sceneHelper.getNodeById("grandExchangeButton").setDisable(true);
+			sceneHelper.getNodeById("meleeButton").setDisable(true);
 		}
 		catch (Exception e)
 		{
@@ -106,11 +129,11 @@ public class MeleeRoutine extends Routine
 		}
 	}
 
-	private void enableGrandExchangeButton() {
+	private void enableMeleeButton() {
 		try
 		{
 			CustomSceneHelper sceneHelper = new CustomSceneHelper();
-			sceneHelper.getNodeById("grandExchangeButton").setDisable(false);
+			sceneHelper.getNodeById("meleeButton").setDisable(false);
 		}
 		catch (Exception e)
 		{
@@ -131,7 +154,7 @@ public class MeleeRoutine extends Routine
 		}
 		catch (Exception e)
 		{
-			System.out.println("Cannot initialize GE routine: " + e);
+			System.out.println("Cannot initialize Melee routine: " + e);
 			throw e;
 		}
 	}
@@ -153,8 +176,8 @@ public class MeleeRoutine extends Routine
 		}
 		catch (Exception e)
 		{
-			System.out.println("Could not choose world GE routine: " + e);
-			log.appendToApplicationLogsFile("Could not choose world GE routine: " + e);
+			System.out.println("Could not choose world Melee routine: " + e);
+			log.appendToApplicationLogsFile("Could not choose world Melee routine: " + e);
 			throw e;
 		}
 	}
@@ -177,8 +200,8 @@ public class MeleeRoutine extends Routine
 		}
 		catch (Exception e)
 		{
-			System.out.println("Could not login GE routine: " + e);
-			log.appendToApplicationLogsFile("Could not login GE routine: " + e);
+			System.out.println("Could not login Melee routine: " + e);
+			log.appendToApplicationLogsFile("Could not login Melee routine: " + e);
 			throw e;
 		}
 	}
@@ -196,8 +219,8 @@ public class MeleeRoutine extends Routine
 		}
 		catch (Exception e)
 		{
-			System.out.println("Could not click here to play GE routine: " + e);
-			log.appendToApplicationLogsFile("Could not click here to play GE routine: " + e);
+			System.out.println("Could not click here to play Melee routine: " + e);
+			log.appendToApplicationLogsFile("Could not click here to play Melee routine: " + e);
 			throw e;
 		}
 	}
@@ -219,10 +242,93 @@ public class MeleeRoutine extends Routine
 		}
 		catch (Exception e)
 		{
-			System.out.println("Could not scroll in" + e);
-			log.appendToApplicationLogsFile("Could not scroll in" + e);
+			System.out.println("Could not scroll in: " + e);
+			log.appendToApplicationLogsFile("Could not scroll in: " + e);
 			throw e;
 		}
 	}
-
+	
+	private void tiltScreenUp() 
+	{
+		log.appendToApplicationLogsFile("Setting screen tilt... ");
+		try
+		{
+			bot.delay(MEDIUM);
+			bot.keyPress(KeyEvent.VK_UP);
+			bot.delay(MEDIUM);
+			bot.delay(MEDIUM);
+			bot.keyRelease(KeyEvent.VK_UP);
+			bot.delay(MEDIUM);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Could not set screen tilt: " + e);
+			log.appendToApplicationLogsFile("Could not set screen tilt: " + e);
+			throw e;
+		}
+	}
+	
+	private void moveMouseRandomly(int style) 
+	{
+		log.appendToApplicationLogsFile("Moving mouse randomly, style: " + style);
+		try
+		{
+			int x = rsc.getOffsetX();
+			int y = rsc.getOffsetY();
+			//zig zag, circle shape, v shape
+			switch(style) 
+			{
+				case 0:
+					
+					bot.moveCursorSlowlyToGeneralArea(77 + x, 50 + y);
+					bot.moveCursorSlowlyToGeneralArea(253 + x, 90 + y);
+					bot.moveCursorSlowlyToGeneralArea(447 + x, 81 + y);
+					bot.moveCursorSlowlyToGeneralArea(336 + x, 162 + y);
+					bot.moveCursorSlowlyToGeneralArea(364 + x, 166 + y);
+					bot.moveCursorSlowlyToGeneralArea(69 + x, 257 + y);
+					bot.moveCursorSlowlyToGeneralArea(239 + x, 266 + y);
+					bot.moveCursorSlowlyToGeneralArea(421 + x, 244 + y);
+					
+					/*
+					bot.moveCursorSlowlyToGeneralArea(171 + x, 250 + y);
+					bot.moveCursorSlowlyToGeneralArea(112 + x, 156 + y);
+					bot.moveCursorSlowlyToGeneralArea(193 + x, 52 + y);
+					bot.moveCursorSlowlyToGeneralArea(352 + x, 78 + y);
+					bot.moveCursorSlowlyToGeneralArea(394 + x, 161 + y);
+					bot.moveCursorSlowlyToGeneralArea(315 + x, 259 + y);
+					bot.moveCursorSlowlyToGeneralArea(111 + x, 223 + y);
+					*/
+					break;
+				case 1:
+					bot.moveCursorSlowlyToGeneralArea(171 + x, 250 + y);
+					bot.moveCursorSlowlyToGeneralArea(112 + x, 156 + y);
+					bot.moveCursorSlowlyToGeneralArea(193 + x, 52 + y);
+					bot.moveCursorSlowlyToGeneralArea(352 + x, 78 + y);
+					bot.moveCursorSlowlyToGeneralArea(394 + x, 161 + y);
+					bot.moveCursorSlowlyToGeneralArea(315 + x, 259 + y);
+					bot.moveCursorSlowlyToGeneralArea(111 + x, 223 + y);
+					break;
+				case 2:
+					bot.moveCursorSlowlyToGeneralArea(399 + x, 79 + y);
+					bot.moveCursorSlowlyToGeneralArea(329 + x, 229 + y);
+					bot.moveCursorSlowlyToGeneralArea(245 + x, 277 + y);
+					bot.moveCursorSlowlyToGeneralArea(148 + x, 196 + y);
+					bot.moveCursorSlowlyToGeneralArea(78 + x, 50 + y);
+					break;
+				default: 
+					bot.moveCursorSlowlyTo(720, 122);
+					bot.moveCursorSlowlyTo(744, 324);
+					bot.moveCursorSlowlyTo(976, 323);
+					bot.moveCursorSlowlyTo(960, 97);
+					bot.moveCursorSlowlyTo(720, 122);
+					break;
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("Could not moveMouseRandomly: " + e);
+			log.appendToApplicationLogsFile("Could not moveMouseRandomly: " + e);
+			throw e;
+		}
+	}
 }

@@ -333,6 +333,14 @@ public class RSCoordinates
 		return getOffsetY() + 260;
 	}
 	
+	public int middleHPX() {
+		return getOffsetX() + 546;
+	}
+	
+	public int middleHPY() {
+		return getOffsetY() + 36;
+	}
+	
 	public Rectangle firstHistoryRowPrice() {
 		//Coords 353 + x , 55 + y , 73, 8
 		Rectangle result = new Rectangle(359 + getOffsetX(), 55 + getOffsetY(), 64, 8);

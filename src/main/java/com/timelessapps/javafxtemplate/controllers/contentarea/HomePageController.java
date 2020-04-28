@@ -14,6 +14,7 @@ import main.java.com.timelessapps.javafxtemplate.app.businesslogic.GrandExchange
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.HighAlchRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.HumidifyRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.MainBotRoutine;
+import main.java.com.timelessapps.javafxtemplate.app.businesslogic.MeleeRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.SplashRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.GlobalKeyListener;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.LoggingService;
@@ -96,11 +97,25 @@ public class HomePageController implements Initializable {
 
 	@FXML
 	public void startGrandExchangeRoutine(MouseEvent event) throws InterruptedException, AWTException {
-		GrandExchangeRoutine grandExchangeRoutine = new GrandExchangeRoutine("", "");
+		GrandExchangeRoutine grandExchangeRoutine = new GrandExchangeRoutine("");
 		grandExchangeRoutine.setDaemon(true);
 		grandExchangeRoutine.start();
 
 		GlobalKeyListener globalKeyListener = new GlobalKeyListener(grandExchangeRoutine);
+		globalKeyListener.setDaemon(true);
+		globalKeyListener.start();
+
+		// botRoutine.join();
+		// System.out.println("Remember to re-active button. ");
+	}
+	
+	@FXML
+	public void startMeleeRoutine(MouseEvent event) throws InterruptedException, AWTException {
+		MeleeRoutine meleeRoutine = new MeleeRoutine("");
+		meleeRoutine.setDaemon(true);
+		meleeRoutine.start();
+
+		GlobalKeyListener globalKeyListener = new GlobalKeyListener(meleeRoutine);
 		globalKeyListener.setDaemon(true);
 		globalKeyListener.start();
 
