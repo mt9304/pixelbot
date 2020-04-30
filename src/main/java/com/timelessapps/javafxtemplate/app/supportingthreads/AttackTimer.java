@@ -30,18 +30,24 @@ public class AttackTimer extends Thread
 	{
 		try 
 		{
-			while (hpArea.getRed() < 40)
+			while (true)
 			{
 				//Check if hp is enough. Currently checking if halfway. 
 				hpArea = bot.getPixelColor(rsc.middleHPX(), rsc.middleHPY()); //Halfway point for hp bar. 
-				if (hpArea.getRed() < 40) // Red value is higher if the hp bar is filled, less than 40 is empty. 
+				if (hpArea.getRed() < 40 && !MeleeRoutine.getIsResettingAggro()) // Red value is higher if the hp bar is filled, less than 40 is empty. 
 				{
-					System.out.println("Red part in HP area not detected, stopping routine. ");
+					System.out.println("Red part in HP area not detected, going into door and stopping routine. ");
+					goLeftDown();
+					goLeftDown();
+					goLeftDown();
+					openDoorOnLeft1();
+					Thread.sleep(1000);
 					return; 
 				}
 				
 				if (!MeleeRoutine.getIsResettingAggro())
 				{
+					System.out.println("Typing. ");
 					int randomNumber = random.nextInt(27);
 					String randomLetter = getRandomLetter(randomNumber);
 					bot.type(randomLetter, random.nextInt(15) + 35);
@@ -50,10 +56,8 @@ public class AttackTimer extends Thread
 					Thread.sleep(random.nextInt(40) + 40);
 					bot.keyRelease(KeyEvent.VK_BACK_SPACE);
 				}
-				Thread.sleep(random.nextInt(120000) + 120000);
+				Thread.sleep(random.nextInt(12000) + 12000);
 			}
-			Thread.sleep(2000);
-			return; 
 		} catch (Exception e) 
 		{
 			System.out.println("AttackTimer was not able to function properly: " + e);
@@ -153,5 +157,22 @@ public class AttackTimer extends Thread
 			break;
 		}
 		return letter;
+	}
+	
+	private void goLeftDown() throws InterruptedException 
+	{
+		bot.accuratelyMoveCursor(634 + rsc.getOffsetX(), 73 + rsc.getOffsetY()); //down left 1213, 116
+		Thread.sleep(750);
+		bot.mouseClick();
+		Thread.sleep(2000);
+	}
+	
+	private void openDoorOnLeft1() throws InterruptedException
+	{
+		Thread.sleep(1500);
+		bot.moveCursorTo(162 + rsc.getOffsetX(), 162 + rsc.getOffsetY()); //down left
+		Thread.sleep(750);
+		bot.mouseClick();
+		Thread.sleep(1500);
 	}
 }

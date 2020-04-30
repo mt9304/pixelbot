@@ -73,7 +73,7 @@ public class VerifyGrandExchange
 				}
 				Thread.sleep(1500);
 			}
-			throw new ElementNotFoundException("Could not detect login button saying Existing User. ");
+			throw new ElementNotFoundException("Could not detect clickHereToPlayButton");
 		}
 		catch (Exception e)
 		{

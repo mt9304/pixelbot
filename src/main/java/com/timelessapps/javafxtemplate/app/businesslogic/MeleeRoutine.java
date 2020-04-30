@@ -42,6 +42,7 @@ public class MeleeRoutine extends Routine
 	private Color hpArea = new Color(0,0,0);
 	private int cursorMovementStyle = 5;
 	private static boolean isResettingAggro = false;
+	private boolean shouldResetAggro = true;
 
 	public MeleeRoutine(String pass) throws AWTException {
 		this.pass = pass;
@@ -56,7 +57,6 @@ public class MeleeRoutine extends Routine
 		synchronized (this) {
 			try {
 				disableMeleeButton();
-				
 				initialize();
 				verifyGE.loginScreenIsLoaded();
 				chooseWorld();
@@ -66,8 +66,7 @@ public class MeleeRoutine extends Routine
 				Thread.sleep(5000); //Add verify chat box loaded
 				//scrollIn();
 				tiltScreenUp();
-				//start clicking thread. reads top left, clicks mouse if text found. 
-				
+				//Types every once in a while to avoid timeout
 			    AttackTimer attackTimer = new AttackTimer(); //300800
 			    attackTimer.setDaemon(true);
 			    attackTimer.start();
@@ -83,6 +82,7 @@ public class MeleeRoutine extends Routine
 						System.out.println("Red part in HP area not detected, stopping routine. ");
 						return; 
 					}
+
 					isResettingAggro = true;
 					Thread.sleep(3000);
 					goLeftDown();
@@ -95,23 +95,24 @@ public class MeleeRoutine extends Routine
 					openDoorOnLeft2();
 					answerQuestion();
 					goFarLeft();
-					Thread.sleep(10000);
+					Thread.sleep(8000);
 					goFarLeft();
 					Thread.sleep(10000);
 					goFarRight();
 					Thread.sleep(10000);
 					goFarRight(); //Maybe go medium right
-					Thread.sleep(10000);
-					openDoorOnRight();
+					Thread.sleep(8000);
+					openDoorOnRight1();
 					Thread.sleep(1000);
 					runRightDown();
 					Thread.sleep(1000);
-					openDoorOnRight();
+					openDoorOnRight2();
 					answerQuestion();
 					goTopRight();
-					isResettingAggro = false;
+					isResettingAggro = false;					
 					
-					Thread.sleep(random.nextInt(20000) + 600000);
+					Thread.sleep(random.nextInt(600000) + 10000);
+					
 					if(attackTimer.getState() == Thread.State.TERMINATED)
 					{ 
 						System.out.println("Attack timer has stopped. Exiting. ");
@@ -311,22 +312,24 @@ public class MeleeRoutine extends Routine
 	{
    		log.appendToApplicationLogsFile("Answering question. ");
 		Color black = new Color(0, 0, 0);
-		String[] possibleAnswers1of2 = { "Talk to any banker." };
+		String[] possibleAnswers1of2 = { "Talk to any banker.", "Tlothing, it's a fake.", "Through account settings on oldschool.runescape.com." };
 		String[] possibleAnswers2of2 = { "ice and reset my passwi", "To.", "Report the incident and do not click any finks"};
 		
-		String[] possibleAnswers1of3 = { "Decline the offer and repore thar player.", "Me.", "rake my gold for your ownl Repovred!" };
-		String[] possibleAnswers2of3 = { "vt the stream as a scam", "Report the player for phishing.", "Only on the Old School RuneSecape website", "type in my password backwards and report the player", "Authenticator and two-step login on my registered email" };
-		String[] possibleAnswers3of3 = { "Palitely tell them no and then use the", "Delece it - it's a fakel", "To, you should never allow anyone to level your account.", "not visit the website and vepove the player who messaged yor", "Don't cell them anyrhing and click", "Read the text and follow the advice given", "The bivehday of a famous person ov evene", "To, you should never buy an accounr." };
+		String[] possibleAnswers1of3 = { "Decline the offer and repore thar player.", "Me.", "rake my gold for your ownl Repovred!", "Ser up @ step authentication with my emafl provider.", "Don't give them the information and send an Abuse reporr'." };
+		String[] possibleAnswers2of3 = { "vt the stream as a scam", "Report the player for phishing.", "Only on the Old School RuneSecape website", "type in my password backwards and report the player", "Authenticator and two-step login on my registered email", "To.", "on't give out your password to anyone. Tlot even close friend" };
+		String[] possibleAnswers3of3 = { "Palitely tell them no and then use the", "Delece it - it's a fakel", "To, you should never allow anyone to level your account.", "not visit the website and vepove the player who messaged yor", "Don't cell them anyrhing and click", "Read the text and follow the advice given", "The bivehday of a famous person ov evene", "To, you should never buy an accounr.", "Use the Account Recovery System.", "Thobody." };
 		
-		Thread.sleep(1500);
+		Thread.sleep(4000);
 		bot.type(" ");
-		Thread.sleep(3500);
+		Thread.sleep(4000);
+		bot.type(" ");
+		Thread.sleep(4000);
 		
 		String answer1of3 = rsir.getRSQuestionsText(rsc.question1Of3(), black).trim();
 		String answer2of3 = rsir.getRSQuestionsText(rsc.question2Of3(), black).trim();
 		String answer3of3 = rsir.getRSQuestionsText(rsc.question3Of3(), black).trim();
 		String answer1of2 = rsir.getRSQuestionsText(rsc.question1Of2(), black).trim();
-		String answer2of2 = rsir.getRSQuestionsText(rsc.question2Of2(), black);
+		String answer2of2 = rsir.getRSQuestionsText(rsc.question2Of2(), black).trim();
 		
 		//Doing in this order because they are the most comon ones to have answers. 
 		if (stringContainsItemFromList(answer3of3, possibleAnswers3of3)) 
@@ -400,10 +403,19 @@ public class MeleeRoutine extends Routine
 		Thread.sleep(1500);
 	}
 	
-	private void openDoorOnRight() throws InterruptedException
+	private void openDoorOnRight1() throws InterruptedException
 	{
 		Thread.sleep(1500);
-		bot.accuratelyMoveCursor(324 + rsc.getOffsetX(), 178 + rsc.getOffsetY()); //down left
+		bot.accuratelyMoveCursor(353 + rsc.getOffsetX(), 178 + rsc.getOffsetY()); //down left
+		Thread.sleep(750);
+		bot.mouseClick();
+		Thread.sleep(1500);
+	}
+	
+	private void openDoorOnRight2() throws InterruptedException
+	{
+		Thread.sleep(1500);
+		bot.accuratelyMoveCursor(298 + rsc.getOffsetX(), 178 + rsc.getOffsetY()); //down left
 		Thread.sleep(750);
 		bot.mouseClick();
 		Thread.sleep(1500);
@@ -450,11 +462,11 @@ public class MeleeRoutine extends Routine
 			Thread.sleep(10000);
 			goFarRight(); //Maybe go medium right
 			Thread.sleep(10000);
-			openDoorOnRight();
+			openDoorOnRight1();
 			Thread.sleep(1000);
 			runRightDown();
 			Thread.sleep(1000);
-			openDoorOnRight();
+			openDoorOnRight2();
 			answerQuestion();
 			goTopRight();
 		}
@@ -467,5 +479,11 @@ public class MeleeRoutine extends Routine
 	public static boolean stringContainsItemFromList(String inputStr, String[] items) 
 	{
 	    return Arrays.stream(items).parallel().anyMatch(inputStr::contains);
+	}
+
+	public void setShouldResetAggro(boolean bool) 
+	{
+		shouldResetAggro = bool;
+		log.appendToApplicationLogsFile("Setting should reset aggro to: " + bool);
 	}
 }
