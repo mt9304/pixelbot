@@ -36,10 +36,10 @@ public class GrandExchangeRoutine extends Routine
 	Rectangle rect = rsc.existingUserButton();
 	VerifyGrandExchange verifyGE = new VerifyGrandExchange();
 	String pass = "";
-	String[] items = { "coal", "nature", "death", "iron ore", "chaos", "gold ore", "law"};
+	String[] items = { "coal", "nature", "death", "chaos", "gold ore", "law", "iron ore"};
 	int lowPrice = 0;
 	int highPrice = 0;
-	int currentGold = 210000 ;
+	int currentGold = 595000; //530000
 	int geLimit = 11000; //GE limits the amount of an item that can be bought every 8 hours. 
 	int currentSlot = 0; //Up to 3 slots for f2p
 	int currentItemIndex = 0;
@@ -75,8 +75,15 @@ public class GrandExchangeRoutine extends Routine
 					verifyGE.isOnGEScreen();
 					if(collectFromGE(currentSlot))
 					{
-						checkIfPausedOrStopped();
-						sellLow(currentSlot);
+						try
+						{
+							checkIfPausedOrStopped();
+							sellLow(currentSlot);
+						}
+						catch (Exception e)
+						{
+							System.out.println("Nothing to sell before routine starts. ");
+						}
 					}
 					//Sell first inventory slot
 					buyHigh(items[currentItemIndex], currentSlot);
@@ -103,6 +110,13 @@ public class GrandExchangeRoutine extends Routine
 						sellHigh(currentSlot);
 						collectFromGEWhenSuccessful(currentSlot, LONG);
 					}
+					//If it is the last item, dont cancel and sell low, just end routine. 
+					if (currentItemIndex == (items.length - 1))
+					{
+						sellHigh(currentSlot);
+						return; 
+					}
+					
 					//Below only runs if there is left over unsold items at high price. Need to sell it at low price to recover gp and move on. 
 					if (verifyGE.isItemToSell())
 					{
@@ -436,6 +450,7 @@ public class GrandExchangeRoutine extends Routine
 		try
 		{
 			verifyGE.transactionCompleted(geSlot, LONG);
+			Thread.sleep(random.nextInt(1000) + 5000);
 			collectFromGE(geSlot);
 			System.out.println("Finished collecting from GE. ");
 			log.appendToApplicationLogsFile("Finished collecting from GE. ");
