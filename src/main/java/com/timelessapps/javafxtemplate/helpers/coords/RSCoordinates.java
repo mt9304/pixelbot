@@ -392,6 +392,31 @@ public class RSCoordinates
 		return result;
 	}
 	
+	public Rectangle question1Of2() {
+		Rectangle result = new Rectangle(47 + getOffsetX(), 367 + getOffsetY(), 425, 24);//
+		return result;
+	}
+	
+	public Rectangle question2Of2() {
+		Rectangle result = new Rectangle(47 + getOffsetX(), 401 + getOffsetY(), 425, 24);//
+		return result;
+	}
+	
+	public Rectangle question1Of3() {
+		Rectangle result = new Rectangle(47 + getOffsetX(), 358 + getOffsetY(), 425, 24);
+		return result;
+	}
+	
+	public Rectangle question2Of3() {
+		Rectangle result = new Rectangle(47 + getOffsetX(), 385 + getOffsetY(), 425, 24);
+		return result;
+	}
+	
+	public Rectangle question3Of3() {
+		Rectangle result = new Rectangle(47 + getOffsetX(), 408 + getOffsetY(), 425, 29);
+		return result;
+	}
+	
 	public int[] buyButtonX() {
 		int[] slots = new int[3];
 		slots[0] = buyButton1X();

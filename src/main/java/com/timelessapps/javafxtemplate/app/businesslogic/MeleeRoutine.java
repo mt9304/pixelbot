@@ -4,6 +4,7 @@ import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,15 +32,16 @@ import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenum
 
 public class MeleeRoutine extends Routine 
 {
-	RobotService bot = new RobotService();
-	LoggingService log = new LoggingService();
-	Random random = new Random();
-	RSCoordinates rsc = new RSCoordinates();
-	RSImageReader rsir = new RSImageReader();
-	VerifyGrandExchange verifyGE = new VerifyGrandExchange();
-	String pass = "";
-	Color hpArea = new Color(0,0,0);
-	int cursorMovementStyle = 5;
+	private RobotService bot = new RobotService();
+	private LoggingService log = new LoggingService();
+	private Random random = new Random();
+	private RSCoordinates rsc = new RSCoordinates();
+	private RSImageReader rsir = new RSImageReader();
+	private VerifyGrandExchange verifyGE = new VerifyGrandExchange();
+	private String pass = "";
+	private Color hpArea = new Color(0,0,0);
+	private int cursorMovementStyle = 5;
+	private static boolean isResettingAggro = false;
 
 	public MeleeRoutine(String pass) throws AWTException {
 		this.pass = pass;
@@ -81,18 +83,42 @@ public class MeleeRoutine extends Routine
 						System.out.println("Red part in HP area not detected, stopping routine. ");
 						return; 
 					}
-					//move mouse around after 10 to 15 seconds
-					//cursorMovementStyle = random.nextInt(8);
-					moveMouseRandomly(cursorMovementStyle);
+					isResettingAggro = true;
+					Thread.sleep(3000);
+					goLeftDown();
+					goLeftDown();
+					goLeftDown();
+					openDoorOnLeft1();
+					Thread.sleep(1000);
+					goLeftDown();
+					Thread.sleep(1000);
+					openDoorOnLeft2();
+					answerQuestion();
+					goFarLeft();
+					Thread.sleep(10000);
+					goFarLeft();
+					Thread.sleep(10000);
+					goFarRight();
+					Thread.sleep(10000);
+					goFarRight(); //Maybe go medium right
+					Thread.sleep(10000);
+					openDoorOnRight();
+					Thread.sleep(1000);
+					runRightDown();
+					Thread.sleep(1000);
+					openDoorOnRight();
+					answerQuestion();
+					goTopRight();
+					isResettingAggro = false;
 					
-					/** End routine here. **/
-					Thread.sleep(random.nextInt(2000) + 2000);
+					Thread.sleep(random.nextInt(20000) + 600000);
 					if(attackTimer.getState() == Thread.State.TERMINATED)
 					{ 
-						System.out.println("Attach timer has stopped. Exiting. ");
+						System.out.println("Attack timer has stopped. Exiting. ");
 						return;
 					}
 					checkIfPausedOrStopped();
+					/** End routine here. **/
 				}
 			} catch (Exception ex) {
 				System.out.println("Bot could not complete routine: " + ex);
@@ -101,7 +127,7 @@ public class MeleeRoutine extends Routine
 			return;
 		}
 	}
-	
+
 	@Override
 	public void checkIfPausedOrStopped() throws InterruptedException {
 		try 
@@ -268,67 +294,178 @@ public class MeleeRoutine extends Routine
 		}
 	}
 	
-	private void moveMouseRandomly(int style) 
+	public static boolean getIsResettingAggro()
 	{
-		log.appendToApplicationLogsFile("Moving mouse randomly, style: " + style);
+		return isResettingAggro;
+	}
+	
+	private void goLeftDown() throws InterruptedException 
+	{
+		bot.accuratelyMoveCursor(634 + rsc.getOffsetX(), 73 + rsc.getOffsetY()); //down left 1213, 116
+		Thread.sleep(750);
+		bot.mouseClick();
+		Thread.sleep(2000);
+	}
+	
+	public void answerQuestion() throws Exception
+	{
+   		log.appendToApplicationLogsFile("Answering question. ");
+		Color black = new Color(0, 0, 0);
+		String[] possibleAnswers1of2 = { "Talk to any banker." };
+		String[] possibleAnswers2of2 = { "ice and reset my passwi", "To.", "Report the incident and do not click any finks"};
+		
+		String[] possibleAnswers1of3 = { "Decline the offer and repore thar player.", "Me.", "rake my gold for your ownl Repovred!" };
+		String[] possibleAnswers2of3 = { "vt the stream as a scam", "Report the player for phishing.", "Only on the Old School RuneSecape website", "type in my password backwards and report the player", "Authenticator and two-step login on my registered email" };
+		String[] possibleAnswers3of3 = { "Palitely tell them no and then use the", "Delece it - it's a fakel", "To, you should never allow anyone to level your account.", "not visit the website and vepove the player who messaged yor", "Don't cell them anyrhing and click", "Read the text and follow the advice given", "The bivehday of a famous person ov evene", "To, you should never buy an accounr." };
+		
+		Thread.sleep(1500);
+		bot.type(" ");
+		Thread.sleep(3500);
+		
+		String answer1of3 = rsir.getRSQuestionsText(rsc.question1Of3(), black).trim();
+		String answer2of3 = rsir.getRSQuestionsText(rsc.question2Of3(), black).trim();
+		String answer3of3 = rsir.getRSQuestionsText(rsc.question3Of3(), black).trim();
+		String answer1of2 = rsir.getRSQuestionsText(rsc.question1Of2(), black).trim();
+		String answer2of2 = rsir.getRSQuestionsText(rsc.question2Of2(), black);
+		
+		//Doing in this order because they are the most comon ones to have answers. 
+		if (stringContainsItemFromList(answer3of3, possibleAnswers3of3)) 
+		{
+			bot.type("3");
+		}
+		else if (stringContainsItemFromList(answer2of3, possibleAnswers2of3)) 
+		{
+			bot.type("2");
+		}
+		else if (stringContainsItemFromList(answer2of2, possibleAnswers2of2)) 
+		{
+			bot.type("2");
+		}
+		else if (stringContainsItemFromList(answer1of2, possibleAnswers1of2)) 
+		{
+			bot.type("1");
+		}
+		else if (stringContainsItemFromList(answer1of3, possibleAnswers1of3)) 
+		{
+			bot.type("1");
+		}
+		else
+		{ 
+			log.appendToApplicationLogsFile("Could not answer question. Possible answers: ");
+			log.appendToApplicationLogsFile(answer1of3);
+			log.appendToApplicationLogsFile(answer2of3);
+			log.appendToApplicationLogsFile(answer3of3);
+			log.appendToApplicationLogsFile(answer1of2);
+			log.appendToApplicationLogsFile(answer2of2);
+		}
+		Thread.sleep(2000);
+		Thread.sleep(2000);
+		bot.type(" ");
+		Thread.sleep(3000);
+	}
+	
+	private void openDoorOnLeft1() throws InterruptedException
+	{
+		Thread.sleep(1500);
+		bot.moveCursorTo(162 + rsc.getOffsetX(), 162 + rsc.getOffsetY()); //down left
+		Thread.sleep(750);
+		bot.mouseClick();
+		Thread.sleep(1500);
+	}
+	
+	private void openDoorOnLeft2() throws InterruptedException
+	{
+		Thread.sleep(1500);
+		bot.moveCursorTo(223 + rsc.getOffsetX(), 181 + rsc.getOffsetY()); //down left
+		Thread.sleep(750);
+		bot.mouseClick();
+		Thread.sleep(1500);
+	}
+	
+	private void goFarLeft() throws InterruptedException
+	{
+		Thread.sleep(1500);
+		bot.accuratelyMoveCursor(599 + rsc.getOffsetX(), 70 + rsc.getOffsetY()); //down left
+		Thread.sleep(750);
+		bot.mouseClick();
+		Thread.sleep(1500);
+	}
+	
+	private void goFarRight() throws InterruptedException
+	{
+		Thread.sleep(1500);
+		bot.accuratelyMoveCursor(699 + rsc.getOffsetX(), 69 + rsc.getOffsetY()); //down left
+		Thread.sleep(750);
+		bot.mouseClick();
+		Thread.sleep(1500);
+	}
+	
+	private void openDoorOnRight() throws InterruptedException
+	{
+		Thread.sleep(1500);
+		bot.accuratelyMoveCursor(324 + rsc.getOffsetX(), 178 + rsc.getOffsetY()); //down left
+		Thread.sleep(750);
+		bot.mouseClick();
+		Thread.sleep(1500);
+	}
+	
+	private void runRightDown() throws InterruptedException
+	{
+		Thread.sleep(1500);
+		bot.accuratelyMoveCursor(654 + rsc.getOffsetX(), 70 + rsc.getOffsetY()); //down left
+		Thread.sleep(750);
+		bot.mouseClick();
+		Thread.sleep(1500);
+	}
+	
+	private void goTopRight() throws InterruptedException
+	{
+		Thread.sleep(1500);
+		bot.accuratelyMoveCursor(661 + rsc.getOffsetX(), 46 + rsc.getOffsetY()); //down left
+		Thread.sleep(750);
+		bot.mouseClick();
+		Thread.sleep(1500);
+	}
+	
+	public void test()
+	{
 		try
 		{
-			int x = rsc.getOffsetX();
-			int y = rsc.getOffsetY();
-			//zig zag, circle shape, v shape
-			switch(style) 
-			{
-				case 0:
-					
-					bot.moveCursorSlowlyToGeneralArea(77 + x, 50 + y);
-					bot.moveCursorSlowlyToGeneralArea(253 + x, 90 + y);
-					bot.moveCursorSlowlyToGeneralArea(447 + x, 81 + y);
-					bot.moveCursorSlowlyToGeneralArea(336 + x, 162 + y);
-					bot.moveCursorSlowlyToGeneralArea(364 + x, 166 + y);
-					bot.moveCursorSlowlyToGeneralArea(69 + x, 257 + y);
-					bot.moveCursorSlowlyToGeneralArea(239 + x, 266 + y);
-					bot.moveCursorSlowlyToGeneralArea(421 + x, 244 + y);
-					
-					/*
-					bot.moveCursorSlowlyToGeneralArea(171 + x, 250 + y);
-					bot.moveCursorSlowlyToGeneralArea(112 + x, 156 + y);
-					bot.moveCursorSlowlyToGeneralArea(193 + x, 52 + y);
-					bot.moveCursorSlowlyToGeneralArea(352 + x, 78 + y);
-					bot.moveCursorSlowlyToGeneralArea(394 + x, 161 + y);
-					bot.moveCursorSlowlyToGeneralArea(315 + x, 259 + y);
-					bot.moveCursorSlowlyToGeneralArea(111 + x, 223 + y);
-					*/
-					break;
-				case 1:
-					bot.moveCursorSlowlyToGeneralArea(171 + x, 250 + y);
-					bot.moveCursorSlowlyToGeneralArea(112 + x, 156 + y);
-					bot.moveCursorSlowlyToGeneralArea(193 + x, 52 + y);
-					bot.moveCursorSlowlyToGeneralArea(352 + x, 78 + y);
-					bot.moveCursorSlowlyToGeneralArea(394 + x, 161 + y);
-					bot.moveCursorSlowlyToGeneralArea(315 + x, 259 + y);
-					bot.moveCursorSlowlyToGeneralArea(111 + x, 223 + y);
-					break;
-				case 2:
-					bot.moveCursorSlowlyToGeneralArea(399 + x, 79 + y);
-					bot.moveCursorSlowlyToGeneralArea(329 + x, 229 + y);
-					bot.moveCursorSlowlyToGeneralArea(245 + x, 277 + y);
-					bot.moveCursorSlowlyToGeneralArea(148 + x, 196 + y);
-					bot.moveCursorSlowlyToGeneralArea(78 + x, 50 + y);
-					break;
-				default: 
-					bot.moveCursorSlowlyTo(720, 122);
-					bot.moveCursorSlowlyTo(744, 324);
-					bot.moveCursorSlowlyTo(976, 323);
-					bot.moveCursorSlowlyTo(960, 97);
-					bot.moveCursorSlowlyTo(720, 122);
-					break;
-			}
+			goTopRight();
+			Thread.sleep(3000);
+			goLeftDown();
+			goLeftDown();
+			goLeftDown();
+			openDoorOnLeft1();
+			Thread.sleep(1000);
+			goLeftDown();
+			Thread.sleep(1000);
+			openDoorOnLeft2();
+			answerQuestion();
+			goFarLeft();
+			Thread.sleep(10000);
+			goFarLeft();
+			Thread.sleep(10000);
+			goFarRight();
+			Thread.sleep(10000);
+			goFarRight(); //Maybe go medium right
+			Thread.sleep(10000);
+			openDoorOnRight();
+			Thread.sleep(1000);
+			runRightDown();
+			Thread.sleep(1000);
+			openDoorOnRight();
+			answerQuestion();
+			goTopRight();
 		}
 		catch (Exception e)
 		{
-			System.out.println("Could not moveMouseRandomly: " + e);
-			log.appendToApplicationLogsFile("Could not moveMouseRandomly: " + e);
-			throw e;
+			System.out.println("Testing failed: " + e);
 		}
+	}
+	
+	public static boolean stringContainsItemFromList(String inputStr, String[] items) 
+	{
+	    return Arrays.stream(items).parallel().anyMatch(inputStr::contains);
 	}
 }

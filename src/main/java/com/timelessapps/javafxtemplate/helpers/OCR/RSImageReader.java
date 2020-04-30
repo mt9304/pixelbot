@@ -168,6 +168,41 @@ public class RSImageReader
 		return image;
     }
     
+    /** For custom colored text sections **/
+    private BufferedImage convertColoredTextToBlackAndWhite(BufferedImage input, Color colorToMatch) 
+    {
+    	BufferedImage image = input;
+		int width = image.getWidth();
+		int height = image.getHeight();
+		Color white = new Color(255, 255, 255);
+		Color black = new Color(0, 0, 0);
+		
+		for (int y = 0; y < height; y++)
+		{
+			for (int x = 0; x < width; x++) 
+			{
+				Color color = new Color(image.getRGB(x, y));
+
+				if (isSameColor(color, colorToMatch))
+				{
+					image.setRGB(x, y, black.getRGB());
+				}
+				else
+				{
+					image.setRGB(x, y, white.getRGB());
+				}
+			}
+		}
+		try 
+		{
+			ImageIO.write(image, "tif", new File("C:\\Users\\Max\\Desktop\\tempimage\\images\\test.png"));
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		return image;
+    }
+    
     /** For yellow text sections **/
     private BufferedImage convertYellowTextToBlackAndWhite(BufferedImage input) 
     {
@@ -413,6 +448,28 @@ public class RSImageReader
     	BufferedImage resizedImage = getResizedImage(filteredImage, percent);
     	
     	String imageText = getImageTextUsingTess(resizedImage);
+    	return imageText;
+    }
+    
+    public String getRSQuestionsText(Rectangle rectangle, ArrayList<Color> colors) throws Exception
+    {
+    	double percent = 4.0; // Needs to be 400% larger for better results. 
+    	BufferedImage originalSnapShot = getSnapShot(rectangle);
+    	BufferedImage filteredImage = convertColoredTextToBlackAndWhite(originalSnapShot, colors);
+    	//BufferedImage resizedImage = getResizedImage(filteredImage, percent);
+    	
+    	String imageText = getImageTextUsingTess(filteredImage);
+    	return imageText;
+    }
+    
+    public String getRSQuestionsText(Rectangle rectangle, Color color) throws Exception
+    {
+    	double percent = 4.0; // Needs to be 400% larger for better results. 
+    	BufferedImage originalSnapShot = getSnapShot(rectangle);
+    	BufferedImage filteredImage = convertColoredTextToBlackAndWhite(originalSnapShot, color);
+    	//BufferedImage resizedImage = getResizedImage(filteredImage, percent);
+    	
+    	String imageText = getImageTextUsingTess(filteredImage);
     	return imageText;
     }
     

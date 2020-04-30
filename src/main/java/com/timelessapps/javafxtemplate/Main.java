@@ -5,6 +5,7 @@
  */
 package main.java.com.timelessapps.javafxtemplate;
 
+import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.Random;
@@ -71,7 +72,21 @@ public class Main extends Application
 	        	}
 	        	if (args[0].equals("melee"))
 	        	{
-
+	        		RSImageReader rsir = new RSImageReader();
+	        		RSCoordinates rsc = new RSCoordinates();
+	        		Color black = new Color(0,0,0);
+	        		
+	        		/*
+	        		System.out.println("Question1 Text: " + rsir.getRSQuestionsText(rsc.question1Of2(), black));
+	        		System.out.println("Question2 Text: " + rsir.getRSQuestionsText(rsc.question2Of2(), black));
+	        		System.out.println("==");
+	        		System.out.println("Question1 Text: " + rsir.getRSQuestionsText(rsc.question1Of3(), black));
+	        		System.out.println("Question2 Text: " + rsir.getRSQuestionsText(rsc.question2Of3(), black));
+	        		System.out.println("Question3 Text: " + rsir.getRSQuestionsText(rsc.question3Of3(), black)); 
+	        		*/
+	        		//MeleeRoutine meleeRoutine = new MeleeRoutine(args[1]); //pass and gp
+	        		//meleeRoutine.test();
+	        		
 	        		System.out.println("Starting melee routine");
 	        		MeleeRoutine meleeRoutine = new MeleeRoutine(args[1]); //pass and gp
 	        		meleeRoutine.setDaemon(true);
@@ -84,6 +99,7 @@ public class Main extends Application
 	        		meleeRoutine.join();
 	        		System.out.println("Completed melee routine, shutting down. ");
 	        		System.exit(0);
+	        		
 	        	}
 	    	}
 	    	catch (Exception e)
