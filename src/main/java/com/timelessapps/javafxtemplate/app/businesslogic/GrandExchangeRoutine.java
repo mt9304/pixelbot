@@ -39,7 +39,7 @@ public class GrandExchangeRoutine extends Routine
 	String[] items = { "coal", "nature", "death", "chaos", "gold ore", "law", "iron ore"};
 	int lowPrice = 0;
 	int highPrice = 0;
-	int currentGold = 595000; //530000
+	int currentGold = 810000; //810000
 	int geLimit = 11000; //GE limits the amount of an item that can be bought every 8 hours. 
 	int currentSlot = 0; //Up to 3 slots for f2p
 	int currentItemIndex = 0;
@@ -115,6 +115,12 @@ public class GrandExchangeRoutine extends Routine
 					{
 						sellHigh(currentSlot);
 						return; 
+					}
+					
+					if (verifyGE.isItemToSell())
+					{
+						sellOriginalPrice(currentSlot);
+						collectFromGEWhenSuccessful(currentSlot, LONG);
 					}
 					
 					//Below only runs if there is left over unsold items at high price. Need to sell it at low price to recover gp and move on. 
@@ -712,6 +718,55 @@ public class GrandExchangeRoutine extends Routine
 		}
 	}
 
+	private void sellOriginalPrice(int slot) throws Exception 
+	{
+		System.out.println("Selling original price");
+		log.appendToApplicationLogsFile("Selling at original price");
+		try
+		{
+			verifyGE.isOnGEScreen();
+			bot.delay(SHORT);
+			bot.moveCursorTo(rsc.sellButtonX()[slot], rsc.sellButtonY()[slot]);
+			bot.delay(SHORT);
+			bot.mouseClick();
+			bot.delay(SHORT);
+			bot.delay(SHORT);
+			bot.moveCursorTo(rsc.firstInventorySlotX(), rsc.firstInventorySlotY());
+			bot.delay(SHORT);
+			bot.mouseClick();
+			bot.delay(SHORT);
+			verifyGE.isOnSellScreen();
+			bot.moveCursorTo(rsc.specifyPriceButtonX(), rsc.specifyPriceButtonY());
+			bot.delay(SHORT);
+			bot.mouseClick();
+			bot.delay(MEDIUM);
+			bot.delay(MEDIUM);
+			bot.type(Integer.toString(lowPrice));
+			bot.delay(SHORT);
+			bot.keyPress(KeyEvent.VK_ENTER);
+			bot.keyRelease(KeyEvent.VK_ENTER);
+			bot.delay(SHORT);
+			bot.delay(SHORT);
+			bot.delay(SHORT);
+			bot.moveCursorTo(rsc.confirmTradeButtonX(), rsc.confirmTradeButtonY());
+			bot.delay(SHORT);
+			bot.mouseClick();
+			bot.delay(SHORT);
+			System.out.println("Finished selling original price. ");
+			log.appendToApplicationLogsFile("Finished selling at original price");
+		}
+		catch (NoItemsToSellException ex)
+		{
+			log.appendToApplicationLogsFile("Caught NoItemsToSellException, skipping sell. ");
+		}
+		catch (Exception e)
+		{
+			System.out.println("Could not sellOriginalPrice(): " + e);
+			log.appendToApplicationLogsFile("Could not sellOriginalPrice(): " + e);
+			throw e;
+		}
+	}
+	
 	private void resetPrices()
 	{
 		lowPrice = 0;

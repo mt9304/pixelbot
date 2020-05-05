@@ -176,9 +176,9 @@ public class VerifyGrandExchange
 		log.appendToApplicationLogsFile("Verifying that all items have sold in GE slot: " + geSlot);
 		try
 		{
-			for (int i = 0; i < 51; i++)
+			for (int i = 0; i < 76; i++)
 			{
-				System.out.println("Checking " + i + "/50 times. ");
+				System.out.println("Checking " + i + "/75 times. ");
 				Color green = new Color(0, 95, 0);
 				Color currentColor = bot.getPixelColor(rsc.progressBarX()[geSlot], rsc.progressBarY()[geSlot]);
 				
