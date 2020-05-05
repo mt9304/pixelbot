@@ -52,11 +52,11 @@ public class RSCoordinates
 	}
 	
 	public int freeWorldButtonX() { // World 474
-		return getOffsetX() + 660;
+		return getOffsetX() + 660; //660
 	}
 	
 	public int freeWorldButtonY() { // World 474
-		return getOffsetY() + 232;
+		return getOffsetY() + 423; //232
 	}
 
 	public int clickHereToPlayButtonX() {

@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -111,7 +112,9 @@ public class MeleeRoutine extends Routine
 					goTopRight();
 					isResettingAggro = false;					
 					
-					Thread.sleep(random.nextInt(600000) + 100000);
+					TimeUnit.MINUTES.sleep(10);
+					Thread.sleep(random.nextInt(10000) + 10000);
+					//Thread.sleep(random.nextInt(700000) + 100000);
 					
 					if(attackTimer.getState() == Thread.State.TERMINATED)
 					{ 
@@ -312,11 +315,11 @@ public class MeleeRoutine extends Routine
 	{
    		log.appendToApplicationLogsFile("Answering question. ");
 		Color black = new Color(0, 0, 0);
-		String[] possibleAnswers1of2 = { "Talk to any banker.", "Tlothing, it's a fake.", "Through account settings on oldschool.runescape.com." };
+		String[] possibleAnswers1of2 = { "Talk to any banker.", "Tlothing, it's a fake.", "Through account settings on oldschool.runescape.com.", "Report the incident and do not click any fnks." };
 		String[] possibleAnswers2of2 = { "ice and reset my passwi", "To.", "Report the incident and do not click any finks"};
 		
-		String[] possibleAnswers1of3 = { "Decline the offer and repore thar player.", "Me.", "rake my gold for your ownl Repovred!", "Ser up @ step authentication with my emafl provider.", "Don't give them the information and send an Abuse reporr'." };
-		String[] possibleAnswers2of3 = { "vt the stream as a scam", "Report the player for phishing.", "Only on the Old School RuneSecape website", "type in my password backwards and report the player", "Authenticator and two-step login on my registered email", "To.", "on't give out your password to anyone. Tlot even close friend", "Tlo way! I'm veporti", "Don't give them my password." };
+		String[] possibleAnswers1of3 = { "Decline the offer and repore thar player.", "Me.", "rake my gold for your ownl Repovred!", "Ser up @ step authentication with my emafl provider.", "Don't give them the information and send an Abuse reporr'.", "Thvus scan my device then change muy password." };
+		String[] possibleAnswers2of3 = { "vt the stream as a scam", "Report the player for phishing.", "Only on the Old School RuneSecape website", "type in my password backwards and report the player", "Authenticator and two-step login on my registered email", "To.", "on't give out your password to anyone. Tlot even close friend", "Tlo way! I'm veporti", "Don't give them my password.", "Don't share your information and report the player." };
 		String[] possibleAnswers3of3 = { "Palitely tell them no and then use the", "Delece it - it's a fakel", "To, you should never allow anyone to level your account.", "not visit the website and vepove the player who messaged yor", "Don't cell them anyrhing and click", "Read the text and follow the advice given", "The bivehday of a famous person ov evene", "To, you should never buy an accounr.", "Use the Account Recovery System.", "Thobody." };
 		
 		Thread.sleep(4000);
@@ -354,7 +357,7 @@ public class MeleeRoutine extends Routine
 		}
 		else
 		{ 
-			log.appendToApplicationLogsFile("Could not answer question. Possible answers: ");
+			log.appendToApplicationLogsFile("Could not answer question. Possible Answers:  ");
 			log.appendToApplicationLogsFile(answer1of3);
 			log.appendToApplicationLogsFile(answer2of3);
 			log.appendToApplicationLogsFile(answer3of3);
