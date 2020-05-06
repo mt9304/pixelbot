@@ -427,7 +427,7 @@ public class MeleeRoutine extends Routine
 	private void runRightDown() throws InterruptedException
 	{
 		Thread.sleep(1500);
-		bot.accuratelyMoveCursor(654 + rsc.getOffsetX(), 70 + rsc.getOffsetY()); //down left
+		bot.accuratelyMoveCursor(656 + rsc.getOffsetX(), 70 + rsc.getOffsetY()); //down left
 		Thread.sleep(750);
 		bot.mouseClick();
 		Thread.sleep(1500);
