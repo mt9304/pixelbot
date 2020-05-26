@@ -58,6 +58,7 @@ public class MeleeRoutine extends Routine
 		synchronized (this) {
 			try {
 				disableMeleeButton();
+				/*
 				initialize();
 				verifyGE.loginScreenIsLoaded();
 				chooseWorld();
@@ -68,6 +69,7 @@ public class MeleeRoutine extends Routine
 				//scrollIn();
 				tiltScreenUp();
 				//Types every once in a while to avoid timeout
+				 */
 			    AttackTimer attackTimer = new AttackTimer(); //300800
 			    attackTimer.setDaemon(true);
 			    attackTimer.start();
@@ -88,7 +90,7 @@ public class MeleeRoutine extends Routine
 					Thread.sleep(3000);
 					goLeftDown();
 					goLeftDown();
-					goLeftDown();
+					//goLeftDown();
 					openDoorOnLeft1();
 					Thread.sleep(1000);
 					goLeftDown();
@@ -313,7 +315,7 @@ public class MeleeRoutine extends Routine
 	
 	public void answerQuestion() throws Exception
 	{
-   		log.appendToApplicationLogsFile("Answering question. ");
+		log.appendToApplicationLogsFile("Answering question. ");
 		Color black = new Color(0, 0, 0);
 		String[] possibleAnswers1of2 = { "Talk to any banker.", "Tlothing, it's a fake.", "Through account settings on oldschool.runescape.com.", "Report the incident and do not click any fnks." };
 		String[] possibleAnswers2of2 = { "ice and reset my passwi", "To.", "Report the incident and do not click any finks"};
@@ -322,11 +324,11 @@ public class MeleeRoutine extends Routine
 		String[] possibleAnswers2of3 = { "vt the stream as a scam", "Report the player for phishing.", "Only on the Old School RuneSecape website", "type in my password backwards and report the player", "Authenticator and two-step login on my registered email", "To.", "on't give out your password to anyone. Tlot even close friend", "Tlo way! I'm veporti", "Don't give them my password.", "Don't share your information and report the player." };
 		String[] possibleAnswers3of3 = { "Palitely tell them no and then use the", "Delece it - it's a fakel", "To, you should never allow anyone to level your account.", "not visit the website and vepove the player who messaged yor", "Don't cell them anyrhing and click", "Read the text and follow the advice given", "The bivehday of a famous person ov evene", "To, you should never buy an accounr.", "Use the Account Recovery System.", "Thobody." };
 		
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 		bot.type(" ");
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 		bot.type(" ");
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 		
 		String answer1of3 = rsir.getRSQuestionsText(rsc.question1Of3(), black).trim();
 		String answer2of3 = rsir.getRSQuestionsText(rsc.question2Of3(), black).trim();
@@ -357,7 +359,7 @@ public class MeleeRoutine extends Routine
 		}
 		else
 		{ 
-			log.appendToApplicationLogsFile("Could not answer question. Possible Answers:  ");
+			log.appendToApplicationLogsFile("Could not answer question. Possible Answers: ");
 			log.appendToApplicationLogsFile(answer1of3);
 			log.appendToApplicationLogsFile(answer2of3);
 			log.appendToApplicationLogsFile(answer3of3);
@@ -365,9 +367,9 @@ public class MeleeRoutine extends Routine
 			log.appendToApplicationLogsFile(answer2of2);
 		}
 		Thread.sleep(2000);
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		bot.type(" ");
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 	}
 	
 	private void openDoorOnLeft1() throws InterruptedException
@@ -436,7 +438,7 @@ public class MeleeRoutine extends Routine
 	private void goTopRight() throws InterruptedException
 	{
 		Thread.sleep(1500);
-		bot.accuratelyMoveCursor(661 + rsc.getOffsetX(), 46 + rsc.getOffsetY()); //down left
+		bot.accuratelyMoveCursor(655 + rsc.getOffsetX(), 50 + rsc.getOffsetY()); //down left was 661 and 46
 		Thread.sleep(750);
 		bot.mouseClick();
 		Thread.sleep(1500);

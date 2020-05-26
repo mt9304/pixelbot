@@ -52,11 +52,11 @@ public class AttackTimer extends Thread
 					String randomLetter = getRandomLetter(randomNumber);
 					bot.type(randomLetter, random.nextInt(15) + 35);
 					Thread.sleep(random.nextInt(1000) + 1000);
-					bot.keyPress(KeyEvent.VK_BACK_SPACE);
-					Thread.sleep(random.nextInt(40) + 40);
-					bot.keyRelease(KeyEvent.VK_BACK_SPACE);
+					//bot.keyPress(KeyEvent.VK_BACK_SPACE);
+					//Thread.sleep(random.nextInt(40) + 40);
+					//bot.keyRelease(KeyEvent.VK_BACK_SPACE);
 				}
-				Thread.sleep(random.nextInt(12000) + 12000);
+				Thread.sleep(random.nextInt(42000) + 42000);
 			}
 		} catch (Exception e) 
 		{
