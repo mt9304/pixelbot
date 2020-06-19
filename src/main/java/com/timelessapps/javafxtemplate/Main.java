@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.GrandExchangeRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.MeleeRoutine;
+import main.java.com.timelessapps.javafxtemplate.app.businesslogic.SimpleNMZRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.AttackTimer;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.GlobalKeyListener;
 import main.java.com.timelessapps.javafxtemplate.controllers.contentarea.LogsPageController;
@@ -55,6 +56,21 @@ public class Main extends Application
     	{
 	    	try 
 	    	{
+	    		if (args[0].equals("snmz"))
+	    		{
+	        		System.out.println("Starting SNMZ routine");
+	        		SimpleNMZRoutine simpleNMZRoutine = new SimpleNMZRoutine(); //pass and gp
+	        		simpleNMZRoutine.setDaemon(true);
+	        		simpleNMZRoutine.start();
+	
+	        		GlobalKeyListener globalKeyListener = new GlobalKeyListener(simpleNMZRoutine);
+	        		globalKeyListener.setDaemon(true);
+	        		globalKeyListener.start();
+	        		
+	        		simpleNMZRoutine.join();
+	        		System.out.println("Completed SNMZ routine, shutting down. ");
+	        		System.exit(0);
+	    		}
 	        	if (args[0].equals("ge"))
 	        	{
 	        		System.out.println("Starting GE routine");

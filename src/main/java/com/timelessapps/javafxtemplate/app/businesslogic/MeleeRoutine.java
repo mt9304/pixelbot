@@ -359,7 +359,7 @@ public class MeleeRoutine extends Routine
 		}
 		else
 		{ 
-			log.appendToApplicationLogsFile("Could not answer question. Possible Answers: ");
+			log.appendToApplicationLogsFile("Could not answer question. Possible Answers:  ");
 			log.appendToApplicationLogsFile(answer1of3);
 			log.appendToApplicationLogsFile(answer2of3);
 			log.appendToApplicationLogsFile(answer3of3);
