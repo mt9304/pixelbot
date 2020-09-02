@@ -19,6 +19,7 @@ import javafx.stage.StageStyle;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.GrandExchangeRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.MeleeRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.SimpleNMZRoutine;
+import main.java.com.timelessapps.javafxtemplate.app.businesslogic.SplashRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.AttackTimer;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.GlobalKeyListener;
 import main.java.com.timelessapps.javafxtemplate.controllers.contentarea.LogsPageController;
@@ -116,6 +117,21 @@ public class Main extends Application
 	        		System.out.println("Completed melee routine, shutting down. ");
 	        		System.exit(0);
 	        		
+	        	}
+	        	if (args[0].contentEquals("splash"))
+	        	{
+	        		System.out.println("Starting splash routine");
+	        		SplashRoutine splashRoutine = new SplashRoutine(); //pass and gp
+	        		splashRoutine.setDaemon(true);
+	        		splashRoutine.start();
+	
+	        		GlobalKeyListener globalKeyListener = new GlobalKeyListener(splashRoutine);
+	        		globalKeyListener.setDaemon(true);
+	        		globalKeyListener.start();
+	        		
+	        		splashRoutine.join();
+	        		System.out.println("Completed splash routine, shutting down. ");
+	        		System.exit(0);
 	        	}
 	    	}
 	    	catch (Exception e)

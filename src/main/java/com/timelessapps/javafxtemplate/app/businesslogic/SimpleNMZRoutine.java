@@ -45,7 +45,7 @@ public class SimpleNMZRoutine extends Routine{
 					counter++;
 					System.out.println("Clicked");
 					//TimeUnit.MINUTES.sleep(1);
-					Thread.sleep(random.nextInt(60000) + 20000);
+					Thread.sleep(random.nextInt(30000) + 25000);
 					checkIfPausedOrStopped();
 				}
 			} catch (InterruptedException ex) {
@@ -56,7 +56,7 @@ public class SimpleNMZRoutine extends Routine{
 	
 	@Override
 	public void checkIfPausedOrStopped() throws InterruptedException {
-		if (counter > 180) {
+		if (counter > 200) {
 			System.out.println("Counter is: " + counter + ". Stopping routine. ");
 			running = false;
 		}

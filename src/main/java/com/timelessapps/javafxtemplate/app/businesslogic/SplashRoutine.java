@@ -3,6 +3,7 @@ package main.java.com.timelessapps.javafxtemplate.app.businesslogic;
 import java.awt.AWTException;
 import java.io.FileNotFoundException;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.BuffTimer;
@@ -63,7 +64,9 @@ public class SplashRoutine extends Routine {
 					bot.type(randomLetter, random.nextInt(15) + 35);
 					counter++;
 					System.out.println("Typed letter. ");
-					Thread.sleep(random.nextInt(120000) + 120000);
+					//Thread.sleep(random.nextInt(120000) + 120000);
+					TimeUnit.MINUTES.sleep(4);
+					Thread.sleep(random.nextInt(30000) + 10000);
 					checkIfPausedOrStopped();
 				}
 			} catch (InterruptedException ex) {
@@ -74,7 +77,7 @@ public class SplashRoutine extends Routine {
 
 	@Override
 	public void checkIfPausedOrStopped() throws InterruptedException {
-		if (counter > 180) {
+		if (counter > 150) {
 			System.out.println("Counter is: " + counter + ". Stopping routine. ");
 			running = false;
 		}
@@ -87,13 +90,23 @@ public class SplashRoutine extends Routine {
 	}
 
 	private void disableSplashButton() {
-		CustomSceneHelper sceneHelper = new CustomSceneHelper();
-		sceneHelper.getNodeById("splashButton").setDisable(true);
+		try {
+			CustomSceneHelper sceneHelper = new CustomSceneHelper();
+			sceneHelper.getNodeById("splashButton").setDisable(true);
+		}
+		catch (Exception e) {
+			System.out.println("Could not disable splash button: " + e);
+		}
 	}
 
 	private void enableSplashButton() {
-		CustomSceneHelper sceneHelper = new CustomSceneHelper();
-		sceneHelper.getNodeById("splashButton").setDisable(false);
+		try {
+			CustomSceneHelper sceneHelper = new CustomSceneHelper();
+			sceneHelper.getNodeById("splashButton").setDisable(false);
+		}
+		catch (Exception e) {
+			System.out.println("Could not enable splash button: " + e);
+		}
 	}
 
 	private String getRandomLetter(int x) {
