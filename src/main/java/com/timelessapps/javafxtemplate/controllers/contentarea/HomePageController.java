@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
+import main.java.com.timelessapps.javafxtemplate.app.businesslogic.StayLoggedRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.HighAlchRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.MainBotRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.GlobalKeyListener;
@@ -71,4 +72,18 @@ public class HomePageController implements Initializable
 				//System.out.println("Remember to re-active button. ");
      }
     
+    @FXML
+    public void startStayLoggedRoutine(MouseEvent event) throws InterruptedException, AWTException 
+    {
+				StayLoggedRoutine stayLoggedRoutine = new StayLoggedRoutine();
+				stayLoggedRoutine.setDaemon(true);
+				stayLoggedRoutine.start();
+
+				GlobalKeyListener globalKeyListener = new GlobalKeyListener(stayLoggedRoutine);
+				globalKeyListener.setDaemon(true);
+				globalKeyListener.start();
+
+				//botRoutine.join();
+				//System.out.println("Remember to re-active button. ");
+     }
 }

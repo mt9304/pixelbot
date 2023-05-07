@@ -20,5 +20,10 @@
             <Font size="18.0" />
          </font>
       </Button>
+      <Button id="startButton" fx:id="stayLoggedButton" layoutX="111.0" layoutY="228.0" mnemonicParsing="false" onMouseClicked="#startStayLoggedRoutine" prefHeight="65.0" prefWidth="219.0" styleClass="stayLoggedButton" text="Stay Logged (2 Accs)">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
