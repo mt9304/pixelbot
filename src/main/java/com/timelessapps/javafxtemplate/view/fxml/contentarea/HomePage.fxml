@@ -10,17 +10,22 @@
         <URL value="@/main/java/com/timelessapps/javafxtemplate/view/css/contentarea/HomePage.css" />
     </stylesheets>
    <children>
-      <Button id="startButton" fx:id="startButton" layoutX="153.0" layoutY="77.0" mnemonicParsing="false" onMouseClicked="#startApplication" prefHeight="58.0" prefWidth="135.0" styleClass="startButton" text="Start">
+      <Button id="startButton" fx:id="startButton" layoutX="44.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#startApplication" prefHeight="58.0" prefWidth="135.0" styleClass="startButton" text="Start">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button id="startButton" fx:id="alchButton" layoutX="153.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#startAlchRoutine" prefHeight="58.0" prefWidth="135.0" styleClass="alchButton" text="Alch">
+      <Button id="startButton" fx:id="alchButton" layoutX="44.0" layoutY="95.0" mnemonicParsing="false" onMouseClicked="#startAlchRoutine" prefHeight="58.0" prefWidth="135.0" styleClass="alchButton" text="Alch">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button id="startButton" fx:id="stayLoggedButton" layoutX="111.0" layoutY="228.0" mnemonicParsing="false" onMouseClicked="#startStayLoggedRoutine" prefHeight="65.0" prefWidth="219.0" styleClass="stayLoggedButton" text="Stay Logged (2 Accs)">
+      <Button id="startButton" fx:id="stayLoggedButton" layoutX="190.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#startStayLoggedRoutine" prefHeight="58.0" prefWidth="200.0" styleClass="stayLoggedButton" text="Stay Logged (2 Accs)">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button id="startButton" fx:id="smeltIronButton" layoutX="190.0" layoutY="95.0" mnemonicParsing="false" onMouseClicked="#startSmeltIronRoutine" prefHeight="58.0" prefWidth="200.0" styleClass="smeltIronButton" text="Smelt Iron (2 Accs)">
          <font>
             <Font size="18.0" />
          </font>

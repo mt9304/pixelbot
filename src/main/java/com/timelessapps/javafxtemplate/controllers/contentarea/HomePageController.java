@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
+import main.java.com.timelessapps.javafxtemplate.app.businesslogic.SmeltIronRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.StayLoggedRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.HighAlchRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.MainBotRoutine;
@@ -55,7 +56,7 @@ public class HomePageController implements Initializable
 
 				//botRoutine.join();
 				//System.out.println("Remember to re-active button. ");
-     }
+    }
 				
     @FXML
     public void startAlchRoutine(MouseEvent event) throws InterruptedException, AWTException 
@@ -70,7 +71,7 @@ public class HomePageController implements Initializable
 
 				//botRoutine.join();
 				//System.out.println("Remember to re-active button. ");
-     }
+    }
     
     @FXML
     public void startStayLoggedRoutine(MouseEvent event) throws InterruptedException, AWTException 
@@ -80,6 +81,21 @@ public class HomePageController implements Initializable
 				stayLoggedRoutine.start();
 
 				GlobalKeyListener globalKeyListener = new GlobalKeyListener(stayLoggedRoutine);
+				globalKeyListener.setDaemon(true);
+				globalKeyListener.start();
+
+				//botRoutine.join();
+				//System.out.println("Remember to re-active button. ");
+    }
+    
+    @FXML
+    public void startSmeltIronRoutine(MouseEvent event) throws InterruptedException, AWTException 
+    {
+				SmeltIronRoutine smeltIronRoutine = new SmeltIronRoutine();
+				smeltIronRoutine.setDaemon(true);
+				smeltIronRoutine.start();
+
+				GlobalKeyListener globalKeyListener = new GlobalKeyListener(smeltIronRoutine);
 				globalKeyListener.setDaemon(true);
 				globalKeyListener.start();
 

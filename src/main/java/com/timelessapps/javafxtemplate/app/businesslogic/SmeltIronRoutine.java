@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.BuffTimer;
+import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.ClickableArea;
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Coordinates.X;
 import static main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Coordinates.Y;
 import main.java.com.timelessapps.javafxtemplate.helpers.abstractsandenums.Routine;
@@ -16,17 +17,20 @@ import main.java.com.timelessapps.javafxtemplate.helpers.services.CustomSceneHel
 import main.java.com.timelessapps.javafxtemplate.helpers.services.LoggingService;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
 
-public class StayLoggedRoutine extends Routine
+public class SmeltIronRoutine extends Routine
 {
     RobotService bot = new RobotService();
     LoggingService log = new LoggingService();
     Random random = new Random();
+    int tripNumber = 0;
+    
+    //Declaring various coordinates for buttons, slots and objects. 
+    ClickableArea bankSlot3_W1 = new ClickableArea(2195, 142, 2201, 147, 2200, 138, 2205, 151, 2193, 148, 2199, 152);
+    ClickableArea bankSlot3_W2 = new ClickableArea(3170, 143, 3179, 149, 3171, 148, 3177, 151, 3178, 139, 3180, 143);
+    ClickableArea invSlot1_W1 = new ClickableArea(2672, 716, 2680, 723, 2671, 727, 2678, 730, 2680, 715, 2682, 727);
+    ClickableArea invSlot1_W2 = new ClickableArea(3668, 755, 3677, 761, 3667, 761, 3674, 765, 3675, 750, 3678, 762);
 
-    int totalNumberOfTimesToClick = 100;
-
-    volatile Boolean bookStillLoading = true;
-
-    public StayLoggedRoutine() throws AWTException
+    public SmeltIronRoutine() throws AWTException
     {
 
     }
@@ -57,8 +61,7 @@ public class StayLoggedRoutine extends Routine
                      */
                     //F5 = Inv, F6 = Equipment, F7 = SpellBook.
                     //Move to starting spot. 
-                    bot.delay(random.nextInt(17000) + 17000);
-                    bot.delay(random.nextInt(17000) + 17000);
+                    bot.delay(random.nextInt(1000) + 1000);
                     //bot.delay(random.nextInt(3500) + 3500);
 
                     //For random taking a break and readjusting mouse. 
@@ -70,26 +73,25 @@ public class StayLoggedRoutine extends Routine
                         bot.delay(random.nextInt(500) + 500);
                     }
                     
-                    bot.type(" ", 1000);
-                    bot.delay(random.nextInt(5000) + 1000);
-                    bot.keyPress(KeyEvent.VK_ALT);
-                    bot.delay(random.nextInt(500));
-                    bot.keyPress(KeyEvent.VK_TAB);
-                    bot.delay(random.nextInt(500));
-                    bot.keyRelease(KeyEvent.VK_TAB);
-                    bot.delay(random.nextInt(500));
-                    bot.keyRelease(KeyEvent.VK_ALT);
+                    //  Start at first teller with bank tab open before running routine. 
+                    //  Make sure no ring of forging equipped, iron ore in second bank  slot and irng of forging in 3rd bank slot. 
+                    //  This routine uses 2 accounts in 2 different windows. Can modify to only use 1. 
+                    if (tripNumber % 5 == 0) { //28 * 5 is 140, which is the startinc harges on a new ring of forging. { 
+                    //  StoreInvToBank();
+                        WithdrawRingOfForging(1);
+                        WithdrawRingOfForging(2);
+                    //  PressEscapeKey();  //Tools => All Settings => Make sure Press Esc To Exit Current Interface is checked in game. 
+                    //  EquipRingOfForging();
+                    //  ClickBankFromInFrontOfTeller();
+                    }
                     
-                    bot.delay(random.nextInt(5000) + 1000);
-                    bot.type(" ", 1000);
-                    bot.delay(random.nextInt(5000) + 1000);
-                    bot.keyPress(KeyEvent.VK_ALT);
-                    bot.delay(random.nextInt(500));
-                    bot.keyPress(KeyEvent.VK_TAB);
-                    bot.delay(random.nextInt(500));
-                    bot.keyRelease(KeyEvent.VK_TAB);
-                    bot.delay(random.nextInt(500));
-                    bot.keyRelease(KeyEvent.VK_ALT);
+                    //  StoreInvToBank();
+                    //  WithDrawIronOre();
+                    //  ClickFurnaceFromBankTeller();
+                    //  bot.type(" ", random.nextInt(400));
+                    //  CheckForLevelUp();
+                    //  ClickBankBoothFromFurnace();
+                    
                     
                     /**
                      * End routine here. *
@@ -97,7 +99,7 @@ public class StayLoggedRoutine extends Routine
                     bot.delay(random.nextInt(17000) + 17000);
                     bot.delay(random.nextInt(17000) + 17000);
                     //bot.delay(random.nextInt(3500) + 3500);
-                    totalNumberOfTimesToClick--;
+                    tripNumber++;
                     checkIfPausedOrStopped();
                 }
             } catch (InterruptedException ex)
@@ -110,7 +112,7 @@ public class StayLoggedRoutine extends Routine
     @Override
     public void checkIfPausedOrStopped() throws InterruptedException
     {
-        if (totalNumberOfTimesToClick <= 0)
+        if (tripNumber >= 100)
         {
             System.out.println("Preparing to shut down. ");
             running = false;
@@ -148,45 +150,40 @@ public class StayLoggedRoutine extends Routine
         CustomSceneHelper sceneHelper = new CustomSceneHelper();
         sceneHelper.getNodeById("startButton").setDisable(false);
     }
-
-    private void moveToAlchSpot()
-    {
-
+    
+    private void AltTab() {
+        bot.keyPress(KeyEvent.VK_ALT);
+        bot.delay(random.nextInt(500));
+        bot.keyPress(KeyEvent.VK_TAB);
+        bot.delay(random.nextInt(500));
+        bot.keyRelease(KeyEvent.VK_TAB);
+        bot.delay(random.nextInt(500));
+        bot.keyRelease(KeyEvent.VK_ALT);
     }
-
-    private void checkIfOnMagicScreen()
-    {
-
+    
+    private void PressEscapeKey() {
+        bot.keyPress(KeyEvent.VK_ESCAPE);
+        bot.delay(random.nextInt(50) + 50);
+        bot.keyRelease(KeyEvent.VK_ESCAPE);
     }
-
-    private void checkIfArrowIsInPlace()
-    {
-
-    }
-
-    private void unequiptArrowAndPutBackInPlace()
-    {
-
-    }
-
-    private void switchTo(Slots slot)
-    {
-        switch (slot)
-        {
-            case INV:
-                bot.keyPress(KeyEvent.VK_F5);
-                bot.delay(random.nextInt(20) + 10);
-                bot.keyRelease(KeyEvent.VK_F5);
-                break;
-            case EQUIP:
-                bot.keyPress(KeyEvent.VK_F6);
-                bot.delay(random.nextInt(20) + 10);
-                bot.keyRelease(KeyEvent.VK_F6);
-                break;
-            case BOOK:
-                bot.keyPress(KeyEvent.VK_F7);
-                bot.delay(random.nextInt(20) + 10);
-                bot.keyRelease(KeyEvent.VK_F7);
+    
+    private void WithdrawRingOfForging(int windowNumber) {
+        if (windowNumber == 1) {
+            bot.accuratelyMoveCursor(bankSlot3_W1.GetRandomXY());
+            try {
+                Thread.sleep(random.nextInt(500) + 500);
+            } catch (Exception e) {
+                
+            }
+            bot.mouseClick();
+        } else if (windowNumber == 2) {
+            bot.accuratelyMoveCursor(bankSlot3_W2.GetRandomXY());
+            try {
+                Thread.sleep(random.nextInt(500) + 500);
+            } catch (Exception e) {
+                
+            }
+            bot.mouseClick();
         }
     }
 }
