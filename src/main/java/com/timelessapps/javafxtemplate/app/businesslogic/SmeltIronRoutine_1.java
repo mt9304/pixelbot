@@ -17,7 +17,7 @@ import main.java.com.timelessapps.javafxtemplate.helpers.services.CustomSceneHel
 import main.java.com.timelessapps.javafxtemplate.helpers.services.LoggingService;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
 
-public class SmeltIronRoutine extends Routine
+public class SmeltIronRoutine_1 extends Routine
 {
     RobotService bot = new RobotService();
     LoggingService log = new LoggingService();
@@ -50,41 +50,29 @@ public class SmeltIronRoutine extends Routine
     */
     
     //Declaring various coordinates for buttons, slots and objects. 
-    int bankSlot2X_W1 = 2151;
-    int bankSlot2Y_W1 = 145;
-    int bankSlot2X_W2 = 3129;
-    int bankSlot2Y_W2 = 144;
-    int bankSlot3X_W1 = 2197;
-    int bankSlot3Y_W1 = 147;
-    int bankSlot3X_W2 = 3176;
-    int bankSlot3Y_W2 = 145;
-    int invSlot1X_W1 = 2680;
-    int invSlot1Y_W1 = 722;
-    int invSlot1X_W2 = 3676;
-    int invSlot1Y_W2 = 760;
-    int depositInvToBankButtonX_W1 = 2457;
-    int depositInvToBankButtonY_W1 = 829;
-    int depositInvToBankButtonX_W2 = 3437;
-    int depositInvToBankButtonY_W2 = 829;
+    ClickableArea bankSlot2_W1 = new ClickableArea(2145, 141, 2158, 151, 2145, 141, 2158, 151, 2145, 141, 2158, 151);
+    ClickableArea bankSlot2_W2 = new ClickableArea(3119, 140, 3135, 146, 3119, 140, 3135, 146, 3119, 140, 3135, 146);
+    ClickableArea bankSlot3_W1 = new ClickableArea(2195, 142, 2201, 147, 2195, 142, 2201, 147, 2195, 142, 2201, 147);
+    ClickableArea bankSlot3_W2 = new ClickableArea(3170, 143, 3179, 149, 3170, 143, 3179, 149, 3170, 143, 3179, 149);
+    ClickableArea invSlot1_W1 = new ClickableArea(2672, 716, 2680, 723, 2672, 716, 2680, 723, 2672, 716, 2680, 723);
+    ClickableArea invSlot1_W2 = new ClickableArea(3668, 755, 3677, 761, 3668, 755, 3677, 761, 3668, 755, 3677, 761);
+    
+    ClickableArea depositInvToBankButton_W1 = new ClickableArea(2449, 822, 2465, 832, 2448, 817, 2470, 827, 2446, 833, 2468, 841);
+    ClickableArea depositInvToBankButton_W2 = new ClickableArea(3433, 823, 3443, 831, 3424, 818, 3447, 828, 3425, 834, 3444, 839);
+    
+    ClickableArea bankBoothFromBank_W1 = new ClickableArea(2387, 562, 2392, 570, 2387, 562, 2392, 570, 2387, 562, 2392, 570);
+    ClickableArea bankBoothFromBank_W2 = new ClickableArea(3358, 561, 3370, 570, 3358, 561, 3370, 570, 3358, 561, 3370, 570);
+    
+    ClickableArea bankBoothFromFurnace_W1 = new ClickableArea(1944, 730, 1956, 738, 1944, 730, 1956, 738, 1944, 730, 1956, 738);
+    ClickableArea bankBoothFromFurnace_W2 = new ClickableArea(2909, 726, 2930, 734, 2909, 726, 2930, 734, 2909, 726, 2930, 734);
+    
+    ClickableArea furnaceFromBankBooth_W1 = new ClickableArea(2737, 399, 2745, 407, 2737, 399, 2745, 407, 2737, 399, 2745, 407);
+    ClickableArea furnaceFromBankBooth_W2 = new ClickableArea(3714, 394, 3725, 404, 3714, 394, 3725, 404, 3714, 394, 3725, 404);
+    
+    ClickableArea furnaceFromFurnace_W1 = new ClickableArea(2418, 521, 2426, 531, 2418, 521, 2426, 531, 2418, 521, 2426, 531);
+    ClickableArea furnaceFromFurnace_W2 = new ClickableArea(3397, 524, 3408, 531, 3397, 524, 3408, 531, 3397, 524, 3408, 531);
 
-    int bankBoothFromBankX_W1 = 2382;
-    int bankBoothFromBankY_W1 = 562;
-    int bankBoothFromBankX_W2 = 3361;
-    int bankBoothFromBankY_W2 = 562;
-    int bankBoothFromFurnaceX_W1 = 1953;
-    int bankBoothFromFurnaceY_W1 = 736;
-    int bankBoothFromFurnaceX_W2 = 2935;
-    int bankBoothFromFurnaceY_W2 = 733;
-    int furnaceFromBankBoothX_W1 = 2741;
-    int furnaceFromBankBoothY_W1 = 396;
-    int furnaceFromBankBoothX_W2 = 3716;
-    int furnaceFromBankBoothY_W2 = 397;
-    int furnaceFromFurnaceX_W1 = 2423;
-    int furnaceFromFurnaceY_W1 = 524;
-    int furnaceFromFurnaceX_W2 = 3400;
-    int furnaceFromFurnaceY_W2 = 526;
-
-    public SmeltIronRoutine() throws AWTException
+    public SmeltIronRoutine_1() throws AWTException
     {
 
     }
@@ -248,18 +236,14 @@ public class SmeltIronRoutine extends Routine
     }
     
     private void WithdrawRingOfForging(int windowNumber) {
-        int bankSlot3X = 0;
-        int bankSlot3Y = 0;
-        
+        int[] bankSlot3 = new int[2];
         if (windowNumber == 1) {
-            bankSlot3X = bankSlot3X_W1;
-            bankSlot3Y = bankSlot3Y_W1;
+            bankSlot3 = bankSlot3_W1.GetRandomXY();
         } else if (windowNumber == 2) {
-            bankSlot3X = bankSlot3X_W2;
-            bankSlot3Y = bankSlot3X_W2;
+            bankSlot3 = bankSlot3_W2.GetRandomXY();
         }
         
-        bot.moveCursorTo(bankSlot3X, bankSlot3Y);
+        bot.accuratelyMoveCursor(bankSlot3);
         try {
             Thread.sleep(random.nextInt(500) + 500);
         } catch (Exception e) {
@@ -274,18 +258,14 @@ public class SmeltIronRoutine extends Routine
     }
     
     private void StoreInvToBank(int windowNumber) {
-        int storeInvButtonX = 0;
-        int storeInvButtonY = 0;
-        
+        int[] storeInvButton = new int[2];
         if (windowNumber == 1) {
-            storeInvButtonX = depositInvToBankButtonX_W1;
-            storeInvButtonY = depositInvToBankButtonY_W1;
+            storeInvButton = depositInvToBankButton_W1.GetRandomXY();
         } else if (windowNumber == 2) {
-            storeInvButtonX = depositInvToBankButtonX_W2;
-            storeInvButtonY = depositInvToBankButtonY_W2;
+            storeInvButton = depositInvToBankButton_W2.GetRandomXY();
         }
         
-        bot.moveCursorTo(storeInvButtonX, storeInvButtonY);
+        bot.accuratelyMoveCursor(storeInvButton);
         try {
             Thread.sleep(random.nextInt(500) + 500);
         } catch (Exception e) {
@@ -300,18 +280,14 @@ public class SmeltIronRoutine extends Routine
     }
     
     private void EquipRingOfForging(int windowNumber) {
-        int invSlot1X = 0;
-        int invSlot1Y = 0;
-        
+        int[] invSlot1 = new int[2];
         if (windowNumber == 1) {
-            invSlot1X = invSlot1X_W1;
-            invSlot1Y = invSlot1Y_W1;
+            invSlot1 = invSlot1_W1.GetRandomXY();
         } else if (windowNumber == 2) {
-            invSlot1X = invSlot1X_W2;
-            invSlot1Y = invSlot1Y_W2;
+            invSlot1 = invSlot1_W2.GetRandomXY();
         }
         
-        bot.moveCursorTo(invSlot1X, invSlot1Y);
+        bot.accuratelyMoveCursor(invSlot1);
         try {
             Thread.sleep(random.nextInt(500) + 500);
         } catch (Exception e) {
@@ -326,18 +302,14 @@ public class SmeltIronRoutine extends Routine
     }
     
     private void ClickBankFromInFrontOfTeller(int windowNumber) {
-        int bankBoothFromBankX = 0;
-        int bankBoothFromBankY = 0;
-        
+        int[] bankBoothFromBank = new int[2];
         if (windowNumber == 1) {
-            bankBoothFromBankX = bankBoothFromBankX_W1;
-            bankBoothFromBankY = bankBoothFromBankY_W1;
+            bankBoothFromBank = bankBoothFromBank_W1.GetRandomXY();
         } else if (windowNumber == 2) {
-            bankBoothFromBankX = bankBoothFromBankX_W2;
-            bankBoothFromBankY = bankBoothFromBankY_W2;
+            bankBoothFromBank = bankBoothFromBank_W2.GetRandomXY();
         }
         
-        bot.moveCursorTo(bankBoothFromBankX, bankBoothFromBankY);
+        bot.accuratelyMoveCursor(bankBoothFromBank);
         try {
             Thread.sleep(random.nextInt(500) + 500);
         } catch (Exception e) {
@@ -352,18 +324,14 @@ public class SmeltIronRoutine extends Routine
     }
     
     private void WithDrawIronOre(int windowNumber) {
-        int bankSlot2X = 0;
-        int bankSlot2Y = 0;
-        
+        int[] bankSlot2 = new int[2];
         if (windowNumber == 1) {
-            bankSlot2X = bankSlot2X_W1;
-            bankSlot2Y = bankSlot2Y_W1;
+            bankSlot2 = bankSlot2_W1.GetRandomXY();
         } else if (windowNumber == 2) {
-            bankSlot2X = bankSlot2X_W2;
-            bankSlot2Y = bankSlot2Y_W2;
+            bankSlot2 = bankSlot2_W2.GetRandomXY();
         }
         
-        bot.moveCursorTo(bankSlot2X, bankSlot2Y);
+        bot.accuratelyMoveCursor(bankSlot2);
         try {
             Thread.sleep(random.nextInt(500) + 500);
         } catch (Exception e) {
@@ -378,18 +346,14 @@ public class SmeltIronRoutine extends Routine
     }
     
     private void ClickFurnaceFromBankTeller(int windowNumber) {
-        int furnaceFromBankBoothX = 0;
-        int furnaceFromBankBoothY = 0;
-        
+        int[] furnaceFromBankBooth = new int[2];
         if (windowNumber == 1) {
-            furnaceFromBankBoothX = furnaceFromBankBoothX_W1;
-            furnaceFromBankBoothY = furnaceFromBankBoothY_W1;
+            furnaceFromBankBooth = furnaceFromBankBooth_W1.GetRandomXY();
         } else if (windowNumber == 2) {
-            furnaceFromBankBoothX = furnaceFromBankBoothX_W2;
-            furnaceFromBankBoothY = furnaceFromBankBoothY_W2;
+            furnaceFromBankBooth = furnaceFromBankBooth_W2.GetRandomXY();
         }
         
-        bot.moveCursorTo(furnaceFromBankBoothX, furnaceFromBankBoothY);
+        bot.accuratelyMoveCursor(furnaceFromBankBooth);
         try {
             Thread.sleep(random.nextInt(500) + 500);
         } catch (Exception e) {
@@ -404,18 +368,14 @@ public class SmeltIronRoutine extends Routine
     }
     
     private void ClickBankBoothFromFurnace(int windowNumber) {
-        int bankBoothFromFurnaceX = 0;
-        int bankBoothFromFurnaceY = 0;
-        
+        int[] bankBoothFromFurnace = new int[2];
         if (windowNumber == 1) {
-            bankBoothFromFurnaceX = bankBoothFromFurnaceX_W1;
-            bankBoothFromFurnaceY = bankBoothFromFurnaceY_W1;
+            bankBoothFromFurnace = bankBoothFromFurnace_W1.GetRandomXY();
         } else if (windowNumber == 2) {
-            bankBoothFromFurnaceX = bankBoothFromFurnaceX_W2;
-            bankBoothFromFurnaceY = bankBoothFromFurnaceY_W2;
+            bankBoothFromFurnace = bankBoothFromFurnace_W2.GetRandomXY();
         }
         
-        bot.moveCursorTo(bankBoothFromFurnaceX, bankBoothFromFurnaceY);
+        bot.accuratelyMoveCursor(bankBoothFromFurnace);
         try {
             Thread.sleep(random.nextInt(500) + 500);
         } catch (Exception e) {
@@ -430,18 +390,14 @@ public class SmeltIronRoutine extends Routine
     }
     
     private void ClickFurnaceFromFurnace(int windowNumber) {
-        int furnaceFromFurnaceX = 0;
-        int furnaceFromFurnaceY = 0;
-        
+        int[] furnaceFromFurnace = new int[2];
         if (windowNumber == 1) {
-            furnaceFromFurnaceX = furnaceFromFurnaceX_W1;
-            furnaceFromFurnaceY = furnaceFromFurnaceY_W1;
+            furnaceFromFurnace = furnaceFromFurnace_W1.GetRandomXY();
         } else if (windowNumber == 2) {
-            furnaceFromFurnaceX = furnaceFromFurnaceX_W2;
-            furnaceFromFurnaceY = furnaceFromFurnaceY_W2;
+            furnaceFromFurnace = furnaceFromFurnace_W2.GetRandomXY();
         }
         
-        bot.moveCursorTo(furnaceFromFurnaceX, furnaceFromFurnaceY);
+        bot.accuratelyMoveCursor(furnaceFromFurnace);
         try {
             Thread.sleep(random.nextInt(500) + 500);
         } catch (Exception e) {

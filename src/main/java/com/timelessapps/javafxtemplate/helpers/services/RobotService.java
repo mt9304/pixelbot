@@ -241,8 +241,8 @@ public class RobotService extends Robot
     public void accuratelyMoveCursor(int[] coords)
     {
         Random random = new Random();
-        int endPointOffsetX = coords[0] + random.nextInt(2);
-        int endPointOffsetY = coords[1] + random.nextInt(2);
+        int endPointOffsetX = coords[0];
+        int endPointOffsetY = coords[1];
 
         int fakeEndPointOffsetX = coords[0] + random.nextInt(12) + 12;
         int fakeEndPointOffsetY = coords[1] + random.nextInt(12) + 12;
