@@ -50,38 +50,39 @@ public class SmeltIronRoutine extends Routine
     */
     
     //Declaring various coordinates for buttons, slots and objects. 
-    int bankSlot2X_W1 = 2151;
+    int W2XOffset = 7;
+    int bankSlot2X_W1 = 2153;
     int bankSlot2Y_W1 = 145;
-    int bankSlot2X_W2 = 3129;
+    int bankSlot2X_W2 = 3129 + W2XOffset;
     int bankSlot2Y_W2 = 144;
     int bankSlot3X_W1 = 2197;
     int bankSlot3Y_W1 = 147;
-    int bankSlot3X_W2 = 3176;
+    int bankSlot3X_W2 = 3176 + W2XOffset;
     int bankSlot3Y_W2 = 145;
     int invSlot1X_W1 = 2680;
     int invSlot1Y_W1 = 722;
-    int invSlot1X_W2 = 3676;
+    int invSlot1X_W2 = 3676 + W2XOffset;
     int invSlot1Y_W2 = 760;
     int depositInvToBankButtonX_W1 = 2457;
     int depositInvToBankButtonY_W1 = 829;
-    int depositInvToBankButtonX_W2 = 3437;
+    int depositInvToBankButtonX_W2 = 3437 + W2XOffset;
     int depositInvToBankButtonY_W2 = 829;
 
     int bankBoothFromBankX_W1 = 2382;
     int bankBoothFromBankY_W1 = 562;
-    int bankBoothFromBankX_W2 = 3361;
+    int bankBoothFromBankX_W2 = 3361 + W2XOffset;
     int bankBoothFromBankY_W2 = 562;
     int bankBoothFromFurnaceX_W1 = 1953;
     int bankBoothFromFurnaceY_W1 = 736;
-    int bankBoothFromFurnaceX_W2 = 2935;
+    int bankBoothFromFurnaceX_W2 = 2935 + W2XOffset;
     int bankBoothFromFurnaceY_W2 = 733;
     int furnaceFromBankBoothX_W1 = 2741;
     int furnaceFromBankBoothY_W1 = 396;
-    int furnaceFromBankBoothX_W2 = 3716;
+    int furnaceFromBankBoothX_W2 = 3716 + W2XOffset;
     int furnaceFromBankBoothY_W2 = 397;
     int furnaceFromFurnaceX_W1 = 2423;
     int furnaceFromFurnaceY_W1 = 524;
-    int furnaceFromFurnaceX_W2 = 3400;
+    int furnaceFromFurnaceX_W2 = 3400 + W2XOffset;
     int furnaceFromFurnaceY_W2 = 526;
 
     public SmeltIronRoutine() throws AWTException
@@ -256,7 +257,7 @@ public class SmeltIronRoutine extends Routine
             bankSlot3Y = bankSlot3Y_W1;
         } else if (windowNumber == 2) {
             bankSlot3X = bankSlot3X_W2;
-            bankSlot3Y = bankSlot3X_W2;
+            bankSlot3Y = bankSlot3Y_W2;
         }
         
         bot.moveCursorTo(bankSlot3X, bankSlot3Y);
