@@ -53,6 +53,7 @@ public class DC_SpelunkRoutine extends Routine
                     bot.delay(random.nextInt(1000) + 1000);
                     
                     /** Start Routine Here **/
+                    System.out.println("Starting Spelunk. ");
                     if (!SpelunkMapDetected()) {
                         return;
                     }

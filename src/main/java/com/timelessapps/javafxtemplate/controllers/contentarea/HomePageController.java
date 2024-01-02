@@ -15,6 +15,7 @@ import main.java.com.timelessapps.javafxtemplate.app.businesslogic.HighAlchRouti
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.HumidifyRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.MainBotRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.MeleeRoutine;
+import main.java.com.timelessapps.javafxtemplate.app.businesslogic.DC_SpelunkRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.SplashRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.GlobalKeyListener;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.LoggingService;
@@ -116,6 +117,20 @@ public class HomePageController implements Initializable {
 		meleeRoutine.start();
 
 		GlobalKeyListener globalKeyListener = new GlobalKeyListener(meleeRoutine);
+		globalKeyListener.setDaemon(true);
+		globalKeyListener.start();
+
+		// botRoutine.join();
+		// System.out.println("Remember to re-active button. ");
+	}
+        
+        @FXML
+	public void startSpelunkRoutine(MouseEvent event) throws InterruptedException, AWTException {
+		DC_SpelunkRoutine spelunkRoutine = new DC_SpelunkRoutine();
+		spelunkRoutine.setDaemon(true);
+		spelunkRoutine.start();
+
+		GlobalKeyListener globalKeyListener = new GlobalKeyListener(spelunkRoutine);
 		globalKeyListener.setDaemon(true);
 		globalKeyListener.start();
 

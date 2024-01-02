@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.GrandExchangeRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.MeleeRoutine;
+import main.java.com.timelessapps.javafxtemplate.app.businesslogic.DC_SpelunkRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.SimpleNMZRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.SplashRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.AttackTimer;
@@ -117,6 +118,21 @@ public class Main extends Application
 	        		System.out.println("Completed melee routine, shutting down. ");
 	        		System.exit(0);
 	        		
+	        	}
+	        	if (args[0].contentEquals("spelunk"))
+	        	{
+	        		System.out.println("Starting spelunk routine");
+	        		DC_SpelunkRoutine spelunkRoutine = new DC_SpelunkRoutine(); //pass and gp
+	        		spelunkRoutine.setDaemon(true);
+	        		spelunkRoutine.start();
+	
+	        		GlobalKeyListener globalKeyListener = new GlobalKeyListener(spelunkRoutine);
+	        		globalKeyListener.setDaemon(true);
+	        		globalKeyListener.start();
+	        		
+	        		spelunkRoutine.join();
+	        		System.out.println("Completed splash routine, shutting down. ");
+	        		System.exit(0);
 	        	}
 	        	if (args[0].contentEquals("splash"))
 	        	{
