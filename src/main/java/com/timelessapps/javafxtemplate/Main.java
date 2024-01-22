@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.GrandExchangeRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.MeleeRoutine;
-import main.java.com.timelessapps.javafxtemplate.app.businesslogic.DC_SpelunkRoutine;
+import main.java.com.timelessapps.javafxtemplate.app.businesslogic.DC_PatrolRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.SimpleNMZRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.SplashRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.AttackTimer;
@@ -119,18 +119,18 @@ public class Main extends Application
 	        		System.exit(0);
 	        		
 	        	}
-	        	if (args[0].contentEquals("spelunk"))
+	        	if (args[0].contentEquals("patrol"))
 	        	{
-	        		System.out.println("Starting spelunk routine");
-	        		DC_SpelunkRoutine spelunkRoutine = new DC_SpelunkRoutine(); //pass and gp
-	        		spelunkRoutine.setDaemon(true);
-	        		spelunkRoutine.start();
+	        		System.out.println("Starting patrol routine");
+	        		DC_PatrolRoutine patrolRoutine = new DC_PatrolRoutine(); //pass and gp
+	        		patrolRoutine.setDaemon(true);
+	        		patrolRoutine.start();
 	
-	        		GlobalKeyListener globalKeyListener = new GlobalKeyListener(spelunkRoutine);
+	        		GlobalKeyListener globalKeyListener = new GlobalKeyListener(patrolRoutine);
 	        		globalKeyListener.setDaemon(true);
 	        		globalKeyListener.start();
 	        		
-	        		spelunkRoutine.join();
+	        		patrolRoutine.join();
 	        		System.out.println("Completed splash routine, shutting down. ");
 	        		System.exit(0);
 	        	}

@@ -15,7 +15,7 @@ import main.java.com.timelessapps.javafxtemplate.app.businesslogic.HighAlchRouti
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.HumidifyRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.MainBotRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.MeleeRoutine;
-import main.java.com.timelessapps.javafxtemplate.app.businesslogic.DC_SpelunkRoutine;
+import main.java.com.timelessapps.javafxtemplate.app.businesslogic.DC_PatrolRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.SplashRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.GlobalKeyListener;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.LoggingService;
@@ -125,12 +125,12 @@ public class HomePageController implements Initializable {
 	}
         
         @FXML
-	public void startSpelunkRoutine(MouseEvent event) throws InterruptedException, AWTException {
-		DC_SpelunkRoutine spelunkRoutine = new DC_SpelunkRoutine();
-		spelunkRoutine.setDaemon(true);
-		spelunkRoutine.start();
+	public void startPatrolRoutine(MouseEvent event) throws InterruptedException, AWTException {
+		DC_PatrolRoutine patrolRoutine = new DC_PatrolRoutine();
+		patrolRoutine.setDaemon(true);
+		patrolRoutine.start();
 
-		GlobalKeyListener globalKeyListener = new GlobalKeyListener(spelunkRoutine);
+		GlobalKeyListener globalKeyListener = new GlobalKeyListener(patrolRoutine);
 		globalKeyListener.setDaemon(true);
 		globalKeyListener.start();
 

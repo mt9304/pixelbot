@@ -16,7 +16,7 @@ import main.java.com.timelessapps.javafxtemplate.helpers.services.CustomSceneHel
 import main.java.com.timelessapps.javafxtemplate.helpers.services.LoggingService;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
 
-public class DC_SpelunkRoutine extends Routine
+public class DC_PatrolRoutine extends Routine
 {
     RobotService bot = new RobotService();
     LoggingService log = new LoggingService();
@@ -24,7 +24,7 @@ public class DC_SpelunkRoutine extends Routine
     int numberOfQuestsToUse = 100;
     int tripNumber = 0;
     
-    public DC_SpelunkRoutine() throws AWTException
+    public DC_PatrolRoutine() throws AWTException
     {
 
     }
@@ -53,7 +53,7 @@ public class DC_SpelunkRoutine extends Routine
                     bot.delay(random.nextInt(1000) + 1000);
                     
                     /** Start Routine Here **/
-                    System.out.println("Starting Spelunk. ");
+                    System.out.println("Starting Patrol. ");
                     if (!SpelunkMapDetected()) {
                         return;
                     }
@@ -145,5 +145,97 @@ public class DC_SpelunkRoutine extends Routine
     
     private Boolean SpelunkMapDetected(){
         return false;
+    }
+    
+    //Check for background color to be either of fields or healing tower. Usually this is an indicator that the user lost the combat 
+    private Boolean IsDead() {
+        //For RGB values of fields
+        int red = bot.getPixelColor(0, 0).getRed();
+        int green = bot.getPixelColor(0, 0).getGreen();
+        int blue = bot.getPixelColor(0, 0).getBlue();
+        
+        if (red == 0 && green == 0 && blue == 0) {
+            return true;
+        }
+        
+        //For RGB areas of healing towertower
+        red = bot.getPixelColor(0, 0).getRed();
+        green = bot.getPixelColor(0, 0).getGreen();
+        blue = bot.getPixelColor(0, 0).getBlue();
+        
+        if (red == 0 && green == 0 && blue == 0) {
+            return true;
+        }
+        return false;
+    }
+    
+    //Checks if the background colour is yellow. 
+    private Boolean IsInMainCombatScreen() {
+        //For RGB values of initial combat screen (yellow)
+        int red = bot.getPixelColor(0, 0).getRed();
+        int green = bot.getPixelColor(0, 0).getGreen();
+        int blue = bot.getPixelColor(0, 0).getBlue();
+        
+        if (red == 0 && green == 0 && blue == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    //Checks if the background colour is black. 
+    private Boolean IsInDialogueScreen() {
+        //For RGB values of black screen when text is present to indicate spcial actions. 
+        int red = bot.getPixelColor(0, 0).getRed();
+        int green = bot.getPixelColor(0, 0).getGreen();
+        int blue = bot.getPixelColor(0, 0).getBlue();
+        
+        if (red == 0 && green == 0 && blue == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    //Checks if the background colour is red. 
+    private Boolean IsInDamageScreen() {
+        //For RGB values of red screen when damaging combat actions occur
+        int red = bot.getPixelColor(0, 0).getRed();
+        int green = bot.getPixelColor(0, 0).getGreen();
+        int blue = bot.getPixelColor(0, 0).getBlue();
+        
+        if (red == 0 && green == 0 && blue == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    //Checks if the background colour is dark red. 
+    private Boolean IsInCaves() {
+        //For RGB values of dark red screen when idle in caves
+        int red = bot.getPixelColor(0, 0).getRed();
+        int green = bot.getPixelColor(0, 0).getGreen();
+        int blue = bot.getPixelColor(0, 0).getBlue();
+        
+        if (red == 0 && green == 0 && blue == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    //Checks if the background colour is orange. 
+    private Boolean IsInInventoryScreen() {
+        //For RGB values of orange screen when in the inventory screen. 
+        int red = bot.getPixelColor(0, 0).getRed();
+        int green = bot.getPixelColor(0, 0).getGreen();
+        int blue = bot.getPixelColor(0, 0).getBlue();
+        
+        if (red == 0 && green == 0 && blue == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
