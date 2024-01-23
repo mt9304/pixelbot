@@ -26,6 +26,10 @@ public class DC_PatrolRoutine extends Routine
     int numberOfTripsToDo = 200;
     int numberOftripsSinceDiseaseCured = 0;
     
+    //The top left most pixel of the game frame. Used as a reference to find the other pixels
+    int osX = 621;
+    int osY = 263;
+    
     public DC_PatrolRoutine() throws AWTException
     {
 
@@ -64,7 +68,7 @@ public class DC_PatrolRoutine extends Routine
                     if (IsDead()) {
                         throw new Exception("Character died in combat, please manually put character back in position and restart bot. ");
                     }
-                    //HealIfNotFullLife();
+                    HealIfNotFullLife();
                     if (numberOftripsSinceDiseaseCured >= 10) {
                         //CureDisease();
                     }
@@ -74,7 +78,7 @@ public class DC_PatrolRoutine extends Routine
                         ClickPastDialogueScreen();
                         continue;
                     } else if (IsInMainCombatScreen()) {
-                        //HandleCombat();
+                        HandleCombat();
                     } else {
                         throw new Exception("Unknown screen detected, expected either dialogue screen or main combat screen. ");
                     }
@@ -528,10 +532,239 @@ public class DC_PatrolRoutine extends Routine
                 ClickPastDamageScreen();
             }
 
-            //This screen might appear if they run away, use an item, or drop loot. 
+            //This screen might appear if they run away, use an item, drop loot, or revive
             if (IsInDialogueScreen()) {
                 ClickPastDialogueScreen();
             }
+        }
+    }
+    
+    private Boolean InventoryBarIsAvailable() {
+        int red = bot.getPixelColor(0, 0).getRed();
+        int green = bot.getPixelColor(0, 0).getGreen();
+        int blue = bot.getPixelColor(0, 0).getBlue();
+        
+        if (red == 0 & green == 0 & blue == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    private void HealIfNotFullLife() throws Exception {
+        if (!InventoryBarIsAvailable()) {
+            throw new Exception("Unable to heal, inventory bar not detected. ");
+        }
+        
+        bot.mouseMove(0, 0);
+        bot.delay(250);
+        bot.mouseClick();
+        bot.delay(250);
+        
+        //Check if moved into inventory screen
+        Boolean isInInventoryScreen = false;
+        for (int i = 0; i < 5; i++) {
+            isInInventoryScreen = IsInInventoryScreen();
+            if (!isInInventoryScreen) {
+                bot.delay(1000);
+            }
+        }
+        if (!isInInventoryScreen) {
+            throw new Exception("Unable to heal, inventory screen not detected. ");
+        }
+        
+        //Uses first item in inventory to heal. 
+        Boolean isDamaged = false;
+        for (int i = 0; i < 10; i++) {
+            //Scan guts area for [ ] characters
+            for (int j = 716; j < 850; j++) {
+                int red = bot.getPixelColor(j, 374).getRed();
+                int green = bot.getPixelColor(j, 374).getGreen();
+                int blue = bot.getPixelColor(j, 374).getBlue();
+
+                if (red == 255 && green == 255 && blue == 255) {
+                    isDamaged = true;
+                    break;
+                }
+            }
+            
+            if (isDamaged = true) {
+                bot.mouseMove(691, 566);
+                bot.delay(250);
+                bot.mouseClick();
+                bot.delay(1000);
+                bot.mouseMove(1044, 840);
+                bot.delay(250);
+                bot.mouseClick();
+                bot.delay(250);
+                isDamaged = false;
+            } else {
+                break;
+            }
+        }
+
+        bot.mouseMove(1396, 842);
+        bot.delay(250);
+        bot.mouseClick();
+        bot.delay(250);
+        
+        //Check if moved away from inventory screen
+        Boolean isStillInInventoryScreen = true;
+        for (int i = 0; i < 5; i++) {
+            isStillInInventoryScreen = IsInInventoryScreen();
+            if (isStillInInventoryScreen) {
+                bot.delay(1000);
+            }
+        }
+        if (isStillInInventoryScreen) {
+            throw new Exception("Unable to exit inventory screen, inventory screen still detected. ");
+        }
+    }
+    
+    private void CureDiseaseAndStatuses() throws Exception {
+        if (!InventoryBarIsAvailable()) {
+            throw new Exception("Unable to cure disease, inventory bar not detected. ");
+        }
+        
+        bot.mouseMove(0, 0);
+        bot.delay(250);
+        bot.mouseClick();
+        bot.delay(250);
+        
+        //Check if moved into inventory screen
+        Boolean isInInventoryScreen = false;
+        for (int i = 0; i < 5; i++) {
+            isInInventoryScreen = IsInInventoryScreen();
+            if (!isInInventoryScreen) {
+                bot.delay(1000);
+            }
+        }
+        if (!isInInventoryScreen) {
+            throw new Exception("Unable to cure disease, inventory screen not detected. ");
+        }
+        
+        //Uses first item in inventory to heal. 
+        Boolean isDebuffed = false;
+        //Scan guts area for [ ] characters
+        for (int j = 1046; j < 1200; j++) {
+            //Scanning skill for [ ] indicators
+            int red = bot.getPixelColor(j, 450).getRed();
+            int green = bot.getPixelColor(j, 450).getGreen();
+            int blue = bot.getPixelColor(j, 450).getBlue();
+
+            if (red == 255 && green == 255 && blue == 255) {
+                isDebuffed = true;
+                break;
+            }
+            
+            //Scanning character portrait in top right for status indicators
+            int statusRed = bot.getPixelColor(j+250, 312).getRed();
+            int statusGreen = bot.getPixelColor(j+250, 312).getGreen();
+            int statusBlue = bot.getPixelColor(j+250, 312).getBlue();
+            
+            if (statusRed == 255 && statusGreen == 255 && statusBlue == 255) {
+                isDebuffed = true;
+                break;
+            }
+        }
+        
+        //Uses first item in inventory. 
+        if (isDebuffed) {
+            bot.mouseMove(691, 566);
+            bot.delay(250);
+            bot.mouseClick();
+            bot.delay(1000);
+            bot.mouseMove(1044, 840);
+            bot.delay(250);
+            bot.mouseClick();
+            bot.delay(250);
+        }
+
+        //Exits inventory screen
+        bot.mouseMove(1396, 842);
+        bot.delay(250);
+        bot.mouseClick();
+        bot.delay(250);
+        
+        //Check if moved away from inventory screen
+        Boolean isStillInInventoryScreen = true;
+        for (int i = 0; i < 5; i++) {
+            isStillInInventoryScreen = IsInInventoryScreen();
+            if (isStillInInventoryScreen) {
+                bot.delay(1000);
+            }
+        }
+        if (isStillInInventoryScreen) {
+            throw new Exception("Unable to exit inventory screen, inventory screen still detected. ");
+        }
+    }
+    
+    private void CureStatuses() throws Exception {
+        if (!InventoryBarIsAvailable()) {
+            throw new Exception("Unable to cure statuses, inventory bar not detected. ");
+        }
+        
+        bot.mouseMove(0, 0);
+        bot.delay(250);
+        bot.mouseClick();
+        bot.delay(250);
+        
+        //Check if moved into inventory screen
+        Boolean isInInventoryScreen = false;
+        for (int i = 0; i < 5; i++) {
+            isInInventoryScreen = IsInInventoryScreen();
+            if (!isInInventoryScreen) {
+                bot.delay(1000);
+            }
+        }
+        if (!isInInventoryScreen) {
+            throw new Exception("Unable to cure statuses, inventory screen not detected. ");
+        }
+        
+        //Uses first item in inventory to heal. 
+        Boolean isDebuffed = false;
+        //Scan guts area for [ ] characters
+        for (int j = 1300; j < 1432; j++) {
+            //Scanning character portrait in top right for status indicators
+            int statusRed = bot.getPixelColor(j, 312).getRed();
+            int statusGreen = bot.getPixelColor(j, 312).getGreen();
+            int statusBlue = bot.getPixelColor(j, 312).getBlue();
+            
+            if (statusRed == 255 && statusGreen == 255 && statusBlue == 255) {
+                isDebuffed = true;
+                break;
+            }
+        }
+        
+        //Uses first item in inventory. 
+        if (isDebuffed) {
+            bot.mouseMove(691, 566);
+            bot.delay(250);
+            bot.mouseClick();
+            bot.delay(1000);
+            bot.mouseMove(1044, 840);
+            bot.delay(250);
+            bot.mouseClick();
+            bot.delay(250);
+        }
+
+        //Exits inventory screen
+        bot.mouseMove(1396, 842);
+        bot.delay(250);
+        bot.mouseClick();
+        bot.delay(250);
+        
+        //Check if moved away from inventory screen
+        Boolean isStillInInventoryScreen = true;
+        for (int i = 0; i < 5; i++) {
+            isStillInInventoryScreen = IsInInventoryScreen();
+            if (isStillInInventoryScreen) {
+                bot.delay(1000);
+            }
+        }
+        
+        if (isStillInInventoryScreen) {
+            throw new Exception("Unable to exit inventory screen, inventory screen still detected. ");
         }
     }
 }
