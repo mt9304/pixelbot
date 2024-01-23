@@ -23,6 +23,8 @@ public class DC_PatrolRoutine extends Routine
     Random random = new Random();
     int numberOfQuestsToUse = 100;
     int tripNumber = 0;
+    int numberOfTripsToDo = 200;
+    int numberOftripsSinceDiseaseCured = 0;
     
     public DC_PatrolRoutine() throws AWTException
     {
@@ -51,23 +53,42 @@ public class DC_PatrolRoutine extends Routine
                 {
                     checkIfPausedOrStopped();
                     bot.delay(random.nextInt(1000) + 1000);
+                    tripNumber++;
+                    
+                    if (tripNumber >= numberOfTripsToDo) {
+                        return;
+                    }
                     
                     /** Start Routine Here **/
                     System.out.println("Starting Patrol. ");
-                    if (!SpelunkMapDetected()) {
-                        return;
+                    if (IsDead()) {
+                        throw new Exception("Character died in combat, please manually put character back in position and restart bot. ");
                     }
-                    RefreshHealthOutOfCombat();
-                    Spelunk();
+                    //HealIfNotFullLife();
+                    if (numberOftripsSinceDiseaseCured >= 10) {
+                        //CureDisease();
+                    }
+                    
+                    ClickPatrol();
+                    if (IsInDialogueScreen()) {
+                        ClickPastDialogueScreen();
+                        continue;
+                    } else if (IsInMainCombatScreen()) {
+                        //HandleCombat();
+                    } else {
+                        throw new Exception("Unknown screen detected, expected either dialogue screen or main combat screen. ");
+                    }
+                    
                     /** End Routine Here **/
                     
                     Thread.sleep(random.nextInt(1000) + 1000);
-                    tripNumber++;
                     checkIfPausedOrStopped();
                 }
             } catch (InterruptedException ex)
             {
                 Logger.getLogger(MainBotRoutine.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception e) {
+                System.out.println("Unable to complete routine: " + e);
             }
         }
     }
@@ -185,7 +206,7 @@ public class DC_PatrolRoutine extends Routine
     
     //Checks if the background colour is black. 
     private Boolean IsInDialogueScreen() {
-        //For RGB values of black screen when text is present to indicate spcial actions. 
+        //For RGB values of black screen when text is present to indicate spcial actions
         int red = bot.getPixelColor(0, 0).getRed();
         int green = bot.getPixelColor(0, 0).getGreen();
         int blue = bot.getPixelColor(0, 0).getBlue();
@@ -227,7 +248,7 @@ public class DC_PatrolRoutine extends Routine
     
     //Checks if the background colour is orange. 
     private Boolean IsInInventoryScreen() {
-        //For RGB values of orange screen when in the inventory screen. 
+        //For RGB values of orange screen when in the inventory screen
         int red = bot.getPixelColor(0, 0).getRed();
         int green = bot.getPixelColor(0, 0).getGreen();
         int blue = bot.getPixelColor(0, 0).getBlue();
@@ -236,6 +257,281 @@ public class DC_PatrolRoutine extends Routine
             return true;
         } else {
             return false;
+        }
+    }
+    
+    private void ClickInventory() throws Exception {
+        //For RGB values of black screen, where inventory bar would not be accessible
+        int red = bot.getPixelColor(0, 0).getRed();
+        int green = bot.getPixelColor(0, 0).getGreen();
+        int blue = bot.getPixelColor(0, 0).getBlue();
+        
+        if (red == 0 && green == 0 && blue == 0) {
+            throw new Exception("Unable to click inventory, black screen detected. ");
+        }
+        
+        //For RGB values of bottom black bar that takes user to inventory
+        red = bot.getPixelColor(0, 0).getRed();
+        green = bot.getPixelColor(0, 0).getGreen();
+        blue = bot.getPixelColor(0, 0).getBlue();
+        
+        if (red != 0 && green != 0 && blue != 0) {
+            throw new Exception("Unable to click inventory, invetory bar not detected. ");
+        }
+        
+        //Click inventory;
+        bot.mouseMove(0, 0);
+        bot.delay(250);
+        bot.mouseClick();
+        bot.delay(250);
+        
+        //Check if in inventory screen
+        Boolean isInInventoryScreen = false;
+        for (int i = 0; i < 5; i++) {
+            isInInventoryScreen = IsInInventoryScreen();
+            if (!isInInventoryScreen) {
+                bot.delay(1000);
+            }
+        }
+        
+        if (!isInInventoryScreen) {
+            throw new Exception("Unable verify if in inventory screen. ");
+        }
+    }
+    
+    private void ClickPatrol() throws Exception {
+        if (!IsInCaves()) {
+            throw new Exception("Could not click patrol, unable to detect caves screen. ");
+        }
+        
+        //Click patrol map icon;
+        bot.mouseMove(0, 0);
+        bot.delay(250);
+        bot.mouseClick();
+        bot.delay(250);
+        
+        //Check if still in caves screen
+        Boolean isStillInCavesScreen = true;
+        for (int i = 0; i < 5; i++) {
+            isStillInCavesScreen = IsInCaves();
+            if (isStillInCavesScreen) {
+                bot.delay(1000);
+            }
+        }
+        
+        if (isStillInCavesScreen) {
+            throw new Exception("Unable verify if moved past caves screen. ");
+        }
+    }
+    
+    private void ClickPastDialogueScreen() throws Exception {
+        if (!IsInDialogueScreen()) {
+            throw new Exception("Unable to click past dialogue screen, black background not detected. ");
+        }
+        
+        //Click top left of screen
+        bot.mouseMove(0, 0);
+        bot.delay(250);
+        bot.mouseClick();
+        bot.delay(250);
+        
+        //Check if still in dialogue screen
+        Boolean isStillInDialogueScreen = true;
+        for (int i = 0; i < 5; i++) {
+            isStillInDialogueScreen = IsInDialogueScreen();
+            if (isStillInDialogueScreen) {
+                bot.delay(1000);
+            }
+        }
+        
+        if (isStillInDialogueScreen) {
+            throw new Exception("Unable verify if moved past dialogue screen. ");
+        }
+    }
+    
+    private void ClickPastDamageScreen() throws Exception {
+        if (!IsInDamageScreen()) {
+            throw new Exception("Unable to click past damage screen, black background not detected. ");
+        }
+        
+        //Click top left of screen
+        bot.mouseMove(0, 0);
+        bot.delay(250);
+        bot.mouseClick();
+        bot.delay(250);
+        
+        //Check if still in dialogue screen
+        Boolean isStillInDamageScreen = true;
+        for (int i = 0; i < 5; i++) {
+            isStillInDamageScreen = IsInDamageScreen();
+            if (isStillInDamageScreen) {
+                bot.delay(1000);
+            }
+        }
+        
+        if (isStillInDamageScreen) {
+            throw new Exception("Unable verify if moved past damage screen. ");
+        }
+    }
+    
+    private int[] GetFirstCombatOptionCoordinates() throws Exception {
+        if (!IsInMainCombatScreen()) {
+            throw new Exception("Unable to find the first combat option on the combat screen, main combat screen not detected. ");
+        }
+        
+        Boolean textColourFound = false;
+	int x = 0;
+	int y = 0;
+        
+        //Need to move mouse away from text area incase it highlights and changes text colour
+        bot.mouseMove(10, 10);
+
+	for (int i = 0; i < 500; i++) {
+            int red = bot.getPixelColor(x, y).getRed();
+            int green = bot.getPixelColor(x, y).getGreen();
+            int blue = bot.getPixelColor(x, y).getBlue();
+            
+            if (red == 0 && green == 0 && blue == 0) {
+                    textColourFound = true;
+                    break;
+            }
+            x++;
+            y++;
+            y++;
+	}
+        
+        if (textColourFound) {
+            int[] coords = {x,y};
+            return coords;
+        } else {
+            throw new Exception("Unable to find the first combat option on the combat screen. ");
+        }
+    }
+    
+    private Boolean EnemyIsMagmaDragon() throws Exception {
+        if (!IsInMainCombatScreen()) {
+            throw new Exception("Unable to detect enemy, main combat screen not detected. ");
+        }
+        
+        int enemyRed = bot.getPixelColor(0, 0).getRed();
+        int enemyGreen = bot.getPixelColor(0, 0).getGreen();
+        int enemyBlue = bot.getPixelColor(0, 0).getBlue();
+        
+        if (enemyRed == 0 && enemyGreen == 0 && enemyBlue == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    //Finds the first combat option, mouses over it to turn the text red, then finds the second combat option (run away) and click. 
+    private void RunAway() throws Exception {
+        if (!IsInMainCombatScreen()) {
+            throw new Exception("Unable to run away, main combat screen not detected. ");
+        }
+        bot.mouseMove(100, 100);
+        int[] firstCombatOptionCoordinates = GetFirstCombatOptionCoordinates();
+        bot.mouseMove(firstCombatOptionCoordinates[0], firstCombatOptionCoordinates[1]);
+        bot.delay(500);
+        
+        int firstOptionRed = bot.getPixelColor(firstCombatOptionCoordinates[0], firstCombatOptionCoordinates[1]).getRed();
+        int firstOptionGreen = bot.getPixelColor(firstCombatOptionCoordinates[0], firstCombatOptionCoordinates[1]).getGreen();
+        int firstOptionBlue = bot.getPixelColor(firstCombatOptionCoordinates[0], firstCombatOptionCoordinates[1]).getBlue();
+        
+        //Checking first combat option text to see if it turned red after mouse moved to it
+        if (firstOptionRed == 0 || firstOptionGreen == 0 && firstOptionBlue == 0) {
+            Boolean textColourFound = false;
+            int x = firstCombatOptionCoordinates[0];
+            int y = firstCombatOptionCoordinates[1];
+            
+            for (int i = 0; i < 500; i++) {
+                int red = bot.getPixelColor(x, y).getRed();
+                int green = bot.getPixelColor(x, y).getGreen();
+                int blue = bot.getPixelColor(x, y).getBlue();
+
+                if (red == 0 && green == 0 && blue == 0) {
+                        textColourFound = true;
+                        break;
+                }
+                x++;
+                y++;
+                y++;
+            }
+            
+            if (textColourFound) {
+                bot.mouseMove(x, y);
+                bot.delay(250);
+                bot.mouseClick();
+                bot.delay(250);
+            } else {
+                throw new Exception("Unable to find the second combat option on the combat screen. ");
+            }
+        } else {
+            throw new Exception("Unable to run away, first combat text not highlighted. ");
+        }
+        
+        //Check if still in main combat screen
+        Boolean isInMainCombatScreen = true;
+        for (int i = 0; i < 5; i++) {
+            isInMainCombatScreen = IsInMainCombatScreen();
+            if (isInMainCombatScreen) {
+                bot.delay(1000);
+            }
+        }
+        if (isInMainCombatScreen) {
+            throw new Exception("Unable verify if ran away, main combat screen still detected. ");
+        }
+    }
+    
+    private void HandleCombat() throws Exception {
+        if (!IsInMainCombatScreen()) {
+            throw new Exception("Unable to handle combat, main combat screen not detected. ");
+        }
+
+        //Running away assumes enemy does not pursue. 
+        if (EnemyIsMagmaDragon()) {
+            RunAway();
+            ClickPastDialogueScreen();
+            return;
+        }
+        
+        int timesToTryAttacking = 20;
+        for (int i = 0; i < timesToTryAttacking; i++) {
+            if (IsInCaves() || IsDead()) {
+                return;
+            }
+            
+            int[] firstCombatOptionCoordinates = GetFirstCombatOptionCoordinates();
+            bot.mouseMove(firstCombatOptionCoordinates[0], firstCombatOptionCoordinates[1]);
+            bot.delay(250);
+            bot.mouseClick();
+            bot.delay(250);
+
+            //Check if still in main combat screen
+            Boolean isInMainCombatScreen = true;
+            for (int j = 0; j < 5; j++) {
+                isInMainCombatScreen = IsInMainCombatScreen();
+                if (isInMainCombatScreen) {
+                    bot.delay(1000);
+                }
+            }
+            if (isInMainCombatScreen) {
+                throw new Exception("Unable verify attack clicked, main combat screen still detected. ");
+            }
+
+            //Sometimes enemies will do something that involve this screen before the damage screen
+            if (IsInDialogueScreen()) {
+                ClickPastDialogueScreen();
+            }
+
+            if (IsInDamageScreen()) {
+                ClickPastDamageScreen();
+            }
+
+            //This screen might appear if they run away, use an item, or drop loot. 
+            if (IsInDialogueScreen()) {
+                ClickPastDialogueScreen();
+            }
         }
     }
 }
