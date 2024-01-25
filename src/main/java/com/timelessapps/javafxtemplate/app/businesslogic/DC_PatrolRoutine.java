@@ -23,7 +23,7 @@ public class DC_PatrolRoutine extends Routine
     Random random = new Random();
     int numberOfQuestsToUse = 100;
     int tripNumber = 0;
-    int numberOfTripsToDo = 200;
+    int numberOfTripsToDo = 40;
     int numberOftripsSinceDiseaseCured = 0;
     
     //The top left most pixel of the game frame. Used as a reference to find the other pixels
@@ -31,17 +31,17 @@ public class DC_PatrolRoutine extends Routine
     //int osX = 621; //For 200%
     //int osY = 263; //For 200%
     
-    //int osX = 837; //For 100% C
-    //int osY = 286; //For 100% C
-    int osX = 841; //For 100% FF
-    int osY = 279; //For 100% FF
+    int osX = 837; //For 100% Chrome
+    int osY = 286; //For 100% Chrome
+    //int osX = 841; //For 100% Firefox
+    //int osY = 279; //For 100% Firefox
     
     //For checking current background color. 
     int bgColorCheckX = osX + 2;
     int bgColorCheckY = osY + 2;
     
-    int dunjeonX = osX + 0;
-    int dunjeonY = osY + 0;
+    int dunjeonX = osX + 326;
+    int dunjeonY = osY + 214;
     
     int patrolX = osX + 211;
     int patrolY = osY + 200;
@@ -90,7 +90,7 @@ public class DC_PatrolRoutine extends Routine
             Logger.getLogger(BuffTimer.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        System.out.println("Starting bot routine in 3 seconds. ");
+        System.out.println("Starting Patrol in 3 seconds.  ");
         bot.delay(3000);
 
         synchronized (this)
@@ -101,7 +101,7 @@ public class DC_PatrolRoutine extends Routine
                 while (running)
                 {
                     checkIfPausedOrStopped();
-                    bot.delay(random.nextInt(1000) + 1000);
+                    //bot.delay(random.nextInt(1000) + 1000);
                     tripNumber++;
                     
                     if (tripNumber >= numberOfTripsToDo) {
@@ -109,18 +109,20 @@ public class DC_PatrolRoutine extends Routine
                     }
                     
                     /** Start Routine Here **/
-                    System.out.println("Starting Patrol. ");
+                    System.out.println("Questions: " + tripNumber + " / " + numberOfTripsToDo);
                     if (IsDead()) {
                         throw new Exception("Character died in combat, please manually put character back in position and restart bot. ");
                     }
+                    //CureDiseaseAndStatuses();
                     HealIfNotFullLife();
                     if (numberOftripsSinceDiseaseCured >= 10) {
-                        //CureDisease();
+                        CureStatuses();
                     }
                     
-                    ClickPatrol();
+                    //ClickPatrol();
+                    ClickDunjeon();
                     if (IsInDialogueScreen()) {
-                        ClickPastDialogueScreen();
+                        ClickPastDialogueScreen(); //Sometimes this happens if new area gets discovered
                         continue;
                     } else if (IsInMainCombatScreen()) {
                         HandleCombat();
@@ -299,12 +301,13 @@ public class DC_PatrolRoutine extends Routine
     
     //Checks if the background colour is dark red. 
     private Boolean IsInCastle() {
-        //For RGB values of orange screen when idle in caves
+        //For RGB values of pink screen when idle in castle
         int red = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getRed();
         int green = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getGreen();
         int blue = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getBlue();
         
-        if (red == 0 && green == 0 && blue == 0) {
+        if (red == 255 && green == 136 && blue == 255) {
+            //System.out.println(bgColorCheckX + ", " + bgColorCheckY + ": " + red + "/" + blue + "/" + green);
             return true;
         } else {
             return false;
@@ -357,10 +360,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if in inventory screen
         Boolean isInInventoryScreen = false;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             isInInventoryScreen = IsInInventoryScreen();
             if (!isInInventoryScreen) {
-                bot.delay(1000);
+                bot.delay(500);
             }
         }
         
@@ -382,10 +385,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if still in caves screen
         Boolean isStillInCavesScreen = true;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             isStillInCavesScreen = IsInCaves();
             if (isStillInCavesScreen) {
-                bot.delay(1000);
+                bot.delay(500);
             }
         }
         
@@ -396,7 +399,7 @@ public class DC_PatrolRoutine extends Routine
     
     private void ClickDunjeon() throws Exception {
         if (!IsInCastle()) {
-            throw new Exception("Could not click patrol, unable to detect caves screen. ");
+            throw new Exception("Could not click Dunjeon, unable to detect castle screen. ");
         }
         
         //Click patrol map icon;
@@ -406,16 +409,16 @@ public class DC_PatrolRoutine extends Routine
         bot.delay(250);
         
         //Check if still in caves screen
-        Boolean isStillInCavesScreen = true;
-        for (int i = 0; i < 5; i++) {
-            isStillInCavesScreen = IsInCaves();
-            if (isStillInCavesScreen) {
-                bot.delay(1000);
+        Boolean isStillInCastleScreen = true;
+        for (int i = 0; i < 10; i++) {
+            isStillInCastleScreen = IsInCastle();
+            if (isStillInCastleScreen) {
+                bot.delay(500);
             }
         }
         
-        if (isStillInCavesScreen) {
-            throw new Exception("Unable verify if moved past caves screen. ");
+        if (isStillInCastleScreen) {
+            throw new Exception("Unable verify if moved past castle screen. ");
         }
     }
     
@@ -432,15 +435,32 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if still in dialogue screen
         Boolean isStillInDialogueScreen = true;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             isStillInDialogueScreen = IsInDialogueScreen();
             if (isStillInDialogueScreen) {
-                bot.delay(1000);
+                bot.delay(500);
             }
         }
         
         if (isStillInDialogueScreen) {
-            throw new Exception("Unable verify if moved past dialogue screen. ");
+            //Character might level up and show this screen again
+            bot.mouseMove(bgColorCheckX, bgColorCheckY);
+            bot.delay(250);
+            bot.mouseClick();
+            bot.delay(250);
+            
+            //Check if still in dialogue screen
+            isStillInDialogueScreen = true;
+            for (int i = 0; i < 10; i++) {
+                isStillInDialogueScreen = IsInDialogueScreen();
+                if (isStillInDialogueScreen) {
+                    bot.delay(500);
+                }
+            }
+            
+            if (isStillInDialogueScreen) {
+                throw new Exception("Unable verify if moved past dialogue screen. ");
+            }
         }
         
         //Sometimes it fails to run away and another damage screen happens. 
@@ -462,10 +482,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if still in dialogue screen
         Boolean isStillInDamageScreen = true;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             isStillInDamageScreen = IsInDamageScreen();
             if (isStillInDamageScreen) {
-                bot.delay(1000);
+                bot.delay(500);
             }
         }
         
@@ -484,7 +504,7 @@ public class DC_PatrolRoutine extends Routine
 	int y = combatTopOfOptionBoxY;
         
         //Need to move mouse away from text area incase it highlights and changes text colour
-        bot.mouseMove(10, 10);
+        bot.mouseMove(bgColorCheckX, bgColorCheckY);
 
 	for (int i = 0; i < 50; i++) {
             int red = bot.getPixelColor(x, y).getRed();
@@ -495,6 +515,12 @@ public class DC_PatrolRoutine extends Routine
                     textColourFound = true;
                     break;
             }
+            
+            //For if the top option is still highlighted
+            if (red == 255 && green == 0 && blue == 0) {
+                textColourFound = true;
+            break;
+            }
             x++;
             y++;
             y++;
@@ -502,6 +528,7 @@ public class DC_PatrolRoutine extends Routine
         
         if (textColourFound) {
             int[] coords = {x,y};
+            //System.out.println("coords: " + x + ", " + y);
             return coords;
         } else {
             throw new Exception("Unable to find the first combat option on the combat screen. ");
@@ -591,6 +618,7 @@ public class DC_PatrolRoutine extends Routine
         int enemyGreen = bot.getPixelColor(gangX1, gangY1).getGreen();
         int enemyBlue = bot.getPixelColor(gangX1, gangY1).getBlue();
         
+        System.out.println(gangX1 + ", " + gangY1 + ": " + enemyRed + "/" + enemyGreen + "/" + enemyBlue);
         if (enemyRed == 254 && enemyGreen == 252 && enemyBlue == 227) {
             coord1Matches = true;
         }
@@ -599,6 +627,7 @@ public class DC_PatrolRoutine extends Routine
         enemyGreen = bot.getPixelColor(gangX2, gangY2).getGreen();
         enemyBlue = bot.getPixelColor(gangX2, gangY2).getBlue();
         
+        System.out.println(gangX2 + ", " + gangY2 + ": " + enemyRed + "/" + enemyGreen + "/" + enemyBlue);
         if (enemyRed == 169 && enemyGreen == 182 && enemyBlue == 112) {
             coord2Matches = true;
         }
@@ -607,7 +636,8 @@ public class DC_PatrolRoutine extends Routine
         enemyGreen = bot.getPixelColor(gangX3, gangY3).getGreen();
         enemyBlue = bot.getPixelColor(gangX3, gangY3).getBlue();
         
-        if (enemyRed == 114 && enemyGreen == 54 && enemyBlue == 20) {
+        System.out.println(gangX3 + ", " + gangY3 + ": " + enemyRed + "/" + enemyGreen + "/" + enemyBlue);
+        if (enemyRed == 96 && enemyGreen == 95 && enemyBlue == 51) {
             coord3Matches = true;
         }
         
@@ -615,11 +645,13 @@ public class DC_PatrolRoutine extends Routine
         enemyGreen = bot.getPixelColor(gangX4, gangY4).getGreen();
         enemyBlue = bot.getPixelColor(gangX4, gangY4).getBlue();
         
-        if (enemyRed == 248 && enemyGreen == 252 && enemyBlue == 132) {
+        System.out.println(gangX4 + ", " + gangY4 + ": " + enemyRed + "/" + enemyGreen + "/" + enemyBlue);
+        if (enemyRed == 240 && enemyGreen == 240 && enemyBlue == 142) {
             coord4Matches = true;
         }
         
         if (coord1Matches && coord2Matches && coord3Matches && coord4Matches) {
+            System.out.println();
             return true;
         } else {
             return false;
@@ -673,10 +705,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if still in main combat screen
         Boolean isInMainCombatScreen = true;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             isInMainCombatScreen = IsInMainCombatScreen();
             if (isInMainCombatScreen) {
-                bot.delay(1000);
+                bot.delay(500);
             }
         }
         if (isInMainCombatScreen) {
@@ -710,10 +742,10 @@ public class DC_PatrolRoutine extends Routine
 
             //Check if still in main combat screen
             Boolean isInMainCombatScreen = true;
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 10; j++) {
                 isInMainCombatScreen = IsInMainCombatScreen();
                 if (isInMainCombatScreen) {
-                    bot.delay(1000);
+                    bot.delay(500);
                 }
             }
             if (isInMainCombatScreen) {
@@ -730,6 +762,11 @@ public class DC_PatrolRoutine extends Routine
             }
 
             //This screen might appear if they run away, use an item, drop loot, or revive
+            if (IsInDialogueScreen()) {
+                ClickPastDialogueScreen();
+            }
+            
+            //This screen might appear if the character levels up
             if (IsInDialogueScreen()) {
                 ClickPastDialogueScreen();
             }
@@ -761,10 +798,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if moved into inventory screen
         Boolean isInInventoryScreen = false;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             isInInventoryScreen = IsInInventoryScreen();
             if (!isInInventoryScreen) {
-                bot.delay(1000);
+                bot.delay(500);
             }
         }
         if (!isInInventoryScreen) {
@@ -782,18 +819,20 @@ public class DC_PatrolRoutine extends Routine
 
                 if (red == 255 && green == 255 && blue == 255) {
                     isDamaged = true;
+                    //System.out.println(j + ", " + invGutsBracketY);
+                    //System.out.println(red + ", " + green + " " + blue);
                     break;
                 }
             }
             
-            if (isDamaged = true) {
+            if (isDamaged) {
                 if (!IsFirstInvItemClicked()) {
                     bot.mouseMove(firstInvItemX, firstInvItemY);
                     bot.delay(250);
                     bot.mouseClick();
-                    bot.delay(500);
+                    bot.delay(125);
                 }
-                bot.delay(500);
+                bot.delay(125);
                 bot.mouseMove(invUseButtonX, invUseButtonY);
                 bot.delay(250);
                 bot.mouseClick();
@@ -811,10 +850,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if moved away from inventory screen
         Boolean isStillInInventoryScreen = true;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             isStillInInventoryScreen = IsInInventoryScreen();
             if (isStillInInventoryScreen) {
-                bot.delay(1000);
+                bot.delay(500);
             }
         }
         if (isStillInInventoryScreen) {
@@ -834,10 +873,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if moved into inventory screen
         Boolean isInInventoryScreen = false;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             isInInventoryScreen = IsInInventoryScreen();
             if (!isInInventoryScreen) {
-                bot.delay(1000);
+                bot.delay(500);
             }
         }
         if (!isInInventoryScreen) {
@@ -874,9 +913,9 @@ public class DC_PatrolRoutine extends Routine
                 bot.mouseMove(firstInvItemX, firstInvItemY);
                 bot.delay(250);
                 bot.mouseClick();
-                bot.delay(500);
+                bot.delay(125);
             }
-            bot.delay(500);
+            bot.delay(125);
             bot.mouseMove(invUseButtonX, invUseButtonY);
             bot.delay(250);
             bot.mouseClick();
@@ -891,10 +930,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if moved away from inventory screen
         Boolean isStillInInventoryScreen = true;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             isStillInInventoryScreen = IsInInventoryScreen();
             if (isStillInInventoryScreen) {
-                bot.delay(1000);
+                bot.delay(500);
             }
         }
         if (isStillInInventoryScreen) {
@@ -914,10 +953,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if moved into inventory screen
         Boolean isInInventoryScreen = false;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             isInInventoryScreen = IsInInventoryScreen();
             if (!isInInventoryScreen) {
-                bot.delay(1000);
+                bot.delay(500);
             }
         }
         if (!isInInventoryScreen) {
@@ -945,9 +984,9 @@ public class DC_PatrolRoutine extends Routine
                 bot.mouseMove(firstInvItemX, firstInvItemY);
                 bot.delay(250);
                 bot.mouseClick();
-                bot.delay(500);
+                bot.delay(125);
             }
-            bot.delay(500);
+            bot.delay(125);
             bot.mouseMove(invUseButtonX, invUseButtonY);
             bot.delay(250);
             bot.mouseClick();
@@ -962,10 +1001,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if moved away from inventory screen
         Boolean isStillInInventoryScreen = true;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             isStillInInventoryScreen = IsInInventoryScreen();
             if (isStillInInventoryScreen) {
-                bot.delay(1000);
+                bot.delay(500);
             }
         }
         
