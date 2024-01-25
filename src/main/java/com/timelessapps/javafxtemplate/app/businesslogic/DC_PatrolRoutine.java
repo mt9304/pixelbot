@@ -27,8 +27,53 @@ public class DC_PatrolRoutine extends Routine
     int numberOftripsSinceDiseaseCured = 0;
     
     //The top left most pixel of the game frame. Used as a reference to find the other pixels
-    int osX = 621;
-    int osY = 263;
+    //Game should be set to 100% zoom, not 150% or 200%
+    //int osX = 621; //For 200%
+    //int osY = 263; //For 200%
+    
+    //int osX = 837; //For 100% C
+    //int osY = 286; //For 100% C
+    int osX = 841; //For 100% FF
+    int osY = 279; //For 100% FF
+    
+    //For checking current background color. 
+    int bgColorCheckX = osX + 2;
+    int bgColorCheckY = osY + 2;
+    
+    int dunjeonX = osX + 0;
+    int dunjeonY = osY + 0;
+    
+    int patrolX = osX + 211;
+    int patrolY = osY + 200;
+
+    int invBarX = osX + 399;
+    int invBarY = osY + 308;
+
+    int firstInvItemX = osX + 27;
+    int firstInvItemY = osY + 152;
+    int firstInvItemBlankX = osX + 144;
+    int firstInvItemBlankY = osY + 152;
+
+    int invUseButtonX = osX + 213;
+    int invUseButtonY = osY + 288;
+
+    int invExitButtonX = osX + 391;
+    int invExitButtonY = osY + 288;
+
+    int invStatusBracketXStart = osX + 344;
+    int invStatusBracketXEnd = osX + 397;
+    int invStatusBracketY = osY + 21;
+
+    int invGutsBracketXStart = osX + 59;
+    int invGutsBracketXEnd = osX + 124;
+    int invGutsBracketY = osY + 56;
+
+    int invDiseaseBracketXStart = osX + 214;
+    int invDiseaseBracketXEnd = osX + 299;
+    int invDiseaseBracketY = osY + 93;
+
+    int combatTopOfOptionBoxX = osX + 205;
+    int combatTopOfOptionBoxY = osY + 21;    
     
     public DC_PatrolRoutine() throws AWTException
     {
@@ -174,16 +219,17 @@ public class DC_PatrolRoutine extends Routine
     
     //Check for background color to be either of fields or healing tower. Usually this is an indicator that the user lost the combat 
     private Boolean IsDead() {
-        //For RGB values of fields
-        int red = bot.getPixelColor(0, 0).getRed();
-        int green = bot.getPixelColor(0, 0).getGreen();
-        int blue = bot.getPixelColor(0, 0).getBlue();
+        //For RGB values of healing tower
+        int red = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getRed();
+        int green = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getGreen();
+        int blue = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getBlue();
         
-        if (red == 0 && green == 0 && blue == 0) {
+        if (red == 128 && green == 255 && blue == 128) {
             return true;
         }
         
-        //For RGB areas of healing towertower
+        /*
+        //For RGB areas of fields. 
         red = bot.getPixelColor(0, 0).getRed();
         green = bot.getPixelColor(0, 0).getGreen();
         blue = bot.getPixelColor(0, 0).getBlue();
@@ -191,17 +237,18 @@ public class DC_PatrolRoutine extends Routine
         if (red == 0 && green == 0 && blue == 0) {
             return true;
         }
+        */
         return false;
     }
     
     //Checks if the background colour is yellow. 
     private Boolean IsInMainCombatScreen() {
         //For RGB values of initial combat screen (yellow)
-        int red = bot.getPixelColor(0, 0).getRed();
-        int green = bot.getPixelColor(0, 0).getGreen();
-        int blue = bot.getPixelColor(0, 0).getBlue();
+        int red = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getRed();
+        int green = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getGreen();
+        int blue = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getBlue();
         
-        if (red == 0 && green == 0 && blue == 0) {
+        if (red == 255 && green == 255 && blue == 0) {
             return true;
         } else {
             return false;
@@ -211,9 +258,9 @@ public class DC_PatrolRoutine extends Routine
     //Checks if the background colour is black. 
     private Boolean IsInDialogueScreen() {
         //For RGB values of black screen when text is present to indicate spcial actions
-        int red = bot.getPixelColor(0, 0).getRed();
-        int green = bot.getPixelColor(0, 0).getGreen();
-        int blue = bot.getPixelColor(0, 0).getBlue();
+        int red = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getRed();
+        int green = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getGreen();
+        int blue = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getBlue();
         
         if (red == 0 && green == 0 && blue == 0) {
             return true;
@@ -225,11 +272,11 @@ public class DC_PatrolRoutine extends Routine
     //Checks if the background colour is red. 
     private Boolean IsInDamageScreen() {
         //For RGB values of red screen when damaging combat actions occur
-        int red = bot.getPixelColor(0, 0).getRed();
-        int green = bot.getPixelColor(0, 0).getGreen();
-        int blue = bot.getPixelColor(0, 0).getBlue();
+        int red = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getRed();
+        int green = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getGreen();
+        int blue = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getBlue();
         
-        if (red == 0 && green == 0 && blue == 0) {
+        if (red == 192 && green == 0 && blue == 0) {
             return true;
         } else {
             return false;
@@ -238,10 +285,24 @@ public class DC_PatrolRoutine extends Routine
     
     //Checks if the background colour is dark red. 
     private Boolean IsInCaves() {
-        //For RGB values of dark red screen when idle in caves
-        int red = bot.getPixelColor(0, 0).getRed();
-        int green = bot.getPixelColor(0, 0).getGreen();
-        int blue = bot.getPixelColor(0, 0).getBlue();
+        //For RGB values of orange screen when idle in caves
+        int red = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getRed();
+        int green = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getGreen();
+        int blue = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getBlue();
+        
+        if (red == 238 && green == 68 && blue == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    //Checks if the background colour is dark red. 
+    private Boolean IsInCastle() {
+        //For RGB values of orange screen when idle in caves
+        int red = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getRed();
+        int green = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getGreen();
+        int blue = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getBlue();
         
         if (red == 0 && green == 0 && blue == 0) {
             return true;
@@ -253,11 +314,25 @@ public class DC_PatrolRoutine extends Routine
     //Checks if the background colour is orange. 
     private Boolean IsInInventoryScreen() {
         //For RGB values of orange screen when in the inventory screen
-        int red = bot.getPixelColor(0, 0).getRed();
-        int green = bot.getPixelColor(0, 0).getGreen();
-        int blue = bot.getPixelColor(0, 0).getBlue();
+        int red = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getRed();
+        int green = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getGreen();
+        int blue = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getBlue();
         
-        if (red == 0 && green == 0 && blue == 0) {
+        if (red == 192 && green == 64 && blue == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    //Checks if the first item in the inv is already clicked 
+    private Boolean IsFirstInvItemClicked() {
+        //For RGB values of orange screen when in the inventory screen
+        int red = bot.getPixelColor(firstInvItemBlankX, firstInvItemBlankY).getRed();
+        int green = bot.getPixelColor(firstInvItemBlankX, firstInvItemBlankY).getGreen();
+        int blue = bot.getPixelColor(firstInvItemBlankX, firstInvItemBlankY).getBlue();
+        
+        if (red == 85 && green == 85 && blue == 85) {
             return true;
         } else {
             return false;
@@ -265,26 +340,17 @@ public class DC_PatrolRoutine extends Routine
     }
     
     private void ClickInventory() throws Exception {
-        //For RGB values of black screen, where inventory bar would not be accessible
-        int red = bot.getPixelColor(0, 0).getRed();
-        int green = bot.getPixelColor(0, 0).getGreen();
-        int blue = bot.getPixelColor(0, 0).getBlue();
-        
-        if (red == 0 && green == 0 && blue == 0) {
-            throw new Exception("Unable to click inventory, black screen detected. ");
-        }
-        
         //For RGB values of bottom black bar that takes user to inventory
-        red = bot.getPixelColor(0, 0).getRed();
-        green = bot.getPixelColor(0, 0).getGreen();
-        blue = bot.getPixelColor(0, 0).getBlue();
+        int red = bot.getPixelColor(invBarX, invBarY).getRed();
+        int green = bot.getPixelColor(invBarX, invBarY).getGreen();
+        int blue = bot.getPixelColor(invBarX, invBarY).getBlue();
         
-        if (red != 0 && green != 0 && blue != 0) {
+        if (red != 66 && green != 0 && blue != 66) {
             throw new Exception("Unable to click inventory, invetory bar not detected. ");
         }
         
         //Click inventory;
-        bot.mouseMove(0, 0);
+        bot.mouseMove(invBarX, invBarY);
         bot.delay(250);
         bot.mouseClick();
         bot.delay(250);
@@ -309,7 +375,32 @@ public class DC_PatrolRoutine extends Routine
         }
         
         //Click patrol map icon;
-        bot.mouseMove(0, 0);
+        bot.mouseMove(patrolX, patrolY);
+        bot.delay(250);
+        bot.mouseClick();
+        bot.delay(250);
+        
+        //Check if still in caves screen
+        Boolean isStillInCavesScreen = true;
+        for (int i = 0; i < 5; i++) {
+            isStillInCavesScreen = IsInCaves();
+            if (isStillInCavesScreen) {
+                bot.delay(1000);
+            }
+        }
+        
+        if (isStillInCavesScreen) {
+            throw new Exception("Unable verify if moved past caves screen. ");
+        }
+    }
+    
+    private void ClickDunjeon() throws Exception {
+        if (!IsInCastle()) {
+            throw new Exception("Could not click patrol, unable to detect caves screen. ");
+        }
+        
+        //Click patrol map icon;
+        bot.mouseMove(dunjeonX, dunjeonY);
         bot.delay(250);
         bot.mouseClick();
         bot.delay(250);
@@ -334,7 +425,7 @@ public class DC_PatrolRoutine extends Routine
         }
         
         //Click top left of screen
-        bot.mouseMove(0, 0);
+        bot.mouseMove(bgColorCheckX, bgColorCheckY);
         bot.delay(250);
         bot.mouseClick();
         bot.delay(250);
@@ -351,6 +442,11 @@ public class DC_PatrolRoutine extends Routine
         if (isStillInDialogueScreen) {
             throw new Exception("Unable verify if moved past dialogue screen. ");
         }
+        
+        //Sometimes it fails to run away and another damage screen happens. 
+        if (IsInDamageScreen()) {
+            ClickPastDamageScreen();
+        }
     }
     
     private void ClickPastDamageScreen() throws Exception {
@@ -359,7 +455,7 @@ public class DC_PatrolRoutine extends Routine
         }
         
         //Click top left of screen
-        bot.mouseMove(0, 0);
+        bot.mouseMove(bgColorCheckX, bgColorCheckY);
         bot.delay(250);
         bot.mouseClick();
         bot.delay(250);
@@ -384,13 +480,13 @@ public class DC_PatrolRoutine extends Routine
         }
         
         Boolean textColourFound = false;
-	int x = 0;
-	int y = 0;
+	int x = combatTopOfOptionBoxX;
+	int y = combatTopOfOptionBoxY;
         
         //Need to move mouse away from text area incase it highlights and changes text colour
         bot.mouseMove(10, 10);
 
-	for (int i = 0; i < 500; i++) {
+	for (int i = 0; i < 50; i++) {
             int red = bot.getPixelColor(x, y).getRed();
             int green = bot.getPixelColor(x, y).getGreen();
             int blue = bot.getPixelColor(x, y).getBlue();
@@ -417,11 +513,113 @@ public class DC_PatrolRoutine extends Routine
             throw new Exception("Unable to detect enemy, main combat screen not detected. ");
         }
         
-        int enemyRed = bot.getPixelColor(0, 0).getRed();
-        int enemyGreen = bot.getPixelColor(0, 0).getGreen();
-        int enemyBlue = bot.getPixelColor(0, 0).getBlue();
+        // This section below are coordinates for checking unique identifiers from certain enemies
+        int cavernDragonX1 = osX + 39; // 1 0 16
+        int cavernDragonY1 = osY + 30;
+        int cavernDragonX2 = osX + 80; // 24 21 40
+        int cavernDragonY2 = osY + 65;
+        int cavernDragonX3 = osX + 62; // 173 16 43
+        int cavernDragonY3 = osY + 85;
+        int cavernDragonX4 = osX + 142; // 255 217 104
+        int cavernDragonY4 = osY + 148;
         
-        if (enemyRed == 0 && enemyGreen == 0 && enemyBlue == 0) {
+        Boolean coord1Matches = false;
+        Boolean coord2Matches = false;
+        Boolean coord3Matches = false;
+        Boolean coord4Matches = false;
+        
+        int enemyRed = bot.getPixelColor(cavernDragonX1, cavernDragonY1).getRed();
+        int enemyGreen = bot.getPixelColor(cavernDragonX1, cavernDragonY1).getGreen();
+        int enemyBlue = bot.getPixelColor(cavernDragonX1, cavernDragonY1).getBlue();
+        
+        if (enemyRed == 1 && enemyGreen == 0 && enemyBlue == 16) {
+            coord1Matches = true;
+        }
+        
+        enemyRed = bot.getPixelColor(cavernDragonX2, cavernDragonY2).getRed();
+        enemyGreen = bot.getPixelColor(cavernDragonX2, cavernDragonY2).getGreen();
+        enemyBlue = bot.getPixelColor(cavernDragonX2, cavernDragonY2).getBlue();
+        
+        if (enemyRed == 24 && enemyGreen == 21 && enemyBlue == 40) {
+            coord2Matches = true;
+        }
+        
+        enemyRed = bot.getPixelColor(cavernDragonX3, cavernDragonY3).getRed();
+        enemyGreen = bot.getPixelColor(cavernDragonX3, cavernDragonY3).getGreen();
+        enemyBlue = bot.getPixelColor(cavernDragonX3, cavernDragonY3).getBlue();
+        
+        if (enemyRed == 173 && enemyGreen == 16 && enemyBlue == 43) {
+            coord3Matches = true;
+        }
+        
+        enemyRed = bot.getPixelColor(cavernDragonX4, cavernDragonY4).getRed();
+        enemyGreen = bot.getPixelColor(cavernDragonX4, cavernDragonY4).getGreen();
+        enemyBlue = bot.getPixelColor(cavernDragonX4, cavernDragonY4).getBlue();
+        
+        if (enemyRed == 255 && enemyGreen == 217 && enemyBlue == 104) {
+            coord4Matches = true;
+        }
+        
+        if (coord1Matches && coord2Matches && coord3Matches && coord4Matches) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    private Boolean EnemyIsGang() throws Exception {
+        if (!IsInMainCombatScreen()) {
+            throw new Exception("Unable to detect enemy, main combat screen not detected. ");
+        }
+        
+        // This section below are coordinates for checking unique identifiers from certain enemies
+        int gangX1 = osX + 40; //254 252 227
+        int gangY1 = osY + 48;
+        int gangX2 = osX + 76; //169 182 112
+        int gangY2 = osY + 48;
+        int gangX3 = osX + 115; //114 54 20
+        int gangY3 = osY + 52;
+        int gangX4 = osX + 165; //248 252 132
+        int gangY4 = osY + 79;
+        
+        Boolean coord1Matches = false;
+        Boolean coord2Matches = false;
+        Boolean coord3Matches = false;
+        Boolean coord4Matches = false;
+        
+        int enemyRed = bot.getPixelColor(gangX1, gangY1).getRed();
+        int enemyGreen = bot.getPixelColor(gangX1, gangY1).getGreen();
+        int enemyBlue = bot.getPixelColor(gangX1, gangY1).getBlue();
+        
+        if (enemyRed == 254 && enemyGreen == 252 && enemyBlue == 227) {
+            coord1Matches = true;
+        }
+        
+        enemyRed = bot.getPixelColor(gangX2, gangY2).getRed();
+        enemyGreen = bot.getPixelColor(gangX2, gangY2).getGreen();
+        enemyBlue = bot.getPixelColor(gangX2, gangY2).getBlue();
+        
+        if (enemyRed == 169 && enemyGreen == 182 && enemyBlue == 112) {
+            coord2Matches = true;
+        }
+        
+        enemyRed = bot.getPixelColor(gangX3, gangY3).getRed();
+        enemyGreen = bot.getPixelColor(gangX3, gangY3).getGreen();
+        enemyBlue = bot.getPixelColor(gangX3, gangY3).getBlue();
+        
+        if (enemyRed == 114 && enemyGreen == 54 && enemyBlue == 20) {
+            coord3Matches = true;
+        }
+        
+        enemyRed = bot.getPixelColor(gangX4, gangY4).getRed();
+        enemyGreen = bot.getPixelColor(gangX4, gangY4).getGreen();
+        enemyBlue = bot.getPixelColor(gangX4, gangY4).getBlue();
+        
+        if (enemyRed == 248 && enemyGreen == 252 && enemyBlue == 132) {
+            coord4Matches = true;
+        }
+        
+        if (coord1Matches && coord2Matches && coord3Matches && coord4Matches) {
             return true;
         } else {
             return false;
@@ -433,7 +631,7 @@ public class DC_PatrolRoutine extends Routine
         if (!IsInMainCombatScreen()) {
             throw new Exception("Unable to run away, main combat screen not detected. ");
         }
-        bot.mouseMove(100, 100);
+        bot.mouseMove(bgColorCheckX, bgColorCheckY);
         int[] firstCombatOptionCoordinates = GetFirstCombatOptionCoordinates();
         bot.mouseMove(firstCombatOptionCoordinates[0], firstCombatOptionCoordinates[1]);
         bot.delay(500);
@@ -443,12 +641,12 @@ public class DC_PatrolRoutine extends Routine
         int firstOptionBlue = bot.getPixelColor(firstCombatOptionCoordinates[0], firstCombatOptionCoordinates[1]).getBlue();
         
         //Checking first combat option text to see if it turned red after mouse moved to it
-        if (firstOptionRed == 0 || firstOptionGreen == 0 && firstOptionBlue == 0) {
+        if (firstOptionRed == 255 || firstOptionGreen == 0 && firstOptionBlue == 0) {
             Boolean textColourFound = false;
             int x = firstCombatOptionCoordinates[0];
             int y = firstCombatOptionCoordinates[1];
             
-            for (int i = 0; i < 500; i++) {
+            for (int i = 0; i < 50; i++) {
                 int red = bot.getPixelColor(x, y).getRed();
                 int green = bot.getPixelColor(x, y).getGreen();
                 int blue = bot.getPixelColor(x, y).getBlue();
@@ -458,7 +656,6 @@ public class DC_PatrolRoutine extends Routine
                         break;
                 }
                 x++;
-                y++;
                 y++;
             }
             
@@ -493,15 +690,15 @@ public class DC_PatrolRoutine extends Routine
         }
 
         //Running away assumes enemy does not pursue. 
-        if (EnemyIsMagmaDragon()) {
+        if (EnemyIsMagmaDragon() || EnemyIsGang()) {
             RunAway();
             ClickPastDialogueScreen();
             return;
         }
         
-        int timesToTryAttacking = 20;
+        int timesToTryAttacking = 5;
         for (int i = 0; i < timesToTryAttacking; i++) {
-            if (IsInCaves() || IsDead()) {
+            if (IsInCaves() || IsDead() || IsInCastle()) {
                 return;
             }
             
@@ -540,11 +737,11 @@ public class DC_PatrolRoutine extends Routine
     }
     
     private Boolean InventoryBarIsAvailable() {
-        int red = bot.getPixelColor(0, 0).getRed();
-        int green = bot.getPixelColor(0, 0).getGreen();
-        int blue = bot.getPixelColor(0, 0).getBlue();
+        int red = bot.getPixelColor(invBarX, invBarY).getRed();
+        int green = bot.getPixelColor(invBarX, invBarY).getGreen();
+        int blue = bot.getPixelColor(invBarX, invBarY).getBlue();
         
-        if (red == 0 & green == 0 & blue == 0) {
+        if (red == 66 & green == 0 & blue == 66) {
             return true;
         } else {
             return false;
@@ -556,7 +753,8 @@ public class DC_PatrolRoutine extends Routine
             throw new Exception("Unable to heal, inventory bar not detected. ");
         }
         
-        bot.mouseMove(0, 0);
+        //Clicks inventory bar to get into inventory screen. 
+        bot.mouseMove(invBarX, invBarY);
         bot.delay(250);
         bot.mouseClick();
         bot.delay(250);
@@ -577,10 +775,10 @@ public class DC_PatrolRoutine extends Routine
         Boolean isDamaged = false;
         for (int i = 0; i < 10; i++) {
             //Scan guts area for [ ] characters
-            for (int j = 716; j < 850; j++) {
-                int red = bot.getPixelColor(j, 374).getRed();
-                int green = bot.getPixelColor(j, 374).getGreen();
-                int blue = bot.getPixelColor(j, 374).getBlue();
+            for (int j = invGutsBracketXStart; j < invGutsBracketXEnd; j++) {
+                int red = bot.getPixelColor(j, invGutsBracketY).getRed();
+                int green = bot.getPixelColor(j, invGutsBracketY).getGreen();
+                int blue = bot.getPixelColor(j, invGutsBracketY).getBlue();
 
                 if (red == 255 && green == 255 && blue == 255) {
                     isDamaged = true;
@@ -589,11 +787,14 @@ public class DC_PatrolRoutine extends Routine
             }
             
             if (isDamaged = true) {
-                bot.mouseMove(691, 566);
-                bot.delay(250);
-                bot.mouseClick();
-                bot.delay(1000);
-                bot.mouseMove(1044, 840);
+                if (!IsFirstInvItemClicked()) {
+                    bot.mouseMove(firstInvItemX, firstInvItemY);
+                    bot.delay(250);
+                    bot.mouseClick();
+                    bot.delay(500);
+                }
+                bot.delay(500);
+                bot.mouseMove(invUseButtonX, invUseButtonY);
                 bot.delay(250);
                 bot.mouseClick();
                 bot.delay(250);
@@ -603,7 +804,7 @@ public class DC_PatrolRoutine extends Routine
             }
         }
 
-        bot.mouseMove(1396, 842);
+        bot.mouseMove(invExitButtonX, invExitButtonY);
         bot.delay(250);
         bot.mouseClick();
         bot.delay(250);
@@ -626,7 +827,7 @@ public class DC_PatrolRoutine extends Routine
             throw new Exception("Unable to cure disease, inventory bar not detected. ");
         }
         
-        bot.mouseMove(0, 0);
+        bot.mouseMove(invBarX, invBarY);
         bot.delay(250);
         bot.mouseClick();
         bot.delay(250);
@@ -645,12 +846,11 @@ public class DC_PatrolRoutine extends Routine
         
         //Uses first item in inventory to heal. 
         Boolean isDebuffed = false;
-        //Scan guts area for [ ] characters
-        for (int j = 1046; j < 1200; j++) {
+        for (int j = invDiseaseBracketXStart; j < invDiseaseBracketXEnd; j++) {
             //Scanning skill for [ ] indicators
-            int red = bot.getPixelColor(j, 450).getRed();
-            int green = bot.getPixelColor(j, 450).getGreen();
-            int blue = bot.getPixelColor(j, 450).getBlue();
+            int red = bot.getPixelColor(j, invDiseaseBracketY).getRed();
+            int green = bot.getPixelColor(j, invDiseaseBracketY).getGreen();
+            int blue = bot.getPixelColor(j, invDiseaseBracketY).getBlue();
 
             if (red == 255 && green == 255 && blue == 255) {
                 isDebuffed = true;
@@ -658,9 +858,9 @@ public class DC_PatrolRoutine extends Routine
             }
             
             //Scanning character portrait in top right for status indicators
-            int statusRed = bot.getPixelColor(j+250, 312).getRed();
-            int statusGreen = bot.getPixelColor(j+250, 312).getGreen();
-            int statusBlue = bot.getPixelColor(j+250, 312).getBlue();
+            int statusRed = bot.getPixelColor(j+250, invStatusBracketY).getRed();
+            int statusGreen = bot.getPixelColor(j+250, invStatusBracketY).getGreen();
+            int statusBlue = bot.getPixelColor(j+250, invStatusBracketY).getBlue();
             
             if (statusRed == 255 && statusGreen == 255 && statusBlue == 255) {
                 isDebuffed = true;
@@ -670,11 +870,14 @@ public class DC_PatrolRoutine extends Routine
         
         //Uses first item in inventory. 
         if (isDebuffed) {
-            bot.mouseMove(691, 566);
-            bot.delay(250);
-            bot.mouseClick();
-            bot.delay(1000);
-            bot.mouseMove(1044, 840);
+            if (!IsFirstInvItemClicked()) {
+                bot.mouseMove(firstInvItemX, firstInvItemY);
+                bot.delay(250);
+                bot.mouseClick();
+                bot.delay(500);
+            }
+            bot.delay(500);
+            bot.mouseMove(invUseButtonX, invUseButtonY);
             bot.delay(250);
             bot.mouseClick();
             bot.delay(250);
@@ -704,7 +907,7 @@ public class DC_PatrolRoutine extends Routine
             throw new Exception("Unable to cure statuses, inventory bar not detected. ");
         }
         
-        bot.mouseMove(0, 0);
+        bot.mouseMove(invBarX, invBarY);
         bot.delay(250);
         bot.mouseClick();
         bot.delay(250);
@@ -724,11 +927,11 @@ public class DC_PatrolRoutine extends Routine
         //Uses first item in inventory to heal. 
         Boolean isDebuffed = false;
         //Scan guts area for [ ] characters
-        for (int j = 1300; j < 1432; j++) {
+        for (int j = invStatusBracketXStart; j < invStatusBracketXEnd; j++) {
             //Scanning character portrait in top right for status indicators
-            int statusRed = bot.getPixelColor(j, 312).getRed();
-            int statusGreen = bot.getPixelColor(j, 312).getGreen();
-            int statusBlue = bot.getPixelColor(j, 312).getBlue();
+            int statusRed = bot.getPixelColor(j, invStatusBracketY).getRed();
+            int statusGreen = bot.getPixelColor(j, invStatusBracketY).getGreen();
+            int statusBlue = bot.getPixelColor(j, invStatusBracketY).getBlue();
             
             if (statusRed == 255 && statusGreen == 255 && statusBlue == 255) {
                 isDebuffed = true;
@@ -738,18 +941,21 @@ public class DC_PatrolRoutine extends Routine
         
         //Uses first item in inventory. 
         if (isDebuffed) {
-            bot.mouseMove(691, 566);
-            bot.delay(250);
-            bot.mouseClick();
-            bot.delay(1000);
-            bot.mouseMove(1044, 840);
+            if (!IsFirstInvItemClicked()) {
+                bot.mouseMove(firstInvItemX, firstInvItemY);
+                bot.delay(250);
+                bot.mouseClick();
+                bot.delay(500);
+            }
+            bot.delay(500);
+            bot.mouseMove(invUseButtonX, invUseButtonY);
             bot.delay(250);
             bot.mouseClick();
             bot.delay(250);
         }
 
         //Exits inventory screen
-        bot.mouseMove(1396, 842);
+        bot.mouseMove(invExitButtonX, invExitButtonY);
         bot.delay(250);
         bot.mouseClick();
         bot.delay(250);
