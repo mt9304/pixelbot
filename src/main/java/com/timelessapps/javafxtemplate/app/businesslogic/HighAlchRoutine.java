@@ -23,7 +23,7 @@ public class HighAlchRoutine extends Routine {
 
 	// For arrows, remember to include more in inv than stated number, otherwise
 	// stack will shrink and pixel detector may be off.
-	int numberToAlch = 980;
+	int numberToAlch = 700;
 	int alchX = 1372; // 1369
 	int alchY = 520; // 546
 
@@ -49,17 +49,19 @@ public class HighAlchRoutine extends Routine {
 	public void run() {
 		log.appendToEventLogsFile("Starting bot routine in 3 seconds. ");
 
-		System.out.println("Starting bot routine in 3 seconds. ");
-		bot.delay(3000);
+		System.out.println("Starting bot routine in 5 seconds. ");
+		bot.delay(5000);
 
 		synchronized (this) {
 			try {
 				disableAlchButton();
 				while (running) {
 					checkIfPausedOrStopped();
+                                        
 					/** Start routine here. **/
 					// F5 = Inv, F6 = Equipment, F7 = SpellBook.
 					// Move to starting spot.
+                                        /* //## Uncomment section if reverting back to old routine. Temporarily changing. 
 					bookStillLoading = true;
 					bot.delay(250);
 					// System.out.println("Moving to alch spot. ");
@@ -95,10 +97,21 @@ public class HighAlchRoutine extends Routine {
 
 					// Check if finished casting.
 					checkIfStillCasting();
-
+                                        */ //##Uncomment above for old routine. 
 					/** End routine here. **/
-					bot.delay(random.nextInt(500) + 500);
+					//bot.delay(random.nextInt(500) + 500);
+                                        
+                                        if (numberToAlch <= 0) {
+                                            break;
+                                        }
+                                        bot.mouseClick();
+					bot.delay(random.nextInt(5) + 5);
+					bot.mouseClick();
+					bot.delay(random.nextInt(5) + 5);
+                                        
 					numberToAlch--;
+                                        
+                                        
 					checkIfPausedOrStopped();
 				}
 			} catch (InterruptedException ex) {
@@ -112,6 +125,7 @@ public class HighAlchRoutine extends Routine {
 		if (numberToAlch <= 0) {
 			System.out.println("Preparing to shut down. ");
 			running = false;
+                        /*
 			// For sleeping computer.
 			bot.delay(1000);
 			bot.moveCursorTo(35, 1050);
@@ -125,6 +139,7 @@ public class HighAlchRoutine extends Routine {
 			bot.moveCursorTo(35, 811);
 			bot.delay(1000);
 			bot.mouseClick();
+                        */
 		}
 
 		waitIfPaused();
