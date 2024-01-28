@@ -23,7 +23,7 @@ public class DC_PatrolRoutine extends Routine
     Random random = new Random();
     //int numberOfQuestsToUse = 100;
     int tripNumber = 0;
-    int numberOfTripsToDo = 45;
+    int numberOfTripsToDo = 100;
     int numberOftripsSinceDiseaseCured = 0;
     
     //The top left most pixel of the game frame. Used as a reference to find the other pixels
@@ -379,10 +379,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if in inventory screen
         Boolean isInInventoryScreen = false;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             isInInventoryScreen = IsInInventoryScreen();
             if (!isInInventoryScreen) {
-                bot.delay(500);
+                bot.delay(250);
             }
         }
         
@@ -404,10 +404,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if still in caves screen
         Boolean isStillInCavesScreen = true;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             isStillInCavesScreen = IsInCaves();
             if (isStillInCavesScreen) {
-                bot.delay(500);
+                bot.delay(250);
             }
         }
         
@@ -429,10 +429,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if still in caves screen
         Boolean isStillInCastleScreen = true;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             isStillInCastleScreen = IsInCastle();
             if (isStillInCastleScreen) {
-                bot.delay(500);
+                bot.delay(250);
             }
         }
         
@@ -454,10 +454,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if still in dialogue screen
         Boolean isStillInDialogueScreen = true;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             isStillInDialogueScreen = IsInDialogueScreen();
             if (isStillInDialogueScreen) {
-                bot.delay(500);
+                bot.delay(250);
             }
         }
         
@@ -470,10 +470,10 @@ public class DC_PatrolRoutine extends Routine
             
             //Check if still in dialogue screen
             isStillInDialogueScreen = true;
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 20; i++) {
                 isStillInDialogueScreen = IsInDialogueScreen();
                 if (isStillInDialogueScreen) {
-                    bot.delay(500);
+                    bot.delay(250);
                 }
             }
             
@@ -501,10 +501,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if still in dialogue screen
         Boolean isStillInDamageScreen = true;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             isStillInDamageScreen = IsInDamageScreen();
             if (isStillInDamageScreen) {
-                bot.delay(500);
+                bot.delay(250);
             }
         }
         
@@ -728,10 +728,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if still in main combat screen
         Boolean isInMainCombatScreen = true;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             isInMainCombatScreen = IsInMainCombatScreen();
             if (isInMainCombatScreen) {
-                bot.delay(500);
+                bot.delay(250);
             }
         }
         if (isInMainCombatScreen) {
@@ -863,10 +863,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if moved away from inventory screen
         Boolean isStillInWheelScreen = true;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             isStillInWheelScreen = IsInWheelScreen();
             if (isStillInWheelScreen) {
-                bot.delay(500);
+                bot.delay(250);
             }
         }
         if (isStillInWheelScreen) {
@@ -902,10 +902,10 @@ public class DC_PatrolRoutine extends Routine
 
             //Check if still in main combat screen
             Boolean isInMainCombatScreen = true;
-            for (int j = 0; j < 10; j++) {
+            for (int j = 0; j < 20; j++) {
                 isInMainCombatScreen = IsInMainCombatScreen();
                 if (isInMainCombatScreen) {
-                    bot.delay(500);
+                    bot.delay(250);
                 }
             }
             if (isInMainCombatScreen) {
@@ -958,10 +958,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if moved into inventory screen
         Boolean isInInventoryScreen = false;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             isInInventoryScreen = IsInInventoryScreen();
             if (!isInInventoryScreen) {
-                bot.delay(500);
+                bot.delay(250);
             }
         }
         if (!isInInventoryScreen) {
@@ -1011,10 +1011,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if moved away from inventory screen
         Boolean isStillInInventoryScreen = true;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             isStillInInventoryScreen = IsInInventoryScreen();
             if (isStillInInventoryScreen) {
-                bot.delay(500);
+                bot.delay(250);
             }
         }
         if (isStillInInventoryScreen) {
@@ -1034,10 +1034,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if moved into inventory screen
         Boolean isInInventoryScreen = false;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             isInInventoryScreen = IsInInventoryScreen();
             if (!isInInventoryScreen) {
-                bot.delay(500);
+                bot.delay(250);
             }
         }
         if (!isInInventoryScreen) {
@@ -1065,10 +1065,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if moved away from inventory screen
         Boolean isStillInInventoryScreen = true;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             isStillInInventoryScreen = IsInInventoryScreen();
             if (isStillInInventoryScreen) {
-                bot.delay(500);
+                bot.delay(250);
             }
         }
         if (isStillInInventoryScreen) {
@@ -1088,10 +1088,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if moved into inventory screen
         Boolean isInInventoryScreen = false;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             isInInventoryScreen = IsInInventoryScreen();
             if (!isInInventoryScreen) {
-                bot.delay(500);
+                bot.delay(250);
             }
         }
         if (!isInInventoryScreen) {
@@ -1145,10 +1145,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if moved away from inventory screen
         Boolean isStillInInventoryScreen = true;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             isStillInInventoryScreen = IsInInventoryScreen();
             if (isStillInInventoryScreen) {
-                bot.delay(500);
+                bot.delay(250);
             }
         }
         if (isStillInInventoryScreen) {
@@ -1168,10 +1168,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if moved into inventory screen
         Boolean isInInventoryScreen = false;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             isInInventoryScreen = IsInInventoryScreen();
             if (!isInInventoryScreen) {
-                bot.delay(500);
+                bot.delay(250);
             }
         }
         if (!isInInventoryScreen) {
@@ -1216,10 +1216,10 @@ public class DC_PatrolRoutine extends Routine
         
         //Check if moved away from inventory screen
         Boolean isStillInInventoryScreen = true;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             isStillInInventoryScreen = IsInInventoryScreen();
             if (isStillInInventoryScreen) {
-                bot.delay(500);
+                bot.delay(250);
             }
         }
         
