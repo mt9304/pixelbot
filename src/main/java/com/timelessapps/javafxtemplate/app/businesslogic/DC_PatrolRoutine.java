@@ -21,9 +21,9 @@ public class DC_PatrolRoutine extends Routine
     RobotService bot = new RobotService();
     LoggingService log = new LoggingService();
     Random random = new Random();
-    int numberOfQuestsToUse = 100;
+    //int numberOfQuestsToUse = 100;
     int tripNumber = 0;
-    int numberOfTripsToDo = 40;
+    int numberOfTripsToDo = 45;
     int numberOftripsSinceDiseaseCured = 0;
     
     //The top left most pixel of the game frame. Used as a reference to find the other pixels
@@ -109,27 +109,33 @@ public class DC_PatrolRoutine extends Routine
                     }
                     
                     /** Start Routine Here **/
-                    System.out.println("Questions: " + tripNumber + " / " + numberOfTripsToDo);
+                    System.out.println("Quests: " + tripNumber + " / " + numberOfTripsToDo);
                     if (IsDead()) {
                         throw new Exception("Character died in combat, please manually put character back in position and restart bot. ");
                     }
                     //CureDiseaseAndStatuses();
                     HealIfNotFullLife();
                     if (numberOftripsSinceDiseaseCured >= 10) {
-                        CureStatuses();
+                        //CureStatuses();
+                        UseFirstItem();
                     }
                     
-                    //ClickPatrol();
-                    ClickDunjeon();
+                    ClickPatrol();
+                    //ClickDunjeon();
                     if (IsInDialogueScreen()) {
                         ClickPastDialogueScreen(); //Sometimes this happens if new area gets discovered
                         continue;
-                    } else if (IsInMainCombatScreen()) {
+                    } else if (IsInWheelScreen()) {
+                        HandleWheel();
+                        continue;
+                    }
+                    else if (IsInMainCombatScreen()) {
                         HandleCombat();
                     } else {
                         throw new Exception("Unknown screen detected, expected either dialogue screen or main combat screen. ");
                     }
                     
+                    numberOftripsSinceDiseaseCured++;
                     /** End Routine Here **/
                     
                     Thread.sleep(random.nextInt(1000) + 1000);
@@ -147,7 +153,7 @@ public class DC_PatrolRoutine extends Routine
     @Override
     public void checkIfPausedOrStopped() throws InterruptedException
     {
-        if (tripNumber >= numberOfQuestsToUse)
+        if (tripNumber >= numberOfTripsToDo)
         {
             System.out.println("Preparing to shut down. ");
             running = false;
@@ -265,6 +271,19 @@ public class DC_PatrolRoutine extends Routine
         int blue = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getBlue();
         
         if (red == 0 && green == 0 && blue == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    //Checks if the background colour is yellowish green. 
+    private Boolean IsInWheelScreen() {
+        int red = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getRed();
+        int green = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getGreen();
+        int blue = bot.getPixelColor(bgColorCheckX, bgColorCheckY).getBlue();
+        
+        if (red == 204 && green == 204 && blue == 0) {
             return true;
         } else {
             return false;
@@ -427,8 +446,8 @@ public class DC_PatrolRoutine extends Routine
             throw new Exception("Unable to click past dialogue screen, black background not detected. ");
         }
         
-        //Click top left of screen
-        bot.mouseMove(bgColorCheckX, bgColorCheckY);
+        //Click bottom right of screen where the Done button should be
+        bot.mouseMove(osX + 387, osY + 311);
         bot.delay(250);
         bot.mouseClick();
         bot.delay(250);
@@ -559,6 +578,7 @@ public class DC_PatrolRoutine extends Routine
         int enemyGreen = bot.getPixelColor(cavernDragonX1, cavernDragonY1).getGreen();
         int enemyBlue = bot.getPixelColor(cavernDragonX1, cavernDragonY1).getBlue();
         
+        System.out.println(cavernDragonX1 + ", " + cavernDragonY1 + ": " + enemyRed + "/" + enemyGreen + "/" + enemyBlue);
         if (enemyRed == 1 && enemyGreen == 0 && enemyBlue == 16) {
             coord1Matches = true;
         }
@@ -567,6 +587,7 @@ public class DC_PatrolRoutine extends Routine
         enemyGreen = bot.getPixelColor(cavernDragonX2, cavernDragonY2).getGreen();
         enemyBlue = bot.getPixelColor(cavernDragonX2, cavernDragonY2).getBlue();
         
+        System.out.println(cavernDragonX2 + ", " + cavernDragonY2 + ": " + enemyRed + "/" + enemyGreen + "/" + enemyBlue);
         if (enemyRed == 24 && enemyGreen == 21 && enemyBlue == 40) {
             coord2Matches = true;
         }
@@ -575,6 +596,7 @@ public class DC_PatrolRoutine extends Routine
         enemyGreen = bot.getPixelColor(cavernDragonX3, cavernDragonY3).getGreen();
         enemyBlue = bot.getPixelColor(cavernDragonX3, cavernDragonY3).getBlue();
         
+        System.out.println(cavernDragonX3 + ", " + cavernDragonY3 + ": " + enemyRed + "/" + enemyGreen + "/" + enemyBlue);
         if (enemyRed == 173 && enemyGreen == 16 && enemyBlue == 43) {
             coord3Matches = true;
         }
@@ -583,6 +605,7 @@ public class DC_PatrolRoutine extends Routine
         enemyGreen = bot.getPixelColor(cavernDragonX4, cavernDragonY4).getGreen();
         enemyBlue = bot.getPixelColor(cavernDragonX4, cavernDragonY4).getBlue();
         
+        System.out.println(cavernDragonX4 + ", " + cavernDragonY4 + ": " + enemyRed + "/" + enemyGreen + "/" + enemyBlue);
         if (enemyRed == 255 && enemyGreen == 217 && enemyBlue == 104) {
             coord4Matches = true;
         }
@@ -716,6 +739,143 @@ public class DC_PatrolRoutine extends Routine
         }
     }
     
+    private void HandleWheel() throws Exception {
+        //432px across and 306 high
+        int checkBoxX = 0;
+        int checkBoxY = 0;
+        int y = osY + 21;
+        int x1 = osX + 13;
+        int x2 = osX + 26;
+        int x3 = osX + 39;
+        int x4 = osX + 52;
+        int x5 = osX + 65;
+        int x6 = osX + 78;
+        int x7 = osX + 91;
+        int x8 = osX + 104;
+        int x9 = osX + 117;
+        int x10 = osX + 130;
+        int x11 = osX + 143;
+        int x12 = osX + 156;
+        int x13 = osX + 169;
+        int x14 = osX + 182;
+        int x15 = osX + 195;
+        int x16 = osX + 208;
+        int x17 = osX + 221;
+        int x18 = osX + 234;
+        int x19 = osX + 247;
+        int x20 = osX + 260;
+        int x21 = osX + 273;
+        int x22 = osX + 286;
+        int x23 = osX + 299;
+        int x24 = osX + 312;
+        int x25 = osX + 325;
+        int x26 = osX + 338;
+        int x27 = osX + 351;
+        int x28 = osX + 364;
+        int x29 = osX + 377;
+        int x30 = osX + 390;
+        int x31 = osX + 403;
+        int x32 = osX + 416;
+        int x33 = osX + 429;
+        
+        //Checkbox is 192, 255, 255
+        //14px x 14px
+        Boolean checkBoxFound = false;
+        for (int i = 0; i < 24; i++) {
+            if (checkBoxFound) {
+                break;
+            }
+            
+            if (bot.getPixelColor(x1, y).getRed() == 192) {checkBoxX = x1; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x2, y).getRed() == 192) {checkBoxX = x2; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x3, y).getRed() == 192) {checkBoxX = x3; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x4, y).getRed() == 192) {checkBoxX = x4; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x5, y).getRed() == 192) {checkBoxX = x5; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x6, y).getRed() == 192) {checkBoxX = x6; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x7, y).getRed() == 192) {checkBoxX = x7; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x8, y).getRed() == 192) {checkBoxX = x8; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x9, y).getRed() == 192) {checkBoxX = x9; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x10, y).getRed() == 192) {checkBoxX = x10; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x11, y).getRed() == 192) {checkBoxX = x11; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x12, y).getRed() == 192) {checkBoxX = x12; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x13, y).getRed() == 192) {checkBoxX = x13; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x14, y).getRed() == 192) {checkBoxX = x14; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x15, y).getRed() == 192) {checkBoxX = x15; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x16, y).getRed() == 192) {checkBoxX = x16; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x17, y).getRed() == 192) {checkBoxX = x17; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x18, y).getRed() == 192) {checkBoxX = x18; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x19, y).getRed() == 192) {checkBoxX = x19; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x20, y).getRed() == 192) {checkBoxX = x20; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x21, y).getRed() == 192) {checkBoxX = x21; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x22, y).getRed() == 192) {checkBoxX = x22; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x23, y).getRed() == 192) {checkBoxX = x23; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x24, y).getRed() == 192) {checkBoxX = x24; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x25, y).getRed() == 192) {checkBoxX = x25; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x26, y).getRed() == 192) {checkBoxX = x26; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x27, y).getRed() == 192) {checkBoxX = x27; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x28, y).getRed() == 192) {checkBoxX = x28; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x29, y).getRed() == 192) {checkBoxX = x29; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x30, y).getRed() == 192) {checkBoxX = x30; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x31, y).getRed() == 192) {checkBoxX = x31; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x32, y).getRed() == 192) {checkBoxX = x32; checkBoxY = y; checkBoxFound = true; break;}
+            if (bot.getPixelColor(x33, y).getRed() == 192) {checkBoxX = x33; checkBoxY = y; checkBoxFound = true; break;}
+            y = y + 13;
+        }
+        System.out.println("Checkbox coords: " + checkBoxX + ", " + checkBoxY);
+        if (!checkBoxFound) {
+            throw new Exception("Unable to handle wheel, could not find checkbox in wheel screen. ");
+        }
+        
+        bot.mouseMove(checkBoxX, checkBoxY);
+        bot.delay(250);
+        bot.mouseClick();
+        bot.delay(250);
+
+        //Button is 187, 187, 187
+        Boolean wheelButtonFound = false;
+        int wheelButtonY = osY + 21;
+        int wheelX = 0;
+        int wheelX1 = osX + 90;
+        int wheelX2 = osX + 180;
+        int wheelX3 = osX + 270;
+        int wheelX4 = osX + 360;
+        
+        for (int i = 0; i < 15; i++) {
+            if (wheelButtonFound) {
+                break;
+            }
+            
+            if (bot.getPixelColor(wheelX1, wheelButtonY).getRed() == 187) {wheelX = wheelX1; wheelButtonFound = true; break;}
+            if (bot.getPixelColor(wheelX2, wheelButtonY).getRed() == 187) {wheelX = wheelX2; wheelButtonFound = true; break;}
+            if (bot.getPixelColor(wheelX3, wheelButtonY).getRed() == 187) {wheelX = wheelX3; wheelButtonFound = true; break;}
+            if (bot.getPixelColor(wheelX4, wheelButtonY).getRed() == 187) {wheelX = wheelX4; wheelButtonFound = true; break;}
+            wheelButtonY = wheelButtonY + 18;
+        }
+        System.out.println("Wheel button coords: " + wheelX + ", " + wheelButtonY);
+        if (!wheelButtonFound) {
+            throw new Exception("Unable to handle wheel, could not find checkbox in wheel screen. ");
+        }
+        
+        bot.mouseMove(wheelX, wheelButtonY);
+        bot.delay(250);
+        bot.mouseClick();
+        bot.delay(250);
+        
+        //Check if moved away from inventory screen
+        Boolean isStillInWheelScreen = true;
+        for (int i = 0; i < 10; i++) {
+            isStillInWheelScreen = IsInWheelScreen();
+            if (isStillInWheelScreen) {
+                bot.delay(500);
+            }
+        }
+        if (isStillInWheelScreen) {
+            throw new Exception("Unable to exit wheel screen, wheel screen still detected. ");
+        }
+        
+        ClickPastDialogueScreen();
+    }
+    
     private void HandleCombat() throws Exception {
         if (!IsInMainCombatScreen()) {
             throw new Exception("Unable to handle combat, main combat screen not detected. ");
@@ -812,7 +972,7 @@ public class DC_PatrolRoutine extends Routine
         Boolean isDamaged = false;
         for (int i = 0; i < 10; i++) {
             //Scan guts area for [ ] characters
-            for (int j = invGutsBracketXStart; j < invGutsBracketXEnd; j++) {
+            for (int j = invGutsBracketXStart; j < invGutsBracketXEnd; j+=2) {
                 int red = bot.getPixelColor(j, invGutsBracketY).getRed();
                 int green = bot.getPixelColor(j, invGutsBracketY).getGreen();
                 int blue = bot.getPixelColor(j, invGutsBracketY).getBlue();
@@ -837,12 +997,67 @@ public class DC_PatrolRoutine extends Routine
                 bot.delay(250);
                 bot.mouseClick();
                 bot.delay(250);
+                numberOftripsSinceDiseaseCured = 0;
                 isDamaged = false;
             } else {
                 break;
             }
         }
 
+        bot.mouseMove(invExitButtonX, invExitButtonY);
+        bot.delay(250);
+        bot.mouseClick();
+        bot.delay(250);
+        
+        //Check if moved away from inventory screen
+        Boolean isStillInInventoryScreen = true;
+        for (int i = 0; i < 10; i++) {
+            isStillInInventoryScreen = IsInInventoryScreen();
+            if (isStillInInventoryScreen) {
+                bot.delay(500);
+            }
+        }
+        if (isStillInInventoryScreen) {
+            throw new Exception("Unable to exit inventory screen, inventory screen still detected. ");
+        }
+    }
+    
+    private void UseFirstItem() throws Exception {
+        if (!InventoryBarIsAvailable()) {
+            throw new Exception("Unable to use first item, inventory bar not detected. ");
+        }
+        
+        bot.mouseMove(invBarX, invBarY);
+        bot.delay(250);
+        bot.mouseClick();
+        bot.delay(250);
+        
+        //Check if moved into inventory screen
+        Boolean isInInventoryScreen = false;
+        for (int i = 0; i < 10; i++) {
+            isInInventoryScreen = IsInInventoryScreen();
+            if (!isInInventoryScreen) {
+                bot.delay(500);
+            }
+        }
+        if (!isInInventoryScreen) {
+            throw new Exception("Unable to use first item, inventory screen not detected. ");
+        }
+        
+        if (!IsFirstInvItemClicked()) {
+            bot.mouseMove(firstInvItemX, firstInvItemY);
+            bot.delay(250);
+            bot.mouseClick();
+            bot.delay(125);
+        }
+        bot.delay(125);
+        bot.mouseMove(invUseButtonX, invUseButtonY);
+        bot.delay(250);
+        bot.mouseClick();
+        bot.delay(250);
+        numberOftripsSinceDiseaseCured = 0;
+
+        //Exits inventory screen
         bot.mouseMove(invExitButtonX, invExitButtonY);
         bot.delay(250);
         bot.mouseClick();
