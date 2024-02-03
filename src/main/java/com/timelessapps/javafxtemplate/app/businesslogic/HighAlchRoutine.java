@@ -23,7 +23,7 @@ public class HighAlchRoutine extends Routine {
 
 	// For arrows, remember to include more in inv than stated number, otherwise
 	// stack will shrink and pixel detector may be off.
-	int numberToAlch = 600;
+	int numberToAlch = 800;
 	int alchX = 1372; // 1369
 	int alchY = 520; // 546
 

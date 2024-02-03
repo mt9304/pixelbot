@@ -23,7 +23,7 @@ public class DC_PatrolRoutine extends Routine
     Random random = new Random();
     //int numberOfQuestsToUse = 100;
     int tripNumber = 0;
-    int numberOfTripsToDo = 100;
+    int numberOfTripsToDo = 120;
     int numberOftripsSinceDiseaseCured = 0;
     
     //The top left most pixel of the game frame. Used as a reference to find the other pixels
@@ -400,7 +400,19 @@ public class DC_PatrolRoutine extends Routine
         bot.mouseMove(patrolX, patrolY);
         bot.delay(250);
         bot.mouseClick();
-        bot.delay(250);
+        
+        /*
+        //Added below as a patch to an issue with the game, but seems resolved now. 
+        bot.delay(50);
+        bot.mouseClick();
+        bot.delay(50);
+        bot.mouseClick();
+        bot.delay(50);
+        bot.mouseClick();
+        bot.delay(50);
+        bot.mouseClick();
+        bot.delay(50);
+        */
         
         //Check if still in caves screen
         Boolean isStillInCavesScreen = true;
