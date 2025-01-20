@@ -50,5 +50,10 @@
             <Font size="18.0" />
          </font>
       </Button>
+      <Button id="calcifiedButton" fx:id="calcifiedButton" layoutX="73.0" layoutY="316.0" mnemonicParsing="false" onMouseClicked="#startCalcifiedRoutine" prefHeight="20.0" prefWidth="57.0" styleClass="calcifiedButton" text="Calcified">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

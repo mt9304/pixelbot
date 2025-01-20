@@ -22,7 +22,7 @@ public class CalcifiedRoutine extends Routine {
 	Random random = new Random();
 
 	// Run in main monitor, runelite exp tab showing. 
-	int numberToAlch = 179;
+	int numberToClick = 276;
 	int alchX = 1372; // 1369
 	int alchY = 520; // 546
 
@@ -63,13 +63,40 @@ public class CalcifiedRoutine extends Routine {
                                         //  {
                                         //{ else {
                                         //
-                                        //{
-                                        bot.mouseClick();
-					bot.delay(random.nextInt(754) + 643);
-					bot.mouseClick();
-					bot.delay(random.nextInt(800) + 550);
-                                        
-					numberToAlch--;
+                                         //{
+                                        //Verifies hovering over knight of ardy
+                                        int currentRed = bot.getPixelColor(530, 37).getRed();
+                                        int currentGreen = bot.getPixelColor(530, 37).getGreen();
+                                        int currentBlue = bot.getPixelColor(530, 37).getBlue();
+
+                                        int currentRed2 = bot.getPixelColor(519, 37).getRed();
+                                        int currentGreen2 = bot.getPixelColor(519, 37).getGreen();
+                                        int currentBlue2 = bot.getPixelColor(519, 37).getBlue();
+
+                                        //Health bar red
+                                        int currentRed3 = bot.getPixelColor(992, 89).getRed();
+                                        int currentGreen3 = bot.getPixelColor(992, 89).getGreen();
+                                        int currentBlue3 = bot.getPixelColor(992, 89).getBlue();
+
+                                        int currentRed4 = bot.getPixelColor(451, 37).getRed();
+                                        int currentGreen4 = bot.getPixelColor(451, 37).getGreen();
+                                        int currentBlue4 = bot.getPixelColor(451, 37).getBlue();
+
+                                        //if (currentRed >= 207 && currentGreen >= 205 && currentBlue >= 0 && currentRed2 >= 207 && currentGreen2 >=205 && currentBlue2 >= 204 && currentRed3 > 80) {
+                                        if (currentRed4 >= 190 && currentGreen4 >= 190 && currentBlue4 >= 190 && currentRed3 > 80) {
+                                            bot.mouseClick();
+                                            bot.delay(random.nextInt(378) + 546);
+
+                                            numberToClick--;
+                                        } else {
+                                            //System.out.println("currentRed 207:" + currentRed + " | currentGreen 205:" + currentGreen + " | currentBlue 0:" + currentBlue);
+                                            //System.out.println("currentRed2 207:" + currentRed2 + " | currentGreen2 205:" + currentGreen2 + " | currentBlue2 204:" + currentBlue2);
+                                            //System.out.println("currentRed3 80:" + currentRed3 + " | currentGreen3:" + currentGreen3 + " | currentBlue3:" + currentBlue3);
+                                            System.out.println("currentRed4 210:" + currentRed4 + " | currentGreen4 211:" + currentGreen4 + " | currentBlue4 209:" + currentBlue4);
+                                            System.out.println("Not clicking, either not mousing over knight or hp low. ");
+                                            bot.delay(random.nextInt(2500) + 2500);
+                                        }
+ 
                                         
                                         
 					checkIfPausedOrStopped();
@@ -82,7 +109,7 @@ public class CalcifiedRoutine extends Routine {
 
 	@Override
 	public void checkIfPausedOrStopped() throws InterruptedException {
-		if (numberToAlch <= 0) {
+		if (numberToClick <= 0) {
 			System.out.println("Preparing to shut down. ");
 			running = false;
                         /*

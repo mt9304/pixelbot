@@ -87,7 +87,7 @@ public class MainBotRoutine extends Routine
                                             System.out.println("Current Date and Time: " + dtf2.format(now2));  
 
 					    drinkAbsorb();
-					    BuffTimer absorbTimer = new BuffTimer(this, 280000, ABSORB); //301000. Works with dhide at 302300, 500000 works for full rune at 45 def
+					    BuffTimer absorbTimer = new BuffTimer(this, 301000, ABSORB); //301000. Works with dhide at 302300, 500000 works for full rune at 45 def
 					    absorbTimer.setDaemon(true);
 					    absorbTimer.start();
 					}

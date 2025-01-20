@@ -18,6 +18,7 @@ import main.java.com.timelessapps.javafxtemplate.app.businesslogic.MeleeRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.DC_PatrolRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.SplashRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.businesslogic.MBRoutine;
+import main.java.com.timelessapps.javafxtemplate.app.businesslogic.CalcifiedRoutine;
 import main.java.com.timelessapps.javafxtemplate.app.supportingthreads.GlobalKeyListener;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.LoggingService;
 import main.java.com.timelessapps.javafxtemplate.helpers.services.RobotService;
@@ -146,6 +147,20 @@ public class HomePageController implements Initializable {
 		patrolRoutine.start();
 
 		GlobalKeyListener globalKeyListener = new GlobalKeyListener(patrolRoutine);
+		globalKeyListener.setDaemon(true);
+		globalKeyListener.start();
+
+		// botRoutine.join();
+		// System.out.println("Remember to re-active button. ");
+	}
+
+	@FXML
+	public void startCalcifiedRoutine(MouseEvent event) throws InterruptedException, AWTException {
+		CalcifiedRoutine calcifiedRoutine = new CalcifiedRoutine();
+		calcifiedRoutine.setDaemon(true);
+		calcifiedRoutine.start();
+
+		GlobalKeyListener globalKeyListener = new GlobalKeyListener(calcifiedRoutine);
 		globalKeyListener.setDaemon(true);
 		globalKeyListener.start();
 
